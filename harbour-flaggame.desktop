@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=harbour-flaggame
+Exec=sailfish-qml harbour-flaggame
+Name=Flag Game
+
+X-Desktop-File-Install-Version=0.26
+
+[X-Sailjail]
+OrganizationName=site.tomin.apps
+ApplicationName=FlagGame
+Permissions=
