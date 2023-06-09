@@ -2,7 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>CoverPage</name>
+    <name>harbour-flaggame</name>
     <message>
         <source>Flag Game</source>
         <translation type="unfinished"></translation>

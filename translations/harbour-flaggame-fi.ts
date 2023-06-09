@@ -2,9 +2,9 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>CoverPage</name>
+    <name>harbour-flaggame</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="8"/>
+        <location filename="../qml/harbour-flaggame.qml" line="17"/>
         <source>Flag Game</source>
         <translation type="unfinished"></translation>
     </message>

@@ -4,6 +4,14 @@ import "pages"
 
 ApplicationWindow {
     initialPage: Component { Flags { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    cover: Component {
+        Cover {
+            Label {
+                anchors.centerIn: parent
+                text: qsTr("Flag Game")
+            }
+        }
+    }
+
     allowedOrientations: defaultAllowedOrientations
 }

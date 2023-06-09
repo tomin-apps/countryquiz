@@ -6,7 +6,6 @@ DISTFILES += \
     assets/flags/*.svg \
     qml/harbour-flaggame.qml \
     qml/components/QuizButton.qml \
-    qml/cover/CoverPage.qml \
     qml/pages/Flags.qml \
     qml/pages/Flag.qml \
     qml/pages/Quiz.qml \
