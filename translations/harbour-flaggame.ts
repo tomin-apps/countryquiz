@@ -2,6 +2,17 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>Flags</name>
+    <message>
+        <source>Play quiz at least once to see all the flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swipe to right and press &apos;Quiz me!&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Quiz</name>
     <message>
         <source>Quiz (%1 / %2)</source>

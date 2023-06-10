@@ -26,6 +26,7 @@ ApplicationWindow {
                 contentItem.width: parent.width
                 delegate: Loader {
                     property var _dataModel: dataModel
+                    property var _config: config
 
                     clip: true
                     height: PagedView.contentHeight
@@ -48,6 +49,8 @@ ApplicationWindow {
     allowedOrientations: defaultAllowedOrientations
 
     Data { id: dataModel }
+
+    Config { id: config }
 
     ListModel {
         id: pageModel

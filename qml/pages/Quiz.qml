@@ -13,6 +13,7 @@ import "../helpers.js" as Helpers
 Page {
     id: page
 
+    property var config
     property int current: 1
     property var indices
     property alias model: delegateModel.model
@@ -101,11 +102,13 @@ Page {
                 })
             } else {
                 pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
+                    config: page.config,
                     indices: page.indices,
                     model: page.model,
                     current: page.current + 1,
                     correctAnswers: correctAnswers
                 })
+                page.config.hasPlayed = true
             }
         }
     }

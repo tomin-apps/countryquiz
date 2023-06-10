@@ -9,6 +9,7 @@ import Sailfish.Silica 1.0
 import "../helpers.js" as Helpers
 
 Item {
+    property var config: _config
     property var dataModel: _dataModel
 
     id: page
@@ -23,6 +24,7 @@ Item {
 
             onClicked:  {
                 pageStack.push(Qt.resolvedUrl("Quiz.qml"), {
+                    config: page.config,
                     indices: Helpers.pickRandomIndices(page.dataModel, 15),
                     model: page.dataModel
                 })

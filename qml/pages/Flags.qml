@@ -9,6 +9,7 @@ import Sailfish.Silica 1.0
 import "../helpers.js" as Helpers
 
 Item {
+    property var config: _config
     property var dataModel: _dataModel
 
     id: page
@@ -40,9 +41,15 @@ Item {
                 }
             }
 
-            onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { index: index, model: model })
+            onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: view.model.get(index) })
         }
-        model: page.dataModel
+        model: config.hasPlayed ? page.dataModel : 0
+
+        ViewPlaceholder {
+            enabled: !config.hasPlayed
+            text: qsTr("Play quiz at least once to see all the flags")
+            hintText: qsTr("Swipe to right and press 'Quiz me!'")
+        }
 
         VerticalScrollDecorator { }
     }
