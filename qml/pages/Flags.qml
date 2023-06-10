@@ -7,19 +7,9 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import ".."
+import "../helpers.js" as Helpers
 
 Page {
-    function randomIndices(a, count) {
-        var indices = []
-        for (var i = 0; i < count - 1; ++i) {
-            indices[i] = Math.floor(Math.random() * dataModel.count)
-            if (indices[i] === a)
-                --i
-        }
-        indices.splice(Math.floor(Math.random() * (indices.length + 1)), 0, a)
-        return indices
-    }
-
     SilicaListView {
         anchors.fill: parent
 
@@ -53,11 +43,12 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: "Quiz me!"
+                text: qsTr("Quiz me!")
                 onClicked: {
-                    var index = Math.floor(Math.random() * dataModel.count)
-                    var indices = randomIndices(index, 4)
-                    pageStack.push(Qt.resolvedUrl("Quiz.qml"), { index: index, indices: indices, model: dataModel })
+                    pageStack.push(Qt.resolvedUrl("Quiz.qml"), {
+                        indices: Helpers.pickRandomIndices(dataModel, 15),
+                        model: dataModel
+                    })
                 }
             }
         }
