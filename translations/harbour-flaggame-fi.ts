@@ -2,14 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>Flags</name>
-    <message>
-        <location filename="../qml/pages/Flags.qml" line="48"/>
-        <source>Quiz me!</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Quiz</name>
     <message>
         <location filename="../qml/pages/Quiz.qml" line="35"/>
@@ -17,7 +9,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Quiz.qml" line="47"/>
+        <location filename="../qml/pages/Quiz.qml" line="48"/>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -41,9 +33,17 @@
     </message>
 </context>
 <context>
+    <name>Selection</name>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="22"/>
+        <source>Quiz me!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>harbour-flaggame</name>
     <message>
-        <location filename="../qml/harbour-flaggame.qml" line="17"/>
+        <location filename="../qml/harbour-flaggame.qml" line="41"/>
         <source>Flag Game</source>
         <translation type="unfinished"></translation>
     </message>

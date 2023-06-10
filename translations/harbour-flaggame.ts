@@ -2,13 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>Flags</name>
-    <message>
-        <source>Quiz me!</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Quiz</name>
     <message>
         <source>Quiz (%1 / %2)</source>
@@ -31,6 +24,13 @@
     </message>
     <message>
         <source>Play again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Selection</name>
+    <message>
+        <source>Quiz me!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

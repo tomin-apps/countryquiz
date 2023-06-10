@@ -9,39 +9,29 @@ import Sailfish.Silica 1.0
 import ".."
 
 Page {
-    property alias index: view.currentIndex
-    property alias model: view.model
+    property var item
 
     PageHeader { id: header }
 
-    PagedView {
-        id: view
-        anchors {
-            left: parent.left
-            top: header.bottom
-        }
-        height: parent.height / 2
+    Column {
+        anchors.top: header.bottom
+        spacing: Theme.paddingLarge
         width: parent.width
 
-        delegate: Column {
-            spacing: Theme.paddingLarge
-            width: PagedView.contentWidth
+        Image {
+            anchors.horizontalCenter: parent.horizontalCenter
+            source: "../../assets/flags/" + item.flag
+            sourceSize.width: parent.width
+        }
 
-            Image {
-                anchors.horizontalCenter: parent.horizontalCenter
-                source: "../../assets/flags/" + model.flag
-                sourceSize.width: parent.width - 2*Theme.horizontalPageMargin
-            }
-
-            Label {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
-                horizontalAlignment: Text.AlignHCenter
-                text: model.name
-                width: parent.width - 2*Theme.horizontalPageMargin
-                wrapMode: Text.Wrap
-            }
+        Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.highlightColor
+            font.pixelSize: Theme.fontSizeExtraLarge
+            horizontalAlignment: Text.AlignHCenter
+            text: item.name
+            width: parent.width - 2 * Theme.horizontalPageMargin
+            wrapMode: Text.Wrap
         }
     }
 }

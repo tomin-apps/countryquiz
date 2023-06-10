@@ -6,15 +6,16 @@
 
 import QtQuick 2.6
 import Sailfish.Silica 1.0
-import ".."
 import "../helpers.js" as Helpers
 
-Page {
+Item {
+    property var dataModel: _dataModel
+
+    id: page
+
     SilicaListView {
+        id: view
         anchors.fill: parent
-
-        model: Data { id: dataModel }
-
         delegate: BackgroundItem {
             id: item
             height: Theme.itemSizeLarge
@@ -22,6 +23,7 @@ Page {
             width: ListView.view.width
 
             Row {
+                anchors.verticalCenter: parent.verticalCenter
                 spacing: Theme.paddingMedium
 
                 Image {
@@ -38,20 +40,9 @@ Page {
                 }
             }
 
-            onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { index: index, model: dataModel })
+            onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { index: index, model: model })
         }
-
-        PullDownMenu {
-            MenuItem {
-                text: qsTr("Quiz me!")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Quiz.qml"), {
-                        indices: Helpers.pickRandomIndices(dataModel, 15),
-                        model: dataModel
-                    })
-                }
-            }
-        }
+        model: page.dataModel
 
         VerticalScrollDecorator { }
     }

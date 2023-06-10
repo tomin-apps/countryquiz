@@ -73,7 +73,7 @@ Page {
                         width: parent.width
                     }
 
-                    onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { index: item.current, model: page.model })
+                    onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: page.model.get(current) })
                 }
             }
 
