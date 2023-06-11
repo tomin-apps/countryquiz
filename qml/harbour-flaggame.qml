@@ -12,17 +12,21 @@ import "pages"
 ApplicationWindow {
     initialPage: Component {
         Page {
-            PageHeader {
-                // TODO: Create some kind of tabbed header to replace this
-                id: pageHeader
-                title: pageModel.get(paged.currentIndex).title
+            Tabs {
+                id: tabs
+                currentIndex: paged.currentIndex
+                model: pageModel
+                width: parent.width
+                z: 1
+
+                onChangeTab: paged.currentIndex = index
             }
 
             PagedView {
                 id: paged
                 anchors.fill: parent
-                contentItem.height: parent.height - pageHeader.height
-                contentItem.y: pageHeader.height
+                contentItem.height: parent.height - tabs.height
+                contentItem.y: tabs.height
                 contentItem.width: parent.width
                 delegate: Loader {
                     property var _dataModel: dataModel
@@ -34,11 +38,13 @@ ApplicationWindow {
                     width: PagedView.contentWidth
                 }
                 model: pageModel
+
+                onCurrentIndexChanged: tabs.currentIndex = currentIndex
             }
         }
     }
     cover: Component {
-        Cover {
+        CoverBackground {
             Label {
                 anchors.centerIn: parent
                 text: qsTr("Flag Game")
@@ -56,12 +62,12 @@ ApplicationWindow {
         id: pageModel
 
         ListElement {
-            title: "Quiz"
+            title: qsTr("Quiz")
             url: "pages/Selection.qml"
         }
 
         ListElement {
-            title: "Flags"
+            title: qsTr("Flags")
             url: "pages/Flags.qml"
         }
     }

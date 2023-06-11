@@ -51,5 +51,13 @@
         <source>Flag Game</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -56,8 +56,18 @@
 <context>
     <name>harbour-flaggame</name>
     <message>
-        <location filename="../qml/harbour-flaggame.qml" line="44"/>
+        <location filename="../qml/harbour-flaggame.qml" line="50"/>
         <source>Flag Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-flaggame.qml" line="65"/>
+        <source>Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-flaggame.qml" line="70"/>
+        <source>Flags</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

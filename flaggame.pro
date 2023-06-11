@@ -5,6 +5,7 @@ CONFIG += sailfishapp_qml
 DISTFILES += \
     assets/flags/*.svg \
     qml/components/Config.qml \
+    qml/components/Tabs.qml \
     qml/harbour-flaggame.qml \
     qml/Data.qml \
     qml/components/QuizButton.qml \
