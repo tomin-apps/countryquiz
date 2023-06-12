@@ -13,18 +13,22 @@ import "../helpers.js" as Helpers
 Page {
     id: page
 
-    property var config
     property int current: 1
     property var indices
+    property var config
+    property var setup
     property alias model: delegateModel.model
     property var correctAnswers: new Array
 
     readonly property int count: indices.length
     readonly property int index: indices[current - 1]
+    readonly property bool finished: closeTimer.running
 
-    function closeInSecond(correctAnswerGiven) {
-        closeTimer.wasCorrect = correctAnswerGiven
-        closeTimer.running = true
+    function closeInSecond(index) {
+        if (!finished) {
+            closeTimer.wasCorrect = index === page.index
+            closeTimer.running = true
+        }
     }
 
     SilicaListView {
@@ -62,11 +66,13 @@ Page {
                     width: parent.width - 2 * Theme.horizontalPageMargin
 
                     onClicked: {
-                        if (model.index !== page.index) {
-                            button.color = "red"
+                        if (!page.finished) {
+                            if (model.index !== page.index) {
+                                button.color = "red"
+                            }
+                            delegateModel.highlightCorrect()
+                            page.closeInSecond(model.index)
                         }
-                        delegateModel.highlightCorrect()
-                        page.closeInSecond(model.index === page.index)
                     }
 
                     Connections {
@@ -98,7 +104,9 @@ Page {
                 pageStack.replace(Qt.resolvedUrl("Results.qml"), {
                     indices: page.indices,
                     model: page.model,
-                    correctAnswers: correctAnswers
+                    correctAnswers: correctAnswers,
+                    config: page.config,
+                    setup: page.setup
                 })
             } else {
                 pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
@@ -106,7 +114,8 @@ Page {
                     indices: page.indices,
                     model: page.model,
                     current: page.current + 1,
-                    correctAnswers: correctAnswers
+                    correctAnswers: correctAnswers,
+                    setup: page.setup
                 })
                 page.config.hasPlayed = true
             }
@@ -114,13 +123,12 @@ Page {
     }
 
     Component.onCompleted: {
-        var count = 4
         var choices = Helpers.getIndexArray(model)
         choices.swap(0, index)
-        for (var i = 1; i < count; ++i) {
+        for (var i = 1; i < setup.choicesCount; ++i) {
             choices.swap(i, i + Math.floor(Math.random() * (model.count - i)))
         }
-        for (i = 0; i < count; ++i) {
+        for (i = 0; i < setup.choicesCount; ++i) {
             delegateModel.items.addGroups(choices[i], 1, "included")
         }
         for (i = 0; i < includedGroup.count - 1; ++i) {

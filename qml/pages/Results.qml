@@ -14,6 +14,8 @@ Page {
     property var correctAnswers
     property var indices
     property var model
+    property var config
+    property var setup
 
     readonly property int count: indices.length
     readonly property int correctAnswersCount: {
@@ -85,8 +87,10 @@ Page {
 
                 onClicked: {
                     pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
-                        indices: Helpers.pickRandomIndices(model, count),
-                        model: model
+                        config: page.config,
+                        indices: Helpers.pickRandomIndices(model, page.setup.questionCount),
+                        model: model,
+                        setup: page.setup
                     })
                 }
             }

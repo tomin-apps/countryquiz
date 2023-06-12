@@ -13,6 +13,13 @@
     </message>
 </context>
 <context>
+    <name>IntSelection</name>
+    <message>
+        <source>You must specify an integer between %1 and %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Quiz</name>
     <message>
         <source>Quiz (%1 / %2)</source>
@@ -42,6 +49,58 @@
     <name>Selection</name>
     <message>
         <source>Quiz me!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Questions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time to answer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 s per question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select number of questions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must have at least one question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You may not have more than %1 questions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select time to answer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must have at least one second to answer the question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You may not have more than %1 seconds (%2 minutes) to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
