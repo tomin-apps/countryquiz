@@ -42,44 +42,78 @@ Page {
             id: column
             anchors.top: header.bottom
             bottomPadding: Theme.paddingLarge
+            spacing: Theme.paddingLarge
             width: parent.width
 
             Label {
                 color: Theme.highlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("%1 / %2 correct").arg(correctAnswersCount).arg(count)
-                width: parent.width
+                text: {
+                    if (count === 1 && correctAnswersCount === 0) {
+                        return qsTr("It's like flipping a coin, sometimes you just have bad luck!")
+                    }
+                    if (count >= 10 && correctAnswersCount === count) {
+                        return qsTr("Perfect work! You clearly know your flags!")
+                    }
+                    var portion = correctAnswersCount / count
+                    if (portion >= 0.9) {
+                        return qsTr("Excellent!")
+                    } if (portion > 0.5) {
+                        return qsTr("Very good!")
+                    } if (portion >= 0.2) {
+                        return qsTr("You could use more practice.")
+                    }
+                    return qsTr("Did you try to avoid the right answers?")
+                }
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.Wrap
+                x: Theme.horizontalPageMargin
             }
 
-            Item { height: Theme.paddingLarge; width: parent.width }
+            Label {
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeLarge
+                horizontalAlignment: Text.AlignHCenter
+                text: qsTr("%1 / %2 correct").arg(correctAnswersCount).arg(count)
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.Wrap
+                x: Theme.horizontalPageMargin
+            }
 
-            Repeater {
-                model: correctAnswers
+            ExpandingSectionGroup {
+                ExpandingSection {
+                    content.sourceComponent: Component {
+                        ColumnView {
+                            delegate: BackgroundItem {
+                                property bool correct: modelData
+                                property int current: indices[index]
+                                property string name: page.model.get(current).name
 
-                BackgroundItem {
-                    property bool correct: modelData
-                    property int current: indices[index]
-                    property string name: page.model.get(current).name
+                                id: item
+                                height: Theme.itemSizeSmall
+                                width: parent.width
 
-                    id: item
-                    height: Theme.itemSizeSmall
-                    width: parent.width
+                                Label {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    color: highlighted ? Theme.highlightColor : (item.correct ? "green" : "red")
+                                    font.pixelSize: Theme.fontSizeMedium
+                                    horizontalAlignment: Text.AlignHCenter
+                                    text: item.name
+                                    truncationMode: TruncationMode.Fade
+                                    width: parent.width - 2 * Theme.horizontalPageMargin
+                                    x: Theme.horizontalPageMargin
+                                }
 
-                    Label {
-                        anchors.verticalCenter: parent.verticalCenter
-                        color: highlighted ? Theme.highlightColor : (item.correct ? "green" : "red")
-                        font.pixelSize: Theme.fontSizeMedium
-                        horizontalAlignment: Text.AlignHCenter
-                        text: item.name
-                        width: parent.width
+                                onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: page.model.get(current) })
+                            }
+                            itemHeight: Theme.itemSizeSmall
+                            model: correctAnswers
+                        }
                     }
-
-                    onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: page.model.get(current) })
+                    title: qsTr("Your answers")
                 }
             }
-
-            Item { height: Theme.paddingLarge; width: parent.width }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter

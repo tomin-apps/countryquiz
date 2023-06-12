@@ -44,6 +44,34 @@
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Your answers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Excellent!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very good!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect work! You clearly know your flags!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You could use more practice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Did you try to avoid the right answers?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Selection</name>

@@ -43,12 +43,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="51"/>
+        <location filename="../qml/pages/Results.qml" line="54"/>
+        <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Results.qml" line="57"/>
+        <source>Perfect work! You clearly know your flags!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Results.qml" line="61"/>
+        <source>Excellent!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Results.qml" line="63"/>
+        <source>Very good!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Results.qml" line="65"/>
+        <source>You could use more practice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Results.qml" line="67"/>
+        <source>Did you try to avoid the right answers?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Results.qml" line="78"/>
         <source>%1 / %2 correct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="86"/>
+        <location filename="../qml/pages/Results.qml" line="114"/>
+        <source>Your answers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Results.qml" line="120"/>
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
