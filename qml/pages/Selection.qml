@@ -40,7 +40,7 @@ Item {
                     MenuItem { text: "15" }
                     MenuItem { text: "80" }
                     MenuItem { text: "%1".arg(dataModel.count) }
-                    MenuItem { text: qsTr("Custom") }
+                    MenuItem { text: qsTr("Custom value") }
 
                     onActivated: {
                         switch (index) {
@@ -96,7 +96,7 @@ Item {
                     MenuItem { text: "15 s" }
                     MenuItem { text: "30 s" }
                     MenuItem { text: "60 s" }
-                    MenuItem { text: qsTr("Custom") }
+                    MenuItem { text: qsTr("Custom value") }
 
                     onActivated: {
                         switch (index) {
@@ -162,7 +162,7 @@ Item {
 
         readonly property int currentIndex: _currentIndex
         readonly property bool presetSelected: _currentIndex >= 0 && _currentItem !== null
-        readonly property string presetTitle: presetSelected ? _currentItem.title : qsTr("Custom")
+        readonly property string presetTitle: presetSelected ? _currentItem.title : qsTr("None")
         readonly property int questionCount: _questionCount < 0 ? dataModel.count : _questionCount
         readonly property int choicesCount: presetSelected ? _currentItem.choices : selectedChoices
         readonly property int timeToAnswer: presetSelected ? _currentItem.time : selectedTime

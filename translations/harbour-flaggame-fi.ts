@@ -96,16 +96,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="43"/>
-        <location filename="../qml/pages/Selection.qml" line="99"/>
-        <location filename="../qml/pages/Selection.qml" line="165"/>
-        <source>Custom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qml/pages/Selection.qml" line="38"/>
         <location filename="../qml/pages/Selection.qml" line="62"/>
         <source>Questions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="43"/>
+        <location filename="../qml/pages/Selection.qml" line="99"/>
+        <source>Custom value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -161,6 +160,11 @@
     <message>
         <location filename="../qml/pages/Selection.qml" line="138"/>
         <source>Quiz me!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="165"/>
+        <source>None</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

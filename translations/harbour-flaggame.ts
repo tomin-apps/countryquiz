@@ -96,10 +96,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Custom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 s per question</source>
         <translation type="unfinished"></translation>
     </message>
@@ -129,6 +125,14 @@
     </message>
     <message>
         <source>You may not have more than %1 seconds (%2 minutes) to answer the question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
