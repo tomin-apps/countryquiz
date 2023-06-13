@@ -37,17 +37,22 @@ Page {
             bottomPadding: Theme.paddingMedium
             width: parent.width
 
-            PageHeader { title: qsTr("Quiz (%1 / %2)").arg(page.current).arg(page.count) }
+            PageHeader {
+                id: header
+                title: qsTr("Quiz (%1 / %2)").arg(page.current).arg(page.count)
+            }
 
             Image {
+                anchors.horizontalCenter: parent.horizontalCenter
                 source: "../../assets/flags/" + model.get(index).flag
+                sourceSize.height: page.height - header.height - Theme.paddingMedium - label.height - (Theme.itemSizeMedium + Theme.paddingMedium) * setup.choicesCount
                 sourceSize.width: parent.width
-                // TODO: Adjust height if other content can't fit the page without scrolling
             }
 
             Item { height: Theme.paddingMedium; width: parent.width }
 
             Label {
+                id: label
                 color: Theme.highlightColor
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Guess which country this flag belongs to")
@@ -108,6 +113,7 @@ Page {
                     config: page.config,
                     setup: page.setup
                 })
+                page.config.hasPlayed = true
             } else {
                 pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
                     config: page.config,
@@ -117,7 +123,6 @@ Page {
                     correctAnswers: correctAnswers,
                     setup: page.setup
                 })
-                page.config.hasPlayed = true
             }
         }
     }

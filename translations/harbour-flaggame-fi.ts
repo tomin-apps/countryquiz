@@ -25,12 +25,12 @@
 <context>
     <name>Quiz</name>
     <message>
-        <location filename="../qml/pages/Quiz.qml" line="40"/>
+        <location filename="../qml/pages/Quiz.qml" line="42"/>
         <source>Quiz (%1 / %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Quiz.qml" line="53"/>
+        <location filename="../qml/pages/Quiz.qml" line="58"/>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
