@@ -13,8 +13,6 @@ Page {
 
     property var correctAnswers
     property var indices
-    property var model
-    property var config
     property var setup
 
     readonly property int count: indices.length
@@ -88,7 +86,7 @@ Page {
                             delegate: BackgroundItem {
                                 property bool correct: modelData
                                 property int current: indices[index]
-                                property string name: page.model.get(current).name
+                                property string name: dataModel.get(current).name
 
                                 id: item
                                 height: Theme.itemSizeSmall
@@ -105,7 +103,7 @@ Page {
                                     x: Theme.horizontalPageMargin
                                 }
 
-                                onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: page.model.get(current) })
+                                onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: dataModel.get(current) })
                             }
                             itemHeight: Theme.itemSizeSmall
                             model: correctAnswers
@@ -121,9 +119,7 @@ Page {
 
                 onClicked: {
                     pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
-                        config: page.config,
-                        indices: Helpers.pickRandomIndices(model, page.setup.questionCount),
-                        model: model,
+                        indices: Helpers.pickRandomIndices(dataModel, page.setup.questionCount),
                         setup: page.setup
                     })
                 }

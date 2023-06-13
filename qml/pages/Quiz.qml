@@ -15,9 +15,7 @@ Page {
 
     property int current: 1
     property var indices
-    property var config
     property var setup
-    property alias model: delegateModel.model
     property var correctAnswers: new Array
 
     readonly property int count: indices.length
@@ -44,7 +42,7 @@ Page {
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "../../assets/flags/" + model.get(index).flag
+                source: "../../assets/flags/" + dataModel.get(index).flag
                 sourceSize.height: page.height - header.height - Theme.paddingMedium - label.height - (Theme.itemSizeMedium + Theme.paddingMedium) * setup.choicesCount
                 sourceSize.width: parent.width
             }
@@ -87,6 +85,7 @@ Page {
                 }
             }
             filterOnGroup: "included"
+            model: dataModel
             groups: [
                 DelegateModelGroup {
                     id: includedGroup
@@ -108,17 +107,13 @@ Page {
             if (current >= count) {
                 pageStack.replace(Qt.resolvedUrl("Results.qml"), {
                     indices: page.indices,
-                    model: page.model,
                     correctAnswers: correctAnswers,
-                    config: page.config,
                     setup: page.setup
                 })
-                page.config.hasPlayed = true
+                config.hasPlayed = true
             } else {
                 pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
-                    config: page.config,
                     indices: page.indices,
-                    model: page.model,
                     current: page.current + 1,
                     correctAnswers: correctAnswers,
                     setup: page.setup
@@ -128,10 +123,10 @@ Page {
     }
 
     Component.onCompleted: {
-        var choices = Helpers.getIndexArray(model)
+        var choices = Helpers.getIndexArray(dataModel)
         choices.swap(0, index)
         for (var i = 1; i < setup.choicesCount; ++i) {
-            choices.swap(i, i + Math.floor(Math.random() * (model.count - i)))
+            choices.swap(i, i + Math.floor(Math.random() * (dataModel.count - i)))
         }
         for (i = 0; i < setup.choicesCount; ++i) {
             delegateModel.items.addGroups(choices[i], 1, "included")

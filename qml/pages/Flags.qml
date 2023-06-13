@@ -9,9 +9,6 @@ import Sailfish.Silica 1.0
 import "../helpers.js" as Helpers
 
 Item {
-    property var config: _config
-    property var dataModel: _dataModel
-
     id: page
 
     SilicaListView {
@@ -43,7 +40,7 @@ Item {
 
             onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: view.model.get(index) })
         }
-        model: config.hasPlayed ? page.dataModel : 0
+        model: config.hasPlayed ? dataModel : 0
 
         ViewPlaceholder {
             enabled: !config.hasPlayed

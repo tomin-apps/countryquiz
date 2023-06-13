@@ -10,6 +10,9 @@ import "components"
 import "pages"
 
 ApplicationWindow {
+    property alias config: config
+    property alias dataModel: dataModel
+
     initialPage: Component {
         Page {
             Tabs {
@@ -29,9 +32,6 @@ ApplicationWindow {
                 contentItem.y: tabs.height
                 contentItem.width: parent.width
                 delegate: Loader {
-                    property var _dataModel: dataModel
-                    property var _config: config
-
                     clip: true
                     height: PagedView.contentHeight
                     source: Qt.resolvedUrl(model.url)

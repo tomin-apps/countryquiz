@@ -4,12 +4,12 @@
 <context>
     <name>Flags</name>
     <message>
-        <location filename="../qml/pages/Flags.qml" line="50"/>
+        <location filename="../qml/pages/Flags.qml" line="47"/>
         <source>Play quiz at least once to see all the flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Flags.qml" line="51"/>
+        <location filename="../qml/pages/Flags.qml" line="48"/>
         <source>Swipe to right and press &apos;Quiz me!&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25,12 +25,12 @@
 <context>
     <name>Quiz</name>
     <message>
-        <location filename="../qml/pages/Quiz.qml" line="42"/>
+        <location filename="../qml/pages/Quiz.qml" line="40"/>
         <source>Quiz (%1 / %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Quiz.qml" line="58"/>
+        <location filename="../qml/pages/Quiz.qml" line="56"/>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -38,52 +38,52 @@
 <context>
     <name>Results</name>
     <message>
-        <location filename="../qml/pages/Results.qml" line="38"/>
+        <location filename="../qml/pages/Results.qml" line="36"/>
         <source>Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="54"/>
+        <location filename="../qml/pages/Results.qml" line="52"/>
         <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="57"/>
+        <location filename="../qml/pages/Results.qml" line="55"/>
         <source>Perfect work! You clearly know your flags!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="61"/>
+        <location filename="../qml/pages/Results.qml" line="59"/>
         <source>Excellent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="63"/>
+        <location filename="../qml/pages/Results.qml" line="61"/>
         <source>Very good!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="65"/>
+        <location filename="../qml/pages/Results.qml" line="63"/>
         <source>You could use more practice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="67"/>
+        <location filename="../qml/pages/Results.qml" line="65"/>
         <source>Did you try to avoid the right answers?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="78"/>
+        <location filename="../qml/pages/Results.qml" line="76"/>
         <source>%1 / %2 correct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="114"/>
+        <location filename="../qml/pages/Results.qml" line="112"/>
         <source>Your answers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="120"/>
+        <location filename="../qml/pages/Results.qml" line="118"/>
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
@@ -91,79 +91,79 @@
 <context>
     <name>Selection</name>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="25"/>
+        <location filename="../qml/pages/Selection.qml" line="22"/>
         <source>Preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="38"/>
-        <location filename="../qml/pages/Selection.qml" line="62"/>
+        <location filename="../qml/pages/Selection.qml" line="35"/>
+        <location filename="../qml/pages/Selection.qml" line="59"/>
         <source>Questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="43"/>
-        <location filename="../qml/pages/Selection.qml" line="99"/>
+        <location filename="../qml/pages/Selection.qml" line="40"/>
+        <location filename="../qml/pages/Selection.qml" line="96"/>
         <source>Custom value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="61"/>
+        <location filename="../qml/pages/Selection.qml" line="58"/>
         <source>Select number of questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="63"/>
+        <location filename="../qml/pages/Selection.qml" line="60"/>
         <source>You must have at least one question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="64"/>
+        <location filename="../qml/pages/Selection.qml" line="61"/>
         <source>You may not have more than %1 questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="81"/>
+        <location filename="../qml/pages/Selection.qml" line="78"/>
         <source>Choices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="94"/>
+        <location filename="../qml/pages/Selection.qml" line="91"/>
         <source>Time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="119"/>
+        <location filename="../qml/pages/Selection.qml" line="116"/>
         <source>Select time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="120"/>
+        <location filename="../qml/pages/Selection.qml" line="117"/>
         <source>Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="121"/>
+        <location filename="../qml/pages/Selection.qml" line="118"/>
         <source>You must have at least one second to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="122"/>
+        <location filename="../qml/pages/Selection.qml" line="119"/>
         <source>You may not have more than %1 seconds (%2 minutes) to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="131"/>
+        <location filename="../qml/pages/Selection.qml" line="128"/>
         <source>%1 s per question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="138"/>
+        <location filename="../qml/pages/Selection.qml" line="135"/>
         <source>Quiz me!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="165"/>
+        <location filename="../qml/pages/Selection.qml" line="160"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>

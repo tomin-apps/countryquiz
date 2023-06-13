@@ -10,9 +10,6 @@ import "../components"
 import "../helpers.js" as Helpers
 
 Item {
-    property var config: _config
-    property var dataModel: _dataModel
-
     id: page
 
     SilicaFlickable {
@@ -139,9 +136,7 @@ Item {
 
                 onClicked:  {
                     pageStack.push(Qt.resolvedUrl("Quiz.qml"), {
-                                       config: page.config,
-                                       indices: Helpers.pickRandomIndices(page.dataModel, presetModel.questionCount),
-                                       model: page.dataModel,
+                                       indices: Helpers.pickRandomIndices(dataModel, presetModel.questionCount),
                                        setup: {
                                            questionCount: presetModel.questionCount,
                                            choicesCount: presetModel.choicesCount,
