@@ -79,6 +79,15 @@ Page {
                 x: Theme.horizontalPageMargin
             }
 
+            Label {
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeLarge
+                horizontalAlignment: Text.AlignHCenter
+                text: qsTr("in %1").arg(quizTimer.getTotalTimeText())
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                x: Theme.horizontalPageMargin
+            }
+
             ExpandingSectionGroup {
                 ExpandingSection {
                     content.sourceComponent: Component {
@@ -118,6 +127,7 @@ Page {
                 text: qsTr("Play again")
 
                 onClicked: {
+                    quizTimer.reset()
                     pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
                         indices: Helpers.pickRandomIndices(dataModel, page.setup.questionCount),
                         setup: page.setup

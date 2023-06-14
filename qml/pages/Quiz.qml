@@ -32,6 +32,9 @@ Page {
     SilicaListView {
         anchors.fill: parent
         header: Column {
+            readonly property int choicesHeight: (Theme.itemSizeMedium + Theme.paddingMedium) * setup.choicesCount
+            readonly property int otherHeight: header.height + label.height + timeLeft.height + 2 * Theme.paddingSmall
+
             bottomPadding: Theme.paddingMedium
             width: parent.width
 
@@ -43,11 +46,11 @@ Page {
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
                 source: "../../assets/flags/" + dataModel.get(index).flag
-                sourceSize.height: page.height - header.height - Theme.paddingMedium - label.height - (Theme.itemSizeMedium + Theme.paddingMedium) * setup.choicesCount
+                sourceSize.height: page.height - otherHeight - choicesHeight
                 sourceSize.width: parent.width
             }
 
-            Item { height: Theme.paddingMedium; width: parent.width }
+            Item { height: Theme.paddingSmall; width: parent.width }
 
             Label {
                 id: label
@@ -56,9 +59,30 @@ Page {
                 text: qsTr("Guess which country this flag belongs to")
                 width: parent.width
             }
+
+            Item { height: Theme.paddingSmall; width: parent.width }
+
+            Label {
+                id: timeLeft
+                color: Theme.highlightColor
+                horizontalAlignment: Text.AlignHCenter
+                text: quizTimer.timeAsString(quizTimer.timeLimit)
+                width: parent.width
+
+                Connections {
+                    target: quizTimer.limit
+                    onTriggered: timeLeft.color = "red"
+                }
+
+                Connections {
+                    target: quizTimer.tick
+                    onTriggered: timeLeft.text = quizTimer.getTimeLeftText()
+                }
+            }
         }
         model: DelegateModel {
             signal highlightCorrect
+            signal highlightAllWrong
 
             id: delegateModel
             delegate: Component {
@@ -70,6 +94,7 @@ Page {
 
                     onClicked: {
                         if (!page.finished) {
+                            quizTimer.stop()
                             if (model.index !== page.index) {
                                 button.color = "red"
                             }
@@ -81,6 +106,7 @@ Page {
                     Connections {
                         target: delegateModel
                         onHighlightCorrect: if (model.index === page.index) button.color = "green"
+                        onHighlightAllWrong: button.color = (model.index === page.index) ? "green" : "red"
                     }
                 }
             }
@@ -122,6 +148,14 @@ Page {
         }
     }
 
+    Connections {
+        target: quizTimer.limit
+        onTriggered: {
+            delegateModel.highlightAllWrong()
+            closeInSecond(-1)
+        }
+    }
+
     Component.onCompleted: {
         var choices = Helpers.getIndexArray(dataModel)
         choices.swap(0, index)
@@ -134,5 +168,6 @@ Page {
         for (i = 0; i < includedGroup.count - 1; ++i) {
             includedGroup.move(i, i + Math.floor(Math.random() * (includedGroup.count - i)), 1)
         }
+        quizTimer.start()
     }
 }

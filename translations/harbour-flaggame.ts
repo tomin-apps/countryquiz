@@ -72,6 +72,10 @@
         <source>Did you try to avoid the right answers?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>in %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Selection</name>

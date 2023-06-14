@@ -12,6 +12,7 @@ import "pages"
 ApplicationWindow {
     property alias config: config
     property alias dataModel: dataModel
+    property alias quizTimer: quizTimer
 
     initialPage: Component {
         Page {
@@ -53,6 +54,8 @@ ApplicationWindow {
     }
 
     allowedOrientations: defaultAllowedOrientations
+
+    QuizTimer { id: quizTimer }
 
     Data { id: dataModel }
 

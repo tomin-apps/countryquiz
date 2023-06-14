@@ -25,12 +25,12 @@
 <context>
     <name>Quiz</name>
     <message>
-        <location filename="../qml/pages/Quiz.qml" line="40"/>
+        <location filename="../qml/pages/Quiz.qml" line="43"/>
         <source>Quiz (%1 / %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Quiz.qml" line="56"/>
+        <location filename="../qml/pages/Quiz.qml" line="59"/>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -78,12 +78,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="112"/>
+        <location filename="../qml/pages/Results.qml" line="86"/>
+        <source>in %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Results.qml" line="121"/>
         <source>Your answers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Results.qml" line="118"/>
+        <location filename="../qml/pages/Results.qml" line="127"/>
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,7 +168,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="160"/>
+        <location filename="../qml/pages/Selection.qml" line="167"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -171,17 +176,17 @@
 <context>
     <name>harbour-flaggame</name>
     <message>
-        <location filename="../qml/harbour-flaggame.qml" line="50"/>
+        <location filename="../qml/harbour-flaggame.qml" line="51"/>
         <source>Flag Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-flaggame.qml" line="65"/>
+        <location filename="../qml/harbour-flaggame.qml" line="68"/>
         <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-flaggame.qml" line="70"/>
+        <location filename="../qml/harbour-flaggame.qml" line="73"/>
         <source>Flags</source>
         <translation type="unfinished"></translation>
     </message>

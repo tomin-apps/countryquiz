@@ -5,6 +5,7 @@ CONFIG += sailfishapp_qml
 DISTFILES += \
     assets/flags/*.svg \
     qml/components/Config.qml \
+    qml/components/QuizTimer.qml \
     qml/components/SelectableDetailItem.qml \
     qml/components/Tabs.qml \
     qml/harbour-flaggame.qml \

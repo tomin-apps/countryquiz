@@ -135,6 +135,7 @@ Item {
                 text: qsTr("Quiz me!")
 
                 onClicked:  {
+                    quizTimer.reset()
                     pageStack.push(Qt.resolvedUrl("Quiz.qml"), {
                                        indices: Helpers.pickRandomIndices(dataModel, presetModel.questionCount),
                                        setup: {
@@ -148,6 +149,12 @@ Item {
         }
 
         VerticalScrollDecorator { }
+    }
+
+    Binding {
+        target: quizTimer
+        property: "timeLimit"
+        value: presetModel.timeToAnswer * 1000
     }
 
     ListModel {
