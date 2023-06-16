@@ -25,7 +25,7 @@ ListItem {
         Label {
             id: detailLabel
             anchors.verticalCenter: parent.verticalCenter
-            color: highlighted ? Theme.highlightColor : Theme.primaryColor
+            color: Theme.highlightColor
             horizontalAlignment: Text.AlignRight
             width: (parent.width - parent.spacing) / 2
             wrapMode: Text.Wrap
@@ -34,7 +34,7 @@ ListItem {
         Label {
             id: valueLabel
             anchors.verticalCenter: parent.verticalCenter
-            color: Theme.highlightColor
+            color: highlighted ? Theme.highlightColor : Theme.primaryColor
             horizontalAlignment: Text.AlignLeft
             width: (parent.width - parent.spacing) / 2
             wrapMode: Text.Wrap
