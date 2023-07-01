@@ -1,13 +1,11 @@
-Name:       harbour-flaggame
-Summary:    Flag game
+Name:       harbour-countryquiz
+Summary:    Country quiz
 Version:    0.1
 Release:    1
 License:    LICENSE
-BuildArch:  noarch
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
-Requires:   libsailfishapp-launcher
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.3
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -16,7 +14,7 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  librsvg-tools
 
 %description
-Game of flags.
+%{summary}.
 
 %prep
 %autosetup -n %{name}-%{version}
@@ -34,7 +32,7 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 
 %files
 %defattr(-,root,root,-)
-%defattr(0644,root,root,-)
+%{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png

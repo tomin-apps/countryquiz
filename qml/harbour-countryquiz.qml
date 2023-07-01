@@ -48,7 +48,7 @@ ApplicationWindow {
         CoverBackground {
             Label {
                 anchors.centerIn: parent
-                text: qsTr("Flag Game")
+                text: qsTr("Country Quiz")
             }
         }
     }

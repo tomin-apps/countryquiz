@@ -141,17 +141,17 @@
     </message>
 </context>
 <context>
-    <name>harbour-flaggame</name>
-    <message>
-        <source>Flag Game</source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>harbour-countryquiz</name>
     <message>
         <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

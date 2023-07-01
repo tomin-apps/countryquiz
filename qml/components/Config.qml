@@ -11,7 +11,7 @@ Item {
     property alias hasPlayed: group.hasPlayed
     ConfigurationGroup {
         id: group
-        path: "/site/tomin/apps/FlagGame"
+        path: "/site/tomin/apps/CountriesQuiz"
 
         property bool hasPlayed
     }

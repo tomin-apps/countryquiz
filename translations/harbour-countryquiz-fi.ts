@@ -174,19 +174,19 @@
     </message>
 </context>
 <context>
-    <name>harbour-flaggame</name>
+    <name>harbour-countryquiz</name>
     <message>
-        <location filename="../qml/harbour-flaggame.qml" line="51"/>
-        <source>Flag Game</source>
+        <location filename="../qml/harbour-countryquiz.qml" line="51"/>
+        <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-flaggame.qml" line="68"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="68"/>
         <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-flaggame.qml" line="73"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="73"/>
         <source>Flags</source>
         <translation type="unfinished"></translation>
     </message>

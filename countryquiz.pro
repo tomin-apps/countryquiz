@@ -1,16 +1,18 @@
-TARGET = harbour-flaggame
+TEMPLATE = subdirs
+TARGET = harbour-countryquiz
+SUBDIRS = assets src
 
-CONFIG += sailfishapp_qml
+CONFIG += sailfishapp
 
 DISTFILES += \
-    assets/flags/*.svg \
+    harbour-countryquiz.desktop \
     qml/components/Config.qml \
+    qml/components/QuizButton.qml \
     qml/components/QuizTimer.qml \
     qml/components/SelectableDetailItem.qml \
     qml/components/Tabs.qml \
-    qml/harbour-flaggame.qml \
     qml/Data.qml \
-    qml/components/QuizButton.qml \
+    qml/harbour-countryquiz.qml \
     qml/helpers.js \
     qml/pages/Flags.qml \
     qml/pages/Flag.qml \
@@ -18,21 +20,16 @@ DISTFILES += \
     qml/pages/Quiz.qml \
     qml/pages/Results.qml \
     qml/pages/Selection.qml \
-    rpm/harbour-flaggame.spec \
-    translations/*.ts \
-    harbour-flaggame.desktop
+    rpm/harbour-countryquiz.spec \
+    translations/*.ts
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 CONFIG += sailfishapp_i18n
-TRANSLATIONS += translations/harbour-flaggame-fi.ts
-
-flags.files = assets/flags/*.svg
-flags.path = /usr/share/$${TARGET}/assets/flags
-INSTALLS += flags
+TRANSLATIONS += translations/harbour-countryquiz-fi.ts
 
 ICON_SIZES = 86 108 128 172
-ICON_SOURCE = $$PWD/harbour-flaggame.svg
+ICON_SOURCE = $$PWD/harbour-countryquiz.svg
 for (size, ICON_SIZES) {
     icon_dir = $$shadowed(icons/$${size}x$${size})
     icon_path = $${icon_dir}/$${TARGET}.png
