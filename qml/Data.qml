@@ -22,20 +22,20 @@ ListModel {
         flag: "alb.svg"
     }
 
-//    ListElement {
-//        name: "Andorra"
-//        flag: "and.svg"
-//    }
+    ListElement {
+        name: "Andorra"
+        flag: "and.svg"
+    }
 
     ListElement {
         name: "The United Arab Emirates"
         flag: "are.svg"
     }
 
-//    ListElement {
-//        name: "Argentina"
-//        flag: "arg.svg"
-//    }
+    ListElement {
+        name: "Argentina"
+        flag: "arg.svg"
+    }
 
     ListElement {
         name: "Armenia"
@@ -122,10 +122,10 @@ ListModel {
         flag: "bol.svg"
     }
 
-//    ListElement {
-//        name: "Brazil"
-//        flag: "bra.svg"
-//    }
+    ListElement {
+        name: "Brazil"
+        flag: "bra.svg"
+    }
 
     ListElement {
         name: "Barbados"
@@ -267,10 +267,10 @@ ListModel {
         flag: "ecu.svg"
     }
 
-//    ListElement {
-//        name: "Egypt"
-//        flag: "egy.svg"
-//    }
+    ListElement {
+        name: "Egypt"
+        flag: "egy.svg"
+    }
 
     ListElement {
         name: "Eritrea"
@@ -297,10 +297,10 @@ ListModel {
         flag: "fin.svg"
     }
 
-//    ListElement {
-//        name: "Fiji"
-//        flag: "fji.svg"
-//    }
+    ListElement {
+        name: "Fiji"
+        flag: "fji.svg"
+    }
 
     ListElement {
         name: "France"
@@ -357,10 +357,10 @@ ListModel {
         flag: "grc.svg"
     }
 
-//    ListElement {
-//        name: "Grenada"
-//        flag: "grd.svg"
-//    }
+    ListElement {
+        name: "Grenada"
+        flag: "grd.svg"
+    }
 
     ListElement {
         name: "Guatemala"
@@ -382,10 +382,10 @@ ListModel {
         flag: "hrv.svg"
     }
 
-//    ListElement {
-//        name: "Haiti"
-//        flag: "hti.svg"
-//    }
+    ListElement {
+        name: "Haiti"
+        flag: "hti.svg"
+    }
 
     ListElement {
         name: "Hungary"
@@ -467,10 +467,10 @@ ListModel {
         flag: "khm.svg"
     }
 
-//    ListElement {
-//        name: "Kiribati"
-//        flag: "kir.svg"
-//    }
+    ListElement {
+        name: "Kiribati"
+        flag: "kir.svg"
+    }
 
     ListElement {
         name: "Saint Kitts and Nevis"
@@ -518,10 +518,10 @@ ListModel {
         flag: "lie.svg"
     }
 
-//    ListElement {
-//        name: "Sri Lanka"
-//        flag: "lka.svg"
-//    }
+    ListElement {
+        name: "Sri Lanka"
+        flag: "lka.svg"
+    }
 
     ListElement {
         name: "Lesotho"
@@ -568,10 +568,10 @@ ListModel {
         flag: "mdv.svg"
     }
 
-//    ListElement {
-//        name: "Mexico"
-//        flag: "mex.svg"
-//    }
+    ListElement {
+        name: "Mexico"
+        flag: "mex.svg"
+    }
 
     ListElement {
         name: "The Marshall Islands"
@@ -664,10 +664,10 @@ ListModel {
         flag: "nor.svg"
     }
 
-//    ListElement {
-//        name: "Nepal"
-//        flag: "npl.svg"
-//    }
+    ListElement {
+        name: "Nepal"
+        flag: "npl.svg"
+    }
 
     ListElement {
         name: "Nauru"
@@ -679,10 +679,10 @@ ListModel {
         flag: "nzl.svg"
     }
 
-//    ListElement {
-//        name: "Oman"
-//        flag: "omn.svg"
-//    }
+    ListElement {
+        name: "Oman"
+        flag: "omn.svg"
+    }
 
     ListElement {
         name: "Pakistan"
@@ -800,10 +800,10 @@ ListModel {
         flag: "smr.svg"
     }
 
-//    ListElement {
-//        name: "Somalia"
-//        flag: "som.svg"
-//    }
+    ListElement {
+        name: "Somalia"
+        flag: "som.svg"
+    }
 
     ListElement {
         name: "Serbia"
@@ -825,10 +825,10 @@ ListModel {
         flag: "sur.svg"
     }
 
-//    ListElement {
-//        name: "Slovakia"
-//        flag: "svk.svg"
-//    }
+    ListElement {
+        name: "Slovakia"
+        flag: "svk.svg"
+    }
 
     ListElement {
         name: "Slovenia"
