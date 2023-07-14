@@ -1,90 +1,84 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="720" height="504" viewBox="-2100 -1470 4200 2940">
-	<defs>
-		<path id="D" d="M -31.5,0 h 33 a 30 30 0 0 0 30,-30 v -10 a 30 30 0 0 0 -30,-30 H -31.5 z M -18.5,-13 h 19 a 19 19 0 0 0 19,-19 v -6 a 19 19 0 0 0 -19,-19 H -18.5 z" fill-rule="evenodd"/>
-		<path id="E" d="M 0,0 h 63 v -13 H 12 v -18 h 40 v -12 h -40 v -14 H 60 v -13 H 0 z" transform="translate(-31.5)"/>
-		<path id="e" d="M -26.25,0 h 52.5 v -12 h -40.5 v -16 h 33 v -12 h -33 v -11 H 25 v -12 H -26.25 z"/>
-		<g id="G">
-			<clipPath id="gcut">
-				<path d="M -31.5,0 v -70 h 63 v 70 z M 0,-47 v 12 h 31.5 v -12 z"/>
-			</clipPath>
-			<use xlink:href="#O" clip-path="url(#gcut)"/>
-			<rect x="5" y="-35" width="26.5" height="10"/>
-			<rect x="21.5" y="-35" width="10" height="35"/>
-		</g>
-		<path id="M" d="M -31.5,0 h 12 v -48 l 14,48 h 11 l 14,-48 V 0 h 12 V -70 h -17.5 l -14,48 l -14,-48 H -31.5 z"/>
-		<path id="O" d="M 0,0 a 31.5 35 0 0 0 0,-70 a 31.5 35 0 0 0 0,70 M 0,-13 a 18.5 22 0 0 0 0,-44 a 18.5 22 0 0 0 0,44" fill-rule="evenodd"/>
-		<path id="P" d="M -31.5,0 h 13 v -26 h 28 a 22 22 0 0 0 0,-44 h -40 z M -18.5,-39 h 27 a 9 9 0 0 0 0,-18 h -27 z" fill-rule="evenodd"/>
-		<g id="R">
-			<use xlink:href="#P"/>
-			<path d="M 28,0 c 0,-10 0,-32 -15,-32 h -19 c 22,0 22,22 22,32"/>
-		</g>
-		<path id="S" d="M -15.75,-22 C -15.75,-15 -9,-11.5 1,-11.5 C 11,-11.5 15.74,-14.75 15.75,-19.25 C 15.75,-33.5 -31,-24.5 -30.75,-49.5 C -30.5,-71 -6,-70 3,-70 C 12,-70 29,-66 28.75,-48.75 L 13.5,-48.75 C 13.5,-56.25 6.5,-59 -1.5,-59 C -9.25,-59 -14.75,-57.75 -14.75,-50.5 C -15,-38.75 31.5,-46.5 31.5,-21.75 C 31.5,-3.5 13.5,0 0,0 C -11.5,0 -31.55,-4.5 -31.5,-22 z"/>
-		<g id="star" fill="#fff">
-			<g id="c">
-				<path id="t" d="M 0,-1 v 1 h .5" transform="rotate(18 0,-1)"/>
-				<use xlink:href="#t" transform="scale(-1,1)"/>
-			</g>
-			<use xlink:href="#c" transform="rotate(72)"/>
-			<use xlink:href="#c" transform="rotate(-72)"/>
-			<use xlink:href="#c" transform="rotate(144)"/>
-			<use xlink:href="#c" transform="rotate(-144)"/>
-		</g>
-		<use id="star1" xlink:href="#star" transform="scale(31.5)"/>
-		<use id="star2" xlink:href="#star" transform="scale(26.25)"/>
-		<use id="star3" xlink:href="#star" transform="scale(21)"/>
-		<use id="star4" xlink:href="#star" transform="scale(15)"/>
-		<use id="star5" xlink:href="#star" transform="scale(10.5)"/>
-	</defs>
-	<rect x="-50%" y="-50%" width="100%" height="100%" fill="#009b3a"/>
-	<path d="M -1743,0 0,1113 1743,0 0,-1113 z" fill="#fedf00"/>
-	<circle r="735" fill="#002776"/>
-	<clipPath id="band">
-		<circle r="735"/>
-	</clipPath>
-	<path d="M -2205,1470 a 1785 1785 0 0 1 3570,0 h -105 a 1680 1680 0 1 0 -3360,0 z" clip-path="url(#band)" fill="#fff"/>
-	<g fill="#009b3a" transform="translate(-420,1470)">
-		<use xlink:href="#O" y="-1697.5" transform="rotate(-7)"/>
-		<use xlink:href="#R" y="-1697.5" transform="rotate(-4)"/>
-		<use xlink:href="#D" y="-1697.5" transform="rotate(-1)"/>
-		<use xlink:href="#E" y="-1697.5" transform="rotate(2)"/>
-		<use xlink:href="#M" y="-1697.5" transform="rotate(5)"/>
-		<use xlink:href="#e" y="-1697.5" transform="rotate(9.75)"/>
-		<use xlink:href="#P" y="-1697.5" transform="rotate(14.5)"/>
-		<use xlink:href="#R" y="-1697.5" transform="rotate(17.5)"/>
-		<use xlink:href="#O" y="-1697.5" transform="rotate(20.5)"/>
-		<use xlink:href="#G" y="-1697.5" transform="rotate(23.5)"/>
-		<use xlink:href="#R" y="-1697.5" transform="rotate(26.5)"/>
-		<use xlink:href="#E" y="-1697.5" transform="rotate(29.5)"/>
-		<use xlink:href="#S" y="-1697.5" transform="rotate(32.5)"/>
-		<use xlink:href="#S" y="-1697.5" transform="rotate(35.5)"/>
-		<use xlink:href="#O" y="-1697.5" transform="rotate(38.5)"/>
-	</g>
-	<use id="αCMi" xlink:href="#star1" x="-600" y="-132"/>
-	<use id="αCMa" xlink:href="#star1" x="-535" y="177"/>
-	<use id="βCMa" xlink:href="#star2" x="-625" y="243"/>
-	<use id="γCMa" xlink:href="#star4" x="-463" y="132"/>
-	<use id="δCMa" xlink:href="#star2" x="-382" y="250"/>
-	<use id="εCMa" xlink:href="#star3" x="-404" y="323"/>
-	<use id="αVir" xlink:href="#star1" x="228" y="-228"/>
-	<use id="αSco" xlink:href="#star1" x="515" y="258"/>
-	<use id="βSco" xlink:href="#star3" x="617" y="265"/>
-	<use id="εSco" xlink:href="#star2" x="545" y="323"/>
-	<use id="θSco" xlink:href="#star2" x="368" y="477"/>
-	<use id="ιSco" xlink:href="#star3" x="367" y="551"/>
-	<use id="κSco" xlink:href="#star3" x="441" y="419"/>
-	<use id="λSco" xlink:href="#star2" x="500" y="382"/>
-	<use id="μSco" xlink:href="#star3" x="365" y="405"/>
-	<use id="αHya" xlink:href="#star2" x="-280" y="30"/>
-	<use id="γHya" xlink:href="#star3" x="200" y="-37"/>
-	<use id="αCru" xlink:href="#star1" y="330"/>
-	<use id="βCru" xlink:href="#star2" x="85" y="184"/>
-	<use id="γCru" xlink:href="#star2" y="118"/>
-	<use id="δCru" xlink:href="#star3" x="-74" y="184"/>
-	<use id="εCru" xlink:href="#star4" x="-37" y="235"/>
-	<use id="αTrA" xlink:href="#star2" x="220" y="495"/>
-	<use id="βTrA" xlink:href="#star3" x="283" y="430"/>
-	<use id="γTrA" xlink:href="#star3" x="162" y="412"/>
-	<use id="αCar" xlink:href="#star1" x="-295" y="390"/>
-	<use id="σOct" xlink:href="#star5" y="575"/>
+<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.0" width="720" height="504" viewBox="-2100 -1470 4200 2940" id="svg616" sodipodi:docname="bra.svg" inkscape:version="1.2.2 (b0a8486541, 2022-12-01)">
+  <sodipodi:namedview id="namedview618" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="0.70710678" inkscape:cx="285.67114" inkscape:cy="343.6539" inkscape:window-width="1920" inkscape:window-height="1011" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg616"/>
+  <defs id="defs544">
+    <path id="D" d="M -31.5,0 h 33 a 30 30 0 0 0 30,-30 v -10 a 30 30 0 0 0 -30,-30 H -31.5 z M -18.5,-13 h 19 a 19 19 0 0 0 19,-19 v -6 a 19 19 0 0 0 -19,-19 H -18.5 z" fill-rule="evenodd"/>
+    <path id="E" d="M 0,0 h 63 v -13 H 12 v -18 h 40 v -12 h -40 v -14 H 60 v -13 H 0 z" transform="translate(-31.5)"/>
+    <path id="e" d="M -26.25,0 h 52.5 v -12 h -40.5 v -16 h 33 v -12 h -33 v -11 H 25 v -12 H -26.25 z"/>
+    <path id="O" d="M 0,0 a 31.5 35 0 0 0 0,-70 a 31.5 35 0 0 0 0,70 M 0,-13 a 18.5 22 0 0 0 0,-44 a 18.5 22 0 0 0 0,44" fill-rule="evenodd"/>
+    <path id="M" d="M -31.5,0 h 12 v -48 l 14,48 h 11 l 14,-48 V 0 h 12 V -70 h -17.5 l -14,48 l -14,-48 H -31.5 z"/>
+    <path id="P" d="M -31.5,0 h 13 v -26 h 28 a 22 22 0 0 0 0,-44 h -40 z M -18.5,-39 h 27 a 9 9 0 0 0 0,-18 h -27 z" fill-rule="evenodd"/>
+    <g id="G" style="fill:#009b3a;fill-opacity:1" transform="translate(60.772527,25.484034)">
+      <path id="path1981" style="fill:#009b3a;fill-opacity:1" d="m 0.68816749,-69.999999 a 31.5,35 0 0 0 -10.76660049,2.107747 31.5,35 0 0 0 -9.479167,6.072591 31.5,35 0 0 0 -7.029622,9.319662 31.5,35 0 0 0 -3.748373,11.416015 31.5,35 0 0 0 0,12.156576 31.5,35 0 0 0 3.748373,11.427409 31.5,35 0 0 0 7.029622,9.3082672 31.5,35 0 0 0 9.479167,6.083984 A 31.5,35 0 0 0 0.68816749,-7.4999997e-7 31.5,35 0 0 0 11.466163,-2.1077478 a 31.5,35 0 0 0 9.467773,-6.083984 31.5,35 0 0 0 7.041016,-9.3082672 31.5,35 0 0 0 3.736979,-11.427409 31.5,35 0 0 0 0,-6.072591 H 19.190772 a 18.5,22 0 0 1 -1.41276,8.419596 18.5,22 0 0 1 -4.010417,7.132161 18.5,22 0 0 1 -5.9928386,4.773763 18.5,22 0 0 1 -7.08658891,1.674805 18.5,22 0 0 1 -7.07519499,-1.674805 18.5,22 0 0 1 -6.0042315,-4.773763 18.5,22 0 0 1 -4.010417,-7.132161 18.5,22 0 0 1 -1.401367,-8.419596 18.5,22 0 0 1 1.401367,-8.419597 18.5,22 0 0 1 4.010417,-7.143554 18.5,22 0 0 1 6.0042315,-4.76237 18.5,22 0 0 1 7.07519499,-1.674805 18.5,22 0 0 1 7.08658891,1.674805 18.5,22 0 0 1 5.9928386,4.76237 18.5,22 0 0 1 2.005209,3.56608 h 14.002278 a 31.5,35 0 0 0 -1.80013,-5.502929 31.5,35 0 0 0 -7.041016,-9.319662 31.5,35 0 0 0 -9.467773,-6.072591 31.5,35 0 0 0 -10.77799551,-2.107747 z"/>
+      <rect x="5" y="-35" width="26.5" height="10" id="rect512" style="fill:#009b3a;fill-opacity:1"/>
+      <rect x="21.5" y="-35" width="10" height="35" id="rect514" style="fill:#009b3a;fill-opacity:1"/>
+    </g>
+    <g id="R">
+      <use xlink:href="#P" id="use520"/>
+      <path d="M 28,0 c 0,-10 0,-32 -15,-32 h -19 c 22,0 22,22 22,32" id="path522"/>
+    </g>
+    <path id="S" d="M -15.75,-22 C -15.75,-15 -9,-11.5 1,-11.5 C 11,-11.5 15.74,-14.75 15.75,-19.25 C 15.75,-33.5 -31,-24.5 -30.75,-49.5 C -30.5,-71 -6,-70 3,-70 C 12,-70 29,-66 28.75,-48.75 L 13.5,-48.75 C 13.5,-56.25 6.5,-59 -1.5,-59 C -9.25,-59 -14.75,-57.75 -14.75,-50.5 C -15,-38.75 31.5,-46.5 31.5,-21.75 C 31.5,-3.5 13.5,0 0,0 C -11.5,0 -31.55,-4.5 -31.5,-22 z"/>
+    <g id="star" fill="#fff">
+      <g id="c">
+        <path id="t" d="M 0,-1 v 1 h .5" transform="rotate(18 0,-1)"/>
+        <use xlink:href="#t" transform="scale(-1,1)" id="use527"/>
+      </g>
+      <use xlink:href="#c" transform="rotate(72)" id="use530"/>
+      <use xlink:href="#c" transform="rotate(-72)" id="use532"/>
+      <use xlink:href="#c" transform="rotate(144)" id="use534"/>
+      <use xlink:href="#c" transform="rotate(-144)" id="use536"/>
+    </g>
+    <use id="star1" xlink:href="#star" transform="scale(31.5)"/>
+    <use id="star2" xlink:href="#star" transform="scale(26.25)"/>
+    <use id="star3" xlink:href="#star" transform="scale(21)"/>
+    <use id="star4" xlink:href="#star" transform="scale(15)"/>
+    <use id="star5" xlink:href="#star" transform="scale(10.5)"/>
+  </defs>
+  <rect x="-2100" y="-1470" width="4200" height="2940" fill="#009b3a" id="rect546" style="stroke-width:5.83333"/>
+  <path d="M -1743,0 0,1113 1743,0 0,-1113 z" fill="#fedf00" id="path548"/>
+  <circle r="735" fill="#002776" id="circle550" cx="4.5474735e-13" cy="0"/>
+  <path style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.583333;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" d="m -672.22392,-297.09029 c 213.29961,-32.92378 499.17625,-25.36218 782.72065,62.62164 283.54439,87.98383 486.8439,226.6880728 617.3307,336.90024 0,0 -6.91112,56.24925 -26.22534,116.80515 C 624.72385,147.25161 370.44675,-56.54148 36.240327,-146.8344 -297.9661,-237.12732 -548.40157,-212.77329 -711.45278,-184.55337 c 16.02814,-62.55425 39.101,-112.87688 39.22886,-112.53692 z" id="path1004" sodipodi:nodetypes="czcczcc"/>
+  <g fill="#009b3a" transform="translate(-420,1470)" id="g587">
+    <use xlink:href="#O" y="-1697.5" transform="rotate(-7)" id="use557"/>
+    <use xlink:href="#R" y="-1697.5" transform="rotate(-4)" id="use559"/>
+    <use xlink:href="#D" y="-1697.5" transform="rotate(-1)" id="use561"/>
+    <use xlink:href="#E" y="-1697.5" transform="rotate(2)" id="use563"/>
+    <use xlink:href="#M" y="-1697.5" transform="rotate(5)" id="use565"/>
+    <use xlink:href="#e" y="-1697.5" transform="rotate(9.75)" id="use567"/>
+    <use xlink:href="#P" y="-1697.5" transform="rotate(14.5)" id="use569"/>
+    <use xlink:href="#R" y="-1697.5" transform="rotate(17.5)" id="use571"/>
+    <use xlink:href="#O" y="-1697.5" transform="rotate(20.5)" id="use573"/>
+    <use xlink:href="#G" y="-1697.5" transform="rotate(23.5,91.645921,-133.34562)" id="use575" style="fill:#009b3a;fill-opacity:1"/>
+    <use xlink:href="#R" y="-1697.5" transform="rotate(26.5)" id="use577"/>
+    <use xlink:href="#E" y="-1697.5" transform="rotate(29.5)" id="use579"/>
+    <use xlink:href="#S" y="-1697.5" transform="rotate(32.5)" id="use581"/>
+    <use xlink:href="#S" y="-1697.5" transform="rotate(35.5)" id="use583"/>
+    <use xlink:href="#O" y="-1697.5" transform="rotate(38.5)" id="use585"/>
+  </g>
+  <use id="&#945;CMi" xlink:href="#star1" x="-600" y="-132"/>
+  <use id="&#945;CMa" xlink:href="#star1" x="-535" y="177"/>
+  <use id="&#946;CMa" xlink:href="#star2" x="-625" y="243"/>
+  <use id="&#947;CMa" xlink:href="#star4" x="-463" y="132"/>
+  <use id="&#948;CMa" xlink:href="#star2" x="-382" y="250"/>
+  <use id="&#949;CMa" xlink:href="#star3" x="-404" y="323"/>
+  <use id="&#945;Vir" xlink:href="#star1" x="228" y="-228"/>
+  <use id="&#945;Sco" xlink:href="#star1" x="515" y="258"/>
+  <use id="&#946;Sco" xlink:href="#star3" x="617" y="265"/>
+  <use id="&#949;Sco" xlink:href="#star2" x="545" y="323"/>
+  <use id="&#952;Sco" xlink:href="#star2" x="368" y="477"/>
+  <use id="&#953;Sco" xlink:href="#star3" x="367" y="551"/>
+  <use id="&#954;Sco" xlink:href="#star3" x="441" y="419"/>
+  <use id="&#955;Sco" xlink:href="#star2" x="500" y="382"/>
+  <use id="&#956;Sco" xlink:href="#star3" x="365" y="405"/>
+  <use id="&#945;Hya" xlink:href="#star2" x="-280" y="30"/>
+  <use id="&#947;Hya" xlink:href="#star3" x="200" y="-37"/>
+  <use id="&#945;Cru" xlink:href="#star1" y="330"/>
+  <use id="&#946;Cru" xlink:href="#star2" x="85" y="184"/>
+  <use id="&#947;Cru" xlink:href="#star2" y="118"/>
+  <use id="&#948;Cru" xlink:href="#star3" x="-74" y="184"/>
+  <use id="&#949;Cru" xlink:href="#star4" x="-37" y="235"/>
+  <use id="&#945;TrA" xlink:href="#star2" x="220" y="495"/>
+  <use id="&#946;TrA" xlink:href="#star3" x="283" y="430"/>
+  <use id="&#947;TrA" xlink:href="#star3" x="162" y="412"/>
+  <use id="&#945;Car" xlink:href="#star1" x="-295" y="390"/>
+  <use id="&#963;Oct" xlink:href="#star5" y="575"/>
 </svg>

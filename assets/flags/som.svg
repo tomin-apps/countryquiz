@@ -1,15 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="900" height="600" viewBox="-81 -54 162 108" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
- <defs>
-  <clipPath id="c">
-   <path transform="rotate(-36,0,-26)" d="m0-26v26h-26"/>
-  </clipPath>
- </defs>
- <path d="m-81-54h162v108h-162z" fill="#4189dd"/>
- <path id="a" transform="rotate(18,0,-26)" d="m0-26v26h26" clip-path="url(#c)" fill="#fff"/>
- <g id="b">
-  <use transform="rotate(72)" xlink:href="#a"/>
-  <use transform="rotate(144)" xlink:href="#a"/>
- </g>
- <use transform="rotate(144)" xlink:href="#b"/>
+<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="900" height="600" viewBox="-81 -54 162 108" version="1.1" id="svg17" sodipodi:docname="som.svg" inkscape:version="1.2.2 (b0a8486541, 2022-12-01)">
+  <sodipodi:namedview id="namedview19" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="1.8573338" inkscape:cx="520.63877" inkscape:cy="375.26911" inkscape:window-width="1920" inkscape:window-height="1011" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg17"/>
+  <defs id="defs5">
+    <clipPath id="c">
+      <path transform="rotate(-36,0,-26)" d="m0-26v26h-26" id="path2"/>
+    </clipPath>
+  </defs>
+  <path d="M -81,-54 H 81 V 54 H -81 Z" fill="#4189dd" id="path7"/>
+  <path id="path258" style="fill:#ffffff;stroke:#ffffff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round" inkscape:transform-center-x="0.085143318" inkscape:transform-center-y="-2.3105078" transform="matrix(0.18,0,0,0.18,-34.166787,-26.060481)" d="M 273.78004,260.38229 190.0048,199.622 l -84.10275,60.69153 31.8985,-98.45095 -83.710251,-61.23176 103.489591,-0.0857 32.36697,-98.5348294 32.06159,98.3979594 103.71414,0.33388 -83.67445,60.89902 z"/>
 </svg>
