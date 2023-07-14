@@ -33,7 +33,7 @@
    id="namedview634"
    showgrid="false"
    inkscape:zoom="8.2560025"
-   inkscape:cx="34.944272"
+   inkscape:cx="32.582354"
    inkscape:cy="47.238358"
    inkscape:window-x="0"
    inkscape:window-y="0"
@@ -48,13 +48,10 @@
          rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata>
 
 
-<rect
-   style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+<path
    id="rect1407"
-   width="82.400002"
-   height="82.400002"
-   x="1.7999992"
-   y="1.7999992" /><g
+   style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:3.00094488;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+   d="M 1.8007812,84.199219 H 43 45.369141 V 84.03125 A 41.200001,41.200001 0 0 0 84.199219,43 41.200001,41.200001 0 0 0 43,1.8007812 41.200001,41.200001 0 0 0 1.875,40.630859 H 1.8007812 V 43 Z" /><g
    id="g1509"
    transform="matrix(0.73723995,0,0,0.73723995,-39.256661,-33.885247)"><circle
      style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.32292;stroke-linecap:round;stroke-linejoin:round"
@@ -144,7 +141,7 @@
      id="path1486"
      sodipodi:nodetypes="cc" /></g><g
    id="g9176"
-   transform="matrix(0.48711231,0,0,0.48711231,-15.83891,-20.35675)"><path
+   transform="matrix(0.40748171,0.47030059,-0.47030059,0.40748171,42.635993,-57.485616)"><path
      style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
      d="M 128.02814,183.56283 88.588759,94.05722"
      id="path4173" /><circle
