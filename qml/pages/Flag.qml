@@ -20,7 +20,7 @@ Page {
 
         Image {
             anchors.horizontalCenter: parent.horizontalCenter
-            source: "../../assets/flags/" + item.flag
+            source: "../../assets/flags/" + item.iso + ".svg"
             sourceSize.width: parent.width
         }
 
@@ -29,7 +29,18 @@ Page {
             color: Theme.highlightColor
             font.pixelSize: Theme.fontSizeExtraLarge
             horizontalAlignment: Text.AlignHCenter
-            text: item.name
+            text: item.pre ? item.pre + " " + item.name : item.name
+            width: parent.width - 2 * Theme.horizontalPageMargin
+            wrapMode: Text.Wrap
+        }
+
+        Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.secondaryHighlightColor
+            font.pixelSize: Theme.fontSizeLarge
+            horizontalAlignment: Text.AlignHCenter
+            text: item.alt || ""
+            visible: text !== ""
             width: parent.width - 2 * Theme.horizontalPageMargin
             wrapMode: Text.Wrap
         }
