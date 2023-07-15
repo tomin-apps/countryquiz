@@ -9,6 +9,7 @@ import Sailfish.Silica 1.0
 
 SilicaControl {
     property alias text: label.text
+    property alias altText: altLabel.text
     property color color: highlighted ? Theme.highlightColor : Theme.primaryColor
 
     signal clicked
@@ -30,9 +31,28 @@ SilicaControl {
 
         Label {
             id: label
-            anchors.verticalCenter: parent.verticalCenter
-            horizontalAlignment: Text.AlignHCenter
-            width: parent.width
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+                verticalCenterOffset: altLabel.visible ? -(font.pixelSize + Theme.paddingSmall) / 2 : 0
+            }
+            horizontalAlignment: width > implicitWidth ? Text.AlignHCenter : Text.AlignLeft
+            truncationMode: TruncationMode.Fade
+            width: parent.width - parent.height / 2
+        }
+
+        Label {
+            id: altLabel
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+                verticalCenterOffset: (font.pixelSize + Theme.paddingSmall) / 2
+            }
+            color: highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
+            horizontalAlignment: width > implicitWidth ? Text.AlignHCenter : Text.AlignLeft
+            truncationMode: TruncationMode.Fade
+            visible: text !== ""
+            width: parent.width - parent.height / 2
         }
 
         onClicked: button.clicked()

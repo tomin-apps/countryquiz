@@ -25,14 +25,14 @@ Item {
                 spacing: Theme.paddingMedium
 
                 Image {
-                    source: "../../assets/flags/" + flag
+                    source: "../../assets/flags/" + iso + ".svg"
                     sourceSize.height: Theme.itemSizeMedium
                 }
 
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: Theme.fontSizeLarge
-                    text: name
+                    text: pre ? pre + " " + name : name
                     truncationMode: TruncationMode.Fade
                     width: item.width - x - Theme.horizontalPageMargin
                 }

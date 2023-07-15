@@ -45,7 +45,7 @@ Page {
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "../../assets/flags/" + dataModel.get(index).flag
+                source: "../../assets/flags/" + dataModel.get(index).iso + ".svg"
                 sourceSize.height: page.height - otherHeight - choicesHeight
                 sourceSize.width: parent.width
             }
@@ -89,7 +89,8 @@ Page {
                 QuizButton {
                     id: button
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: model.name
+                    text: model.pre ? model.pre + " " + model.name : model.name
+                    altText: model.alt || ""
                     width: parent.width - 2 * Theme.horizontalPageMargin
 
                     onClicked: {

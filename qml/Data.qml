@@ -9,986 +9,1180 @@ import QtQuick 2.6
 ListModel {
     ListElement {
         name: "Afghanistan"
-        flag: "afg.svg"
+        iso: "afg"
     }
 
     ListElement {
         name: "Angola"
-        flag: "ago.svg"
+        iso: "ago"
     }
 
     ListElement {
         name: "Albania"
-        flag: "alb.svg"
+        alt: "Republic of Albania"
+        iso: "alb"
     }
 
     ListElement {
         name: "Andorra"
-        flag: "and.svg"
+        alt: "Principality of Andorra"
+        iso: "and"
+        small_island: true
     }
 
     ListElement {
-        name: "The United Arab Emirates"
-        flag: "are.svg"
+        pre: "The"
+        name: "United Arab Emirates"
+        iso: "are"
     }
 
     ListElement {
         name: "Argentina"
-        flag: "arg.svg"
+        alt: "Argentine Republic"
+        iso: "arg"
     }
 
     ListElement {
         name: "Armenia"
-        flag: "arm.svg"
+        alt: "Republic of Armenia"
+        iso: "arm"
     }
 
     ListElement {
         name: "Antigua and Barbuda"
-        flag: "atg.svg"
+        iso: "atg"
+        small_island: true
     }
 
     ListElement {
         name: "Australia"
-        flag: "aus.svg"
+        alt: "Commonwealth of Australia"
+        iso: "aus"
     }
 
     ListElement {
         name: "Austria"
-        flag: "aut.svg"
+        alt: "Republic of Austria"
+        iso: "aut"
     }
 
     ListElement {
         name: "Azerbaijan"
-        flag: "aze.svg"
+        alt: "Republic of Azerbaijan"
+        iso: "aze"
     }
 
     ListElement {
         name: "Burundi"
-        flag: "bdi.svg"
+        alt: "Republic of Burundi"
+        iso: "bdi"
     }
 
     ListElement {
         name: "Belgium"
-        flag: "bel.svg"
+        alt: "Kingdom of Belgium"
+        iso: "bel"
     }
 
     ListElement {
         name: "Benin"
-        flag: "ben.svg"
+        alt: "Republic of Benin"
+        iso: "ben"
     }
 
     ListElement {
         name: "Burkina Faso"
-        flag: "bfa.svg"
+        iso: "bfa"
     }
 
     ListElement {
         name: "Bangladesh"
-        flag: "bgd.svg"
+        alt: "People's Republic of Bangladesh"
+        iso: "bgd"
     }
 
     ListElement {
         name: "Bulgaria"
-        flag: "bgr.svg"
+        alt: "Republic of Bulgaria"
+        iso: "bgr"
     }
 
     ListElement {
         name: "Bahrain"
-        flag: "bhr.svg"
+        alt: "Kingdom of Bahrain"
+        iso: "bhr"
+        small_island: true
     }
 
     ListElement {
-        name: "The Bahamas"
-        flag: "bhs.svg"
+        pre: "The"
+        name: "Bahamas"
+        alt: "Commonwealth of The Bahamas"
+        iso: "bhs"
+        small_island: true
     }
 
     ListElement {
         name: "Bosnia and Herzegovina"
-        flag: "bih.svg"
+        iso: "bih"
     }
 
     ListElement {
         name: "Belarus"
-        flag: "blr.svg"
+        alt: "Republic of Belarus"
+        iso: "blr"
     }
 
     ListElement {
         name: "Belize"
-        flag: "blz.svg"
+        iso: "blz"
     }
 
     ListElement {
         name: "Bolivia"
-        flag: "bol.svg"
+        alt: "Plurinational State of Bolivia"
+        iso: "bol"
     }
 
     ListElement {
         name: "Brazil"
-        flag: "bra.svg"
+        alt: "Federative Republic of Brazil"
+        iso: "bra"
     }
 
     ListElement {
         name: "Barbados"
-        flag: "brb.svg"
+        iso: "brb"
+        small_island: true
     }
 
     ListElement {
         name: "Brunei"
-        flag: "brn.svg"
+        alt: "Brunei Darussalam"
+        iso: "brn"
     }
 
     ListElement {
         name: "Bhutan"
-        flag: "btn.svg"
+        alt: "Kingdom of Bhutan"
+        iso: "btn"
     }
 
     ListElement {
         name: "Botswana"
-        flag: "bwa.svg"
+        alt: "Republic of Botswana"
+        iso: "bwa"
     }
 
     ListElement {
-        name: "The Central African Republic"
-        flag: "caf.svg"
+        pre: "The"
+        name: "Central African Republic"
+        iso: "caf"
     }
 
     ListElement {
         name: "Canada"
-        flag: "can.svg"
+        iso: "can"
     }
 
     ListElement {
         name: "Switzerland"
-        flag: "che.svg"
+        alt: "Swiss Confederation"
+        iso: "che"
     }
 
     ListElement {
         name: "Chile"
-        flag: "chl.svg"
+        alt: "Republic of Chile"
+        iso: "chl"
     }
 
     ListElement {
         name: "China"
-        flag: "chn.svg"
-        alt: "The People's Republic of China"
+        alt: "People's Republic of China"
+        iso: "chn"
     }
 
     ListElement {
         name: "Ivory Coast"
-        flag: "civ.svg"
-        alt: "Côte d'Ivoire"
+        alt: "Republic of Côte d'Ivoire"
+        iso: "civ"
     }
 
     ListElement {
         name: "Cameroon"
-        flag: "cmr.svg"
+        alt: "Republic of Cameroon"
+        iso: "cmr"
     }
 
     ListElement {
-        name: "The Democratic Republic of the Congo"
-        flag: "cod.svg"
+        name: "Democratic Republic of the Congo"
+        other: "Congo-Kinshasa;Zaire"
+        iso: "cod"
     }
 
     ListElement {
         name: "Congo"
-        flag: "cog.svg"
         alt: "Republic of the Congo"
+        iso: "cog"
     }
 
     ListElement {
         name: "Colombia"
-        flag: "col.svg"
+        alt: "Republic of Colombia"
+        iso: "col"
     }
 
     ListElement {
-        name: "The Comoros"
-        flag: "com.svg"
+        name: "Comoros"
+        alt: "Union of the Comoros"
+        iso: "com"
+        small_island: true
     }
 
     ListElement {
         name: "Cape Verde"
-        flag: "cpv.svg"
-        alt: "Cabo Verde"
+        alt: "Republic of Cabo Verde"
+        other: "Cabo Verde"
+        iso: "cpv"
+        small_island: true
     }
 
     ListElement {
         name: "Costa Rica"
-        flag: "cri.svg"
+        alt: "Republic of Costa Rica"
+        iso: "cri"
     }
 
     ListElement {
         name: "Cuba"
-        flag: "cub.svg"
+        alt: "Republic of Cuba"
+        iso: "cub"
     }
 
     ListElement {
         name: "Cyprus"
-        flag: "cyp.svg"
+        alt: "Republic of Cyprus"
+        iso: "cyp"
     }
 
     ListElement {
         name: "Czechia"
-        flag: "cze.svg"
-        alt: "The Czech Republic"
+        alt: "Czech Republic"
+        iso: "cze"
     }
 
     ListElement {
         name: "Germany"
-        flag: "deu.svg"
+        alt: "Federal Republic of Germany"
+        iso: "deu"
     }
 
     ListElement {
         name: "Djibouti"
-        flag: "dji.svg"
+        alt: "Republic of Djibouti"
+        iso: "dji"
     }
 
     ListElement {
         name: "Dominica"
-        flag: "dma.svg"
+        alt: "Commonwealth of Dominica"
+        iso: "dma"
+        small_island: true
     }
 
     ListElement {
         name: "Denmark"
-        flag: "dnk.svg"
+        alt: "Kingdom of Denmark"
+        other: "Danish Realm"
+        iso: "dnk"
     }
 
     ListElement {
-        name: "The Dominican Republic"
-        flag: "dom.svg"
+        name: "Dominican Republic"
+        iso: "dom"
     }
 
     ListElement {
         name: "Algeria"
-        flag: "dza.svg"
+        alt: "People's Democratic Republic of Algeria"
+        iso: "dza"
     }
 
     ListElement {
         name: "Ecuador"
-        flag: "ecu.svg"
+        alt: "Republic of Ecuador"
+        iso: "ecu"
     }
 
     ListElement {
         name: "Egypt"
-        flag: "egy.svg"
+        alt: "Arab Republic of Egypt"
+        iso: "egy"
     }
 
     ListElement {
         name: "Eritrea"
-        flag: "eri.svg"
+        alt: "State of Eritrea"
+        iso: "eri"
     }
 
     ListElement {
         name: "Spain"
-        flag: "esp.svg"
+        alt: "Kingdom of Spain"
+        iso: "esp"
     }
 
     ListElement {
         name: "Estonia"
-        flag: "est.svg"
+        alt: "Republic of Estonia"
+        iso: "est"
     }
 
     ListElement {
         name: "Ethiopia"
-        flag: "eth.svg"
+        alt: "Federal Democratic Republic of Ethiopia"
+        iso: "eth"
     }
 
     ListElement {
         name: "Finland"
-        flag: "fin.svg"
+        alt: "Republic of Finland"
+        iso: "fin"
     }
 
     ListElement {
         name: "Fiji"
-        flag: "fji.svg"
+        alt: "Republic of Fiji"
+        iso: "fji"
     }
 
     ListElement {
         name: "France"
-        flag: "fra.svg"
+        alt: "French Republic"
+        iso: "fra"
     }
 
     ListElement {
-        name: "The Federated States of Micronesia"
-        flag: "fsm.svg"
+        pre: "The"
+        name: "Federated States of Micronesia"
+        iso: "fsm"
     }
 
     ListElement {
         name: "Gabon"
-        flag: "gab.svg"
+        alt: "Gabonese Republic"
+        iso: "gab"
     }
 
     ListElement {
-        name: "The United Kingdom"
-        flag: "gbr.svg"
+        pre: "The"
+        name: "United Kingdom"
+        alt: "United Kingdom of Great Britain and Northern Ireland"
+        other: "Britain"
+        iso: "gbr"
     }
 
     ListElement {
         name: "Georgia"
-        flag: "geo.svg"
+        iso: "geo"
     }
 
     ListElement {
         name: "Ghana"
-        flag: "gha.svg"
+        alt: "Republic of Ghana"
+        iso: "gha"
     }
 
     ListElement {
         name: "Guinea"
-        flag: "gin.svg"
+        alt: "Republic of Guinea"
+        other: "Guinea-Conakry"
+        iso: "gin"
     }
 
     ListElement {
-        name: "The Gambia"
-        flag: "gmb.svg"
+        pre: "The"
+        name: "Gambia"
+        alt: "Republic of The Gambia"
+        iso: "gmb"
     }
 
     ListElement {
         name: "Guinea-Bissau"
-        flag: "gnb.svg"
+        alt: "Republic of Guinea-Bissau"
+        iso: "gnb"
     }
 
     ListElement {
         name: "Equatorial Guinea"
-        flag: "gnq.svg"
+        alt: "Republic of Equatorial Guinea"
+        iso: "gnq"
     }
 
     ListElement {
         name: "Greece"
-        flag: "grc.svg"
+        alt: "Hellenic Republic"
+        iso: "grc"
     }
 
     ListElement {
         name: "Grenada"
-        flag: "grd.svg"
+        iso: "grd"
+        small_island: true
     }
 
     ListElement {
         name: "Guatemala"
-        flag: "gtm.svg"
+        alt: "Republic of Guatemala"
+        iso: "gtm"
     }
 
     ListElement {
         name: "Guyana"
-        flag: "guy.svg"
+        alt: "Co-operative Republic of Guyana"
+        iso: "guy"
     }
 
     ListElement {
         name: "Honduras"
-        flag: "hnd.svg"
+        alt: "Republic of Honduras"
+        iso: "hnd"
     }
 
     ListElement {
         name: "Croatia"
-        flag: "hrv.svg"
+        alt: "Republic of Croatia"
+        iso: "hrv"
     }
 
     ListElement {
         name: "Haiti"
-        flag: "hti.svg"
+        alt: "Republic of Haiti"
+        iso: "hti"
     }
 
     ListElement {
         name: "Hungary"
-        flag: "hun.svg"
+        iso: "hun"
     }
 
     ListElement {
         name: "Indonesia"
-        flag: "idn.svg"
+        alt: "Republic of Indonesia"
+        iso: "idn"
     }
 
     ListElement {
         name: "India"
-        flag: "ind.svg"
+        alt: "Republic of India"
+        iso: "ind"
     }
 
     ListElement {
         name: "Ireland"
-        flag: "irl.svg"
+        alt: "Republic of Ireland"
+        iso: "irl"
     }
 
     ListElement {
         name: "Iran"
-        flag: "irn.svg"
+        alt: "Islamic Republic of Iran"
+        iso: "irn"
     }
 
     ListElement {
         name: "Iraq"
-        flag: "irq.svg"
+        alt: "Republic of Iraq"
+        iso: "irq"
     }
 
     ListElement {
         name: "Iceland"
-        flag: "isl.svg"
+        alt: "Republic of Iceland"
+        iso: "isl"
     }
 
     ListElement {
         name: "Israel"
-        flag: "isr.svg"
+        alt: "State of Israel"
+        iso: "isr"
     }
 
     ListElement {
         name: "Italy"
-        flag: "ita.svg"
+        alt: "Italian Republic"
+        iso: "ita"
     }
 
     ListElement {
         name: "Jamaica"
-        flag: "jam.svg"
+        iso: "jam"
+        small_island: true
     }
 
     ListElement {
         name: "Jordan"
-        flag: "jor.svg"
+        alt: "Hashemite Kingdom of Jordan"
+        iso: "jor"
     }
 
     ListElement {
         name: "Japan"
-        flag: "jpn.svg"
+        iso: "jpn"
     }
 
     ListElement {
         name: "Kazakhstan"
-        flag: "kaz.svg"
+        alt: "Republic of Kazakhstan"
+        iso: "kaz"
     }
 
     ListElement {
         name: "Kenya"
-        flag: "ken.svg"
+        alt: "Republic of Kenya"
+        iso: "ken"
     }
 
     ListElement {
         name: "Kyrgyzstan"
-        flag: "kgz.svg"
+        alt: "Kyrgyz Republic"
+        iso: "kgz"
     }
 
     ListElement {
         name: "Cambodia"
-        flag: "khm.svg"
+        alt: "Kingdom of Cambodia"
+        iso: "khm"
     }
 
     ListElement {
         name: "Kiribati"
-        flag: "kir.svg"
+        alt: "Republic of Kiribati"
+        iso: "kir"
     }
 
     ListElement {
         name: "Saint Kitts and Nevis"
-        flag: "kna.svg"
+        alt: "Federation of Saint Christopher and Nevis"
+        iso: "kna"
     }
 
     ListElement {
         name: "South Korea"
-        flag: "kor.svg"
-        alt: "The Republic of Korea"
+        alt: "Republic of Korea"
+        iso: "kor"
     }
 
     ListElement {
         name: "Kuwait"
-        flag: "kwt.svg"
+        alt: "State of Kuwait"
+        iso: "kwt"
     }
 
     ListElement {
         name: "Laos"
-        flag: "lao.svg"
+        alt: "Lao People's Democratic Republic"
+        iso: "lao"
     }
 
     ListElement {
         name: "Lebanon"
-        flag: "lbn.svg"
+        alt: "Republic of Lebanon"
+        other: "Lebanese Republic"
+        iso: "lbn"
     }
 
     ListElement {
         name: "Liberia"
-        flag: "lbr.svg"
+        alt: "Republic of Liberia"
+        iso: "lbr"
     }
 
     ListElement {
         name: "Libya"
-        flag: "lby.svg"
+        alt: "State of Libya"
+        iso: "lby"
     }
 
     ListElement {
         name: "Saint Lucia"
-        flag: "lca.svg"
+        iso: "lca"
+        small_island: true
     }
 
     ListElement {
         name: "Liechtenstein"
-        flag: "lie.svg"
+        alt: "Principality of Liechtenstein"
+        iso: "lie"
     }
 
     ListElement {
         name: "Sri Lanka"
-        flag: "lka.svg"
+        alt: "Democratic Socialist Republic of Sri Lanka"
+        iso: "lka"
     }
 
     ListElement {
         name: "Lesotho"
-        flag: "lso.svg"
+        alt: "Kingdom of Lesotho"
+        iso: "lso"
     }
 
     ListElement {
         name: "Lithuania"
-        flag: "ltu.svg"
+        alt: "Republic of Lithuania"
+        iso: "ltu"
     }
 
     ListElement {
         name: "Luxembourg"
-        flag: "lux.svg"
+        alt: "Grand Duchy of Luxembourg"
+        iso: "lux"
     }
 
     ListElement {
         name: "Latvia"
-        flag: "lva.svg"
+        alt: "Republic of Latvia"
+        iso: "lva"
     }
 
     ListElement {
         name: "Morocco"
-        flag: "mar.svg"
+        alt: "Kingdom of Morocco"
+        iso: "mar"
     }
 
     ListElement {
         name: "Monaco"
-        flag: "mco.svg"
+        alt: "Principality of Monaco"
+        iso: "mco"
     }
 
     ListElement {
         name: "Moldova"
-        flag: "mda.svg"
+        alt: "Republic of Moldova"
+        iso: "mda"
     }
 
     ListElement {
         name: "Madagascar"
-        flag: "mdg.svg"
+        alt: "Republic of Madagascar"
+        iso: "mdg"
     }
 
     ListElement {
         name: "Maldives"
-        flag: "mdv.svg"
+        alt: "Republic of Maldives"
+        iso: "mdv"
     }
 
     ListElement {
         name: "Mexico"
-        flag: "mex.svg"
+        alt: "United Mexican States"
+        iso: "mex"
     }
 
     ListElement {
-        name: "The Marshall Islands"
-        flag: "mhl.svg"
+        pre: "The"
+        name: "Marshall Islands"
+        alt: "Republic of the Marshall Islands"
+        iso: "mhl"
     }
 
     ListElement {
         name: "North Macedonia"
-        flag: "mkd.svg"
-        alt: "Macedonia"
+        alt: "Republic of North Macedonia"
+        other: "Macedonia"
+        iso: "mkd"
     }
 
     ListElement {
         name: "Mali"
-        flag: "mli.svg"
+        alt: "Republic of Mali"
+        iso: "mli"
     }
 
     ListElement {
         name: "Malta"
-        flag: "mlt.svg"
+        alt: "Republic of Malta"
+        iso: "mlt"
     }
 
     ListElement {
         name: "Myanmar"
-        flag: "mmr.svg"
+        alt: "Republic of the Union of Myanmar"
+        other: "Burma"
+        iso: "mmr"
     }
 
     ListElement {
         name: "Montenegro"
-        flag: "mne.svg"
+        iso: "mne"
     }
 
     ListElement {
         name: "Mongolia"
-        flag: "mng.svg"
+        iso: "mng"
     }
 
     ListElement {
         name: "Mozambique"
-        flag: "moz.svg"
+        alt: "Republic of Mozambique"
+        iso: "moz"
     }
 
     ListElement {
         name: "Mauritania"
-        flag: "mrt.svg"
+        alt: "Islamic Republic of Mauritania"
+        iso: "mrt"
     }
 
     ListElement {
         name: "Mauritius"
-        flag: "mus.svg"
+        alt: "Republic of Mauritius"
+        iso: "mus"
     }
 
     ListElement {
         name: "Malawi"
-        flag: "mwi.svg"
+        alt: "Republic of Malawi"
+        iso: "mwi"
     }
 
     ListElement {
         name: "Malaysia"
-        flag: "mys.svg"
+        iso: "mys"
     }
 
     ListElement {
         name: "Namibia"
-        flag: "nam.svg"
+        alt: "Republic of Namibia"
+        iso: "nam"
     }
 
     ListElement {
         name: "Niger"
-        flag: "ner.svg"
+        alt: "Republic of the Niger"
+        iso: "ner"
     }
 
     ListElement {
         name: "Nigeria"
-        flag: "nga.svg"
+        alt: "Federal Republic of Nigeria"
+        iso: "nga"
     }
 
     ListElement {
         name: "Nicaragua"
-        flag: "nic.svg"
+        alt: "Republic of Nicaragua"
+        iso: "nic"
     }
 
     ListElement {
-        name: "The Netherlands"
-        flag: "nld.svg"
+        pre: "The"
+        name: "Netherlands"
+        alt: "Kingdom of the Netherlands"
+        iso: "nld"
     }
 
     ListElement {
         name: "Norway"
-        flag: "nor.svg"
+        alt: "Kingdom of Norway"
+        iso: "nor"
     }
 
     ListElement {
         name: "Nepal"
-        flag: "npl.svg"
+        alt: "Federal Democratic Republic of Nepal"
+        iso: "npl"
     }
 
     ListElement {
         name: "Nauru"
-        flag: "nru.svg"
+        alt: "Republic of Nauru"
+        iso: "nru"
     }
 
     ListElement {
         name: "New Zealand"
-        flag: "nzl.svg"
+        iso: "nzl"
     }
 
     ListElement {
         name: "Oman"
-        flag: "omn.svg"
+        alt: "Sultanate of Oman"
+        iso: "omn"
     }
 
     ListElement {
         name: "Pakistan"
-        flag: "pak.svg"
+        alt: "Islamic Republic of Pakistan"
+        iso: "pak"
     }
 
     ListElement {
         name: "Panama"
-        flag: "pan.svg"
+        alt: "Republic of Panama"
+        iso: "pan"
     }
 
     ListElement {
         name: "Peru"
-        flag: "per.svg"
+        alt: "Republic of Peru"
+        iso: "per"
     }
 
     ListElement {
-        name: "The Philippines"
-        flag: "phl.svg"
+        pre: "The"
+        name: "Philippines"
+        alt: "Republic of the Philippines"
+        iso: "phl"
     }
 
     ListElement {
         name: "Palau"
-        flag: "plw.svg"
+        alt: "Republic of Palau"
+        iso: "plw"
     }
 
     ListElement {
         name: "Papua New Guinea"
-        flag: "png.svg"
+        alt: "Independent State of Papua New Guinea"
+        iso: "png"
     }
 
     ListElement {
         name: "Poland"
-        flag: "pol.svg"
+        alt: "Republic of Poland"
+        iso: "pol"
     }
 
     ListElement {
         name: "North Korea"
-        flag: "prk.svg"
         alt: "The Democratic People's Republic of Korea"
+        iso: "prk"
     }
 
     ListElement {
         name: "Portugal"
-        flag: "prt.svg"
+        alt: "Portuguese Republic"
+        iso: "prt"
     }
 
     ListElement {
         name: "Paraguay"
-        flag: "pry.svg"
+        alt: "Republic of Paraguay"
+        iso: "pry"
     }
 
     ListElement {
         name: "Palestine"
-        flag: "pse.svg"
+        alt: "State of Palestine"
+        iso: "pse"
     }
 
     ListElement {
         name: "Qatar"
-        flag: "qat.svg"
+        alt: "State of Qatar"
+        iso: "qat"
     }
 
     ListElement {
         name: "Romania"
-        flag: "rou.svg"
+        iso: "rou"
     }
 
     ListElement {
         name: "Russia"
-        flag: "rus.svg"
+        alt: "Russian Federation"
+        iso: "rus"
     }
 
     ListElement {
         name: "Rwanda"
-        flag: "rwa.svg"
+        alt: "Republic of Rwanda"
+        iso: "rwa"
     }
 
     ListElement {
         name: "Saudi Arabia"
-        flag: "sau.svg"
+        alt: "Kingdom of Saudi Arabia"
+        iso: "sau"
     }
 
     ListElement {
         name: "Sudan"
-        flag: "sdn.svg"
+        alt: "Republic of the Sudan"
+        iso: "sdn"
     }
 
     ListElement {
         name: "Senegal"
-        flag: "sen.svg"
+        alt: "Republic of Senegal"
+        iso: "sen"
     }
 
     ListElement {
         name: "Singapore"
-        flag: "sgp.svg"
+        alt: "Republic of Singapore"
+        iso: "sgp"
     }
 
     ListElement {
-        name: "The Solomon Islands"
-        flag: "slb.svg"
+        pre: "The"
+        name: "Solomon Islands"
+        iso: "slb"
     }
 
     ListElement {
         name: "Sierra Leone"
-        flag: "sle.svg"
+        alt: "Republic of Sierra Leone"
+        iso: "sle"
     }
 
     ListElement {
         name: "El Salvador"
-        flag: "slv.svg"
+        alt: "Republic of El Salvador"
+        iso: "slv"
     }
 
     ListElement {
         name: "San Marino"
-        flag: "smr.svg"
+        alt: "Republic of San Marino"
+        iso: "smr"
     }
 
     ListElement {
         name: "Somalia"
-        flag: "som.svg"
+        alt: "Independent State of Samoa"
+        iso: "som"
     }
 
     ListElement {
         name: "Serbia"
-        flag: "srb.svg"
+        alt: "Republic of Serbia"
+        iso: "srb"
     }
 
     ListElement {
         name: "South Sudan"
-        flag: "ssd.svg"
+        alt: "Republic of South Sudan"
+        iso: "ssd"
     }
 
     ListElement {
         name: "São Tomé and Príncipe"
-        flag: "stp.svg"
+        alt: "Democratic Republic of São Tomé and Príncipe"
+        iso: "stp"
     }
 
     ListElement {
         name: "Suriname"
-        flag: "sur.svg"
+        alt: "Republic of Suriname"
+        iso: "sur"
     }
 
     ListElement {
         name: "Slovakia"
-        flag: "svk.svg"
+        alt: "Slovak Republic"
+        iso: "svk"
     }
 
     ListElement {
         name: "Slovenia"
-        flag: "svn.svg"
+        alt: "Republic of Slovenia"
+        iso: "svn"
     }
 
     ListElement {
         name: "Sweden"
-        flag: "swe.svg"
+        alt: "Kingdom of Sweden"
+        iso: "swe"
     }
 
     ListElement {
         name: "Eswatini"
-        flag: "swz.svg"
+        alt: "Kingdom of Eswatini"
+        other: "Swaziland;Kingdom of Swaziland"
+        iso: "swz"
     }
 
     ListElement {
         name: "Seychelles"
-        flag: "syc.svg"
+        alt: "Republic of Seychelles"
+        iso: "syc"
     }
 
     ListElement {
         name: "Syria"
-        flag: "syr.svg"
+        alt: "Syrian Arab Republic"
+        iso: "syr"
     }
 
     ListElement {
         name: "Chad"
-        flag: "tcd.svg"
+        alt: "Republic of Chad"
+        iso: "tcd"
     }
 
     ListElement {
         name: "Togo"
-        flag: "tgo.svg"
+        alt: "Togolese Republic"
+        iso: "tgo"
     }
 
     ListElement {
         name: "Thailand"
-        flag: "tha.svg"
+        alt: "Kingdom of Thailand"
+        other: "Siam"
+        iso: "tha"
     }
 
     ListElement {
         name: "Tajikistan"
-        flag: "tjk.svg"
+        alt: "Republic of Tajikistan"
+        iso: "tjk"
     }
 
     ListElement {
         name: "Turkmenistan"
-        flag: "tkm.svg"
+        iso: "tkm"
     }
 
     ListElement {
         name: "Timor-Leste"
-        flag: "tls.svg"
-        alt: "East Timor"
+        alt: "Democratic Republic of Timor-Leste"
+        other: "East Timor"
+        iso: "tls"
     }
 
     ListElement {
         name: "Tonga"
-        flag: "ton.svg"
+        alt: "Kingdom of Tonga"
+        iso: "ton"
     }
 
     ListElement {
         name: "Trinidad and Tobago"
-        flag: "tto.svg"
+        alt: "Republic of Trinidad and Tobago"
+        iso: "tto"
     }
 
     ListElement {
         name: "Tunisia"
-        flag: "tun.svg"
+        alt: "Republic of Tunisia"
+        iso: "tun"
     }
 
     ListElement {
         name: "Türkiye"
-        flag: "tur.svg"
-        alt: "Turkey"
+        alt: "Republic of Türkiye"
+        other: "Turkey"
+        iso: "tur"
     }
 
     ListElement {
         name: "Tuvalu"
-        flag: "tuv.svg"
+        other: "Ellice Islands"
+        iso: "tuv"
     }
 
     ListElement {
         name: "Tanzania"
-        flag: "tza.svg"
+        alt: "United Republic of Tanzania"
+        iso: "tza"
     }
 
     ListElement {
         name: "Uganda"
-        flag: "uga.svg"
+        alt: "Republic of Uganda"
+        iso: "uga"
     }
 
     ListElement {
         name: "Ukraine"
-        flag: "ukr.svg"
+        iso: "ukr"
     }
 
     ListElement {
         name: "Uruguay"
-        flag: "ury.svg"
+        alt: "Oriental Republic of Uruguay"
+        other: "Eastern Republic of Uruguay"
+        iso: "ury"
     }
 
     ListElement {
-        name: "The United States"
-        flag: "usa.svg"
+        pre: "The"
+        name: "United States"
+        alt: "United States of America"
+        other: "America"
+        iso: "usa"
     }
 
     ListElement {
         name: "Uzbekistan"
-        flag: "uzb.svg"
+        alt: "Republic of Uzbekistan"
+        iso: "uzb"
     }
 
     ListElement {
-        name: "The Vatican City"
-        flag: "vat.svg"
+        name: "Vatican City"
+        alt: "Vatican City State"
+        iso: "vat"
     }
 
     ListElement {
         name: "Saint Vincent and the Grenadines"
-        flag: "vct.svg"
+        iso: "vct"
     }
 
     ListElement {
         name: "Venezuela"
-        flag: "ven.svg"
+        alt: "Bolivarian Republic of Venezuela"
+        iso: "ven"
     }
 
     ListElement {
         name: "Vietnam"
-        flag: "vnm.svg"
+        alt: "Socialist Republic of Vietnam"
+        iso: "vnm"
     }
 
     ListElement {
         name: "Vanuatu"
-        flag: "vut.svg"
+        alt: "Republic of Vanuatu"
+        iso: "vut"
     }
 
     ListElement {
         name: "Samoa"
-        flag: "wsm.svg"
+        alt: "Independent State of Samoa"
+        other: "Western Samoa"
+        iso: "wsm"
     }
 
     ListElement {
         name: "Yemen"
-        flag: "yem.svg"
+        alt: "Republic of Yemen"
+        iso: "yem"
     }
 
     ListElement {
         name: "South Africa"
-        flag: "zaf.svg"
+        alt: "Republic of South Africa"
+        iso: "zaf"
     }
 
     ListElement {
         name: "Zambia"
-        flag: "zmb.svg"
+        alt: "Republic of Zambia"
+        iso: "zmb"
     }
 
     ListElement {
         name: "Zimbabwe"
-        flag: "zwe.svg"
+        alt: "Republic of Zimbabwe"
+        iso: "zwe"
     }
 }
