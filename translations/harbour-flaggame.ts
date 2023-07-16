@@ -139,6 +139,30 @@
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Fade in time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select time for fade in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Milliseconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fade in time cannot be negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fade in time can be at most ten seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>harbour-flaggame</name>

@@ -96,79 +96,110 @@
 <context>
     <name>Selection</name>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="22"/>
+        <location filename="../qml/pages/Selection.qml" line="24"/>
         <source>Preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="35"/>
-        <location filename="../qml/pages/Selection.qml" line="59"/>
+        <location filename="../qml/pages/Selection.qml" line="37"/>
+        <location filename="../qml/pages/Selection.qml" line="61"/>
         <source>Questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="40"/>
-        <location filename="../qml/pages/Selection.qml" line="96"/>
+        <location filename="../qml/pages/Selection.qml" line="42"/>
+        <location filename="../qml/pages/Selection.qml" line="98"/>
+        <location filename="../qml/pages/Selection.qml" line="139"/>
         <source>Custom value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="58"/>
+        <location filename="../qml/pages/Selection.qml" line="60"/>
         <source>Select number of questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="60"/>
+        <location filename="../qml/pages/Selection.qml" line="62"/>
         <source>You must have at least one question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="61"/>
+        <location filename="../qml/pages/Selection.qml" line="63"/>
         <source>You may not have more than %1 questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="78"/>
+        <location filename="../qml/pages/Selection.qml" line="80"/>
         <source>Choices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="91"/>
+        <location filename="../qml/pages/Selection.qml" line="93"/>
         <source>Time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="116"/>
+        <location filename="../qml/pages/Selection.qml" line="118"/>
         <source>Select time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="117"/>
+        <location filename="../qml/pages/Selection.qml" line="119"/>
         <source>Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="118"/>
+        <location filename="../qml/pages/Selection.qml" line="120"/>
         <source>You must have at least one second to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="119"/>
+        <location filename="../qml/pages/Selection.qml" line="121"/>
         <source>You may not have more than %1 seconds (%2 minutes) to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="128"/>
+        <location filename="../qml/pages/Selection.qml" line="130"/>
         <source>%1 s per question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="135"/>
+        <location filename="../qml/pages/Selection.qml" line="134"/>
+        <source>Fade in time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="159"/>
+        <source>Select time for fade in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="160"/>
+        <source>Milliseconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="161"/>
+        <source>Fade in time cannot be negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="162"/>
+        <source>Fade in time can be at most ten seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="171"/>
+        <source>%1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Selection.qml" line="178"/>
         <source>Quiz me!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Selection.qml" line="167"/>
+        <location filename="../qml/pages/Selection.qml" line="211"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>

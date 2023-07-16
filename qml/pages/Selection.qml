@@ -10,6 +10,8 @@ import "../components"
 import "../helpers.js" as Helpers
 
 Item {
+    property int fadeInTime: 1000
+
     id: page
 
     SilicaFlickable {
@@ -128,6 +130,47 @@ Item {
                 value: qsTr("%1 s per question").arg(presetModel.timeToAnswer)
             }
 
+            SelectableDetailItem {
+                label: qsTr("Fade in time")
+                menu: ContextMenu {
+                    MenuItem { text: "300 ms" }
+                    MenuItem { text: "500 ms" }
+                    MenuItem { text: "1000 ms" }
+                    MenuItem { text: qsTr("Custom value") }
+
+                    onActivated: {
+                        switch (index) {
+                        case 0:
+                            page.fadeInTime = 300
+                            break
+                        case 1:
+                            page.fadeInTime = 500
+                            break
+                        case 2:
+                            page.fadeInTime = 1000
+                            break
+                        case 3:
+                            var minimum = 0
+                            var maximum = 10000
+                            var dialog = pageStack.push(Qt.resolvedUrl("IntSelection.qml"), {
+                                value: page.fadeInTime,
+                                minimum: minimum,
+                                maximum: maximum,
+                                title: qsTr("Select time for fade in"),
+                                description: qsTr("Milliseconds"),
+                                tooLowHint: qsTr("Fade in time cannot be negative"),
+                                tooHighHint: qsTr("Fade in time can be at most ten seconds")
+                            })
+                            dialog.onAccepted.connect(function() {
+                                page.fadeInTime = dialog.selectedValue
+                            })
+                            break
+                        }
+                    }
+                }
+                value: qsTr("%1 ms").arg(page.fadeInTime)
+            }
+
             Item { height: Theme.paddingLarge; width: parent.width }
 
             Button {
@@ -141,7 +184,8 @@ Item {
                                        setup: {
                                            questionCount: presetModel.questionCount,
                                            choicesCount: presetModel.choicesCount,
-                                           timeToAnswer: presetModel.timeToAnswer
+                                           timeToAnswer: presetModel.timeToAnswer,
+                                           fadeInTime: page.fadeInTime
                                        }
                                    })
                 }
