@@ -29,57 +29,61 @@ Page {
         }
     }
 
-    SilicaListView {
-        anchors.fill: parent
-        header: Column {
-            readonly property int choicesHeight: (Theme.itemSizeMedium + Theme.paddingMedium) * setup.choicesCount
-            readonly property int otherHeight: header.height + label.height + timeLeft.height + 2 * Theme.paddingSmall
+    onStatusChanged: if (status === PageStatus.Active) choices.opacity = 1.0
 
-            bottomPadding: Theme.paddingMedium
+    Column {
+        readonly property int otherHeight: header.height + label.height + timeLeft.height + 2 * Theme.paddingSmall
+
+        id: column
+        width: parent.width
+
+        PageHeader {
+            id: header
+            title: qsTr("Quiz (%1 / %2)").arg(page.current).arg(page.count)
+        }
+
+        Image {
+            anchors.horizontalCenter: parent.horizontalCenter
+            source: "../../assets/flags/" + dataModel.get(index).iso + ".svg"
+            sourceSize.height: page.height - column.otherHeight - choices.height
+            sourceSize.width: parent.width
+        }
+
+        Item { height: Theme.paddingSmall; width: parent.width }
+
+        Label {
+            id: label
+            color: Theme.highlightColor
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("Guess which country this flag belongs to")
+            width: parent.width
+        }
+
+        Item { height: Theme.paddingSmall; width: parent.width }
+
+        Label {
+            id: timeLeft
+            color: Theme.highlightColor
+            horizontalAlignment: Text.AlignHCenter
+            text: quizTimer.timeAsString(quizTimer.timeLimit)
             width: parent.width
 
-            PageHeader {
-                id: header
-                title: qsTr("Quiz (%1 / %2)").arg(page.current).arg(page.count)
+            Connections {
+                target: quizTimer.limit
+                onTriggered: timeLeft.color = "red"
             }
 
-            Image {
-                anchors.horizontalCenter: parent.horizontalCenter
-                source: "../../assets/flags/" + dataModel.get(index).iso + ".svg"
-                sourceSize.height: page.height - otherHeight - choicesHeight
-                sourceSize.width: parent.width
-            }
-
-            Item { height: Theme.paddingSmall; width: parent.width }
-
-            Label {
-                id: label
-                color: Theme.highlightColor
-                horizontalAlignment: Text.AlignHCenter
-                text: qsTr("Guess which country this flag belongs to")
-                width: parent.width
-            }
-
-            Item { height: Theme.paddingSmall; width: parent.width }
-
-            Label {
-                id: timeLeft
-                color: Theme.highlightColor
-                horizontalAlignment: Text.AlignHCenter
-                text: quizTimer.timeAsString(quizTimer.timeLimit)
-                width: parent.width
-
-                Connections {
-                    target: quizTimer.limit
-                    onTriggered: timeLeft.color = "red"
-                }
-
-                Connections {
-                    target: quizTimer.tick
-                    onTriggered: timeLeft.text = quizTimer.getTimeLeftText()
-                }
+            Connections {
+                target: quizTimer.tick
+                onTriggered: timeLeft.text = quizTimer.getTimeLeftText()
             }
         }
+    }
+
+    ListView {
+        id: choices
+        anchors.bottom: parent.bottom
+        height: (Theme.itemSizeMedium + Theme.paddingMedium) * setup.choicesCount
         model: DelegateModel {
             signal highlightCorrect
             signal highlightAllWrong
@@ -120,7 +124,17 @@ Page {
                 }
             ]
         }
+        opacity: 0.0
         spacing: Theme.paddingMedium
+        width: parent.width
+
+        Behavior on opacity {
+            FadeAnimator {
+                id: fadeIn
+                duration: 1000
+                onRunningChanged: if (!running) quizTimer.start()
+            }
+        }
     }
 
     Timer {
@@ -169,6 +183,5 @@ Page {
         for (i = 0; i < includedGroup.count - 1; ++i) {
             includedGroup.move(i, i + Math.floor(Math.random() * (includedGroup.count - i)), 1)
         }
-        quizTimer.start()
     }
 }
