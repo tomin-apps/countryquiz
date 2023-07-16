@@ -1,1 +1,7 @@
+*.list
+*.o
+*.qm
+Makefile
 /*.pro.user
+/icons/
+/src/harbour-countryquiz
