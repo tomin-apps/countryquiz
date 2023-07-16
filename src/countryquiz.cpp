@@ -7,6 +7,7 @@
 #include <QGuiApplication>
 #include <QQuickView>
 #include <QScopedPointer>
+#include <QTranslator>
 #include <sailfishapp.h>
 
 int main(int argc, char *argv[])
