@@ -9,12 +9,14 @@ import QtQuick 2.6
 ListModel {
     ListElement {
         name: "Afghanistan"
+        alt: "Islamic Emirate of Afghanistan"
         iso: "afg"
     }
 
     ListElement {
         name: "Angola"
         iso: "ago"
+        alt: "Republic of Angola"
     }
 
     ListElement {
@@ -33,6 +35,7 @@ ListModel {
     ListElement {
         pre: "The"
         name: "United Arab Emirates"
+        other: "Emirates"
         iso: "are"
     }
 
@@ -222,8 +225,8 @@ ListModel {
     }
 
     ListElement {
-        name: "Congo"
-        alt: "Republic of the Congo"
+        name: "Republic of the Congo"
+        other: "Congo Republic;Congo;Congo-Brazzaville"
         iso: "cog"
     }
 
