@@ -1,6 +1,7 @@
 *.list
 *.o
 *.qm
+moc_*.cpp
 Makefile
 /*.pro.user
 /icons/
