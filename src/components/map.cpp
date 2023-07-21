@@ -17,6 +17,7 @@ Q_LOGGING_CATEGORY(lcMap, "site.tomin.apps.CountryQuiz.Map", QtWarningMsg)
 Map::Map(QQuickItem *parent)
     : QQuickItem(parent)
     , m_dirty(true)
+    , m_load(true)
     , m_renderer(MapRenderer::get(SailfishApp::pathTo("assets/map.svg").toLocalFile()))
     , m_window(nullptr)
 {
@@ -40,7 +41,8 @@ Map::Map(QQuickItem *parent)
 void Map::componentComplete()
 {
     QQuickItem::componentComplete();
-    emit renderMap(m_maxSize, m_code);
+    if (m_load)
+        emit renderMap(m_sourceSize, m_code);
 }
 
 void Map::createMapTexture()
@@ -96,23 +98,38 @@ void Map::setCode(const QString &code)
         m_code = code;
         emit codeChanged();
         if (isComponentComplete())
-            emit renderMap(m_maxSize, m_code);
+            emit renderMap(m_sourceSize, m_code);
     }
 }
 
-void Map::setMaxSize(const QSize &maxSize)
+bool Map::load() const
 {
-    if (m_maxSize != maxSize) {
-        m_maxSize = maxSize;
-        emit maxSizeChanged();
-        if (isComponentComplete())
-            emit renderMap(m_maxSize, m_code);
+    return m_load;
+}
+
+void Map::setLoad(bool load)
+{
+    if (m_load != load) {
+        m_load = load;
+        emit loadChanged();
+        if (isComponentComplete() && m_load)
+            emit renderMap(m_sourceSize, m_code);
     }
 }
 
-const QSize &Map::maxSize() const
+void Map::setSourceSize(const QSize &sourceSize)
 {
-    return m_maxSize;
+    if (m_sourceSize != sourceSize) {
+        m_sourceSize = sourceSize;
+        emit sourceSizeChanged();
+        if (isComponentComplete() && m_load)
+            emit renderMap(m_sourceSize, m_code);
+    }
+}
+
+const QSize &Map::sourceSize() const
+{
+    return m_sourceSize;
 }
 
 void Map::mapReady(const QImage &image, const QString &code)

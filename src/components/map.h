@@ -16,7 +16,8 @@ class Map : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(QString code READ code WRITE setCode NOTIFY codeChanged)
-    Q_PROPERTY(QSize maxSize READ maxSize WRITE setMaxSize NOTIFY maxSizeChanged)
+    Q_PROPERTY(bool load READ load WRITE setLoad NOTIFY loadChanged)
+    Q_PROPERTY(QSize sourceSize READ sourceSize WRITE setSourceSize NOTIFY sourceSizeChanged)
 
 public:
     explicit Map(QQuickItem *parent = nullptr);
@@ -27,14 +28,18 @@ public:
     QString code() const;
     void setCode(const QString &code);
 
-    const QSize &maxSize() const;
-    void setMaxSize(const QSize &maxSize);
+    bool load() const;
+    void setLoad(bool load);
+
+    const QSize &sourceSize() const;
+    void setSourceSize(const QSize &sourceSize);
 
 signals:
     void codeChanged();
-    void renderMap(const QSize &size, const QString &code);
+    void loadChanged();
+    void sourceSizeChanged();
 
-    void maxSizeChanged();
+    void renderMap(const QSize &size, const QString &code);
 
 protected:
     void componentComplete() override;
@@ -46,8 +51,9 @@ private slots:
 private:
     QString m_code;
     bool m_dirty;
+    bool m_load;
     QImage m_map;
-    QSize m_maxSize;
+    QSize m_sourceSize;
     MapRenderer *m_renderer;
     struct {
         QScopedPointer<QSGTexture> pending;

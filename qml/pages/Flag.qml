@@ -12,6 +12,8 @@ import ".."
 Page {
     property var item
 
+    id: page
+
     PageHeader { id: header }
 
     SilicaFlickable {
@@ -23,39 +25,54 @@ Page {
 
         Column {
             id: content
-            spacing: Theme.paddingLarge
             width: parent.width
 
             Image {
+                id: flag
                 anchors.horizontalCenter: parent.horizontalCenter
                 source: "../../assets/flags/" + item.iso + ".svg"
-                sourceSize.width: parent.width
+                sourceSize: Qt.size(parent.width, (page.height - header.height - textContent.height - Theme.paddingLarge) / 2)
             }
 
-            Label {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
-                horizontalAlignment: Text.AlignHCenter
-                text: item.pre ? item.pre + " " + item.name : item.name
-                width: parent.width - 2 * Theme.horizontalPageMargin
-                wrapMode: Text.Wrap
-            }
+            Column {
+                id: textContent
+                width: parent.width
 
-            Label {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeLarge
-                horizontalAlignment: Text.AlignHCenter
-                text: item.alt || ""
-                visible: text !== ""
-                width: parent.width - 2 * Theme.horizontalPageMargin
-                wrapMode: Text.Wrap
+                Item { height: Theme.paddingLarge; width: parent.width }
+
+                Label {
+                    id: nameLabel
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.highlightColor
+                    font.pixelSize: Theme.fontSizeExtraLarge
+                    horizontalAlignment: Text.AlignHCenter
+                    text: item.pre ? item.pre + " " + item.name : item.name
+                    width: parent.width - 2 * Theme.horizontalPageMargin
+                    wrapMode: Text.Wrap
+                }
+
+                Item { height: Theme.paddingSmall; width: parent.width }
+
+                Label {
+                    id: altNameLabel
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeLarge
+                    horizontalAlignment: Text.AlignHCenter
+                    text: item.alt || ""
+                    visible: text !== ""
+                    width: parent.width - 2 * Theme.horizontalPageMargin
+                    wrapMode: Text.Wrap
+                }
+
+                Item { height: Theme.paddingLarge; width: parent.width }
             }
 
             Map {
+                anchors.horizontalCenter: parent.horizontalCenter
                 code: item.iso
-                maxSize.width: parent.width
+                load: parent.width !== 0 && flag.height !== 0 && textContent.height !== 0
+                sourceSize: Qt.size(parent.width, page.height - header.height - flag.height - textContent.height - Theme.paddingLarge)
             }
         }
 
