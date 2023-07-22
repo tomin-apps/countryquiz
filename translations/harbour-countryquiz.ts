@@ -2,7 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>Flags</name>
+    <name>CountryListTab</name>
     <message>
         <source>Play quiz at least once to see all the flags</source>
         <translation type="unfinished"></translation>
@@ -13,14 +13,14 @@
     </message>
 </context>
 <context>
-    <name>IntSelection</name>
+    <name>IntSelectionPage</name>
     <message>
         <source>You must specify an integer between %1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Quiz</name>
+    <name>QuizPage</name>
     <message>
         <source>Quiz (%1 / %2)</source>
         <translation type="unfinished"></translation>
@@ -31,58 +31,7 @@
     </message>
 </context>
 <context>
-    <name>Results</name>
-    <message>
-        <source>Results</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 / %2 correct</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your answers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Excellent!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Very good!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect work! You clearly know your flags!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You could use more practice.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Did you try to avoid the right answers?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>in %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Selection</name>
-    <message>
-        <source>Quiz me!</source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>QuizSelectionTab</name>
     <message>
         <source>Preset</source>
         <translation type="unfinished"></translation>
@@ -92,15 +41,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choices</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time to answer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 s per question</source>
+        <source>Custom value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -113,6 +54,14 @@
     </message>
     <message>
         <source>You may not have more than %1 questions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -132,11 +81,62 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Custom value</source>
+        <source>%1 s per question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quiz me!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ResultsPage</name>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect work! You clearly know your flags!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Excellent!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very good!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You could use more practice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Did you try to avoid the right answers?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 / %2 correct</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>in %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your answers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

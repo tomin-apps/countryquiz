@@ -14,12 +14,12 @@ DISTFILES += \
     qml/Data.qml \
     qml/harbour-countryquiz.qml \
     qml/helpers.js \
-    qml/pages/Flags.qml \
-    qml/pages/Flag.qml \
-    qml/pages/IntSelection.qml \
-    qml/pages/Quiz.qml \
-    qml/pages/Results.qml \
-    qml/pages/Selection.qml \
+    qml/pages/CountryListTab.qml \
+    qml/pages/CountryPage.qml \
+    qml/pages/IntSelectionPage.qml \
+    qml/pages/QuizPage.qml \
+    qml/pages/QuizSelectionTab.qml \
+    qml/pages/ResultsPage.qml \
     rpm/harbour-countryquiz.spec \
     translations/*.ts
 

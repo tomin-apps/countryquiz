@@ -112,7 +112,7 @@ Page {
                                     x: Theme.horizontalPageMargin
                                 }
 
-                                onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: dataModel.get(current) })
+                                onClicked: pageStack.push(Qt.resolvedUrl("CountryPage.qml"), { item: dataModel.get(current) })
                             }
                             itemHeight: Theme.itemSizeSmall
                             model: correctAnswers
@@ -128,7 +128,7 @@ Page {
 
                 onClicked: {
                     quizTimer.reset()
-                    pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
+                    pageStack.replace(Qt.resolvedUrl("QuizPage.qml"), {
                         indices: Helpers.pickRandomIndices(dataModel, page.setup.questionCount),
                         setup: page.setup
                     })

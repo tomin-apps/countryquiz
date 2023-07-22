@@ -51,7 +51,7 @@ Item {
                             presetModel.selectedCount = -1
                             break
                         case 3:
-                            var dialog = pageStack.push(Qt.resolvedUrl("IntSelection.qml"), {
+                            var dialog = pageStack.push(Qt.resolvedUrl("IntSelectionPage.qml"), {
                                 value: presetModel.questionCount,
                                 minimum: 1,
                                 maximum: dataModel.count,
@@ -109,7 +109,7 @@ Item {
                         case 3:
                             var minimum = 1
                             var maximum = 600
-                            var dialog = pageStack.push(Qt.resolvedUrl("IntSelection.qml"), {
+                            var dialog = pageStack.push(Qt.resolvedUrl("IntSelectionPage.qml"), {
                                 value: presetModel.timeToAnswer,
                                 minimum: minimum,
                                 maximum: maximum,
@@ -136,7 +136,7 @@ Item {
 
                 onClicked:  {
                     quizTimer.reset()
-                    pageStack.push(Qt.resolvedUrl("Quiz.qml"), {
+                    pageStack.push(Qt.resolvedUrl("QuizPage.qml"), {
                                        indices: Helpers.pickRandomIndices(dataModel, presetModel.questionCount),
                                        setup: {
                                            questionCount: presetModel.questionCount,

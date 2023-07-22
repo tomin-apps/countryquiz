@@ -66,12 +66,12 @@ ApplicationWindow {
 
         ListElement {
             title: qsTr("Quiz")
-            url: "pages/Selection.qml"
+            url: "pages/QuizSelectionTab.qml"
         }
 
         ListElement {
             title: qsTr("Flags")
-            url: "pages/Flags.qml"
+            url: "pages/CountryListTab.qml"
         }
     }
 }

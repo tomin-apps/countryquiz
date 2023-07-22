@@ -38,7 +38,7 @@ Item {
                 }
             }
 
-            onClicked: pageStack.push(Qt.resolvedUrl("Flag.qml"), { item: view.model.get(index) })
+            onClicked: pageStack.push(Qt.resolvedUrl("CountryPage.qml"), { item: view.model.get(index) })
         }
         model: config.hasPlayed ? dataModel : 0
 

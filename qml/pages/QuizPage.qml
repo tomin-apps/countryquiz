@@ -146,14 +146,14 @@ Page {
             var correctAnswers = page.correctAnswers
             correctAnswers.push(wasCorrect)
             if (current >= count) {
-                pageStack.replace(Qt.resolvedUrl("Results.qml"), {
+                pageStack.replace(Qt.resolvedUrl("ResultsPage.qml"), {
                     indices: page.indices,
                     correctAnswers: correctAnswers,
                     setup: page.setup
                 })
                 config.hasPlayed = true
             } else {
-                pageStack.replace(Qt.resolvedUrl("Quiz.qml"), {
+                pageStack.replace(Qt.resolvedUrl("QuizPage.qml"), {
                     indices: page.indices,
                     current: page.current + 1,
                     correctAnswers: correctAnswers,
