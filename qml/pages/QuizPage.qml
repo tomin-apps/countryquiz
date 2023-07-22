@@ -132,7 +132,7 @@ Page {
             FadeAnimator {
                 id: fadeIn
                 duration: 1000
-                onRunningChanged: if (!running) quizTimer.start()
+                onRunningChanged: if (!running && !closeTimer.running) quizTimer.start()
             }
         }
     }
