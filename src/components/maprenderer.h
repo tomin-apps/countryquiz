@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -30,7 +30,6 @@ signals:
 
 private:
     explicit MapRenderer(const QString &filePath, QObject *parent = nullptr);
-    QSize getSize(const QSize &maxSize, const QString &code) const;
 
     static QMutex s_rendererMutex;
     static QVector<MapRenderer *> s_renderers;
@@ -38,6 +37,9 @@ private:
 
     QString m_mapFilePath;
     QSvgRenderer m_renderer;
+    QString m_tilePathTemplate;
+    QSize m_tileSize;
+    QSize m_dimensions;
 };
 
 #endif // MAPRENDERER_H
