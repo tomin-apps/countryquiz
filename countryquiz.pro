@@ -21,7 +21,8 @@ DISTFILES += \
     qml/pages/QuizSelectionTab.qml \
     qml/pages/ResultsPage.qml \
     rpm/harbour-countryquiz.spec \
-    translations/*.ts
+    translations/*.ts \
+    tools/tile_svg.py
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
