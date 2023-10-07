@@ -2,6 +2,7 @@
 *.o
 *.qm
 moc_*.cpp
+__pycache__
 Makefile
 /*.pro.user
 /icons/
