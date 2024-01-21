@@ -4,12 +4,12 @@
 <context>
     <name>CountryListTab</name>
     <message>
-        <location filename="../qml/pages/CountryListTab.qml" line="47"/>
-        <source>Play quiz at least once to see all the flags</source>
+        <location filename="../qml/pages/CountryListTab.qml" line="22"/>
+        <source>Play quiz at least once to see all the countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryListTab.qml" line="48"/>
+        <location filename="../qml/pages/CountryListTab.qml" line="23"/>
         <source>Swipe to right and press &apos;Quiz me!&apos;</source>
         <translation type="unfinished"></translation>
     </message>
