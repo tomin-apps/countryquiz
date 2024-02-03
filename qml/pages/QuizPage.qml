@@ -131,7 +131,7 @@ Page {
         Behavior on opacity {
             FadeAnimator {
                 id: fadeIn
-                duration: 1000
+                duration: 300
                 onRunningChanged: if (!running && !closeTimer.running) quizTimer.start()
             }
         }
