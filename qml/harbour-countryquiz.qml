@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -32,6 +32,7 @@ ApplicationWindow {
                 contentItem.height: parent.height - tabs.height
                 contentItem.y: tabs.height
                 contentItem.width: parent.width
+                currentIndex: 1
                 delegate: Loader {
                     clip: true
                     height: PagedView.contentHeight
@@ -65,13 +66,13 @@ ApplicationWindow {
         id: pageModel
 
         ListElement {
-            title: qsTr("Quiz")
-            url: "pages/QuizSelectionTab.qml"
+            title: qsTr("Countries")
+            url: "pages/CountryListTab.qml"
         }
 
         ListElement {
-            title: qsTr("Flags")
-            url: "pages/CountryListTab.qml"
+            title: qsTr("Quiz")
+            url: "pages/QuizSelectionTab.qml"
         }
     }
 }

@@ -4,11 +4,11 @@
 <context>
     <name>CountryListTab</name>
     <message>
-        <source>Swipe to right and press &apos;Quiz me!&apos;</source>
+        <source>Play quiz at least once to see all the countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play quiz at least once to see all the countries</source>
+        <source>Swipe to left and press &apos;Quiz me!&apos;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -162,11 +162,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Flags</source>
+        <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Country Quiz</source>
+        <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

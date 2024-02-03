@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -20,7 +20,7 @@ Item {
         ViewPlaceholder {
             enabled: !config.hasPlayed
             text: qsTr("Play quiz at least once to see all the countries")
-            hintText: qsTr("Swipe to right and press 'Quiz me!'")
+            hintText: qsTr("Swipe to left and press 'Quiz me!'")
         }
 
         VerticalScrollDecorator { }

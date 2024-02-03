@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../qml/pages/CountryListTab.qml" line="23"/>
-        <source>Swipe to right and press &apos;Quiz me!&apos;</source>
+        <source>Swipe to left and press &apos;Quiz me!&apos;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -194,18 +194,18 @@
 <context>
     <name>harbour-countryquiz</name>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="51"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="52"/>
         <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="68"/>
-        <source>Quiz</source>
+        <location filename="../qml/harbour-countryquiz.qml" line="69"/>
+        <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="73"/>
-        <source>Flags</source>
+        <location filename="../qml/harbour-countryquiz.qml" line="74"/>
+        <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
