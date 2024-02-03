@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -61,6 +61,28 @@ Page {
                     horizontalAlignment: Text.AlignHCenter
                     text: item.alt || ""
                     visible: text !== ""
+                    width: parent.width - 2 * Theme.horizontalPageMargin
+                    wrapMode: Text.Wrap
+                }
+
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    horizontalAlignment: Text.AlignHCenter
+                    text: {
+                        var capitals = item.capital.split(';')
+                        switch (capitals.length) {
+                        case 1:
+                            return qsTr("Capital: %1").arg(capitals[0])
+                        case 2:
+                            return qsTr("Capitals: %1 and %2").arg(capitals[0]).arg(capitals[1])
+                        case 3:
+                            return qsTr("Capitals: %1, %2 and %3").arg(capitals[0]).arg(capitals[1]).arg(capitals[2])
+                        }
+                        console.warn("UNIMPLEMENTD: Bad number of capitals", capitals.length)
+                        return ""
+                    }
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap
                 }

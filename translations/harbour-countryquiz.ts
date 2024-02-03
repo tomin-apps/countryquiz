@@ -13,6 +13,21 @@
     </message>
 </context>
 <context>
+    <name>CountryPage</name>
+    <message>
+        <source>Capital: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capitals: %1 and %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capitals: %1, %2 and %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IntSelectionPage</name>
     <message>
         <source>You must specify an integer between %1 and %2</source>

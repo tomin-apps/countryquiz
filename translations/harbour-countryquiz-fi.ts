@@ -15,6 +15,24 @@
     </message>
 </context>
 <context>
+    <name>CountryPage</name>
+    <message>
+        <location filename="../qml/pages/CountryPage.qml" line="77"/>
+        <source>Capital: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CountryPage.qml" line="79"/>
+        <source>Capitals: %1 and %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CountryPage.qml" line="81"/>
+        <source>Capitals: %1, %2 and %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IntSelectionPage</name>
     <message>
         <location filename="../qml/pages/IntSelectionPage.qml" line="18"/>
