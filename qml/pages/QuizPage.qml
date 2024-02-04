@@ -50,7 +50,7 @@ Page {
             property int ready: page.height !== 0 && column.otherReady && choices.height !== 0 && parent.width !== 0
 
             anchors.horizontalCenter: parent.horizontalCenter
-            sourceComponent: setup.quizType === "flags" ? flag : setup.quizType === "maps" ? map : setup.quizType === "capitals" ? capital : null
+            sourceComponent: setup.quizType === "flags" ? flagComponent : setup.quizType === "maps" ? mapComponent : setup.quizType === "capitals" ? capitalComponent : null
         }
 
         Item { height: Theme.paddingSmall; width: parent.width }
@@ -59,8 +59,24 @@ Page {
             id: label
             color: Theme.highlightColor
             horizontalAlignment: Text.AlignHCenter
-            text: qsTr("Guess which country this flag belongs to")
+            text: {
+                if (setup.quizType === "flags") {
+                    return qsTr("Guess which country this flag belongs to")
+                }
+                if (setup.quizType === "maps") {
+                    return qsTr("Guess which country is highlighted on the map")
+                }
+                if (setup.quizType === "capitals") {
+                    if (dataModel.get(index).capital.indexOf(';') === -1) {
+                        return qsTr("Guess which country's capital is this")
+                    } else {
+                        return qsTr("Guess which country's capitals are these")
+                    }
+                }
+                return ""
+            }
             width: parent.width
+            wrapMode: Text.Wrap
         }
 
         Item { height: Theme.paddingSmall; width: parent.width }
@@ -168,7 +184,7 @@ Page {
     }
 
     Component {
-        id: flag
+        id: flagComponent
 
         Image {
             source: "../../assets/flags/" + dataModel.get(index).iso + ".svg"
@@ -178,12 +194,44 @@ Page {
     }
 
     Component {
-        id: map
+        id: mapComponent
 
         Map {
             code: dataModel.get(index).iso
             load: ready
             sourceSize: Qt.size(maximumWidth, maximumHeight)
+        }
+    }
+
+    Component {
+        id: capitalComponent
+
+        Item {
+            height: capitalsLabel.contentHeight + 2 * Theme.paddingLarge - Theme.paddingSmall
+            width: maximumWidth
+
+            Label {
+                id: capitalsLabel
+
+                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeLarge
+                horizontalAlignment: Text.AlignHCenter
+                text: {
+                    var capitals = dataModel.get(index).capital.split(';')
+                    switch (capitals.length) {
+                    case 1:
+                        return qsTr("%1").arg(capitals[0])
+                    case 2:
+                        return qsTr("%1 and %2").arg(capitals[0]).arg(capitals[1])
+                    case 3:
+                        return qsTr("%1, %2 and %3").arg(capitals[0]).arg(capitals[1]).arg(capitals[2])
+                    }
+                    console.warn("UNIMPLEMENTD: Bad number of capitals", capitals.length)
+                    return ""
+                }
+                width: parent.width
+                wrapMode: Text.Wrap
+            }
         }
     }
 

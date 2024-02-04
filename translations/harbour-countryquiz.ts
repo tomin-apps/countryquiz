@@ -35,6 +35,13 @@
     </message>
 </context>
 <context>
+    <name>PresetModel</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QuizPage</name>
     <message>
         <source>Quiz (%1 / %2)</source>
@@ -44,9 +51,33 @@
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 and %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1, %2 and %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guess which country is highlighted on the map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guess which country&apos;s capital is this</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guess which country&apos;s capitals are these</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>QuizSelectionTab</name>
+    <name>QuizSection</name>
     <message>
         <source>Preset</source>
         <translation type="unfinished"></translation>
@@ -103,8 +134,19 @@
         <source>Quiz me!</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>QuizSelectionTab</name>
     <message>
-        <source>None</source>
+        <source>Flag Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capital Quiz</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
