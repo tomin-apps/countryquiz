@@ -1,9 +1,10 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
 
+import CountryQuiz 1.0
 import QtQuick 2.6
 import QtQml.Models 2.2
 import Sailfish.Silica 1.0
@@ -33,6 +34,7 @@ Page {
 
     Column {
         readonly property int otherHeight: header.height + label.height + timeLeft.height + 2 * Theme.paddingSmall
+        readonly property bool otherReady: header.height !== 0 && label.height !== 0 && timeLeft.height !== 0
 
         id: column
         width: parent.width
@@ -42,11 +44,13 @@ Page {
             title: qsTr("Quiz (%1 / %2)").arg(page.current).arg(page.count)
         }
 
-        Image {
+        Loader {
+            property int maximumHeight: page.height - column.otherHeight - choices.height
+            property int maximumWidth: parent.width
+            property int ready: page.height !== 0 && column.otherReady && choices.height !== 0 && parent.width !== 0
+
             anchors.horizontalCenter: parent.horizontalCenter
-            source: "../../assets/flags/" + dataModel.get(index).iso + ".svg"
-            sourceSize.height: page.height - column.otherHeight - choices.height
-            sourceSize.width: parent.width
+            sourceComponent: setup.quizType === "flags" ? flag : setup.quizType === "maps" ? map : setup.quizType === "capitals" ? capital : null
         }
 
         Item { height: Theme.paddingSmall; width: parent.width }
@@ -160,6 +164,26 @@ Page {
                     setup: page.setup
                 })
             }
+        }
+    }
+
+    Component {
+        id: flag
+
+        Image {
+            source: "../../assets/flags/" + dataModel.get(index).iso + ".svg"
+            sourceSize.height: maximumHeight
+            sourceSize.width: maximumWidth
+        }
+    }
+
+    Component {
+        id: map
+
+        Map {
+            code: dataModel.get(index).iso
+            load: ready
+            sourceSize: Qt.size(maximumWidth, maximumHeight)
         }
     }
 

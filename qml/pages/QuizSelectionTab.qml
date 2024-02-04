@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -141,7 +141,8 @@ Item {
                                        setup: {
                                            questionCount: presetModel.questionCount,
                                            choicesCount: presetModel.choicesCount,
-                                           timeToAnswer: presetModel.timeToAnswer
+                                           timeToAnswer: presetModel.timeToAnswer,
+                                           quizType: "flags"
                                        }
                                    })
                 }

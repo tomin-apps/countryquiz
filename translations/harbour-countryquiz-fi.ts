@@ -43,12 +43,12 @@
 <context>
     <name>QuizPage</name>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="42"/>
+        <location filename="../qml/pages/QuizPage.qml" line="44"/>
         <source>Quiz (%1 / %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="58"/>
+        <location filename="../qml/pages/QuizPage.qml" line="62"/>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -128,7 +128,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizSelectionTab.qml" line="167"/>
+        <location filename="../qml/pages/QuizSelectionTab.qml" line="168"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
