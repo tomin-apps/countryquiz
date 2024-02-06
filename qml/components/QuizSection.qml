@@ -49,7 +49,7 @@ ExpandingSection {
                         presetModel.selectedCount = -1
                         break
                     case 3:
-                        var dialog = pageStack.push(Qt.resolvedUrl("IntSelectionPage.qml"), {
+                        var dialog = pageStack.push(Qt.resolvedUrl("../pages/IntSelectionPage.qml"), {
                             value: presetModel.questionCount,
                             minimum: 1,
                             maximum: dataModel.count,
@@ -107,7 +107,7 @@ ExpandingSection {
                     case 3:
                         var minimum = 1
                         var maximum = 600
-                        var dialog = pageStack.push(Qt.resolvedUrl("IntSelectionPage.qml"), {
+                        var dialog = pageStack.push(Qt.resolvedUrl("../pages/IntSelectionPage.qml"), {
                             value: presetModel.timeToAnswer,
                             minimum: minimum,
                             maximum: maximum,
