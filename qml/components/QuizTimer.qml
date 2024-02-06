@@ -31,8 +31,8 @@ Item {
                 + ":" + _digits(seconds.toString()) + "." + tenths.toString()
     }
 
-    function getTimeLeftText() {
-        return timeAsString(limitTimer.interval - (Date.now() - _lastStarted))
+    function getTimeLeft() {
+        return limitTimer.interval - (Date.now() - _lastStarted)
     }
 
     function getTotalTimeText() {

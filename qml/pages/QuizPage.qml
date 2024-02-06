@@ -84,9 +84,46 @@ Page {
         Label {
             id: timeLeft
             color: Theme.highlightColor
+            font.pixelSize: Theme.fontSizeLarge
+            height: Theme.fontSizeExtraLarge
             horizontalAlignment: Text.AlignHCenter
             text: quizTimer.timeAsString(quizTimer.timeLimit)
             width: parent.width
+
+            states: [
+                State {
+                    name: "enlarged"
+
+                    PropertyChanges {
+                        font.pixelSize: timeLeft.height
+                        target: timeLeft
+                    }
+                },
+                State {
+                    name: "alerted"
+                    extend: "enlarged"
+
+                    PropertyChanges {
+                        color: "red"
+                        target: timeLeft
+                    }
+                }
+
+            ]
+
+            transitions: Transition {
+                PropertyAnimation {
+                    duration: 500
+                    easing.type: Easing.InOutQuad
+                    property: "font.pixelSize"
+                }
+
+                ColorAnimation {
+                    duration: 500
+                    easing.type: Easing.InOutQuad
+                    property: "color"
+                }
+            }
 
             Connections {
                 target: quizTimer.limit
@@ -95,7 +132,11 @@ Page {
 
             Connections {
                 target: quizTimer.tick
-                onTriggered: timeLeft.text = quizTimer.getTimeLeftText()
+                onTriggered: {
+                    var left = quizTimer.getTimeLeft()
+                    timeLeft.text = quizTimer.timeAsString(left)
+                    timeLeft.state = left % 1000 >= 500 ? left < 5000 ? "alerted" : "enlarged" : ""
+                }
             }
         }
     }
