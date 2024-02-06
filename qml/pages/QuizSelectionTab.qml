@@ -32,7 +32,7 @@ Item {
             }
 
             QuizSection {
-                title: qsTr("Capital Quiz")
+                title: qsTr("Capital City Quiz")
                 quizType: "capitals"
             }
         }

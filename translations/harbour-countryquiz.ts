@@ -146,7 +146,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Capital Quiz</source>
+        <source>Capital City Quiz</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -180,7 +180,7 @@
     </message>
     <message>
         <location filename="../qml/pages/QuizSelectionTab.qml" line="35"/>
-        <source>Capital Quiz</source>
+        <source>Capital City Quiz</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
