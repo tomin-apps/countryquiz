@@ -240,7 +240,10 @@ Page {
         Map {
             code: dataModel.get(index).iso
             load: ready
-            sourceSize: Qt.size(maximumWidth, maximumHeight)
+            sourceSize: {
+                var size = Math.min(maximumWidth, maximumHeight)
+                return Qt.size(size, size)
+            }
         }
     }
 

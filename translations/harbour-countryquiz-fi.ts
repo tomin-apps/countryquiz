@@ -76,17 +76,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="264"/>
+        <location filename="../qml/pages/QuizPage.qml" line="267"/>
         <source>%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="266"/>
+        <location filename="../qml/pages/QuizPage.qml" line="269"/>
         <source>%1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="268"/>
+        <location filename="../qml/pages/QuizPage.qml" line="271"/>
         <source>%1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
