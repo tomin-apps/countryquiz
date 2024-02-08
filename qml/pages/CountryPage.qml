@@ -43,12 +43,17 @@ Page {
                 Label {
                     id: nameLabel
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.highlightColor
+                    color: Theme.primaryColor
                     font.pixelSize: Theme.fontSizeExtraLarge
                     horizontalAlignment: Text.AlignHCenter
                     text: item.pre ? item.pre + " " + item.name : item.name
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: Qt.openUrlExternally("https://en.wikipedia.org/wiki/" + item.name.replace(/ /g, "_"))
+                    }
                 }
 
                 Item { height: Theme.paddingSmall; width: parent.width }
