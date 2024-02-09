@@ -20,6 +20,16 @@ function getIndexArray(model) {
     return indices
 }
 
+function filterIndexArray(model, array, test) {
+    var indices = []
+    for (var i = 0; i < model.count; ++i) {
+        if (test(model.get(array[i]))) {
+            indices[indices.length] = array[i]
+        }
+    }
+    return indices
+}
+
 function pickRandomIndices(model, count) {
     var indices = getIndexArray(model)
     for (var i = 0; i < count; ++i) {

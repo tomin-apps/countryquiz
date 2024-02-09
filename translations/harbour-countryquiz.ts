@@ -26,6 +26,10 @@
         <source>Capitals: %1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Region: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IntSelectionPage</name>
@@ -132,6 +136,18 @@
     </message>
     <message>
         <source>Quiz me!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choices from region</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

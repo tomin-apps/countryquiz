@@ -31,6 +31,11 @@
         <source>Capitals: %1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/CountryPage.qml" line="100"/>
+        <source>Region: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IntSelectionPage</name>
@@ -43,7 +48,7 @@
 <context>
     <name>PresetModel</name>
     <message>
-        <location filename="../qml/components/PresetModel.qml" line="17"/>
+        <location filename="../qml/components/PresetModel.qml" line="18"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -106,7 +111,7 @@
     </message>
     <message>
         <location filename="../qml/components/QuizSection.qml" line="38"/>
-        <location filename="../qml/components/QuizSection.qml" line="94"/>
+        <location filename="../qml/components/QuizSection.qml" line="106"/>
         <source>Custom value</source>
         <translation type="unfinished"></translation>
     </message>
@@ -132,36 +137,53 @@
     </message>
     <message>
         <location filename="../qml/components/QuizSection.qml" line="89"/>
+        <source>Choices from region</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/QuizSection.qml" line="91"/>
+        <location filename="../qml/components/QuizSection.qml" line="97"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/QuizSection.qml" line="92"/>
+        <location filename="../qml/components/QuizSection.qml" line="97"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/QuizSection.qml" line="101"/>
         <source>Time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="114"/>
+        <location filename="../qml/components/QuizSection.qml" line="126"/>
         <source>Select time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="115"/>
+        <location filename="../qml/components/QuizSection.qml" line="127"/>
         <source>Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="116"/>
+        <location filename="../qml/components/QuizSection.qml" line="128"/>
         <source>You must have at least one second to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="117"/>
+        <location filename="../qml/components/QuizSection.qml" line="129"/>
         <source>You may not have more than %1 seconds (%2 minutes) to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="126"/>
+        <location filename="../qml/components/QuizSection.qml" line="138"/>
         <source>%1 s per question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="133"/>
+        <location filename="../qml/components/QuizSection.qml" line="145"/>
         <source>Quiz me!</source>
         <translation type="unfinished"></translation>
     </message>

@@ -290,8 +290,14 @@ Page {
     Component.onCompleted: {
         var choices = Helpers.getIndexArray(dataModel)
         choices.swap(0, index)
+        if (setup.sameRegion) {
+            var region = dataModel.get(index).region
+            choices = Helpers.filterIndexArray(dataModel, choices, function(item) {
+                return item.region === region
+            })
+        }
         for (var i = 1; i < setup.choicesCount; ++i) {
-            choices.swap(i, i + Math.floor(Math.random() * (dataModel.count - i)))
+            choices.swap(i, i + Math.floor(Math.random() * (choices.length - i)))
         }
         for (i = 0; i < setup.choicesCount; ++i) {
             delegateModel.items.addGroups(choices[i], 1, "included")

@@ -10,6 +10,7 @@ import Sailfish.Silica 1.0
 ListModel {
     property int selectedCount: _currentItem !== null ? _currentItem.count : 0
     property int selectedChoices: _currentItem !== null ? _currentItem.choices : 0
+    property bool selectedRegion: _currentItem !== null ? _currentItem.region : 0
     property int selectedTime: _currentItem !== null ? _currentItem.time: 0
 
     readonly property int currentIndex: _currentIndex
@@ -17,6 +18,7 @@ ListModel {
     readonly property string presetTitle: presetSelected ? _currentItem.title : qsTr("None")
     readonly property int questionCount: _questionCount < 0 ? dataModel.count : _questionCount
     readonly property int choicesCount: presetSelected ? _currentItem.choices : selectedChoices
+    readonly property bool sameRegion: presetSelected ? _currentItem.region : selectedRegion
     readonly property int timeToAnswer: presetSelected ? _currentItem.time : selectedTime
 
     property int _currentIndex
@@ -29,6 +31,8 @@ ListModel {
             return preset.count === selectedCount
         } if (prop === "choices") {
             return preset.choices === selectedChoices
+        } if (prop === "region") {
+            return preset.region === selectedRegion
         } if (prop === "time") {
             return preset.time === selectedTime
         }
@@ -41,6 +45,7 @@ ListModel {
                 var preset = get(i)
                 if (selectedCount === preset.count
                         && selectedChoices === preset.choices
+                        && selectedRegion === preset.region
                         && selectedTime === preset.time) {
                     selectPreset(i)
                     return
@@ -54,6 +59,7 @@ ListModel {
         var preset = get(index)
         selectedCount = preset.count
         selectedChoices = preset.choices
+        selectedRegion = preset.region
         selectedTime = preset.time
         _currentIndex = index
     }
@@ -68,6 +74,7 @@ ListModel {
         title: "Normal"
         count: 15
         choices: 4
+        region: false
         time: 15
     }
 
@@ -75,6 +82,7 @@ ListModel {
         title: "Long"
         count: 80
         choices: 4
+        region: false
         time: 15
     }
 
@@ -82,10 +90,12 @@ ListModel {
         title: "All"
         count: -1
         choices: 4
+        region: false
         time: 15
     }
 
     onSelectedCountChanged: checkProp("count")
     onSelectedChoicesChanged: checkProp("choices")
+    onSelectedRegionChanged: checkProp("region")
     onSelectedTimeChanged: checkProp("time")
 }

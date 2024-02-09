@@ -86,6 +86,18 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
+            label: qsTr("Choices from region")
+            menu: ContextMenu {
+                MenuItem { text: qsTr("Yes") }
+                MenuItem { text: qsTr("No") }
+
+                onActivated: presetModel.selectedRegion = index === 0 ? true : false
+            }
+
+            value: presetModel.sameRegion ? qsTr("Yes") : qsTr("No")
+        }
+
+        SelectableDetailItem {
             label: qsTr("Time to answer")
             menu: ContextMenu {
                 MenuItem { text: "15 s" }
@@ -139,6 +151,7 @@ ExpandingSection {
                                    setup: {
                                        questionCount: presetModel.questionCount,
                                        choicesCount: presetModel.choicesCount,
+                                       sameRegion: presetModel.sameRegion,
                                        timeToAnswer: presetModel.timeToAnswer,
                                        quizType: expandingSection.quizType
                                    }

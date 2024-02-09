@@ -92,6 +92,16 @@ Page {
                     wrapMode: Text.Wrap
                 }
 
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    horizontalAlignment: Text.AlignHCenter
+                    text: qsTr("Region: %1").arg(item.region)
+                    width: parent.width - 2 * Theme.horizontalPageMargin
+                    wrapMode: Text.Wrap
+                }
+
                 Item { height: Theme.paddingLarge; width: parent.width }
             }
 
