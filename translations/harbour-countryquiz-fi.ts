@@ -17,22 +17,22 @@
 <context>
     <name>CountryPage</name>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="82"/>
+        <location filename="../qml/pages/CountryPage.qml" line="73"/>
         <source>Capital: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="84"/>
+        <location filename="../qml/pages/CountryPage.qml" line="75"/>
         <source>Capitals: %1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="86"/>
+        <location filename="../qml/pages/CountryPage.qml" line="77"/>
         <source>Capitals: %1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="100"/>
+        <location filename="../qml/pages/CountryPage.qml" line="91"/>
         <source>Region: %1</source>
         <translation type="unfinished"></translation>
     </message>

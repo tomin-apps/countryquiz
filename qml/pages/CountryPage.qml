@@ -11,10 +11,15 @@ import ".."
 
 Page {
     property var item
+    property string countryName: item.pre ? item.pre + " " + item.name : item.name
 
     id: page
 
-    PageHeader { id: header }
+    PageHeader {
+        id: header
+        title: countryName
+        leftMargin: Theme.horizontalPageMargin + Theme.paddingLarge
+    }
 
     SilicaFlickable {
         contentHeight: content.height
@@ -41,12 +46,12 @@ Page {
                 Item { height: Theme.paddingLarge; width: parent.width }
 
                 Label {
-                    id: nameLabel
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.primaryColor
                     font.pixelSize: Theme.fontSizeExtraLarge
                     horizontalAlignment: Text.AlignHCenter
-                    text: item.pre ? item.pre + " " + item.name : item.name
+                    text: item.alt || countryName
+                    visible: text !== ""
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap
 
@@ -54,20 +59,6 @@ Page {
                         anchors.fill: parent
                         onClicked: Qt.openUrlExternally("https://en.wikipedia.org/wiki/" + item.name.replace(/ /g, "_"))
                     }
-                }
-
-                Item { height: Theme.paddingSmall; width: parent.width }
-
-                Label {
-                    id: altNameLabel
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.secondaryHighlightColor
-                    font.pixelSize: Theme.fontSizeLarge
-                    horizontalAlignment: Text.AlignHCenter
-                    text: item.alt || ""
-                    visible: text !== ""
-                    width: parent.width - 2 * Theme.horizontalPageMargin
-                    wrapMode: Text.Wrap
                 }
 
                 Label {
@@ -115,4 +106,7 @@ Page {
 
         VerticalScrollDecorator { }
     }
+
+    // Break some weird signal issue that crashes the app when leaving the page
+    Component.onCompleted: page.countryName = countryName
 }
