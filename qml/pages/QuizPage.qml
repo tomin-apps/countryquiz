@@ -79,63 +79,84 @@ Page {
             wrapMode: Text.Wrap
         }
 
-        Item { height: Theme.paddingSmall; width: parent.width }
+        Item {
+            readonly property int smallFontSize: Theme.fontSizeLarge
+            readonly property int largeFontSize: Theme.fontSizeExtraLarge
 
-        Label {
-            id: timeLeft
-            color: Theme.highlightColor
-            font.pixelSize: Theme.fontSizeLarge
-            height: Theme.fontSizeExtraLarge
-            horizontalAlignment: Text.AlignHCenter
-            text: quizTimer.timeAsString(quizTimer.timeLimit)
+            id: timerItem
+            height: timeLeft.height
             width: parent.width
 
-            states: [
-                State {
-                    name: "enlarged"
-
-                    PropertyChanges {
-                        font.pixelSize: timeLeft.height
-                        target: timeLeft
-                    }
-                },
-                State {
-                    name: "alerted"
-                    extend: "enlarged"
-
-                    PropertyChanges {
-                        color: "red"
-                        target: timeLeft
-                    }
+            Image {
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    verticalCenter: parent.verticalCenter
+                    verticalCenterOffset: Theme.paddingSmall / 2
                 }
+                source: "image://theme/icon-s-duration"
 
-            ]
-
-            transitions: Transition {
-                PropertyAnimation {
-                    duration: 500
-                    easing.type: Easing.InOutQuad
-                    property: "font.pixelSize"
-                }
-
-                ColorAnimation {
-                    duration: 500
-                    easing.type: Easing.InOutQuad
-                    property: "color"
+                Component.onCompleted: {
+                    var change = (timerItem.largeFontSize / timerItem.smallFontSize - 1) * timeLeft.contentWidth
+                    anchors.horizontalCenterOffset = -timeLeft.width / 2 - Theme.paddingMedium - change
                 }
             }
 
-            Connections {
-                target: quizTimer.limit
-                onTriggered: timeLeft.color = "red"
-            }
+            Label {
+                id: timeLeft
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Theme.highlightColor
+                font.pixelSize: timerItem.smallFontSize
+                height: timerItem.largeFontSize + Theme.paddingMedium
+                text: quizTimer.timeAsString(quizTimer.timeLimit)
+                verticalAlignment: Text.AlignVCenter
 
-            Connections {
-                target: quizTimer.tick
-                onTriggered: {
-                    var left = quizTimer.getTimeLeft()
-                    timeLeft.text = quizTimer.timeAsString(left)
-                    timeLeft.state = left % 1000 >= 500 ? left < 5000 ? "alerted" : "enlarged" : ""
+                states: [
+                    State {
+                        name: "enlarged"
+
+                        PropertyChanges {
+                            font.pixelSize: timerItem.largeFontSize
+                            target: timeLeft
+                        }
+                    },
+                    State {
+                        name: "alerted"
+                        extend: "enlarged"
+
+                        PropertyChanges {
+                            color: "red"
+                            target: timeLeft
+                        }
+                    }
+
+                ]
+
+                transitions: Transition {
+                    PropertyAnimation {
+                        duration: 500
+                        easing.type: Easing.InOutQuad
+                        property: "font.pixelSize"
+                    }
+
+                    ColorAnimation {
+                        duration: 500
+                        easing.type: Easing.InOutQuad
+                        property: "color"
+                    }
+                }
+
+                Connections {
+                    target: quizTimer.limit
+                    onTriggered: timeLeft.color = "red"
+                }
+
+                Connections {
+                    target: quizTimer.tick
+                    onTriggered: {
+                        var left = quizTimer.getTimeLeft()
+                        timeLeft.text = quizTimer.timeAsString(left)
+                        timeLeft.state = left % 1000 >= 500 ? left < 5000 ? "alerted" : "enlarged" : ""
+                    }
                 }
             }
         }
