@@ -21,7 +21,7 @@ ExpandingSection {
             menu: ContextMenu {
                 Repeater {
                     model: presetModel
-                    MenuItem { text: model.title }
+                    MenuItem { text: presetModel.getTitleText(model.name) }
                 }
 
                 onActivated: presetModel.selectPreset(index)
@@ -86,15 +86,15 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
-            label: qsTr("Choices from region")
+            label: qsTr("Choices from")
             menu: ContextMenu {
-                MenuItem { text: qsTr("Yes") }
-                MenuItem { text: qsTr("No") }
+                MenuItem { text: qsTr("Everywhere") }
+                MenuItem { text: qsTr("Same region") }
 
-                onActivated: presetModel.selectedRegion = index === 0 ? true : false
+                onActivated: presetModel.selectedRegion = index === 1
             }
 
-            value: presetModel.sameRegion ? qsTr("Yes") : qsTr("No")
+            value: presetModel.sameRegion ? qsTr("Same region") : qsTr("Everywhere")
         }
 
         SelectableDetailItem {

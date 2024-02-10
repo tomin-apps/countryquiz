@@ -10,12 +10,12 @@ import Sailfish.Silica 1.0
 ListModel {
     property int selectedCount: _currentItem !== null ? _currentItem.count : 0
     property int selectedChoices: _currentItem !== null ? _currentItem.choices : 0
-    property bool selectedRegion: _currentItem !== null ? _currentItem.region : 0
+    property bool selectedRegion: _currentItem !== null ? _currentItem.region : false
     property int selectedTime: _currentItem !== null ? _currentItem.time: 0
 
     readonly property int currentIndex: _currentIndex
     readonly property bool presetSelected: _currentIndex >= 0 && _currentItem !== null
-    readonly property string presetTitle: presetSelected ? _currentItem.title : qsTr("None")
+    readonly property string presetTitle: getTitleText(presetSelected ? _currentItem.name : "none")
     readonly property int questionCount: _questionCount < 0 ? dataModel.count : _questionCount
     readonly property int choicesCount: presetSelected ? _currentItem.choices : selectedChoices
     readonly property bool sameRegion: presetSelected ? _currentItem.region : selectedRegion
@@ -68,10 +68,30 @@ ListModel {
         _currentIndex = -1
     }
 
+
+    function getTitleText(name) {
+        if (name === "easy") {
+            return qsTr("Easy")
+        } if (name === "regular") {
+            return qsTr("Regular")
+        } if (name === "veteran") {
+            return qsTr("Veteran")
+        }
+        return qsTr("None")
+    }
+
     id: presetModel
 
     ListElement {
-        title: "Normal"
+        name: "easy"
+        count: 15
+        choices: 3
+        region: false
+        time: 30
+    }
+
+    ListElement {
+        name: "regular"
         count: 15
         choices: 4
         region: false
@@ -79,18 +99,10 @@ ListModel {
     }
 
     ListElement {
-        title: "Long"
-        count: 80
-        choices: 4
-        region: false
-        time: 15
-    }
-
-    ListElement {
-        title: "All"
-        count: -1
-        choices: 4
-        region: false
+        name: "veteran"
+        count: 15
+        choices: 5
+        region: true
         time: 15
     }
 

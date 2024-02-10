@@ -48,7 +48,22 @@
 <context>
     <name>PresetModel</name>
     <message>
-        <location filename="../qml/components/PresetModel.qml" line="18"/>
+        <location filename="../qml/components/PresetModel.qml" line="74"/>
+        <source>Easy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/PresetModel.qml" line="76"/>
+        <source>Regular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/PresetModel.qml" line="78"/>
+        <source>Veteran</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/PresetModel.qml" line="80"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -137,19 +152,19 @@
     </message>
     <message>
         <location filename="../qml/components/QuizSection.qml" line="89"/>
-        <source>Choices from region</source>
+        <source>Choices from</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/QuizSection.qml" line="91"/>
         <location filename="../qml/components/QuizSection.qml" line="97"/>
-        <source>Yes</source>
+        <source>Everywhere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/components/QuizSection.qml" line="92"/>
         <location filename="../qml/components/QuizSection.qml" line="97"/>
-        <source>No</source>
+        <source>Same region</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

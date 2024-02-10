@@ -44,6 +44,18 @@
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Easy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Veteran</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QuizPage</name>
@@ -139,15 +151,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Yes</source>
+        <source>Choices from</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No</source>
+        <source>Everywhere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choices from region</source>
+        <source>Same region</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
