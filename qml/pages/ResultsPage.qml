@@ -57,8 +57,10 @@ Page {
                     var portion = correctAnswersCount / count
                     if (portion >= 0.9) {
                         return qsTr("Excellent!")
-                    } if (portion > 0.5) {
+                    } if (portion > 0.7) {
                         return qsTr("Very good!")
+                    } if (portion > 0.5) {
+                        return qsTr("You did well!!")
                     } if (portion >= 0.2) {
                         return qsTr("You could use more practice.")
                     }

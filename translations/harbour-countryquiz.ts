@@ -224,6 +224,10 @@
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You did well!!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>harbour-countryquiz</name>

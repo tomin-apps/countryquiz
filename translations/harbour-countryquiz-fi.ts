@@ -250,31 +250,36 @@
     </message>
     <message>
         <location filename="../qml/pages/ResultsPage.qml" line="63"/>
-        <source>You could use more practice.</source>
+        <source>You did well!!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/ResultsPage.qml" line="65"/>
+        <source>You could use more practice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ResultsPage.qml" line="67"/>
         <source>Did you try to avoid the right answers?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="76"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="78"/>
         <source>%1 / %2 correct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="86"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="88"/>
         <source>in %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="121"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="123"/>
         <source>Your answers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="127"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="129"/>
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
