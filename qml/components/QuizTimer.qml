@@ -7,13 +7,19 @@
 import QtQuick 2.6
 
 Item {
+    id: timer
+
     property alias tick: tickTimer
-    property alias limit: limitTimer
-    property alias timeLimit: limitTimer.interval
+    property alias running: tickTimer.running
+    property int timeLimit
+    readonly property int timeLeft: _timeLeft
     readonly property int total: _total
 
     property var _lastStarted
+    property int _timeLeft: timeLimit
     property int _total
+
+    signal triggered()
 
     function _digits(value) {
         return (Math.floor(value / 10)).toString() + (value % 10).toString()
@@ -31,44 +37,46 @@ Item {
                 + ":" + _digits(seconds.toString()) + "." + tenths.toString()
     }
 
-    function getTimeLeft() {
-        return limitTimer.interval - (Date.now() - _lastStarted)
-    }
-
     function getTotalTimeText() {
         return timeAsString(total)
     }
 
     function reset() {
-        limitTimer.running = false
+        tickTimer.running = false
         _total = 0
         _lastStarted = 0
+        _timeLeft = timeLimit
     }
 
     function start() {
-        limitTimer.start()
+        _timeLeft = timeLimit
+        tickTimer.start()
     }
 
     function stop() {
-        limitTimer.stop()
+        tickTimer.stop()
     }
 
     Timer {
         id: tickTimer
         interval: 100
         repeat: true
-        running: limitTimer.running
-    }
 
-    Timer {
-        id: limitTimer
         onRunningChanged: {
             var time = Date.now()
             if (running) {
                 _lastStarted = time
             } else {
                 var elapsed = time - _lastStarted
-                _total += elapsed < interval ? elapsed : interval
+                _total += elapsed < timeLimit ? elapsed : timeLimit
+            }
+        }
+
+        onTriggered: {
+            _timeLeft = timeLimit - (Date.now() - _lastStarted)
+            if (_timeLeft <= 0) {
+                running = false
+                timer.triggered()
             }
         }
     }

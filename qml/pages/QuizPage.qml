@@ -147,16 +147,13 @@ Page {
                 }
 
                 Connections {
-                    target: quizTimer.limit
-                    onTriggered: timeLeft.color = "red"
-                }
-
-                Connections {
                     target: quizTimer.tick
                     onTriggered: {
-                        var left = quizTimer.getTimeLeft()
+                        var left = quizTimer.timeLeft
                         timeLeft.text = quizTimer.timeAsString(left)
-                        timeLeft.state = left % 1000 >= 500 ? left < 5000 ? "alerted" : "enlarged" : ""
+                        if (quizTimer.running) {
+                            timeLeft.state = left % 1000 >= 500 ? left < 5000 ? "alerted" : "enlarged" : ""
+                        }
                     }
                 }
             }
@@ -224,7 +221,7 @@ Page {
         property bool wasCorrect
 
         id: closeTimer
-        interval: 1000
+        interval: 1500
         onTriggered: {
             var correctAnswers = page.correctAnswers
             correctAnswers.push(wasCorrect)
@@ -304,8 +301,9 @@ Page {
     KeepAlive { enabled: true }
 
     Connections {
-        target: quizTimer.limit
+        target: quizTimer
         onTriggered: {
+            timeLeft.state = "alerted"
             delegateModel.highlightAllWrong()
             closeInSecond(-1)
         }
