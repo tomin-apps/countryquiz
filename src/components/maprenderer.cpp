@@ -135,7 +135,7 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
     QPainter painter(&image);
 
     QSizeF tileSize(fullArea.width() / m_dimensions.width(), fullArea.height() / m_dimensions.height());
-    QPoint position(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), std::max(0.0, std::floor((bounds.top() - fullArea.top()) / tileSize.height())));
+    QPoint position(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), std::max((qreal)0.0, std::floor((bounds.top() - fullArea.top()) / tileSize.height())));
     QPointF point((qreal)position.x() * tileSize.width() + fullArea.left(), (qreal)position.y() * tileSize.height() + fullArea.top());
     while (point.y() <= bounds.bottom()) {
         while (point.x() <= bounds.right()) {
