@@ -116,7 +116,7 @@ Page {
                         name: "enlarged"
 
                         PropertyChanges {
-                            font.pixelSize: timerItem.largeFontSize
+                            scale: timerItem.largeFontSize / timerItem.smallFontSize
                             target: timeLeft
                         }
                     },
@@ -133,10 +133,9 @@ Page {
                 ]
 
                 transitions: Transition {
-                    PropertyAnimation {
+                    ScaleAnimator {
                         duration: 500
                         easing.type: Easing.InOutQuad
-                        property: "font.pixelSize"
                     }
 
                     ColorAnimation {
