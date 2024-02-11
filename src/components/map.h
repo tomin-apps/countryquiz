@@ -56,8 +56,8 @@ private:
     QSize m_sourceSize;
     MapRenderer *m_renderer;
     struct {
-        QScopedPointer<QSGTexture> pending;
-        QScopedPointer<QSGTexture> current;
+        QScopedPointer<QSGTexture, QScopedPointerDeleteLater> pending;
+        QScopedPointer<QSGTexture, QScopedPointerDeleteLater> current;
         QRectF sourceRect;
     } m_texture;
     QQuickWindow *m_window;
