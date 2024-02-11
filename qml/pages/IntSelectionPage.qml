@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -43,7 +43,7 @@ Dialog {
 
     Label {
         anchors.top: textField.bottom
-        color: Theme.secondaryHighlightColor
+        color: palette.secondaryHighlightColor
         text: {
             if (isNaN(selectedValue)) {
                 return invalidHint

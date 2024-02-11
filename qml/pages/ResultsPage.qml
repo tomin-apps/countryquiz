@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -44,7 +44,7 @@ Page {
             width: parent.width
 
             Label {
-                color: Theme.highlightColor
+                color: palette.highlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
                 text: {
@@ -72,7 +72,7 @@ Page {
             }
 
             Label {
-                color: Theme.secondaryHighlightColor
+                color: palette.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("%1 / %2 correct").arg(correctAnswersCount).arg(count)
@@ -82,7 +82,7 @@ Page {
             }
 
             Label {
-                color: Theme.secondaryHighlightColor
+                color: palette.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("in %1").arg(quizTimer.getTotalTimeText())
@@ -105,7 +105,7 @@ Page {
 
                                 Label {
                                     anchors.verticalCenter: parent.verticalCenter
-                                    color: highlighted ? Theme.highlightColor : (item.correct ? "green" : "red")
+                                    color: highlighted ? palette.highlightColor : (item.correct ? "green" : "red")
                                     font.pixelSize: Theme.fontSizeMedium
                                     horizontalAlignment: Text.AlignHCenter
                                     text: item.name

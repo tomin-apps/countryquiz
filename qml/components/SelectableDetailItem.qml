@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -25,7 +25,7 @@ ListItem {
         Label {
             id: detailLabel
             anchors.verticalCenter: parent.verticalCenter
-            color: Theme.highlightColor
+            color: palette.highlightColor
             horizontalAlignment: Text.AlignRight
             width: (parent.width - parent.spacing) / 2
             wrapMode: Text.Wrap
@@ -34,7 +34,7 @@ ListItem {
         Label {
             id: valueLabel
             anchors.verticalCenter: parent.verticalCenter
-            color: highlighted ? Theme.highlightColor : Theme.primaryColor
+            color: highlighted ? palette.highlightColor : palette.primaryColor
             horizontalAlignment: Text.AlignLeft
             width: (parent.width - parent.spacing) / 2
             wrapMode: Text.Wrap

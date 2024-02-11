@@ -58,7 +58,7 @@ Page {
 
         Label {
             id: label
-            color: Theme.highlightColor
+            color: palette.highlightColor
             horizontalAlignment: Text.AlignHCenter
             text: {
                 if (setup.quizType === "flags") {
@@ -88,12 +88,13 @@ Page {
             height: timeLeft.height
             width: parent.width
 
-            Image {
+            Icon {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     verticalCenter: parent.verticalCenter
                     verticalCenterOffset: Theme.paddingSmall / 2
                 }
+                color: palette.highlightColor
                 source: "image://theme/icon-s-duration"
 
                 Component.onCompleted: {
@@ -105,7 +106,7 @@ Page {
             Label {
                 id: timeLeft
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.highlightColor
+                color: palette.highlightColor
                 font.pixelSize: timerItem.smallFontSize
                 height: timerItem.largeFontSize + Theme.paddingMedium
                 text: quizTimer.timeAsString(quizTimer.timeLimit)
@@ -275,7 +276,7 @@ Page {
             Label {
                 id: capitalsLabel
 
-                color: Theme.highlightColor
+                color: palette.highlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
                 text: {

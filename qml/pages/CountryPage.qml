@@ -47,7 +47,7 @@ Page {
 
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.primaryColor
+                    color: palette.primaryColor
                     font.pixelSize: Theme.fontSizeExtraLarge
                     horizontalAlignment: Text.AlignHCenter
                     text: item.alt || countryName
@@ -63,7 +63,7 @@ Page {
 
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.secondaryHighlightColor
+                    color: palette.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeMedium
                     horizontalAlignment: Text.AlignHCenter
                     text: {
@@ -85,7 +85,7 @@ Page {
 
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.secondaryHighlightColor
+                    color: palette.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeMedium
                     horizontalAlignment: Text.AlignHCenter
                     text: qsTr("Region: %1").arg(item.region)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -39,7 +39,7 @@ Item {
                         centerIn: parent
                         verticalCenterOffset: -Theme.paddingMedium
                     }
-                    color: model.index === currentIndex ? Theme.highlightColor : Theme.primaryColor
+                    color: model.index === currentIndex ? palette.highlightColor : palette.primaryColor
                     font.pixelSize: Theme.fontSizeExtraLarge
                     text: title
                 }
@@ -54,7 +54,7 @@ Item {
             bottom: parent.bottom
             bottomMargin: Theme.paddingLarge
         }
-        color: Theme.highlightColor
+        color: palette.highlightColor
         x: tabsRow.x + Theme.paddingLarge / 2 + (_currentItem != null ? _currentItem.x : 0)
         height: Math.ceil(Theme.pixelRatio * 2)
         width: _currentItem != null ? _currentItem.contentWidth : 0
