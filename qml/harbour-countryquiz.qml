@@ -7,6 +7,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import "components"
+import "helpers.js" as Helpers
 import "pages"
 
 ApplicationWindow {
@@ -58,7 +59,25 @@ ApplicationWindow {
 
     QuizTimer { id: quizTimer }
 
-    Data { id: dataModel }
+    Data {
+        id: dataModel
+
+        function getIndices(type) {
+            var indices = Helpers.getIndexArray(dataModel)
+            if (type === "capitals") {
+                return Helpers.filterIndexArray(dataModel, indices, function(item) {
+                    var capitals = item.capital.split(';')
+                    for (var i = 0; i < capitals.length; ++i) {
+                        if (capitals[i].search(item.name) !== -1 || item.name.search(capitals[i]) !== -1) {
+                            return false
+                        }
+                    }
+                    return true
+                })
+            }
+            return indices
+        }
+    }
 
     Config { id: config }
 

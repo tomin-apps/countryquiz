@@ -30,8 +30,7 @@ function filterIndexArray(model, array, test) {
     return indices
 }
 
-function pickRandomIndices(model, count) {
-    var indices = getIndexArray(model)
+function pickRandomIndices(model, indices, count) {
     for (var i = 0; i < count; ++i) {
         var index = i + Math.floor(Math.random() * (indices.length - i))
         indices.swap(i, index)

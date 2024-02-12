@@ -131,7 +131,7 @@ Page {
                 onClicked: {
                     quizTimer.reset()
                     pageStack.replace(Qt.resolvedUrl("QuizPage.qml"), {
-                        indices: Helpers.pickRandomIndices(dataModel, page.setup.questionCount),
+                        indices: Helpers.pickRandomIndices(dataModel, dataModel.getIndices(page.setup.quizType), page.setup.questionCount),
                         setup: page.setup
                     })
                 }

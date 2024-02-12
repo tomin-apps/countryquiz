@@ -16,7 +16,7 @@ ListModel {
     readonly property int currentIndex: _currentIndex
     readonly property bool presetSelected: _currentIndex >= 0 && _currentItem !== null
     readonly property string presetTitle: getTitleText(presetSelected ? _currentItem.name : "none")
-    readonly property int questionCount: _questionCount < 0 ? dataModel.count : _questionCount
+    readonly property int questionCount: _questionCount < 0 ? maximumLength : _questionCount
     readonly property int choicesCount: presetSelected ? _currentItem.choices : selectedChoices
     readonly property bool sameRegion: presetSelected ? _currentItem.region : selectedRegion
     readonly property int timeToAnswer: presetSelected ? _currentItem.time : selectedTime

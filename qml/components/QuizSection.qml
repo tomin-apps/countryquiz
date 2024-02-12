@@ -11,6 +11,7 @@ import "../helpers.js" as Helpers
 ExpandingSection {
     id: expandingSection
     property string quizType
+    readonly property int maximumLength: dataModel.getIndices(quizType).length
 
     content.sourceComponent: Column {
         bottomPadding: Theme.paddingLarge
@@ -34,7 +35,7 @@ ExpandingSection {
             menu: ContextMenu {
                 MenuItem { text: "15" }
                 MenuItem { text: "80" }
-                MenuItem { text: "%1".arg(dataModel.count) }
+                MenuItem { text: "%1".arg(expandingSection.maximumLength) }
                 MenuItem { text: qsTr("Custom value") }
 
                 onActivated: {
@@ -52,14 +53,14 @@ ExpandingSection {
                         var dialog = pageStack.push(Qt.resolvedUrl("../pages/IntSelectionPage.qml"), {
                             value: presetModel.questionCount,
                             minimum: 1,
-                            maximum: dataModel.count,
+                            maximum: expandingSection.maximumLength,
                             title: qsTr("Select number of questions"),
                             description: qsTr("Questions"),
                             tooLowHint: qsTr("You must have at least one question"),
-                            tooHighHint: qsTr("You may not have more than %1 questions").arg(dataModel.count)
+                            tooHighHint: qsTr("You may not have more than %1 questions").arg(expandingSection.maximumLength)
                         })
                         dialog.onAccepted.connect(function() {
-                            if (dialog.selectedValue === dataModel.count) {
+                            if (dialog.selectedValue >= expandingSection.maximumLength) {
                                 presetModel.selectedCount = -1
                             } else {
                                 presetModel.selectedCount = dialog.selectedValue
@@ -147,7 +148,7 @@ ExpandingSection {
             onClicked:  {
                 quizTimer.reset()
                 pageStack.push(Qt.resolvedUrl("../pages/QuizPage.qml"), {
-                                   indices: Helpers.pickRandomIndices(dataModel, presetModel.questionCount),
+                                   indices: Helpers.pickRandomIndices(dataModel, dataModel.getIndices(expandingSection.quizType), presetModel.questionCount),
                                    setup: {
                                        questionCount: presetModel.questionCount,
                                        choicesCount: presetModel.choicesCount,

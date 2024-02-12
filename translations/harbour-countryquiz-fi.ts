@@ -114,91 +114,91 @@
 <context>
     <name>QuizSection</name>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="20"/>
+        <location filename="../qml/components/QuizSection.qml" line="21"/>
         <source>Preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="33"/>
-        <location filename="../qml/components/QuizSection.qml" line="57"/>
+        <location filename="../qml/components/QuizSection.qml" line="34"/>
+        <location filename="../qml/components/QuizSection.qml" line="58"/>
         <source>Questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="38"/>
-        <location filename="../qml/components/QuizSection.qml" line="106"/>
+        <location filename="../qml/components/QuizSection.qml" line="39"/>
+        <location filename="../qml/components/QuizSection.qml" line="107"/>
         <source>Custom value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="56"/>
+        <location filename="../qml/components/QuizSection.qml" line="57"/>
         <source>Select number of questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="58"/>
+        <location filename="../qml/components/QuizSection.qml" line="59"/>
         <source>You must have at least one question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="59"/>
+        <location filename="../qml/components/QuizSection.qml" line="60"/>
         <source>You may not have more than %1 questions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="76"/>
+        <location filename="../qml/components/QuizSection.qml" line="77"/>
         <source>Choices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="89"/>
+        <location filename="../qml/components/QuizSection.qml" line="90"/>
         <source>Choices from</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="91"/>
-        <location filename="../qml/components/QuizSection.qml" line="97"/>
+        <location filename="../qml/components/QuizSection.qml" line="92"/>
+        <location filename="../qml/components/QuizSection.qml" line="98"/>
         <source>Everywhere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="92"/>
-        <location filename="../qml/components/QuizSection.qml" line="97"/>
+        <location filename="../qml/components/QuizSection.qml" line="93"/>
+        <location filename="../qml/components/QuizSection.qml" line="98"/>
         <source>Same region</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="101"/>
+        <location filename="../qml/components/QuizSection.qml" line="102"/>
         <source>Time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="126"/>
+        <location filename="../qml/components/QuizSection.qml" line="127"/>
         <source>Select time to answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="127"/>
+        <location filename="../qml/components/QuizSection.qml" line="128"/>
         <source>Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="128"/>
+        <location filename="../qml/components/QuizSection.qml" line="129"/>
         <source>You must have at least one second to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="129"/>
+        <location filename="../qml/components/QuizSection.qml" line="130"/>
         <source>You may not have more than %1 seconds (%2 minutes) to answer the question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="138"/>
+        <location filename="../qml/components/QuizSection.qml" line="139"/>
         <source>%1 s per question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/QuizSection.qml" line="145"/>
+        <location filename="../qml/components/QuizSection.qml" line="146"/>
         <source>Quiz me!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -287,17 +287,17 @@
 <context>
     <name>harbour-countryquiz</name>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="52"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="53"/>
         <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="69"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="88"/>
         <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="74"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="93"/>
         <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
