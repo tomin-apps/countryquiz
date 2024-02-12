@@ -234,52 +234,62 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="55"/>
-        <source>Perfect work! You clearly know your flags!</source>
+        <location filename="../qml/pages/ResultsPage.qml" line="56"/>
+        <source>Perfect work! You clearly know the flags!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="59"/>
-        <source>Excellent!</source>
+        <location filename="../qml/pages/ResultsPage.qml" line="58"/>
+        <source>Perfect work! You clearly know maps!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="61"/>
-        <source>Very good!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="63"/>
-        <source>You did well!!</source>
+        <location filename="../qml/pages/ResultsPage.qml" line="60"/>
+        <source>Perfect work! You clearly know the capitals!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/ResultsPage.qml" line="65"/>
-        <source>You could use more practice.</source>
+        <source>Excellent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/ResultsPage.qml" line="67"/>
+        <source>Very good!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ResultsPage.qml" line="69"/>
+        <source>You did well!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ResultsPage.qml" line="71"/>
+        <source>You could use more practice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ResultsPage.qml" line="73"/>
         <source>Did you try to avoid the right answers?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="78"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="84"/>
         <source>%1 / %2 correct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="88"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="94"/>
         <source>in %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="123"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="129"/>
         <source>Your answers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="129"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="135"/>
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>

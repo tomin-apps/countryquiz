@@ -189,10 +189,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Perfect work! You clearly know your flags!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Excellent!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -226,6 +222,18 @@
     </message>
     <message>
         <source>You did well!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect work! You clearly know the flags!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect work! You clearly know maps!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Perfect work! You clearly know the capitals!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

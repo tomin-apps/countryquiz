@@ -52,7 +52,13 @@ Page {
                         return qsTr("It's like flipping a coin, sometimes you just have bad luck!")
                     }
                     if (count >= 10 && correctAnswersCount === count) {
-                        return qsTr("Perfect work! You clearly know your flags!")
+                        if (setup.quizType === "flags") {
+                            return qsTr("Perfect work! You clearly know the flags!")
+                        } if (setup.quizType === "maps") {
+                            return qsTr("Perfect work! You clearly know maps!")
+                        } if (setup.quizType === "capitals") {
+                            return qsTr("Perfect work! You clearly know the capitals!")
+                        }
                     }
                     var portion = correctAnswersCount / count
                     if (portion >= 0.9) {
