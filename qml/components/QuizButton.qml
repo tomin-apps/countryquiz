@@ -15,7 +15,6 @@ SilicaControl {
     signal clicked
 
     id: button
-    height: Theme.itemSizeMedium
     highlighted: mouseArea.containsPress
 
     MouseArea {
@@ -49,6 +48,7 @@ SilicaControl {
                 verticalCenterOffset: (font.pixelSize + Theme.paddingSmall) / 2
             }
             color: highlighted ? palette.secondaryHighlightColor : palette.secondaryColor
+            font.pixelSize: button.height >= Theme.itemSizeMedium ? Theme.fontSizeMedium : Theme.fontSizeSmall
             horizontalAlignment: width > implicitWidth ? Text.AlignHCenter : Text.AlignLeft
             truncationMode: TruncationMode.Fade
             visible: text !== ""

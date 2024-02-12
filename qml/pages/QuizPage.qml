@@ -34,9 +34,8 @@ Page {
     onStatusChanged: if (status === PageStatus.Active) choices.opacity = 1.0
 
     Column {
-        readonly property int otherHeight: header.height + label.height + timeLeft.height + 2 * Theme.paddingSmall
+        readonly property int otherHeight: header.height + label.height + timeLeft.height
         readonly property bool otherReady: header.height !== 0 && label.height !== 0 && timeLeft.height !== 0
-
         id: column
         width: parent.width
 
@@ -46,19 +45,18 @@ Page {
         }
 
         Loader {
-            property int maximumHeight: page.height - column.otherHeight - choices.height
+            property int maximumHeight: Math.min(parent.width, page.height - column.otherHeight - choices.minimumHeight)
             property int maximumWidth: parent.width
-            property int ready: page.height !== 0 && column.otherReady && choices.height !== 0 && parent.width !== 0
+            property bool ready: parent.width !== 0 && page.height !== 0 && column.otherReady && choices.minimumHeight !== 0
 
             anchors.horizontalCenter: parent.horizontalCenter
             sourceComponent: setup.quizType === "flags" ? flagComponent : setup.quizType === "maps" ? mapComponent : setup.quizType === "capitals" ? capitalComponent : null
         }
 
-        Item { height: Theme.paddingSmall; width: parent.width }
-
         Label {
             id: label
             color: palette.highlightColor
+            font.pixelSize: Theme.fontSizeSmall
             horizontalAlignment: Text.AlignHCenter
             text: {
                 if (setup.quizType === "flags") {
@@ -161,9 +159,14 @@ Page {
     }
 
     ListView {
+        readonly property int maximumHeight: Math.min(Math.min(page.width, page.height / 2), (Theme.itemSizeLarge + Theme.paddingLarge) * setup.choicesCount)
+        readonly property int minimumHeight: Math.min((Theme.itemSizeSmall + Theme.paddingSmall) * 5, maximumHeight)
+        readonly property bool smallItems: height / setup.choicesCount < Theme.itemSizeMedium + Theme.paddingMedium
+
         id: choices
         anchors.bottom: parent.bottom
-        height: (Theme.itemSizeMedium + Theme.paddingMedium) * setup.choicesCount
+        boundsBehavior: Flickable.StopAtBounds
+        height: Math.min(maximumHeight, Math.max(minimumHeight, page.height - column.height))
         model: DelegateModel {
             signal highlightCorrect
             signal highlightAllWrong
@@ -173,6 +176,7 @@ Page {
                 QuizButton {
                     id: button
                     anchors.horizontalCenter: parent.horizontalCenter
+                    height: (choices.height / setup.choicesCount) - choices.spacing
                     text: model.pre ? model.pre + " " + model.name : model.name
                     altText: model.alt || ""
                     width: parent.width - 2 * Theme.horizontalPageMargin
@@ -205,7 +209,7 @@ Page {
             ]
         }
         opacity: 0.0
-        spacing: Theme.paddingMedium
+        spacing: smallItems ? Theme.paddingSmall : Theme.paddingMedium
         width: parent.width
 
         Behavior on opacity {
@@ -270,7 +274,7 @@ Page {
         id: capitalComponent
 
         Item {
-            height: capitalsLabel.contentHeight + 2 * Theme.paddingLarge - Theme.paddingSmall
+            height: capitalsLabel.contentHeight + 2 * Theme.paddingLarge
             width: maximumWidth
 
             Label {

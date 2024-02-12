@@ -36,7 +36,7 @@ Page {
                 id: flag
                 anchors.horizontalCenter: parent.horizontalCenter
                 source: "../../assets/flags/" + item.iso + ".svg"
-                sourceSize: Qt.size(parent.width, (page.height - header.height - textContent.height - Theme.paddingLarge) / 2)
+                sourceSize: Qt.size(parent.width, Math.min(page.height / 4, (page.height - header.height - textContent.height) / 2))
             }
 
             Column {
@@ -100,7 +100,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 code: item.iso
                 load: parent.width !== 0 && flag.height !== 0 && textContent.height !== 0
-                sourceSize: Qt.size(parent.width, page.height - header.height - flag.height - textContent.height - Theme.paddingLarge)
+                sourceSize: Qt.size(parent.width, page.height - header.height - flag.height - textContent.height)
             }
         }
 
