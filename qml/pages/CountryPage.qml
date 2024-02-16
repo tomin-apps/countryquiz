@@ -11,7 +11,7 @@ import ".."
 
 Page {
     property var item
-    property string countryName: item.pre ? item.pre + " " + item.name : item.name
+    property string countryName: item !== undefined && item !== null ? (item.pre ? item.pre + " " + item.name : item.name) : ""
 
     id: page
 
