@@ -1,11 +1,12 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
 
 #include <QLoggingCategory>
 #include <QQuickWindow>
+#include <QSGClipNode>
 #include <QSGSimpleTextureNode>
 #include <sailfishapp.h>
 
@@ -18,20 +19,25 @@ Map::Map(QQuickItem *parent)
     : QQuickItem(parent)
     , m_dirty(true)
     , m_load(true)
+    , m_tileCount(-1)
     , m_renderer(MapRenderer::get(SailfishApp::pathTo("assets/map.svg").toLocalFile()))
     , m_window(nullptr)
 {
     setFlag(QQuickItem::ItemHasContents);
     connect(this, &Map::renderMap, m_renderer, &MapRenderer::renderMap);
-    connect(m_renderer, &MapRenderer::mapReady, this, &Map::mapReady);
+    connect(m_renderer, &MapRenderer::tileCountReady, this, &Map::tileCountReady);
+    connect(m_renderer, &MapRenderer::tileReady, this, &Map::tileReady);
+    connect(m_renderer, &MapRenderer::overlayReady, this, &Map::overlayReady);
     connect(this, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
         if (m_window)
             m_window->disconnect(this);
         if (window) {
-            connect(window, &QQuickWindow::sceneGraphInitialized, this, &Map::createMapTexture);
+            connect(window, &QQuickWindow::sceneGraphInitialized, this, &Map::createMapTextures);
             connect(window, &QQuickWindow::sceneGraphInvalidated, this, [this]() {
-                m_texture.pending.reset();
-                m_texture.current.reset();
+                for (Tile &tile : m_tiles) {
+                    tile.texture.reset();
+                }
+                m_overlay.texture.reset();
             });
         }
         m_window = window;
@@ -45,24 +51,29 @@ void Map::componentComplete()
         emit renderMap(m_sourceSize, m_code);
 }
 
-void Map::createMapTexture()
+void Map::createMapTextures()
 {
-    if (!m_map.isNull()) {
-        QSGTexture *texture = window()->createTextureFromImage(m_map);
-        m_texture.pending.reset(texture);
-        polish();
+    // TODO: shouldn't always iterate everything
+    for (Tile &tile : m_tiles) {
+        if (!tile.image.isNull()) {
+            if (!tile.texture)
+                tile.texture.reset(window()->createTextureFromImage(tile.image));
+        }
     }
+    if (!m_overlay.image.isNull()) {
+        if (!m_overlay.texture)
+            m_overlay.texture.reset(window()->createTextureFromImage(m_overlay.image));
+    }
+
+    if (texturesReady())
+        polish();
 }
 
 void Map::updatePolish()
 {
-    if (m_texture.pending) {
-        QSize size = m_map.size();
-        setImplicitWidth(size.width());
-        setImplicitHeight(size.height());
-        m_texture.current.reset();
-        m_texture.current.swap(m_texture.pending);
-        m_texture.sourceRect.setSize(size);
+    if (texturesReady()) { // TODO: Check that textures are there!
+        setImplicitWidth(m_sourceSize.width());
+        setImplicitHeight(m_sourceSize.height());
         m_dirty = true;
         qCDebug(lcMap) << "Polish done";
         update();
@@ -71,18 +82,30 @@ void Map::updatePolish()
 
 QSGNode *Map::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    if (!m_texture.current)
+    if (!texturesReady())
         return nullptr; // not ready
 
-    auto *node = static_cast<QSGSimpleTextureNode *>(oldNode);
+    auto *node = static_cast<QSGClipNode *>(oldNode);
     if (!node || m_dirty) {
-        if (!node)
-            node = new QSGSimpleTextureNode();
-        node->setTexture(m_texture.current.data());
-        node->setSourceRect(m_texture.sourceRect);
+        if (!node) {
+            node = new QSGClipNode;
+            node->setIsRectangular(true);
+        }
+        node->removeAllChildNodes();
+        for (const Tile &tile : m_tiles) {
+            auto *tileNode = new QSGSimpleTextureNode;
+            tileNode->setTexture(tile.texture.data());
+            tileNode->setRect(tile.location);
+            node->appendChildNode(tileNode);
+        }
+        auto *overlayNode = new QSGSimpleTextureNode;
+        overlayNode->setTexture(m_overlay.texture.data());
+        overlayNode->setRect(m_overlay.location);
+        node->appendChildNode(overlayNode);
         m_dirty = false;
     }
-    node->setRect(boundingRect());
+
+    node->setClipRect(boundingRect());
     qCDebug(lcMap) << "Update done";
     return node;
 }
@@ -132,15 +155,57 @@ const QSize &Map::sourceSize() const
     return m_sourceSize;
 }
 
-void Map::mapReady(const QImage &image, const QString &code)
+void Map::tileCountReady(const QSize &size, const QSize &tiles, const QString &code)
+{
+    if (m_code == code && m_sourceSize == size) {
+        m_tiles.clear();
+        m_tileCount = tiles.width() * tiles.height();
+    }
+}
+
+void Map::tileReady(const QImage &image, const QRectF &tile, const QString &code)
 {
     if (m_code == code) {
-        m_map = image;
-        createMapTexture();
+        m_tiles.emplace_back(std::move(Tile(image, tile)));
+        createMapTextures(); // TODO: inefficient
+    }
+}
+
+void Map::overlayReady(const QImage &image, const QRectF &tile, const QString &code)
+{
+    if (m_code == code) {
+        m_overlay.image = image;
+        m_overlay.location = tile;
+        createMapTextures(); // TODO: inefficient
     }
 }
 
 bool Map::canDraw() const
 {
     return isComponentComplete() && m_load && m_sourceSize.isValid() && !m_code.isEmpty();
+}
+
+bool Map::texturesReady() const
+{
+    if (m_tileCount == -1 || (int)m_tiles.size() < m_tileCount)
+        return false;
+
+    for (const Tile &tile : m_tiles) {
+        if (!tile.texture)
+            return false;
+    }
+    return m_overlay.texture;
+}
+
+Map::Tile::Tile(const QImage &image, const QRectF &location)
+    : image(image)
+    , location(location)
+{
+}
+
+Map::Tile::Tile(Tile &&other)
+    : image(other.image)
+    , location(other.location)
+{
+    texture.reset(other.texture.take());
 }

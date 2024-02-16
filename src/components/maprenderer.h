@@ -10,6 +10,7 @@
 #include <QCoreApplication>
 #include <QMutex>
 #include <QObject>
+#include <QRectF>
 #include <QSvgRenderer>
 #include <QThread>
 #include <QVector>
@@ -26,7 +27,9 @@ public slots:
     void renderMap(const QSize &maxSize, const QString &code);
 
 signals:
-    void mapReady(const QImage &image, const QString &code);
+    void tileCountReady(const QSize &size, const QSize &tiles, const QString &code);
+    void tileReady(const QImage &image, const QRectF &tile, const QString &code);
+    void overlayReady(const QImage &image, const QRectF &tile, const QString &code);
 
 private:
     explicit MapRenderer(const QString &filePath, QObject *parent = nullptr);

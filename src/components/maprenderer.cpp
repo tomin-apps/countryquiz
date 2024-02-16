@@ -130,19 +130,22 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
     QTransform translation = QTransform::fromTranslate(-bounds.left(), -bounds.top());
     QTransform scaling = QTransform::fromScale(maxSize.width() / bounds.width(), maxSize.height() / bounds.height());
 
-    QImage image(maxSize, QImage::Format_ARGB32_Premultiplied);
-    image.fill(Qt::transparent);
-    QPainter painter(&image);
-
     QSizeF tileSize(fullArea.width() / m_dimensions.width(), fullArea.height() / m_dimensions.height());
+    QSize tileCount(bounds.width() / tileSize.width(), bounds.height() / tileSize.height());
+
+    emit tileCountReady(maxSize, tileCount, code);
+
     QPoint position(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), std::max((qreal)0.0, std::floor((bounds.top() - fullArea.top()) / tileSize.height())));
     QPointF point((qreal)position.x() * tileSize.width() + fullArea.left(), (qreal)position.y() * tileSize.height() + fullArea.top());
     while (point.y() <= bounds.bottom()) {
         while (point.x() <= bounds.right()) {
+            // TODO: Create tasks for tile
             QString name(m_tilePathTemplate.arg(mod(position.x(), m_dimensions.width())).arg(position.y()));
             QImage tile(name);
             QRectF transformed = scaling.mapRect(translation.mapRect(QRectF(point, tileSize)));
-            painter.drawImage(transformed, tile);
+
+            emit tileReady(tile, transformed, code);
+
             position.setX(position.x() + 1);
             point.setX(point.x() + tileSize.width());
         }
@@ -150,13 +153,12 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
         point = QPointF((qreal)position.x() * tileSize.width() + fullArea.left(), point.y() + tileSize.height());
     }
 
+    // TODO: Create task for overlay
     QColor overlayColor(Qt::red);
     overlayColor.setAlphaF(0.25);
     QRectF target = scaling.mapRect(translation.mapRect(element));
     QImage overlay = draw_overlay(m_renderer, code, target, overlayColor);
-    painter.drawImage(target.topLeft(), overlay);
-
-    emit mapReady(image, code);
+    emit overlayReady(overlay, target, code);
 }
 
 MapRenderer::MapRenderer(const QString &filePath, QObject *parent)

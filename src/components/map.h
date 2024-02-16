@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2024 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -7,6 +7,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <vector>
 #include <QImage>
 #include <QQuickItem>
 #include <QSGTexture>
@@ -45,23 +46,39 @@ protected:
     void componentComplete() override;
 
 private slots:
-    void createMapTexture();
-    void mapReady(const QImage &image, const QString &code);
+    void createMapTextures();
+    void tileCountReady(const QSize &size, const QSize &tiles, const QString &code);
+    void tileReady(const QImage &image, const QRectF &tile, const QString &code);
+    void overlayReady(const QImage &image, const QRectF &tile, const QString &code);
 
 private:
+    struct Tile {
+        QImage image;
+        QRectF location;
+        QScopedPointer<QSGTexture, QScopedPointerDeleteLater> texture;
+
+        Tile(const QImage &image, const QRectF &location);
+        Tile(Tile &&other);
+        Tile(Tile &other) = delete;
+    };
+
     bool canDraw() const;
+    bool texturesReady() const;
 
     QString m_code;
     bool m_dirty;
     bool m_load;
-    QImage m_map;
     QSize m_sourceSize;
-    MapRenderer *m_renderer;
+
+    int m_tileCount;
+    std::vector<Tile> m_tiles;
     struct {
-        QScopedPointer<QSGTexture, QScopedPointerDeleteLater> pending;
-        QScopedPointer<QSGTexture, QScopedPointerDeleteLater> current;
-        QRectF sourceRect;
-    } m_texture;
+        QImage image;
+        QRectF location;
+        QScopedPointer<QSGTexture, QScopedPointerDeleteLater> texture;
+    } m_overlay;
+
+    MapRenderer *m_renderer;
     QQuickWindow *m_window;
 };
 
