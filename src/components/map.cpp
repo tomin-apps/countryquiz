@@ -41,7 +41,7 @@ Map::Map(QQuickItem *parent)
 void Map::componentComplete()
 {
     QQuickItem::componentComplete();
-    if (m_load)
+    if (canDraw())
         emit renderMap(m_sourceSize, m_code);
 }
 
@@ -97,7 +97,7 @@ void Map::setCode(const QString &code)
     if (m_code != code) {
         m_code = code;
         emit codeChanged();
-        if (isComponentComplete())
+        if (canDraw())
             emit renderMap(m_sourceSize, m_code);
     }
 }
@@ -112,7 +112,7 @@ void Map::setLoad(bool load)
     if (m_load != load) {
         m_load = load;
         emit loadChanged();
-        if (isComponentComplete() && m_load)
+        if (canDraw())
             emit renderMap(m_sourceSize, m_code);
     }
 }
@@ -122,7 +122,7 @@ void Map::setSourceSize(const QSize &sourceSize)
     if (m_sourceSize != sourceSize) {
         m_sourceSize = sourceSize;
         emit sourceSizeChanged();
-        if (isComponentComplete() && m_load)
+        if (canDraw())
             emit renderMap(m_sourceSize, m_code);
     }
 }
@@ -138,4 +138,9 @@ void Map::mapReady(const QImage &image, const QString &code)
         m_map = image;
         createMapTexture();
     }
+}
+
+bool Map::canDraw() const
+{
+    return isComponentComplete() && m_load && m_sourceSize.isValid() && !m_code.isEmpty();
 }

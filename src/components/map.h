@@ -49,6 +49,8 @@ private slots:
     void mapReady(const QImage &image, const QString &code);
 
 private:
+    bool canDraw() const;
+
     QString m_code;
     bool m_dirty;
     bool m_load;
