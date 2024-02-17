@@ -24,10 +24,10 @@ Map::Map(QQuickItem *parent)
     , m_window(nullptr)
 {
     setFlag(QQuickItem::ItemHasContents);
-    connect(this, &Map::renderMap, m_renderer, &MapRenderer::renderMap);
-    connect(m_renderer, &MapRenderer::tileCountReady, this, &Map::tileCountReady);
-    connect(m_renderer, &MapRenderer::tileReady, this, &Map::tileReady);
-    connect(m_renderer, &MapRenderer::overlayReady, this, &Map::overlayReady);
+    connect(this, &Map::renderMap, m_renderer, &MapRenderer::renderMap, Qt::QueuedConnection);
+    connect(m_renderer, &MapRenderer::tileCountReady, this, &Map::tileCountReady, Qt::QueuedConnection);
+    connect(m_renderer, &MapRenderer::tileReady, this, &Map::tileReady, Qt::QueuedConnection);
+    connect(m_renderer, &MapRenderer::overlayReady, this, &Map::overlayReady, Qt::QueuedConnection);
     connect(this, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
         if (m_window)
             m_window->disconnect(this);

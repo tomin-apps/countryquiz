@@ -12,6 +12,7 @@
 #include <QImage>
 #include <QLoggingCategory>
 #include <QPainter>
+#include <QThreadPool>
 #include "maprenderer.h"
 
 /* TODO
@@ -135,16 +136,25 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
 
     emit tileCountReady(maxSize, tileCount, code);
 
+    QThreadPool *pool = QThreadPool::globalInstance();
+
+    QColor overlayColor(Qt::red);
+    overlayColor.setAlphaF(0.25);
+    auto *overlayRenderer = new OverlayRenderer(m_renderer, element, overlayColor, translation, scaling, code);
+    connect(overlayRenderer, &OverlayRenderer::overlayReady, this, &MapRenderer::overlayReady, Qt::QueuedConnection);
+    overlayRenderer->setAutoDelete(true);
+    pool->start(overlayRenderer);
+
     QPoint position(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), std::max((qreal)0.0, std::floor((bounds.top() - fullArea.top()) / tileSize.height())));
     QPointF point((qreal)position.x() * tileSize.width() + fullArea.left(), (qreal)position.y() * tileSize.height() + fullArea.top());
     while (point.y() <= bounds.bottom()) {
         while (point.x() <= bounds.right()) {
-            // TODO: Create tasks for tile
+            // TODO: Some countries don't work, at least Russia is broken
             QString name(m_tilePathTemplate.arg(mod(position.x(), m_dimensions.width())).arg(position.y()));
-            QImage tile(name);
-            QRectF transformed = scaling.mapRect(translation.mapRect(QRectF(point, tileSize)));
-
-            emit tileReady(tile, transformed, code);
+            auto *tileRenderer = new TileRenderer(name, QRectF(point, tileSize), translation, scaling, code);
+            connect(tileRenderer, &TileRenderer::tileReady, this, &MapRenderer::tileReady, Qt::QueuedConnection);
+            tileRenderer->setAutoDelete(true);
+            pool->start(tileRenderer);
 
             position.setX(position.x() + 1);
             point.setX(point.x() + tileSize.width());
@@ -152,13 +162,6 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
         position = QPoint(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), position.y() + 1);
         point = QPointF((qreal)position.x() * tileSize.width() + fullArea.left(), point.y() + tileSize.height());
     }
-
-    // TODO: Create task for overlay
-    QColor overlayColor(Qt::red);
-    overlayColor.setAlphaF(0.25);
-    QRectF target = scaling.mapRect(translation.mapRect(element));
-    QImage overlay = draw_overlay(m_renderer, code, target, overlayColor);
-    emit overlayReady(overlay, target, code);
 }
 
 MapRenderer::MapRenderer(const QString &filePath, QObject *parent)
@@ -192,4 +195,47 @@ MapRenderer::MapRenderer(const QString &filePath, QObject *parent)
     } else {
         qCDebug(lcMapRenderer) << "Could not read tiles info file from" << tiles.fileName() << ", error" << tiles.error();
     }
+}
+
+TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, const QString &code)
+    : QObject()
+    , m_path(path)
+    , m_rect(rect)
+    , m_translation(translation)
+    , m_scaling(scaling)
+    , m_code(code)
+{
+}
+
+void TileRenderer::run()
+{
+    // TODO: Also clip tiles here
+    QImage tile(m_path);
+    QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
+
+    QImage scaled(transformed.size().toSize(), QImage::Format_ARGB32_Premultiplied);
+    scaled.fill(Qt::transparent);
+    QPainter painter(&scaled);
+    painter.drawImage(QRectF(QPoint(), transformed.size().toSize()), tile);
+
+    emit tileReady(scaled, transformed, m_code);
+}
+
+OverlayRenderer::OverlayRenderer(QSvgRenderer &renderer, const QRectF &rect, const QColor &color, const QTransform &translation, const QTransform &scaling, const QString &code)
+    : QObject()
+    , m_renderer(renderer)
+    , m_rect(rect)
+    , m_color(color)
+    , m_translation(translation)
+    , m_scaling(scaling)
+    , m_code(code)
+{
+}
+
+void OverlayRenderer::run()
+{
+    QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
+    QImage overlay = draw_overlay(m_renderer, m_code, transformed, m_color);
+
+    emit overlayReady(overlay, transformed, m_code);
 }
