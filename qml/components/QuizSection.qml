@@ -11,7 +11,8 @@ import "../helpers.js" as Helpers
 ExpandingSection {
     id: expandingSection
     property string quizType
-    readonly property int maximumLength: dataModel.getIndices(quizType).length
+    readonly property int maximumLength: _maximumLength
+    property int _maximumLength: dataModel.getIndices(quizType).length
 
     content.sourceComponent: Column {
         bottomPadding: Theme.paddingLarge
@@ -169,4 +170,7 @@ ExpandingSection {
         value: presetModel
         when: expandingSection.expanded
     }
+
+    // Break some weird signal issue that crashes the app when closing it
+    Component.onCompleted: expandingSection._maximumLength = _maximumLength
 }
