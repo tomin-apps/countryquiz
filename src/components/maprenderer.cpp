@@ -24,10 +24,13 @@
  *   - Generic minimum zoom (DONE)
  *   - Adjust zoom for each country
  * - Circle small islands
- * - Jolla C performance?
- *   - Would splitting tiles to separate textures (and threads) help?
- *   - Smaller texture? Generating the correct texture on startup?
- *   - Or just some UI change to allow for a bit of loading time?
+ * - (Jolla C) performance?
+ *   - Would splitting tiles to separate textures (and threads) help? (DONE)
+ *   - Smaller texture? Generating the correct texture on startup? (TODO)
+ *   - Or just some UI change to allow for a bit of loading time? (NOT PLANNED)
+ *   - Splitting some big countries in svg? (TODO, mainly helps Canada)
+ * - Other improvements
+ *   - Clip tiles already here while resizing
  */
 
 Q_LOGGING_CATEGORY(lcMapRenderer, "site.tomin.apps.CountryQuiz.MapRenderer", QtWarningMsg)
@@ -136,7 +139,7 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
 
     QSizeF tileSize(fullArea.width() / m_dimensions.width(), fullArea.height() / m_dimensions.height());
 
-    QThreadPool pool; // TODO: Use Qt Concurrent
+    QThreadPool pool;
 
     QColor overlayColor(Qt::red);
     overlayColor.setAlphaF(0.25);
@@ -221,7 +224,6 @@ TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTrans
 
 void TileRenderer::run()
 {
-    // TODO: Also clip tiles here
     QImage tile(m_path);
     QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
 
