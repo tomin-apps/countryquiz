@@ -14,6 +14,7 @@
 #include "maprenderer.h"
 
 Q_LOGGING_CATEGORY(lcMap, "site.tomin.apps.CountryQuiz.Map", QtWarningMsg)
+Q_LOGGING_CATEGORY(lcMapElapsed, "site.tomin.apps.CountryQuiz.Map.Elapsed", QtWarningMsg)
 
 Map::Map(QQuickItem *parent)
     : QQuickItem(parent)
@@ -43,6 +44,24 @@ Map::Map(QQuickItem *parent)
 
 void Map::drawAgain()
 {
+    if (lcMapElapsed().isDebugEnabled()) {
+        auto *renderingTimer = new RenderingTimer;
+        connect(this, &Map::renderingProgressed, [this, renderingTimer](MapRenderer::MessageType message, int count) {
+            const char *msg;
+            switch (message) {
+                case MapRenderer::TileRendered: msg = "Rendered tile"; break;
+                case MapRenderer::OverlayRendered: msg = "Rendered overlay"; break;
+                case MapRenderer::RenderingDone: msg = "Rendering finished"; break;
+            }
+
+            qCDebug(lcMapElapsed).nospace() << msg << " for " << m_code << ", count: " << count << ", elapsed: " << renderingTimer->elapsed() << "ms";
+            if (message == MapRenderer::RenderingDone) {
+                disconnect(this, 0, renderingTimer, 0);
+                renderingTimer->deleteLater();
+            }
+        });
+        renderingTimer->start();
+    }
     m_renderingReady = false;
     emit renderMap(m_sourceSize, m_code);
 }
@@ -143,7 +162,9 @@ const QSize &Map::sourceSize() const
 
 void Map::renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile)
 {
-    qCDebug(lcMap) << "Got" << (message == MapRenderer::TileRendered ? "tile" : message == MapRenderer::OverlayRendered ? "overlay" : "done") << "message";
+    if (lcMapElapsed().isDebugEnabled()) {
+        emit renderingProgressed(message, m_tiles.size() + (m_overlay.texture ? 1 : 0));
+    }
     m_dirty = true;
     if (message == MapRenderer::TileRendered) {
         m_tiles.emplace_back(std::move(Tile(texture, tile)));
@@ -185,4 +206,9 @@ Map::Tile::Tile(Tile &&other)
     : location(other.location)
 {
     texture.reset(other.texture.take());
+}
+
+RenderingTimer::RenderingTimer(QObject *parent)
+    : QObject(parent)
+{
 }

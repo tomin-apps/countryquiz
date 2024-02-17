@@ -8,6 +8,7 @@
 #define MAP_H
 
 #include <vector>
+#include <QElapsedTimer>
 #include <QImage>
 #include <QQuickItem>
 #include <QSGTexture>
@@ -45,6 +46,7 @@ signals:
     void sourceSizeChanged();
 
     void renderMap(const QSize &size, const QString &code);
+    void renderingProgressed(MapRenderer::MessageType message, int count);
 
 protected:
     void componentComplete() override;
@@ -79,6 +81,14 @@ private:
 
     MapRenderer *m_renderer;
     QQuickWindow *m_window;
+};
+
+class RenderingTimer : public QObject, public QElapsedTimer
+{
+    Q_OBJECT
+
+public:
+    explicit RenderingTimer(QObject *parent = nullptr);
 };
 
 #endif // MAP_H
