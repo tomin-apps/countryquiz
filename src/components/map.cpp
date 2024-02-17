@@ -19,59 +19,45 @@ Map::Map(QQuickItem *parent)
     : QQuickItem(parent)
     , m_dirty(true)
     , m_load(true)
-    , m_tileCount(-1)
+    , m_renderingReady(false)
     , m_renderer(MapRenderer::get(SailfishApp::pathTo("assets/map.svg").toLocalFile()))
     , m_window(nullptr)
 {
     setFlag(QQuickItem::ItemHasContents);
     connect(this, &Map::renderMap, m_renderer, &MapRenderer::renderMap, Qt::QueuedConnection);
-    connect(m_renderer, &MapRenderer::tileCountReady, this, &Map::tileCountReady, Qt::QueuedConnection);
-    connect(m_renderer, &MapRenderer::tileReady, this, &Map::tileReady, Qt::QueuedConnection);
-    connect(m_renderer, &MapRenderer::overlayReady, this, &Map::overlayReady, Qt::QueuedConnection);
     connect(this, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
         if (m_window)
             m_window->disconnect(this);
         if (window) {
-            connect(window, &QQuickWindow::sceneGraphInitialized, this, &Map::createMapTextures);
+            connect(window, &QQuickWindow::sceneGraphInitialized, this, &Map::drawAgain);
             connect(window, &QQuickWindow::sceneGraphInvalidated, this, [this]() {
-                for (Tile &tile : m_tiles) {
-                    tile.texture.reset();
-                }
+                m_renderingReady = false;
+                m_tiles.clear();
                 m_overlay.texture.reset();
             });
         }
         m_window = window;
     });
+    connect(this, &QQuickItem::windowChanged, m_renderer, &MapRenderer::windowChanged);
+}
+
+void Map::drawAgain()
+{
+    m_renderingReady = false;
+    emit renderMap(m_sourceSize, m_code);
 }
 
 void Map::componentComplete()
 {
     QQuickItem::componentComplete();
+    emit windowChanged(window());
     if (canDraw())
-        emit renderMap(m_sourceSize, m_code);
-}
-
-void Map::createMapTextures()
-{
-    // TODO: shouldn't always iterate everything
-    for (Tile &tile : m_tiles) {
-        if (!tile.image.isNull()) {
-            if (!tile.texture)
-                tile.texture.reset(window()->createTextureFromImage(tile.image));
-        }
-    }
-    if (!m_overlay.image.isNull()) {
-        if (!m_overlay.texture)
-            m_overlay.texture.reset(window()->createTextureFromImage(m_overlay.image));
-    }
-
-    if (texturesReady())
-        polish();
+        drawAgain();
 }
 
 void Map::updatePolish()
 {
-    if (texturesReady()) { // TODO: Check that textures are there!
+    if (texturesReady()) {
         setImplicitWidth(m_sourceSize.width());
         setImplicitHeight(m_sourceSize.height());
         m_dirty = true;
@@ -121,7 +107,7 @@ void Map::setCode(const QString &code)
         m_code = code;
         emit codeChanged();
         if (canDraw())
-            emit renderMap(m_sourceSize, m_code);
+            drawAgain();
     }
 }
 
@@ -136,7 +122,7 @@ void Map::setLoad(bool load)
         m_load = load;
         emit loadChanged();
         if (canDraw())
-            emit renderMap(m_sourceSize, m_code);
+            drawAgain();
     }
 }
 
@@ -146,7 +132,7 @@ void Map::setSourceSize(const QSize &sourceSize)
         m_sourceSize = sourceSize;
         emit sourceSizeChanged();
         if (canDraw())
-            emit renderMap(m_sourceSize, m_code);
+            drawAgain();
     }
 }
 
@@ -155,29 +141,20 @@ const QSize &Map::sourceSize() const
     return m_sourceSize;
 }
 
-void Map::tileCountReady(const QSize &size, const QSize &tiles, const QString &code)
+void Map::renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile)
 {
-    if (m_code == code && m_sourceSize == size) {
-        m_tiles.clear();
-        m_tileCount = tiles.width() * tiles.height();
-    }
-}
-
-void Map::tileReady(const QImage &image, const QRectF &tile, const QString &code)
-{
-    if (m_code == code) {
-        m_tiles.emplace_back(std::move(Tile(image, tile)));
-        createMapTextures(); // TODO: inefficient
-    }
-}
-
-void Map::overlayReady(const QImage &image, const QRectF &tile, const QString &code)
-{
-    if (m_code == code) {
-        m_overlay.image = image;
+    qCDebug(lcMap) << "Got" << (message == MapRenderer::TileRendered ? "tile" : message == MapRenderer::OverlayRendered ? "overlay" : "done") << "message";
+    m_dirty = true;
+    if (message == MapRenderer::TileRendered) {
+        m_tiles.emplace_back(std::move(Tile(texture, tile)));
+    } else if (message == MapRenderer::OverlayRendered) {
+        m_overlay.texture.reset(texture);
         m_overlay.location = tile;
-        createMapTextures(); // TODO: inefficient
+    } else /*message == MapRenderer::RenderingDone */ {
+        m_renderingReady = true;
     }
+    if (m_renderingReady)
+        polish();
 }
 
 bool Map::canDraw() const
@@ -187,25 +164,25 @@ bool Map::canDraw() const
 
 bool Map::texturesReady() const
 {
-    if (m_tileCount == -1 || (int)m_tiles.size() < m_tileCount)
+    if (!m_renderingReady)
         return false;
-
+    if (!m_overlay.texture)
+        return false;
     for (const Tile &tile : m_tiles) {
         if (!tile.texture)
             return false;
     }
-    return m_overlay.texture;
+    return true;
 }
 
-Map::Tile::Tile(const QImage &image, const QRectF &location)
-    : image(image)
+Map::Tile::Tile(QSGTexture *texture, const QRectF &location)
+    : texture(texture)
     , location(location)
 {
 }
 
 Map::Tile::Tile(Tile &&other)
-    : image(other.image)
-    , location(other.location)
+    : location(other.location)
 {
     texture.reset(other.texture.take());
 }

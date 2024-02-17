@@ -11,6 +11,7 @@
 #include <QImage>
 #include <QQuickItem>
 #include <QSGTexture>
+#include "maprenderer.h"
 
 class MapRenderer;
 class Map : public QQuickItem
@@ -35,6 +36,9 @@ public:
     const QSize &sourceSize() const;
     void setSourceSize(const QSize &sourceSize);
 
+public slots:
+    void renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile);
+
 signals:
     void codeChanged();
     void loadChanged();
@@ -46,18 +50,14 @@ protected:
     void componentComplete() override;
 
 private slots:
-    void createMapTextures();
-    void tileCountReady(const QSize &size, const QSize &tiles, const QString &code);
-    void tileReady(const QImage &image, const QRectF &tile, const QString &code);
-    void overlayReady(const QImage &image, const QRectF &tile, const QString &code);
+    void drawAgain();
 
 private:
     struct Tile {
-        QImage image;
-        QRectF location;
         QScopedPointer<QSGTexture, QScopedPointerDeleteLater> texture;
+        QRectF location;
 
-        Tile(const QImage &image, const QRectF &location);
+        Tile(QSGTexture *texture, const QRectF &location);
         Tile(Tile &&other);
         Tile(Tile &other) = delete;
     };
@@ -70,10 +70,9 @@ private:
     bool m_load;
     QSize m_sourceSize;
 
-    int m_tileCount;
+    bool m_renderingReady;
     std::vector<Tile> m_tiles;
     struct {
-        QImage image;
         QRectF location;
         QScopedPointer<QSGTexture, QScopedPointerDeleteLater> texture;
     } m_overlay;

@@ -13,6 +13,7 @@
 #include <QLoggingCategory>
 #include <QPainter>
 #include <QThreadPool>
+#include "map.h"
 #include "maprenderer.h"
 
 /* TODO
@@ -122,6 +123,8 @@ namespace {
 
 void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
 {
+    Map *map = qobject_cast<Map *>(sender());
+
     QRectF fullArea = m_renderer.boundsOnElement("world");
     QMatrix matrix = m_renderer.matrixForElement(code);
     QRectF element = matrix.mapRect(m_renderer.boundsOnElement(code));
@@ -132,29 +135,25 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
     QTransform scaling = QTransform::fromScale(maxSize.width() / bounds.width(), maxSize.height() / bounds.height());
 
     QSizeF tileSize(fullArea.width() / m_dimensions.width(), fullArea.height() / m_dimensions.height());
-    QSize tileCount(bounds.width() / tileSize.width(), bounds.height() / tileSize.height());
 
-    emit tileCountReady(maxSize, tileCount, code);
-
-    QThreadPool *pool = QThreadPool::globalInstance();
+    QThreadPool pool; // TODO: Use Qt Concurrent
 
     QColor overlayColor(Qt::red);
     overlayColor.setAlphaF(0.25);
-    auto *overlayRenderer = new OverlayRenderer(m_renderer, element, overlayColor, translation, scaling, code);
-    connect(overlayRenderer, &OverlayRenderer::overlayReady, this, &MapRenderer::overlayReady, Qt::QueuedConnection);
+    auto *overlayRenderer = new OverlayRenderer(m_renderer, element, overlayColor, translation, scaling, code, this);
+    connect(overlayRenderer, &OverlayRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
     overlayRenderer->setAutoDelete(true);
-    pool->start(overlayRenderer);
+    pool.start(overlayRenderer);
 
     QPoint position(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), std::max((qreal)0.0, std::floor((bounds.top() - fullArea.top()) / tileSize.height())));
     QPointF point((qreal)position.x() * tileSize.width() + fullArea.left(), (qreal)position.y() * tileSize.height() + fullArea.top());
     while (point.y() <= bounds.bottom()) {
         while (point.x() <= bounds.right()) {
-            // TODO: Some countries don't work, at least Russia is broken
             QString name(m_tilePathTemplate.arg(mod(position.x(), m_dimensions.width())).arg(position.y()));
-            auto *tileRenderer = new TileRenderer(name, QRectF(point, tileSize), translation, scaling, code);
-            connect(tileRenderer, &TileRenderer::tileReady, this, &MapRenderer::tileReady, Qt::QueuedConnection);
+            auto *tileRenderer = new TileRenderer(name, QRectF(point, tileSize), translation, scaling, this);
+            connect(tileRenderer, &TileRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
             tileRenderer->setAutoDelete(true);
-            pool->start(tileRenderer);
+            pool.start(tileRenderer);
 
             position.setX(position.x() + 1);
             point.setX(point.x() + tileSize.width());
@@ -162,12 +161,16 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
         position = QPoint(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), position.y() + 1);
         point = QPointF((qreal)position.x() * tileSize.width() + fullArea.left(), point.y() + tileSize.height());
     }
+
+    pool.waitForDone();
+    QMetaObject::invokeMethod(map, "renderingReady", Qt::QueuedConnection, Q_ARG(MapRenderer::MessageType, RenderingDone), Q_ARG(QSGTexture *, nullptr), Q_ARG(QRectF, QRectF(QPointF(), maxSize)));
 }
 
 MapRenderer::MapRenderer(const QString &filePath, QObject *parent)
     : QObject(parent)
     , m_mapFilePath(filePath)
     , m_renderer(filePath)
+    , m_window(nullptr)
 {
     QFile tiles(filePath + ".txt");
     if (tiles.exists() && tiles.open(QIODevice::ReadOnly)) {
@@ -197,13 +200,22 @@ MapRenderer::MapRenderer(const QString &filePath, QObject *parent)
     }
 }
 
-TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, const QString &code)
-    : QObject()
+void MapRenderer::windowChanged(QQuickWindow *window)
+{
+    m_window = window;
+}
+
+QQuickWindow *MapRenderer::getWindow()
+{
+    return m_window;
+}
+
+TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, MapRenderer *parent)
+    : QObject(parent)
     , m_path(path)
     , m_rect(rect)
     , m_translation(translation)
     , m_scaling(scaling)
-    , m_code(code)
 {
 }
 
@@ -218,11 +230,12 @@ void TileRenderer::run()
     QPainter painter(&scaled);
     painter.drawImage(QRectF(QPoint(), transformed.size().toSize()), tile);
 
-    emit tileReady(scaled, transformed, m_code);
+    QSGTexture *texture = getMapRenderer()->getWindow()->createTextureFromImage(scaled);
+    emit renderingReady(MapRenderer::TileRendered, texture, transformed);
 }
 
-OverlayRenderer::OverlayRenderer(QSvgRenderer &renderer, const QRectF &rect, const QColor &color, const QTransform &translation, const QTransform &scaling, const QString &code)
-    : QObject()
+OverlayRenderer::OverlayRenderer(QSvgRenderer &renderer, const QRectF &rect, const QColor &color, const QTransform &translation, const QTransform &scaling, const QString &code, MapRenderer *parent)
+    : QObject(parent)
     , m_renderer(renderer)
     , m_rect(rect)
     , m_color(color)
@@ -237,5 +250,6 @@ void OverlayRenderer::run()
     QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
     QImage overlay = draw_overlay(m_renderer, m_code, transformed, m_color);
 
-    emit overlayReady(overlay, transformed, m_code);
+    QSGTexture *texture = getMapRenderer()->getWindow()->createTextureFromImage(overlay);
+    emit renderingReady(MapRenderer::OverlayRendered, texture, transformed);
 }
