@@ -7,6 +7,7 @@
 #ifndef MAPRENDERER_H
 #define MAPRENDERER_H
 
+#include <map>
 #include <QCoreApplication>
 #include <QColor>
 #include <QMutex>
@@ -42,7 +43,15 @@ public slots:
     void windowChanged(QQuickWindow *window);
 
 private:
+    struct Tiles {
+        QString pathTemplate;
+        QSize dimensions;
+
+        Tiles(const QString &pathTemplate, const QSize &dimensions);
+    };
+
     explicit MapRenderer(const QString &filePath, QObject *parent = nullptr);
+    const Tiles &getTilesForScaling(const QTransform &transform) const;
 
     static QMutex s_rendererMutex;
     static QVector<MapRenderer *> s_renderers;
@@ -50,8 +59,7 @@ private:
 
     QString m_mapFilePath;
     QSvgRenderer m_renderer;
-    QString m_tilePathTemplate;
-    QSize m_dimensions;
+    std::map<qreal, Tiles> m_tiles;
     QQuickWindow *m_window;
 };
 

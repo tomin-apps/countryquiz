@@ -13,6 +13,7 @@
 #include <QLoggingCategory>
 #include <QPainter>
 #include <QThreadPool>
+#include <utility>
 #include "map.h"
 #include "maprenderer.h"
 
@@ -26,7 +27,7 @@
  * - Circle small islands
  * - (Jolla C) performance?
  *   - Would splitting tiles to separate textures (and threads) help? (DONE)
- *   - Smaller texture? Generating the correct texture on startup? (TODO)
+ *   - Smaller texture? Generating the correct texture on startup? (DONE)
  *   - Or just some UI change to allow for a bit of loading time? (NOT PLANNED)
  *   - Splitting some big countries in svg? (TODO, mainly helps Canada)
  * - Other improvements
@@ -136,8 +137,8 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
 
     QTransform translation = QTransform::fromTranslate(-bounds.left(), -bounds.top());
     QTransform scaling = QTransform::fromScale(maxSize.width() / bounds.width(), maxSize.height() / bounds.height());
-
-    QSizeF tileSize(fullArea.width() / m_dimensions.width(), fullArea.height() / m_dimensions.height());
+    const Tiles &tiles = getTilesForScaling(scaling);
+    QSizeF tileSize(fullArea.width() / tiles.dimensions.width(), fullArea.height() / tiles.dimensions.height());
 
     QThreadPool pool;
 
@@ -152,7 +153,7 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
     QPointF point((qreal)position.x() * tileSize.width() + fullArea.left(), (qreal)position.y() * tileSize.height() + fullArea.top());
     while (point.y() <= bounds.bottom()) {
         while (point.x() <= bounds.right()) {
-            QString name(m_tilePathTemplate.arg(mod(position.x(), m_dimensions.width())).arg(position.y()));
+            QString name(tiles.pathTemplate.arg(mod(position.x(), tiles.dimensions.width())).arg(position.y()));
             auto *tileRenderer = new TileRenderer(name, QRectF(point, tileSize), translation, scaling, this);
             connect(tileRenderer, &TileRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
             tileRenderer->setAutoDelete(true);
@@ -177,27 +178,35 @@ MapRenderer::MapRenderer(const QString &filePath, QObject *parent)
 {
     QFile tiles(filePath + ".txt");
     if (tiles.exists() && tiles.open(QIODevice::ReadOnly)) {
-        auto info = tiles.readAll();
-        if (info.endsWith('\n'))
-            info.chop(1);
-        auto parts = info.split(';');
-        if (parts.size() != 3) {
-            qCWarning(lcMapRenderer) << tiles.fileName() << "looks malformed, wrong number of parts";
-            return;
+        auto info = tiles.readLine();
+        while (!info.isEmpty()) {
+            if (info.endsWith('\n'))
+                info.chop(1);
+            auto parts = info.split(';');
+            if (parts.size() != 4) {
+                qCWarning(lcMapRenderer) << tiles.fileName() << "looks malformed, wrong number of parts";
+                return;
+            }
+            bool ok = false;
+            qreal scale = parts.at(1).toFloat(&ok);
+            if (!ok) {
+                qCWarning(lcMapRenderer) << tiles.fileName() << "looks malformed," << parts.at(1) << "is not a float";
+                return;
+            }
+            int width = parts.at(2).toInt(&ok);
+            if (!ok) {
+                qCWarning(lcMapRenderer) << tiles.fileName() << "looks malformed," << parts.at(2) << "is not an integer";
+                return;
+            }
+            int height = parts.at(3).toInt(&ok);
+            if (!ok) {
+                qCWarning(lcMapRenderer) << tiles.fileName() << "looks malformed," << parts.at(3) << "is not an integer";
+                return;
+            }
+            m_tiles.emplace(std::piecewise_construct, std::forward_as_tuple(scale), std::forward_as_tuple(QFileInfo(filePath).dir().absoluteFilePath(parts.at(0)), QSize(width, height)));
+            qCDebug(lcMapRenderer).nospace() << "Pushed tiles of scale " << scale << ", width: " << width << ", height: " << height << " into tile set";
+            info = tiles.readLine();
         }
-        bool ok = false;
-        int width = parts.at(1).toInt(&ok);
-        if (!ok) {
-            qCWarning(lcMapRenderer) << tiles.fileName() << "looks malformed," << parts.at(1) << "is not integer";
-            return;
-        }
-        int height = parts.at(2).toInt(&ok);
-        if (!ok) {
-            qCWarning(lcMapRenderer) << tiles.fileName() << "looks malformed," << parts.at(2) << "is not integer";
-            return;
-        }
-        m_tilePathTemplate = QFileInfo(filePath).dir().absoluteFilePath(parts.at(0));
-        m_dimensions = QSize(width, height);
     } else {
         qCDebug(lcMapRenderer) << "Could not read tiles info file from" << tiles.fileName() << ", error" << tiles.error();
     }
@@ -211,6 +220,27 @@ void MapRenderer::windowChanged(QQuickWindow *window)
 QQuickWindow *MapRenderer::getWindow()
 {
     return m_window;
+}
+
+MapRenderer::Tiles::Tiles(const QString &pathTemplate, const QSize &dimensions)
+    : pathTemplate(pathTemplate)
+    , dimensions(dimensions)
+{
+}
+
+const MapRenderer::Tiles &MapRenderer::getTilesForScaling(const QTransform &scaling) const
+{
+    qCDebug(lcMapRenderer) << "Scaling is" << scaling.m11() << "and" << scaling.m22();
+    if (scaling.m11() != scaling.m22()) // TODO: Fuzzy check
+        qCWarning(lcMapRenderer) << "Different x and y scaling:" << scaling.m11() << "and" << scaling.m22();
+    qreal scale = scaling.m11() + scaling.m22() / 2;
+    auto it = m_tiles.lower_bound(scale);
+    if (it == m_tiles.cend()) {
+        qCWarning(lcMapRenderer) << "There is not big enough tile set";
+        abort(); // TODO: This is not good
+    }
+    qCDebug(lcMapRenderer) << "Selecting tiles for scaling" << it->first;
+    return it->second;
 }
 
 TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, MapRenderer *parent)
