@@ -150,7 +150,7 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
     auto *overlayRenderer = new OverlayRenderer(m_renderer, element, overlayColor, translation, scaling, code, this);
     connect(overlayRenderer, &OverlayRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
     overlayRenderer->setAutoDelete(true);
-    pool.start(overlayRenderer);
+    pool.start(overlayRenderer, QThread::HighPriority);
 
     QPoint position(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), std::max((qreal)0.0, std::floor((bounds.top() - fullArea.top()) / tileSize.height())));
     QPointF point((qreal)position.x() * tileSize.width() + fullArea.left(), (qreal)position.y() * tileSize.height() + fullArea.top());
@@ -160,7 +160,7 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
             auto *tileRenderer = new TileRenderer(name, QRectF(point, tileSize), translation, scaling, this);
             connect(tileRenderer, &TileRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
             tileRenderer->setAutoDelete(true);
-            pool.start(tileRenderer);
+            pool.start(tileRenderer, QThread::NormalPriority);
 
             position.setX(position.x() + 1);
             point.setX(point.x() + tileSize.width());
