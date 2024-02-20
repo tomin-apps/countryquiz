@@ -14,6 +14,7 @@
 #include <QLoggingCategory>
 #include <QPainter>
 #include <QThreadPool>
+#include <sys/sysinfo.h>
 #include <utility>
 #include "map.h"
 #include "maprenderer.h"
@@ -32,7 +33,6 @@
  *   - Or just some UI change to allow for a bit of loading time? (NOT PLANNED)
  *   - Splitting some big countries in svg? (TODO, mainly helps Canada)
  *   - Two tiered drawing? First rough version and then replace that when better tiles are ready?
- *   - Xperia 10 is surprisingly slow here
  * - Other improvements
  *   - Clip tiles already here while resizing
  */
@@ -78,7 +78,8 @@ void MapRenderer::setup(QCoreApplication *app)
                 s_rendererThread->wait();
             });
             s_rendererThread->start();
-            qCDebug(lcMapRenderer) << "Setup for rendering thread completed";
+            qCInfo(lcMapRenderer) << "Setup for rendering thread completed";
+            qCDebug(lcMapRenderer) << "Cores:" << get_nprocs() << "cores online," << get_nprocs_conf() << "cores configured";
         }
     }
 }
@@ -144,6 +145,7 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
     QSizeF tileSize(fullArea.width() / tiles.dimensions.width(), fullArea.height() / tiles.dimensions.height());
 
     QThreadPool pool;
+    pool.setMaxThreadCount(get_nprocs_conf());
 
     QColor overlayColor(Qt::red);
     overlayColor.setAlphaF(0.25);
