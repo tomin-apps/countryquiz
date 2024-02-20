@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
+import CountryQuiz 1.0
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import "components"
@@ -13,6 +14,7 @@ import "pages"
 ApplicationWindow {
     property alias config: config
     property alias dataModel: dataModel
+    property alias mapModel: mapModel
     property alias quizTimer: quizTimer
 
     initialPage: Component {
@@ -58,6 +60,12 @@ ApplicationWindow {
     allowedOrientations: defaultAllowedOrientations
 
     QuizTimer { id: quizTimer }
+
+    MapModel {
+        id: mapModel
+        mapFile: Qt.resolvedUrl("../assets/map.svg")
+        miniMapSize: Qt.size(Screen.width, Screen.width)
+    }
 
     Data {
         id: dataModel

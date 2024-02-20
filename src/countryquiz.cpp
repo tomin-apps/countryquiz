@@ -11,7 +11,7 @@
 #include <sailfishapp.h>
 
 #include "map.h"
-#include "maprenderer.h"
+#include "mapmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,8 +25,8 @@ int main(int argc, char *argv[])
     if (translator.load(QLocale::system(), "harbour-countryquiz", "-", SailfishApp::pathTo("translations").toLocalFile(), ".qm"))
         app->installTranslator(&translator);
 
-    MapRenderer::setup(app.data());
     qmlRegisterType<Map>("CountryQuiz", 1, 0, "Map");
+    qmlRegisterType<MapModel>("CountryQuiz", 1, 0, "MapModel");
     view->setSource(SailfishApp::pathToMainQml());
     view->show();
     return app->exec();

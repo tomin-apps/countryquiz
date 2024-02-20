@@ -6,43 +6,83 @@
 
 #include <QLoggingCategory>
 #include <QQuickWindow>
-#include <QSGClipNode>
 #include <QSGSimpleTextureNode>
 #include <sailfishapp.h>
 
 #include "map.h"
+#include "mapmodel.h"
 #include "maprenderer.h"
 
 Q_LOGGING_CATEGORY(lcMap, "site.tomin.apps.CountryQuiz.Map", QtWarningMsg)
 Q_LOGGING_CATEGORY(lcMapElapsed, "site.tomin.apps.CountryQuiz.Map.Elapsed", QtWarningMsg)
 
+namespace {
+    class TextureCleaningJob : public QRunnable
+    {
+    public:
+        TextureCleaningJob(std::vector<QSGTexture *> textures)
+            : textures(textures)
+        {
+            setAutoDelete(true);
+        }
+
+        void run() override
+        {
+            qCDebug(lcMap) << "Destroying" << textures.size() << "textures";
+            for (QSGTexture *texture : textures)
+                delete texture;
+            textures.clear();
+        }
+    private:
+        std::vector<QSGTexture *> textures;
+    };
+}
+
 Map::Map(QQuickItem *parent)
     : QQuickItem(parent)
+    , m_mapModel(nullptr)
     , m_dirty(true)
-    , m_load(true)
-    , m_renderingReady(false)
-    , m_renderer(MapRenderer::get(SailfishApp::pathTo("assets/map.svg").toLocalFile()))
-    , m_window(nullptr)
+    , m_renderer(nullptr)
+    , m_window(window())
+    , m_ready(NothingReady)
 {
     setFlag(QQuickItem::ItemHasContents);
-    connect(this, &Map::renderMap, m_renderer, &MapRenderer::renderMap, Qt::QueuedConnection);
     connect(this, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
         if (m_window)
             m_window->disconnect(this);
         if (window) {
-            connect(window, &QQuickWindow::sceneGraphInitialized, this, &Map::drawAgain);
-            connect(window, &QQuickWindow::sceneGraphInvalidated, this, [this]() {
-                m_renderingReady = false;
-                m_tiles.clear();
-                m_overlay.texture.reset();
-            });
+            connect(window, &QQuickWindow::sceneGraphInitialized, this, &Map::renderAgain);
+            connect(window, &QQuickWindow::sceneGraphInvalidated, this, &Map::releaseResources);
         }
         m_window = window;
     });
-    connect(this, &QQuickItem::windowChanged, m_renderer, &MapRenderer::windowChanged);
+    if (m_window) {
+        connect(m_window, &QQuickWindow::sceneGraphInitialized, this, &Map::renderAgain);
+        connect(m_window, &QQuickWindow::sceneGraphInvalidated, this, &Map::releaseResources);
+    }
 }
 
-void Map::drawAgain()
+Map::~Map()
+{
+    // Hopefully Qt has done its job and releaseResources() has been called
+    for (QSGTexture *ptr : m_abandoned)
+        delete ptr;
+    m_abandoned.clear();
+}
+
+void Map::releaseResources()
+{
+    m_ready = NothingReady;
+    m_abandoned.reserve(m_abandoned.size() + m_tiles.size() + 3);
+    for (Tile &tile : m_tiles)
+        m_abandoned.push_back(tile.texture.take());
+    m_tiles.clear();
+    m_abandoned.push_back(m_overlay.texture.take());
+    m_abandoned.push_back(m_miniMap.texture.take());
+    cleanupTextures();
+}
+
+void Map::renderAgain()
 {
     if (lcMapElapsed().isDebugEnabled()) {
         auto *renderingTimer = new RenderingTimer;
@@ -62,55 +102,245 @@ void Map::drawAgain()
         });
         renderingTimer->start();
     }
-    m_renderingReady = false;
+    releaseResources();
+    setTexture(m_miniMap.texture, m_mapModel->miniMap());
     emit renderMap(m_sourceSize, m_code);
+}
+
+void Map::rendererChanged()
+{
+    if (m_renderer) {
+        disconnect(this, 0, m_renderer, 0);
+    }
+    m_renderer = m_mapModel ? m_mapModel->renderer() : nullptr;
+    if (m_renderer) {
+        connect(this, &Map::renderMap, m_renderer, &MapRenderer::renderMap, Qt::QueuedConnection);
+        if (canRender())
+            renderAgain();
+    }
 }
 
 void Map::componentComplete()
 {
     QQuickItem::componentComplete();
-    emit windowChanged(window());
-    if (canDraw())
-        drawAgain();
+    if (m_sourceSize.isValid()) {
+        setImplicitWidth(m_sourceSize.width());
+        setImplicitHeight(m_sourceSize.height());
+    }
+    if (canRender())
+        renderAgain();
 }
+
+namespace {
+    qreal getScale(const QSizeF &a, const QSizeF &b)
+    {
+        return (a.width() / b.width() + a.height() / b.height()) / 2;
+    }
+
+    QRectF miniMapSourceRect(const QSizeF &texture, const QRectF &location)
+    {
+        qreal height = texture.height() * 2 / 3;
+        if (height < location.height())
+            height = location.height();
+        if (height < location.width())
+            height = location.width();
+        QRectF rect(0, 0, height, height);
+        rect.moveCenter(location.center());
+        if (rect.top() < 0)
+            rect.moveTop(0);
+        if (rect.bottom() > texture.height())
+            rect.moveBottom(texture.height());
+        return rect;
+    }
+
+    QRectF miniMapRect(const QRectF &item, const QSizeF &texture)
+    {
+        return QRectF(QPointF(0, 0), texture.scaled(item.size() / 4, Qt::KeepAspectRatio));
+    }
+
+    QRectF getSubtractedArea(const QRectF &a, const QRectF &b, bool atBottom)
+    {
+        QRectF area(a);
+        if (atBottom) {
+            area.setTop(b.bottom());
+        } else {
+            area.setLeft(b.right());
+            if (area.bottom() > b.bottom())
+                area.setBottom(b.bottom());
+        }
+        return area;
+    }
+
+    QRectF adjustedBy(const QRectF &rect, qreal left, qreal top, qreal right, qreal bottom)
+    {
+        return QRectF(QPointF(rect.left() + rect.width() * left, rect.top() + rect.height() * top),
+                      QPointF(rect.right() + rect.width() * right, rect.bottom() + rect.height() * bottom));
+    }
+} // namespace
 
 void Map::updatePolish()
 {
-    if (texturesReady()) {
-        setImplicitWidth(m_sourceSize.width());
-        setImplicitHeight(m_sourceSize.height());
-        m_dirty = true;
+    if (!(m_ready & MinimapReady) && m_miniMap.texture) {
+        QRectF rect = boundingRect();
+        m_miniMap.location = m_mapModel->miniMapBounds(m_code, rect.width() / rect.height());
+        if (m_miniMap.location.isValid()) {
+            m_ready |= MinimapReady;
+            m_miniMap.sourceRect = miniMapSourceRect(m_miniMap.texture->textureSize(), m_miniMap.location);
+            m_miniMap.targetRect = miniMapRect(boundingRect(), m_miniMap.sourceRect.size());
+            qreal scale = getScale(m_miniMap.targetRect.size(), m_miniMap.sourceRect.size());
+            QRectF bounds((m_miniMap.location.topLeft() - m_miniMap.sourceRect.topLeft()) * scale, m_miniMap.location.size() * scale);
+            m_miniMap.bounds = m_miniMap.targetRect.intersected(bounds);
+
+            m_fastMap[0].target = adjustedBy(boundingRect(), 0.25, 0, 0, 0.25);
+            m_fastMap[0].source = adjustedBy(m_miniMap.location, 0.25, 0, 0, 0.25);
+            m_fastMap[1].target = adjustedBy(boundingRect(), 0, 0.25, 0, 0);
+            m_fastMap[1].source = adjustedBy(m_miniMap.location, 0, 0.25, 0, 0);
+        }
+    }
+    if (m_overlay.texture)
+        m_ready |= OverlayReady;
+    if ((m_ready & RenderingReady) && !(m_ready & TilesReady) && !m_tiles.empty()) {
+        QRectF bounds = boundingRect();
+        for (Tile &tile : m_tiles) {
+            QRectF targetRect = bounds.intersected(tile.location);
+            QRectF sourceRect = QRectF(QPointF(targetRect.left() - tile.location.left(), targetRect.top() - tile.location.top()), targetRect.size());
+            if (!tile.location.intersects(m_miniMap.targetRect)) {
+                tile.rects[0].target = targetRect;
+                tile.rects[0].source = sourceRect;
+                tile.parts = SinglePart;
+            } else {
+                tile.parts = Hidden;
+                if (targetRect.right() > m_miniMap.targetRect.right()) {
+                    QRectF rect = getSubtractedArea(targetRect, m_miniMap.targetRect, false);
+                    tile.rects[0].target = rect;
+                    rect.moveTo(sourceRect.topLeft() + rect.topLeft() - targetRect.topLeft());
+                    tile.rects[0].source = rect;
+                    tile.parts = SinglePart;
+                }
+                if (targetRect.bottom() > m_miniMap.targetRect.bottom()) {
+                    QRectF rect = getSubtractedArea(targetRect, m_miniMap.targetRect, true);
+                    tile.rects[tile.parts].target = rect;
+                    rect.moveTo(sourceRect.topLeft() + rect.topLeft() - targetRect.topLeft());
+                    tile.rects[tile.parts].source = rect;
+                    tile.parts = tile.parts == SinglePart ? SplitParts : SinglePart;
+                }
+            }
+        }
+        m_ready |= TilesReady;
+    }
+    if ((m_ready & MinimapReady) && (m_ready & OverlayReady)) {
         qCDebug(lcMap) << "Polish done";
         update();
     }
+    cleanupTextures();
 }
 
-QSGNode *Map::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
-{
-    if (!texturesReady())
-        return nullptr; // not ready
+namespace {
+    template<typename T> T *getNextChildNode(QSGNode *parent, QSGNode *previous)
+    {
+        T *node;
+        QSGNode *next = previous ? previous->nextSibling() : parent->firstChild();
+        while (next) { // TODO: Instead of removing this could insert before
+            node = dynamic_cast<T *>(next);
+            if (node)
+                break;
+            QSGNode *sibling = next->nextSibling();
+            parent->removeChildNode(next); // O(N) => O(N^2)???
+            delete next;
+            next = sibling;
+        }
+        if (!next) {
+            node = new T;
+            parent->appendChildNode(node);
+        }
+        return node;
+    }
 
-    auto *node = static_cast<QSGClipNode *>(oldNode);
+    QSGNode *drawRectangle(QSGNode *parent, QSGNode *previous, const QRectF &rect, const QColor &color, qreal border)
+    {
+        // Left side
+        auto *node = getNextChildNode<QSGSimpleRectNode>(parent, previous);
+        node->setColor(color);
+        node->setRect(rect.left(), rect.top(), border, rect.bottom() - rect.top());
+
+        // Top side
+        node = getNextChildNode<QSGSimpleRectNode>(parent, node);
+        node->setColor(color);
+        node->setRect(rect.left() + border, rect.top(), rect.right() - rect.left() - 2 * border, border);
+
+        // Right side
+        node = getNextChildNode<QSGSimpleRectNode>(parent, node);
+        node->setColor(color);
+        node->setRect(rect.right() - border, rect.top(), border, rect.bottom() - rect.top());
+
+        // Bottom side
+        node = getNextChildNode<QSGSimpleRectNode>(parent, node);
+        node->setColor(color);
+        node->setRect(rect.left() + border, rect.bottom() - border, rect.right() - rect.left() - 2 * border, border);
+
+        return node;
+    }
+} // namespace
+
+QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
+{
+    if (!((m_ready & MinimapReady) && (m_ready & OverlayReady))) {
+        delete node;
+        return nullptr;
+    }
+
     if (!node || m_dirty) {
-        if (!node) {
-            node = new QSGClipNode;
-            node->setIsRectangular(true);
+        if (!node)
+            node = new QSGNode;
+        QSGNode *prevNode = nullptr;
+
+        if (!(m_ready & TilesReady)) {
+            auto *mapNode = getNextChildNode<QSGSimpleTextureNode>(node, prevNode);
+            if (mapNode->texture() != m_miniMap.texture.data()) {
+                mapNode->setTexture(m_miniMap.texture.data());
+                mapNode->setRect(m_fastMap[0].target);
+                mapNode->setSourceRect(m_fastMap[0].source);
+            }
+            mapNode = getNextChildNode<QSGSimpleTextureNode>(node, mapNode);
+            if (mapNode->texture() != m_miniMap.texture.data()) {
+                mapNode->setTexture(m_miniMap.texture.data());
+                mapNode->setRect(m_fastMap[1].target);
+                mapNode->setSourceRect(m_fastMap[1].source);
+            }
+            prevNode = mapNode;
+        } else {
+            for (const Tile &tile : m_tiles) {
+                for (size_t part = Hidden; part < tile.parts; ++part) {
+                    auto *tileNode = getNextChildNode<QSGSimpleTextureNode>(node, prevNode);
+                    if (tileNode->texture() != tile.texture.data())
+                        tileNode->setTexture(tile.texture.data());
+                    tileNode->setRect(tile.rects[part].target);
+                    tileNode->setSourceRect(tile.rects[part].source);
+                    prevNode = tileNode;
+                }
+            }
         }
-        node->removeAllChildNodes();
-        for (const Tile &tile : m_tiles) {
-            auto *tileNode = new QSGSimpleTextureNode;
-            tileNode->setTexture(tile.texture.data());
-            tileNode->setRect(tile.location);
-            node->appendChildNode(tileNode);
+
+        auto *overlayNode = getNextChildNode<QSGSimpleTextureNode>(node, prevNode);
+        if (overlayNode->texture() != m_overlay.texture.data()) {
+            overlayNode->setTexture(m_overlay.texture.data());
+            overlayNode->setRect(m_overlay.location);
+            overlayNode->setSourceRect(QRectF());
         }
-        auto *overlayNode = new QSGSimpleTextureNode;
-        overlayNode->setTexture(m_overlay.texture.data());
-        overlayNode->setRect(m_overlay.location);
-        node->appendChildNode(overlayNode);
+
+        auto *miniMapNode = getNextChildNode<QSGSimpleTextureNode>(node, overlayNode);
+        if (miniMapNode->texture() != m_miniMap.texture.data()) {
+            miniMapNode->setTexture(m_miniMap.texture.data());
+            miniMapNode->setRect(m_miniMap.targetRect);
+            miniMapNode->setSourceRect(m_miniMap.sourceRect);
+        }
+
+        prevNode = drawRectangle(node, miniMapNode, m_miniMap.targetRect, QColor(Qt::white), 2);
+        drawRectangle(node, prevNode, m_miniMap.bounds.toRect(), QColor(Qt::red), 2);
+
         m_dirty = false;
     }
 
-    node->setClipRect(boundingRect());
     qCDebug(lcMap) << "Update done";
     return node;
 }
@@ -125,23 +355,8 @@ void Map::setCode(const QString &code)
     if (m_code != code) {
         m_code = code;
         emit codeChanged();
-        if (canDraw())
-            drawAgain();
-    }
-}
-
-bool Map::load() const
-{
-    return m_load;
-}
-
-void Map::setLoad(bool load)
-{
-    if (m_load != load) {
-        m_load = load;
-        emit loadChanged();
-        if (canDraw())
-            drawAgain();
+        if (canRender())
+            renderAgain();
     }
 }
 
@@ -150,14 +365,35 @@ void Map::setSourceSize(const QSize &sourceSize)
     if (m_sourceSize != sourceSize) {
         m_sourceSize = sourceSize;
         emit sourceSizeChanged();
-        if (canDraw())
-            drawAgain();
+        if (m_sourceSize.isValid()) {
+            setImplicitWidth(m_sourceSize.width());
+            setImplicitHeight(m_sourceSize.height());
+        }
+        if (canRender())
+            renderAgain();
     }
 }
 
 const QSize &Map::sourceSize() const
 {
     return m_sourceSize;
+}
+
+void Map::setModel(MapModel *mapModel)
+{
+    if (m_mapModel != mapModel) {
+        m_mapModel = mapModel;
+        if (m_mapModel)
+            connect(m_mapModel, &MapModel::rendererChanged, this, &Map::rendererChanged, Qt::QueuedConnection);
+        emit modelChanged();
+        rendererChanged();
+        miniMapChanged();
+    }
+}
+
+MapModel *Map::model() const
+{
+    return m_mapModel;
 }
 
 void Map::renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile)
@@ -167,45 +403,69 @@ void Map::renderingReady(MapRenderer::MessageType message, QSGTexture *texture, 
     }
     m_dirty = true;
     if (message == MapRenderer::TileRendered) {
-        m_tiles.emplace_back(std::move(Tile(texture, tile)));
+        m_tiles.emplace_back(texture, tile);
     } else if (message == MapRenderer::OverlayRendered) {
-        m_overlay.texture.reset(texture);
+        bool second = m_overlay.texture;
+        setTexture(m_overlay.texture, texture);
         m_overlay.location = tile;
-    } else /*message == MapRenderer::RenderingDone */ {
-        m_renderingReady = true;
+        if (second)
+            qCDebug(lcMap) << "Replaced overlay texture with new version";
+        m_ready |= OverlayPending;
+    } else /* message == MapRenderer::RenderingDone */ {
+        m_ready |= RenderingReady;
     }
-    if (m_renderingReady)
+    if ((m_ready & RenderingReady) || message == MapRenderer::OverlayRendered)
         polish();
 }
 
-bool Map::canDraw() const
+void Map::miniMapChanged()
 {
-    return isComponentComplete() && m_load && m_sourceSize.isValid() && !m_code.isEmpty();
+    if (m_mapModel && !m_code.isEmpty()) {
+        m_dirty = true;
+        setTexture(m_miniMap.texture, m_mapModel->miniMap());
+        if (m_miniMap.texture) {
+            qCDebug(lcMap) << "Mini map received";
+            m_miniMap.texture->setHorizontalWrapMode(QSGTexture::Repeat);
+        }
+        if (m_ready & OverlayPending)
+            polish();
+    }
 }
 
-bool Map::texturesReady() const
+bool Map::canRender() const
 {
-    if (!m_renderingReady)
-        return false;
-    if (!m_overlay.texture)
-        return false;
-    for (const Tile &tile : m_tiles) {
-        if (!tile.texture)
-            return false;
+    return isComponentComplete() && m_mapModel && m_renderer && m_sourceSize.isValid() && !m_code.isEmpty();
+}
+
+void Map::setTexture(QScopedPointer<QSGTexture> &ptr, QSGTexture *texture)
+{
+    if (ptr)
+        m_abandoned.push_back(ptr.take());
+    ptr.reset(texture);
+}
+
+void Map::cleanupTextures()
+{
+    if (!m_abandoned.empty() && window()) {
+        std::vector<QSGTexture *> textures;
+        textures.swap(m_abandoned);
+        window()->scheduleRenderJob(new TextureCleaningJob(textures), QQuickWindow::AfterSwapStage);
     }
-    return true;
 }
 
 Map::Tile::Tile(QSGTexture *texture, const QRectF &location)
     : texture(texture)
     , location(location)
+    , parts(Hidden)
 {
 }
 
 Map::Tile::Tile(Tile &&other)
-    : location(other.location)
+    : texture(other.texture.take())
+    , location(other.location)
+    , rects(other.rects)
+    , parts(other.parts)
 {
-    texture.reset(other.texture.take());
 }
 
 RenderingTimer::RenderingTimer(QObject *parent)

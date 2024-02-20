@@ -26,10 +26,13 @@ class MapRenderer : public QObject
     Q_OBJECT
 
 public:
-    static MapRenderer *get(const QString &filePath);
-    static void setup(QCoreApplication *app);
+    explicit MapRenderer(const QString &filePath, QObject *parent = nullptr);
 
-    QQuickWindow *getWindow();
+    QRectF calculateBounds(const QString &code, qreal aspectRatio);
+    QRectF fullArea();
+
+    std::pair<QMutex *, QSvgRenderer *> accessRenderer();
+    QQuickWindow *window();
 
     enum MessageType {
         TileRendered,
@@ -39,7 +42,8 @@ public:
     Q_ENUM(MessageType)
 
 public slots:
-    void renderMap(const QSize &maxSize, const QString &code);
+    void renderMap(const QSize &size, const QString &code);
+    void renderFullMap(const QSize &maxSize);
     void windowChanged(QQuickWindow *window);
 
 private:
@@ -50,15 +54,12 @@ private:
         Tiles(const QString &pathTemplate, const QSize &dimensions);
     };
 
-    explicit MapRenderer(const QString &filePath, QObject *parent = nullptr);
-    const Tiles &getTilesForScaling(const QSize &target, const QSizeF &original) const;
-
-    static QMutex s_rendererMutex;
-    static QVector<MapRenderer *> s_renderers;
-    static QThread *s_rendererThread;
+    const Tiles &getTilesForScaling(const QSize &target, const QSizeF &original);
 
     QString m_mapFilePath;
     QSvgRenderer m_renderer;
+    QMutex m_rendererMutex;
+    QRectF m_fullArea;
     std::map<qreal, Tiles> m_tiles;
     QQuickWindow *m_window;
 };
@@ -68,7 +69,7 @@ class TileRenderer : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, MapRenderer *parent);
+    TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, MapRenderer *mapRenderer);
 
     void run() override;
 
@@ -76,8 +77,7 @@ signals:
     void renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile);
 
 private:
-    MapRenderer *getMapRenderer() { return qobject_cast<MapRenderer *>(parent()); }
-
+    MapRenderer *m_mapRenderer;
     QString m_path;
     QRectF m_rect;
     QTransform m_translation;
@@ -89,7 +89,7 @@ class OverlayRenderer : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    OverlayRenderer(QSvgRenderer &renderer, const QRectF &rect, const QColor &color, const QTransform &translation, const QTransform &scaling, const QString &code, MapRenderer *parent);
+    OverlayRenderer(const QColor &color, const QTransform &translation, const QTransform &scaling, const QString &code, bool fast, MapRenderer *mapRenderer);
 
     void run() override;
 
@@ -97,14 +97,29 @@ signals:
     void renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile);
 
 private:
-    MapRenderer *getMapRenderer() { return qobject_cast<MapRenderer *>(parent()); }
-
-    QSvgRenderer &m_renderer;
-    QRectF m_rect;
+    MapRenderer *m_mapRenderer;
     QColor m_color;
     QTransform m_translation;
     QTransform m_scaling;
     QString m_code;
+    bool m_fast;
+};
+
+class FullMapRenderer : public QObject, public QRunnable
+{
+    Q_OBJECT
+
+public:
+    FullMapRenderer(const QSize &size, MapRenderer *mapRenderer);
+
+    void run() override;
+
+signals:
+    void fullMapReady(const QImage &map);
+
+private:
+    MapRenderer *m_mapRenderer;
+    QSize m_size;
 };
 
 #endif // MAPRENDERER_H

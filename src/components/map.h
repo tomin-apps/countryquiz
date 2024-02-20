@@ -14,73 +14,116 @@
 #include <QSGTexture>
 #include "maprenderer.h"
 
+class MapModel;
 class MapRenderer;
 class Map : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(QString code READ code WRITE setCode NOTIFY codeChanged)
-    Q_PROPERTY(bool load READ load WRITE setLoad NOTIFY loadChanged)
     Q_PROPERTY(QSize sourceSize READ sourceSize WRITE setSourceSize NOTIFY sourceSizeChanged)
+    Q_PROPERTY(MapModel *model READ model WRITE setModel NOTIFY modelChanged)
 
 public:
+    enum Ready {
+        NothingReady   = 0x00,
+        MinimapReady   = 0x01,
+        OverlayPending = 0x02,
+        OverlayReady   = 0x04,
+        TilesReady     = 0x08,
+        RenderingReady = 0x10,
+    };
+    Q_DECLARE_FLAGS(Readyness, Ready)
+    Q_FLAG(Readyness)
+
     explicit Map(QQuickItem *parent = nullptr);
+    ~Map();
 
     void updatePolish() override;
-    QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
     QString code() const;
     void setCode(const QString &code);
 
-    bool load() const;
-    void setLoad(bool load);
-
     const QSize &sourceSize() const;
     void setSourceSize(const QSize &sourceSize);
+
+    MapModel *model() const;
+    void setModel(MapModel *model);
 
 public slots:
     void renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile);
 
 signals:
     void codeChanged();
-    void loadChanged();
     void sourceSizeChanged();
+    void modelChanged();
 
     void renderMap(const QSize &size, const QString &code);
     void renderingProgressed(MapRenderer::MessageType message, int count);
 
 protected:
     void componentComplete() override;
+    void releaseResources() override;
+    QSGNode *updatePaintNode(QSGNode *node, UpdatePaintNodeData *) override;
 
 private slots:
-    void drawAgain();
+    void renderAgain();
+    void rendererChanged();
+    void miniMapChanged();
 
 private:
+    enum TileParts : size_t {
+        Hidden,
+        SinglePart,
+        SplitParts,
+    };
+
     struct Tile {
-        QScopedPointer<QSGTexture, QScopedPointerDeleteLater> texture;
+        QScopedPointer<QSGTexture> texture;
         QRectF location;
+        struct {
+            QRectF source;
+            QRectF target;
+        } rects[2];
+        TileParts parts;
 
         Tile(QSGTexture *texture, const QRectF &location);
         Tile(Tile &&other);
         Tile(Tile &other) = delete;
     };
 
-    bool canDraw() const;
+    bool canRender() const;
     bool texturesReady() const;
+    bool allTexturesReady() const;
+    void setTexture(QScopedPointer<QSGTexture> &ptr, QSGTexture *texture);
+    void cleanupTextures();
 
     QString m_code;
-    bool m_dirty;
-    bool m_load;
     QSize m_sourceSize;
+    MapModel *m_mapModel;
 
-    bool m_renderingReady;
+    bool m_dirty;
     std::vector<Tile> m_tiles;
     struct {
+        QScopedPointer<QSGTexture> texture;
         QRectF location;
-        QScopedPointer<QSGTexture, QScopedPointerDeleteLater> texture;
     } m_overlay;
+    struct {
+        QScopedPointer<QSGTexture> texture;
+        QRectF location;
+        QRectF sourceRect;
+        QRectF targetRect;
+        QRectF bounds;
+    } m_miniMap;
+    struct {
+        QRectF source;
+        QRectF target;
+    } m_fastMap[2];
 
     MapRenderer *m_renderer;
     QQuickWindow *m_window;
+    std::vector<QSGTexture *> m_abandoned;
+
+    Readyness m_ready;
 };
 
 class RenderingTimer : public QObject, public QElapsedTimer
@@ -90,5 +133,7 @@ class RenderingTimer : public QObject, public QElapsedTimer
 public:
     explicit RenderingTimer(QObject *parent = nullptr);
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Map::Readyness)
 
 #endif // MAP_H

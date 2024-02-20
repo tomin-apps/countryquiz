@@ -262,7 +262,7 @@ Page {
 
         Map {
             code: dataModel.get(index).iso
-            load: ready
+            model: ready ? mapModel : null
             sourceSize: {
                 var size = Math.min(maximumWidth, maximumHeight)
                 return Qt.size(size, size)

@@ -5,6 +5,7 @@
  */
 
 #include <algorithm>
+#include <cassert>
 #include <cmath>
 #include <iterator>
 #include <QDir>
@@ -17,72 +18,18 @@
 #include <sys/sysinfo.h>
 #include <utility>
 #include "map.h"
+#include "mapmodel.h"
 #include "maprenderer.h"
 
 /* TODO
- * - Color the area
- *   - Colouring (DONE)
- *   - Use theme colour
- * - Zoom out
- *   - Generic minimum zoom (DONE)
- *   - Adjust zoom for each country
- * - Circle small islands
- * - Better performance?
- *   - Would splitting tiles to separate textures (and threads) help? (DONE)
- *   - Smaller texture? Generating the correct texture on startup? (DONE)
- *   - Or just some UI change to allow for a bit of loading time? (NOT PLANNED)
- *   - Splitting some big countries in svg? (TODO, mainly helps Canada)
- *   - Two tiered drawing? First rough version and then replace that when better tiles are ready?
- * - Other improvements
- *   - Clip tiles already here while resizing
+ * - Use theme colour
+ * - Light theme support
+ * - Circle tiny islands and city states that would be otherwise invisible
  */
 
 Q_LOGGING_CATEGORY(lcMapRenderer, "site.tomin.apps.CountryQuiz.MapRenderer", QtWarningMsg)
 
-QMutex MapRenderer::s_rendererMutex;
-
-QVector<MapRenderer *> MapRenderer::s_renderers;
-
-QThread *MapRenderer::s_rendererThread = nullptr;
-
-MapRenderer *MapRenderer::get(const QString &filePath)
-{
-    QMutexLocker locker(&s_rendererMutex);
-    MapRenderer *renderer = nullptr;
-    if (!s_rendererThread) {
-        qCCritical(lcMapRenderer) << "Could not get MapRenderer as there is no renderer thread!";
-    } else {
-        for (auto candidate : s_renderers) {
-            if (candidate->m_mapFilePath == filePath)
-                renderer = candidate;
-        }
-        if (!renderer) {
-            renderer = new MapRenderer(filePath);
-            renderer->moveToThread(s_rendererThread);
-            connect(s_rendererThread, &QThread::finished, renderer, &QObject::deleteLater);
-            s_renderers.append(renderer);
-            qCDebug(lcMapRenderer) << "Created new renderer for" << filePath;
-        }
-    }
-    return renderer;
-}
-
-void MapRenderer::setup(QCoreApplication *app)
-{
-    if (!s_rendererThread) {
-        QMutexLocker locker(&s_rendererMutex);
-        if (!s_rendererThread) {
-            s_rendererThread = new QThread(app);
-            connect(app, &QCoreApplication::aboutToQuit, []() {
-                s_rendererThread->quit();
-                s_rendererThread->wait();
-            });
-            s_rendererThread->start();
-            qCInfo(lcMapRenderer) << "Setup for rendering thread completed";
-            qCDebug(lcMapRenderer) << "Cores:" << get_nprocs() << "cores online," << get_nprocs_conf() << "cores configured";
-        }
-    }
-}
+#define IMAGE_FORMAT QImage::Format_RGBA8888_Premultiplied
 
 namespace {
     int mod(int x, int y) {
@@ -91,33 +38,31 @@ namespace {
 
     QRectF adjusted_area(const QRectF &target, const QRectF &fullArea, qreal minArea, qreal aspectRatio)
     {
-        QRectF bounds(target);
+        QSizeF size(target.size() * 1.25);
         if (target.width() < minArea * fullArea.width()) {
-            qreal targetWidth = minArea * fullArea.width();
-            qreal margin = (targetWidth - target.width()) / 2;
-            bounds.setLeft(target.left() - margin);
-            bounds.setRight(target.right() + margin);
+            size.setWidth(minArea * fullArea.width());
         }
-        if (bounds.width() < bounds.height() * aspectRatio) {
-            qreal targetWidth = bounds.height() * aspectRatio;
-            qreal margin = (targetWidth - bounds.width()) / 2;
-            bounds.setLeft(bounds.left() - margin);
-            bounds.setRight(bounds.right() + margin);
-        } else if (bounds.height() < bounds.width() / aspectRatio) {
-            qreal targetHeight = bounds.width() / aspectRatio;
-            qreal margin = (targetHeight - bounds.height()) / 2;
-            bounds.setTop(bounds.top() - margin);
-            bounds.setBottom(bounds.bottom() + margin);
+        size = QSizeF(aspectRatio, 1).scaled(size, Qt::KeepAspectRatioByExpanding);
+        qreal width = target.width() / size.width();
+        qreal height = target.height() / size.height();
+        if (width > 0.5 && height > 0.5) {
+            if (width > height) {
+                size.scale(QSizeF(target.width() * 2, size.height()), Qt::KeepAspectRatioByExpanding);
+            } else {
+                size.scale(QSizeF(size.width(), target.height() * 2), Qt::KeepAspectRatioByExpanding);
+            }
         }
+        QRectF bounds(QPointF(), size);
+        bounds.moveCenter(target.center());
         return bounds;
     }
 
-    QImage draw_overlay(QSvgRenderer &renderer, const QString &code, const QRectF &target, const QColor &color)
+    QImage draw_overlay(QSvgRenderer &renderer, const QString &code, const QSizeF &size, const QColor &color)
     {
-        QImage overlay(target.size().toSize(), QImage::Format_ARGB32_Premultiplied);
+        QImage overlay(size.toSize(), IMAGE_FORMAT);
         overlay.fill(color);
 
-        QImage element(target.size().toSize(), QImage::Format_ARGB32_Premultiplied);
+        QImage element(size.toSize(), IMAGE_FORMAT);
         element.fill(Qt::transparent);
         QPainter elementPainter(&element);
         renderer.render(&elementPainter, code);
@@ -129,33 +74,51 @@ namespace {
     }
 } // namespace
 
-void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
+QRectF MapRenderer::calculateBounds(const QString &code, qreal aspectRatio)
 {
-    Map *map = qobject_cast<Map *>(sender());
-
-    QRectF fullArea = m_renderer.boundsOnElement("world");
+    QMutexLocker locker(&m_rendererMutex);
     QMatrix matrix = m_renderer.matrixForElement(code);
     QRectF element = matrix.mapRect(m_renderer.boundsOnElement(code));
-    qreal aspectRatio = static_cast<qreal>(maxSize.width()) / maxSize.height();
-    QRectF bounds = adjusted_area(element, fullArea, 0.15, aspectRatio);
+    locker.unlock();
+    return adjusted_area(element, m_fullArea, 0.05, aspectRatio);
+}
+
+QRectF MapRenderer::fullArea()
+{
+    return m_fullArea;
+}
+
+void MapRenderer::renderMap(const QSize &size, const QString &code)
+{
+    Map *map = qobject_cast<Map *>(sender());
+    assert(map);
+
+    qreal aspectRatio = static_cast<qreal>(size.width()) / size.height();
+    QRectF bounds = calculateBounds(code, aspectRatio);
 
     QTransform translation = QTransform::fromTranslate(-bounds.left(), -bounds.top());
-    QTransform scaling = QTransform::fromScale(maxSize.width() / bounds.width(), maxSize.height() / bounds.height());
-    const Tiles &tiles = getTilesForScaling(maxSize, bounds.size());
-    QSizeF tileSize(fullArea.width() / tiles.dimensions.width(), fullArea.height() / tiles.dimensions.height());
+    QTransform scaling = QTransform::fromScale(size.width() / bounds.width(), size.height() / bounds.height());
+    const Tiles &tiles = getTilesForScaling(size, bounds.size());
+    QSizeF tileSize(m_fullArea.width() / tiles.dimensions.width(), m_fullArea.height() / tiles.dimensions.height());
 
     QThreadPool pool;
     pool.setMaxThreadCount(get_nprocs_conf());
 
     QColor overlayColor(Qt::red);
     overlayColor.setAlphaF(0.25);
-    auto *overlayRenderer = new OverlayRenderer(m_renderer, element, overlayColor, translation, scaling, code, this);
+    auto *overlayRenderer = new OverlayRenderer(overlayColor, translation, scaling, code, true, this);
     connect(overlayRenderer, &OverlayRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
+    connect(overlayRenderer, &OverlayRenderer::renderingReady, this, [this, map, overlayColor, translation, scaling, code]{
+        auto *overlayRenderer = new OverlayRenderer(overlayColor, translation, scaling, code, false, this);
+        connect(overlayRenderer, &OverlayRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
+        overlayRenderer->setAutoDelete(true);
+        QThreadPool::globalInstance()->start(overlayRenderer, QThread::LowPriority);
+    });
     overlayRenderer->setAutoDelete(true);
     pool.start(overlayRenderer, QThread::HighPriority);
 
-    QPoint position(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), std::max((qreal)0.0, std::floor((bounds.top() - fullArea.top()) / tileSize.height())));
-    QPointF point((qreal)position.x() * tileSize.width() + fullArea.left(), (qreal)position.y() * tileSize.height() + fullArea.top());
+    QPoint position(std::floor((bounds.left() - m_fullArea.left()) / tileSize.width()), std::max((qreal)0.0, std::floor((bounds.top() - m_fullArea.top()) / tileSize.height())));
+    QPointF point((qreal)position.x() * tileSize.width() + m_fullArea.left(), (qreal)position.y() * tileSize.height() + m_fullArea.top());
     while (point.y() <= bounds.bottom()) {
         while (point.x() <= bounds.right()) {
             QString name(tiles.pathTemplate.arg(mod(position.x(), tiles.dimensions.width())).arg(position.y()));
@@ -167,18 +130,36 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
             position.setX(position.x() + 1);
             point.setX(point.x() + tileSize.width());
         }
-        position = QPoint(std::floor((bounds.left() - fullArea.left()) / tileSize.width()), position.y() + 1);
-        point = QPointF((qreal)position.x() * tileSize.width() + fullArea.left(), point.y() + tileSize.height());
+        position = QPoint(std::floor((bounds.left() - m_fullArea.left()) / tileSize.width()), position.y() + 1);
+        point = QPointF((qreal)position.x() * tileSize.width() + m_fullArea.left(), point.y() + tileSize.height());
     }
 
     pool.waitForDone();
-    QMetaObject::invokeMethod(map, "renderingReady", Qt::QueuedConnection, Q_ARG(MapRenderer::MessageType, RenderingDone), Q_ARG(QSGTexture *, nullptr), Q_ARG(QRectF, QRectF(QPointF(), maxSize)));
+    QMetaObject::invokeMethod(map, "renderingReady", Qt::QueuedConnection, Q_ARG(MapRenderer::MessageType, RenderingDone), Q_ARG(QSGTexture *, nullptr), Q_ARG(QRectF, QRectF()));
+}
+
+void MapRenderer::renderFullMap(const QSize &maxSize)
+{
+    MapModel *mapModel = qobject_cast<MapModel *>(sender());
+    assert(mapModel);
+
+    QSize size = m_fullArea.size().scaled(maxSize, Qt::KeepAspectRatio).toSize();
+    auto *renderer = new FullMapRenderer(size, this);
+    connect(renderer, &FullMapRenderer::fullMapReady, mapModel, &MapModel::fullMapReady, Qt::QueuedConnection);
+    renderer->setAutoDelete(true);
+    QThreadPool::globalInstance()->start(renderer, QThread::HighPriority);
+}
+
+void MapRenderer::windowChanged(QQuickWindow *window)
+{
+    m_window = window;
 }
 
 MapRenderer::MapRenderer(const QString &filePath, QObject *parent)
     : QObject(parent)
     , m_mapFilePath(filePath)
     , m_renderer(filePath)
+    , m_fullArea(m_renderer.boundsOnElement("world"))
     , m_window(nullptr)
 {
     QFile tiles(filePath + ".txt");
@@ -217,12 +198,12 @@ MapRenderer::MapRenderer(const QString &filePath, QObject *parent)
     }
 }
 
-void MapRenderer::windowChanged(QQuickWindow *window)
+std::pair<QMutex *, QSvgRenderer *> MapRenderer::accessRenderer()
 {
-    m_window = window;
+    return std::make_pair(&m_rendererMutex, &m_renderer);
 }
 
-QQuickWindow *MapRenderer::getWindow()
+QQuickWindow *MapRenderer::window()
 {
     return m_window;
 }
@@ -233,10 +214,13 @@ MapRenderer::Tiles::Tiles(const QString &pathTemplate, const QSize &dimensions)
 {
 }
 
-const MapRenderer::Tiles &MapRenderer::getTilesForScaling(const QSize &target, const QSizeF &original) const
+const MapRenderer::Tiles &MapRenderer::getTilesForScaling(const QSize &target, const QSizeF &original)
 {
+    QMutexLocker locker(&m_rendererMutex);
     QSizeF worldSize = m_renderer.boundsOnElement("world").size();
     QSizeF documentSize = m_renderer.defaultSize();
+    locker.unlock();
+
     qreal scale_x = target.width() / original.width() * (worldSize.width() / documentSize.width());
     qreal scale_y = target.height() / original.height() * (worldSize.height() / documentSize.height());
     if (abs(scale_x - scale_y) > 0.01)
@@ -250,15 +234,17 @@ const MapRenderer::Tiles &MapRenderer::getTilesForScaling(const QSize &target, c
     }
     if (it == m_tiles.cend()) {
         auto last = m_tiles.crbegin();
-        qCDebug(lcMapRenderer) << "Falling back to best quality tiles with scaling" << last->first;
+        qCWarning(lcMapRenderer).nospace() << "Falling back to best quality tiles with scaling " << last->first
+                                           << " (requested: " << scale << ")";
         return last->second;
     }
     qCDebug(lcMapRenderer) << "Selecting tiles for scaling" << it->first;
     return it->second;
 }
 
-TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, MapRenderer *parent)
-    : QObject(parent)
+TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, MapRenderer *mapRenderer)
+    : QObject(nullptr)
+    , m_mapRenderer(mapRenderer)
     , m_path(path)
     , m_rect(rect)
     , m_translation(translation)
@@ -268,29 +254,67 @@ TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTrans
 
 void TileRenderer::run()
 {
-    QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
-    QImage tile = QImage(m_path).convertToFormat(QImage::Format_ARGB32_Premultiplied).scaled(transformed.size().toSize());
+    if (!QFileInfo::exists(m_path))
+        return;
 
-    QSGTexture *texture = getMapRenderer()->getWindow()->createTextureFromImage(tile);
-    emit renderingReady(MapRenderer::TileRendered, texture, transformed);
+    QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
+    QImage tile = QImage(m_path).scaled(transformed.size().toSize()).convertToFormat(IMAGE_FORMAT);
+
+    emit renderingReady(MapRenderer::TileRendered, m_mapRenderer->window()->createTextureFromImage(tile), transformed);
 }
 
-OverlayRenderer::OverlayRenderer(QSvgRenderer &renderer, const QRectF &rect, const QColor &color, const QTransform &translation, const QTransform &scaling, const QString &code, MapRenderer *parent)
-    : QObject(parent)
-    , m_renderer(renderer)
-    , m_rect(rect)
+OverlayRenderer::OverlayRenderer(const QColor &color, const QTransform &translation, const QTransform &scaling, const QString &code, bool fast, MapRenderer *mapRenderer)
+    : QObject(nullptr)
+    , m_mapRenderer(mapRenderer)
     , m_color(color)
     , m_translation(translation)
     , m_scaling(scaling)
     , m_code(code)
+    , m_fast(fast)
 {
 }
 
 void OverlayRenderer::run()
 {
-    QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
-    QImage overlay = draw_overlay(m_renderer, m_code, transformed, m_color);
+    QRectF transformed;
+    QImage overlay;
 
-    QSGTexture *texture = getMapRenderer()->getWindow()->createTextureFromImage(overlay);
-    emit renderingReady(MapRenderer::OverlayRendered, texture, transformed);
+    std::pair<QMutex *, QSvgRenderer *> access = m_mapRenderer->accessRenderer();
+    {
+        QMutexLocker locker(access.first);
+        QSvgRenderer &renderer = *access.second;
+
+        QMatrix matrix = renderer.matrixForElement(m_code);
+        QRectF element = matrix.mapRect(renderer.boundsOnElement(m_code));
+
+        transformed = m_scaling.mapRect(m_translation.mapRect(element));
+        overlay = draw_overlay(renderer, m_code, m_fast ? transformed.size() / 4 : transformed.size(), m_color);
+    }
+
+    emit renderingReady(MapRenderer::OverlayRendered, m_mapRenderer->window()->createTextureFromImage(overlay), transformed);
+}
+
+FullMapRenderer::FullMapRenderer(const QSize &size, MapRenderer *mapRenderer)
+    : QObject(nullptr)
+    , m_mapRenderer(mapRenderer)
+    , m_size(size)
+{
+}
+
+void FullMapRenderer::run()
+{
+    std::pair<QMutex *, QSvgRenderer *> access = m_mapRenderer->accessRenderer();
+    QMutexLocker locker(access.first);
+    QSvgRenderer &renderer = *access.second;
+
+    QImage map(m_size, IMAGE_FORMAT);
+    map.fill(Qt::transparent);
+    QPainter painter(&map);
+
+    QRectF viewBox = renderer.viewBoxF();
+    renderer.setViewBox(m_mapRenderer->fullArea());
+    renderer.render(&painter);
+    renderer.setViewBox(viewBox);
+
+    emit fullMapReady(map);
 }

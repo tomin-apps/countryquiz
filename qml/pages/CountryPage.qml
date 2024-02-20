@@ -96,11 +96,17 @@ Page {
                 Item { height: Theme.paddingLarge; width: parent.width }
             }
 
+            Item {
+                height: page.height - header.height - flag.height - textContent.height - map.height
+                width: parent.width
+            }
+
             Map {
+                id: map
                 anchors.horizontalCenter: parent.horizontalCenter
                 code: item.iso
-                load: parent.width !== 0 && flag.height !== 0 && textContent.height !== 0
-                sourceSize: Qt.size(parent.width, page.height - header.height - flag.height - textContent.height)
+                model: parent.width !== 0 && flag.height !== 0 && textContent.height !== 0 ? mapModel : null
+                sourceSize: Qt.size(parent.width, Math.min(parent.width, page.height - header.height - flag.height - textContent.height))
             }
         }
 

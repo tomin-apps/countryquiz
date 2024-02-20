@@ -8,9 +8,11 @@ INCLUDEPATH += \
 
 HEADERS += \
     components/map.h \
+    components/mapmodel.h \
     components/maprenderer.h
 
 SOURCES += \
     components/map.cpp \
+    components/mapmodel.cpp \
     components/maprenderer.cpp \
     countryquiz.cpp

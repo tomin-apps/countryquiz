@@ -297,17 +297,17 @@
 <context>
     <name>harbour-countryquiz</name>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="53"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="55"/>
         <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="88"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="96"/>
         <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="93"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="101"/>
         <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
