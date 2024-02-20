@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iterator>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -25,11 +26,13 @@
  *   - Generic minimum zoom (DONE)
  *   - Adjust zoom for each country
  * - Circle small islands
- * - (Jolla C) performance?
+ * - Better performance?
  *   - Would splitting tiles to separate textures (and threads) help? (DONE)
  *   - Smaller texture? Generating the correct texture on startup? (DONE)
  *   - Or just some UI change to allow for a bit of loading time? (NOT PLANNED)
  *   - Splitting some big countries in svg? (TODO, mainly helps Canada)
+ *   - Two tiered drawing? First rough version and then replace that when better tiles are ready?
+ *   - Xperia 10 is surprisingly slow here
  * - Other improvements
  *   - Clip tiles already here while resizing
  */
@@ -137,7 +140,7 @@ void MapRenderer::renderMap(const QSize &maxSize, const QString &code)
 
     QTransform translation = QTransform::fromTranslate(-bounds.left(), -bounds.top());
     QTransform scaling = QTransform::fromScale(maxSize.width() / bounds.width(), maxSize.height() / bounds.height());
-    const Tiles &tiles = getTilesForScaling(scaling);
+    const Tiles &tiles = getTilesForScaling(maxSize, bounds.size());
     QSizeF tileSize(fullArea.width() / tiles.dimensions.width(), fullArea.height() / tiles.dimensions.height());
 
     QThreadPool pool;
@@ -228,16 +231,25 @@ MapRenderer::Tiles::Tiles(const QString &pathTemplate, const QSize &dimensions)
 {
 }
 
-const MapRenderer::Tiles &MapRenderer::getTilesForScaling(const QTransform &scaling) const
+const MapRenderer::Tiles &MapRenderer::getTilesForScaling(const QSize &target, const QSizeF &original) const
 {
-    qCDebug(lcMapRenderer) << "Scaling is" << scaling.m11() << "and" << scaling.m22();
-    if (scaling.m11() != scaling.m22()) // TODO: Fuzzy check
-        qCWarning(lcMapRenderer) << "Different x and y scaling:" << scaling.m11() << "and" << scaling.m22();
-    qreal scale = scaling.m11() + scaling.m22() / 2;
-    auto it = m_tiles.lower_bound(scale);
+    QSizeF worldSize = m_renderer.boundsOnElement("world").size();
+    QSizeF documentSize = m_renderer.defaultSize();
+    qreal scale_x = target.width() / original.width() * (worldSize.width() / documentSize.width());
+    qreal scale_y = target.height() / original.height() * (worldSize.height() / documentSize.height());
+    if (abs(scale_x - scale_y) > 0.01)
+        qCWarning(lcMapRenderer) << "Different x and y scaling:" << scale_x << "and" << scale_y;
+    qreal scale = (scale_x + scale_y) / (qreal)2.0;
+    qCDebug(lcMapRenderer) << "Scaling is" << scale;
+
+    auto it = m_tiles.cbegin();
+    while (it != m_tiles.cend() && scale > it->first) {
+        std::advance(it, 1);
+    }
     if (it == m_tiles.cend()) {
-        qCWarning(lcMapRenderer) << "There is not big enough tile set";
-        abort(); // TODO: This is not good
+        auto last = m_tiles.crbegin();
+        qCDebug(lcMapRenderer) << "Falling back to best quality tiles with scaling" << last->first;
+        return last->second;
     }
     qCDebug(lcMapRenderer) << "Selecting tiles for scaling" << it->first;
     return it->second;

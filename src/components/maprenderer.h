@@ -51,7 +51,7 @@ private:
     };
 
     explicit MapRenderer(const QString &filePath, QObject *parent = nullptr);
-    const Tiles &getTilesForScaling(const QTransform &transform) const;
+    const Tiles &getTilesForScaling(const QSize &target, const QSizeF &original) const;
 
     static QMutex s_rendererMutex;
     static QVector<MapRenderer *> s_renderers;
