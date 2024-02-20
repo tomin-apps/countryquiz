@@ -266,15 +266,10 @@ TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTrans
 
 void TileRenderer::run()
 {
-    QImage tile(m_path);
     QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
+    QImage tile = QImage(m_path).convertToFormat(QImage::Format_ARGB32_Premultiplied).scaled(transformed.size().toSize());
 
-    QImage scaled(transformed.size().toSize(), QImage::Format_ARGB32_Premultiplied);
-    scaled.fill(Qt::transparent);
-    QPainter painter(&scaled);
-    painter.drawImage(QRectF(QPoint(), transformed.size().toSize()), tile);
-
-    QSGTexture *texture = getMapRenderer()->getWindow()->createTextureFromImage(scaled);
+    QSGTexture *texture = getMapRenderer()->getWindow()->createTextureFromImage(tile);
     emit renderingReady(MapRenderer::TileRendered, texture, transformed);
 }
 
