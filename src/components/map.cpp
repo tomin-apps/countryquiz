@@ -46,7 +46,7 @@ void Map::drawAgain()
 {
     if (lcMapElapsed().isDebugEnabled()) {
         auto *renderingTimer = new RenderingTimer;
-        connect(this, &Map::renderingProgressed, [this, renderingTimer](MapRenderer::MessageType message, int count) {
+        connect(this, &Map::renderingProgressed, renderingTimer, [this, renderingTimer](MapRenderer::MessageType message, int count) {
             const char *msg;
             switch (message) {
                 case MapRenderer::TileRendered: msg = "Rendered tile"; break;
