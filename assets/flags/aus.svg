@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="640" viewBox="0 0 10080 5040">
-<defs>
-<clipPath id="c1"><path d="M0,0H6V3H0z"/></clipPath>
-<clipPath id="c2"><path d="M0,0V1.5H6V3H6zM6,0H3V3H0V3z"/></clipPath>
-<path id="Star7" d="M0,-360 69.421398,-144.155019 281.459334,-224.456329 155.988466,-35.603349 350.974048,80.107536 125.093037,99.758368 156.198146,324.348792 0,160 -156.198146,324.348792 -125.093037,99.758368 -350.974048,80.107536 -155.988466,-35.603349 -281.459334,-224.456329 -69.421398,-144.155019z"/>
-<path id="Star5" d="M0,-210 54.859957,-75.508253 199.721868,-64.893569 88.765275,28.841586 123.434903,169.893569 0,93.333333 -123.434903,169.893569 -88.765275,28.841586 -199.721868,-64.893569 -54.859957,-75.508253z"/>
-</defs>
-<g transform="scale(840)">
-<rect width="12" height="6" fill="#012169"/>
-<path d="M0,0 6,3M6,0 0,3" stroke="#fff" stroke-width="0.6" clip-path="url(#c1)"/>
-<path d="M0,0 6,3M6,0 0,3" stroke="#e4002b" stroke-width="0.4" clip-path="url(#c2)"/>
-<path d="M3,0V3M0,1.5H6" stroke="#fff"/>
-<path d="M3,0V3M0,1.5H6" stroke="#e4002b" stroke-width="0.6"/>
-</g>
-<g fill="#fff">
-<use id="Comwlth" xlink:href="#Star7" transform="translate(2520, 3780) scale(2.1)"/>
-<use id="αCrucis" xlink:href="#Star7" x="7560" y="4200"/>
-<use id="βCrucis" xlink:href="#Star7" x="6300" y="2205"/>
-<use id="γCrucis" xlink:href="#Star7" x="7560" y="840"/>
-<use id="δCrucis" xlink:href="#Star7" x="8680" y="1869"/>
-<use id="εCrucis" xlink:href="#Star5" x="8064" y="2730"/>
-</g>
+<svg width="1280" height="640" version="1.1" viewBox="0 0 10080 5040" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path id="Star7" d="m0-360 69.421 215.84 212.04-80.301-125.47 188.85 194.99 115.71-225.88 19.651 31.105 224.59-156.2-164.35-156.2 164.35 31.105-224.59-225.88-19.651 194.99-115.71-125.47-188.85 212.04 80.301z"/>
+        <path id="Star5" d="m0-210 54.86 134.49 144.86 10.615-110.96 93.735 34.67 141.05-123.43-76.56-123.43 76.56 34.67-141.05-110.96-93.735 144.86-10.615z"/>
+    </defs>
+    <g transform="scale(840)">
+        <rect width="12" height="6" fill="#012169"/>
+        <g stroke-width=".1">
+            <path d="m0 0 6 3m0-3-6 3" color="#000000" style="-inkscape-stroke:none"/>
+            <path d="m0 0v0.33545l2.3291 1.1646-2.3291 1.1646v0.33545h0.67094l2.3291-1.1645 2.3291 1.1645h0.67094v-0.33545l-2.3291-1.1646 2.3291-1.1646v-0.33545h-0.67094l-2.3291 1.1645-2.3291-1.1645z" color="#000000" fill="#fff" style="-inkscape-stroke:none"/>
+            <path d="m0 0 6 3m0-3-6 3" color="#000000" style="-inkscape-stroke:none"/>
+            <path d="m0 0v0.22363l2.5527 1.2764h0.44727l-3-1.5zm3 1.5 3-1.5h-0.44727l-2.5527 1.2764v0.22363zm0 0 3 1.5v-0.22363l-2.5527-1.2764h-0.44727zm0 0-3 1.5h0.44727l2.5527-1.2764v-0.22363z" color="#000000" fill="#c8102e" style="-inkscape-stroke:none"/>
+            <path d="m3 0v3m-3-1.5h6" color="#000000" style="-inkscape-stroke:none"/>
+            <path d="m2.5 0v1h-2.5v1h2.5v1h1v-1h2.5v-1h-2.5v-1z" color="#000000" fill="#fff" style="-inkscape-stroke:none"/>
+            <path d="m3 0v3m-3-1.5h6" color="#000000" style="-inkscape-stroke:none"/>
+            <path d="m2.7 0v1.2h-2.7v0.6h2.7v1.2h0.6v-1.2h2.7v-0.6h-2.7v-1.2z" color="#000000" fill="#c8102e" style="-inkscape-stroke:none"/>
+        </g>
+    </g>
+    <g fill="#fff">
+        <use id="Comwlth" transform="translate(2520 3780) scale(2.1)" xlink:href="#Star7"/>
+        <use id="αCrucis" x="7560" y="4200" xlink:href="#Star7"/>
+        <use id="βCrucis" x="6300" y="2205" xlink:href="#Star7"/>
+        <use id="γCrucis" x="7560" y="840" xlink:href="#Star7"/>
+        <use id="δCrucis" x="8680" y="1869" xlink:href="#Star7"/>
+        <use id="εCrucis" x="8064" y="2730" xlink:href="#Star5"/>
+    </g>
 </svg>

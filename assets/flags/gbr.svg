@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="1200" height="600">
-<clipPath id="s">
-	<path d="M0,0 v30 h60 v-30 z"/>
-</clipPath>
-<clipPath id="t">
-	<path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/>
-</clipPath>
-<g clip-path="url(#s)">
-	<path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-	<path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
-	<path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/>
-	<path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-	<path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
-</g>
+<svg width="1200" height="600" version="1.1" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="m0 0v30h60v-30z" fill="#012169"/>
+    <path d="m0 0 60 30m0-30-60 30" color="#000000" style="-inkscape-stroke:none"/>
+    <path d="m0 0v3.3545l23.291 11.646-23.291 11.646v3.3545h6.7094l23.291-11.645 23.291 11.645h6.7094v-3.3545l-23.291-11.646 23.291-11.646v-3.3545h-6.7094l-23.291 11.645-23.291-11.645h-6.7094z" color="#000000" fill="#fff" style="-inkscape-stroke:none"/>
+    <path d="m0 0 60 30m0-30-60 30" color="#000000" style="-inkscape-stroke:none"/>
+    <path d="m0 0v2.2363l25.527 12.764h4.4727l-30-15zm30 15 30-15h-4.4727l-25.527 12.764v2.2363zm0 0 30 15v-2.2363l-25.527-12.764h-4.4727zm0 0-30 15h4.4727l25.527-12.764v-2.2363z" color="#000000" fill="#c8102e" style="-inkscape-stroke:none"/>
+    <path d="m30 0v30m-30-15h60" color="#000000" style="-inkscape-stroke:none"/>
+    <path d="m25 0v10h-25v10h25v10h10v-10h25v-10h-25v-10z" color="#000000" fill="#fff" style="-inkscape-stroke:none"/>
+    <path d="m30 0v30m-30-15h60" color="#000000" style="-inkscape-stroke:none"/>
+    <path d="m27 0v12h-27v6h27v12h6v-12h27v-6h-27v-12z" color="#000000" fill="#c8102e" style="-inkscape-stroke:none"/>
 </svg>
