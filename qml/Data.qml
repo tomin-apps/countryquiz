@@ -802,7 +802,7 @@ ListModel {
         name: "Libya"
         alt: "State of Libya"
         capital: "Tripoli"
-        region: "Asia"
+        region: "Africa"
         iso: "lby"
     }
 
