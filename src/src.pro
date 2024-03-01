@@ -16,3 +16,5 @@ SOURCES += \
     components/mapmodel.cpp \
     components/maprenderer.cpp \
     countryquiz.cpp
+
+QMAKE_CLEAN += $$shadowed($$TARGET)

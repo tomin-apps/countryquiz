@@ -30,6 +30,11 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-countryquiz-fi.ts
+for (file, TRANSLATIONS) {
+    QMAKE_CLEAN += $$shadowed($$file)
+    file ~= s/\.ts/.qm
+    QMAKE_CLEAN += $$shadowed($$file)
+}
 
 ICON_SIZES = 86 108 128 172
 ICON_SOURCE = $$PWD/harbour-countryquiz.svg
@@ -42,6 +47,7 @@ for (size, ICON_SIZES) {
             --output $$icon_path $$ICON_SOURCE $$escape_expand(\n\t)
     icon_$${size}.depends = $$ICON_SOURCE
     icon_$${size}.output = $$icon_path
+    icon_$${size}.target = $$icon_path
 
     icon_$${size}_install.CONFIG = no_check_exist
     icon_$${size}_install.depends = icon_$${size}
@@ -50,5 +56,6 @@ for (size, ICON_SIZES) {
 
     QMAKE_EXTRA_TARGETS += icon_$${size}
     PRE_TARGETDEPS += icon_$${size}
+    QMAKE_CLEAN += $$icon_path
     INSTALLS += icon_$${size}_install
 }
