@@ -10,6 +10,7 @@ import cairo
 import concurrent.futures
 import gi
 import itertools
+import os.path
 import threading
 
 gi.require_version('Rsvg', '2.0')
@@ -49,6 +50,14 @@ class Surface:
         self.dimensions = Dimensions(dimensions.width, dimensions.height).scaled(scale_factor)
         self.scale_factor = scale_factor
 
+    def check_tiles(self, x, y, target_template):
+        surface_mtime = os.path.getmtime(self.svg)
+        for tile in self.tiled(x, y):
+            path = target_template.format(x=tile.index.x, y=tile.index.y)
+            if not os.path.isfile(path) or os.path.getmtime(path) < surface_mtime:
+                return True
+        return False
+
     def paint(self):
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, self.dimensions.width, self.dimensions.height)
         ctx = cairo.Context(surface)
@@ -75,16 +84,17 @@ def draw_tile(surface, tile, target_template):
 
 def tile(filepath, x, y, target, scale_factor):
     surface = Surface(filepath, scale_factor)
-    cairo_surface = surface.paint()
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        for tile in surface.tiled(x, y):
-            executor.submit(draw_tile, cairo_surface, tile, target)
+    if surface.check_tiles(x, y, target):
+        cairo_surface = surface.paint()
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            for tile in surface.tiled(x, y):
+                executor.submit(draw_tile, cairo_surface, tile, target)
 
 def target(text):
     if "{x}" not in text:
-        raise ValueError("{} does not contain '{x}'".format(text))
+        raise ValueError("{} does not contain '{{x}}'".format(text))
     if "{y}" not in text:
-        raise ValueError("{} does not contain '{y}'".format(text))
+        raise ValueError("{} does not contain '{{y}}'".format(text))
     return text
 
 if __name__ == "__main__":
