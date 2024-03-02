@@ -263,7 +263,7 @@ Page {
         Map {
             code: dataModel.get(index).iso
             model: ready ? mapModel : null
-            overlayColor: Theme.highlightColor
+            overlayColor: Theme.rgba(Theme.highlightColor, Theme.opacityLow)
             sourceSize: {
                 var size = Math.min(maximumWidth, maximumHeight)
                 return Qt.size(size, size)
