@@ -106,6 +106,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 code: item.iso
                 model: parent.width !== 0 && flag.height !== 0 && textContent.height !== 0 ? mapModel : null
+                overlayColor: Theme.highlightColor
                 sourceSize: Qt.size(parent.width, Math.min(parent.width, page.height - header.height - flag.height - textContent.height))
             }
         }

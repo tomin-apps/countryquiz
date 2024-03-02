@@ -96,17 +96,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="290"/>
+        <location filename="../qml/pages/QuizPage.qml" line="291"/>
         <source>%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="292"/>
+        <location filename="../qml/pages/QuizPage.qml" line="293"/>
         <source>%1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="294"/>
+        <location filename="../qml/pages/QuizPage.qml" line="295"/>
         <source>%1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
