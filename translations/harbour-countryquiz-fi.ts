@@ -48,22 +48,22 @@
 <context>
     <name>PresetModel</name>
     <message>
-        <location filename="../qml/components/PresetModel.qml" line="82"/>
+        <location filename="../qml/components/PresetModel.qml" line="84"/>
         <source>Easy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/PresetModel.qml" line="84"/>
+        <location filename="../qml/components/PresetModel.qml" line="86"/>
         <source>Regular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/PresetModel.qml" line="86"/>
+        <location filename="../qml/components/PresetModel.qml" line="88"/>
         <source>Veteran</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/PresetModel.qml" line="88"/>
+        <location filename="../qml/components/PresetModel.qml" line="90"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>

@@ -4,16 +4,18 @@
  * SPDX-License-Identifier: MIT
  */
 
+import Nemo.Configuration 1.0
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 
 Item {
     property ListModel presets
+    property string type
 
-    property int selectedCount: _currentItem !== null ? _currentItem.count : 0
-    property int selectedChoices: _currentItem !== null ? _currentItem.choices : 0
-    property bool selectedRegion: _currentItem !== null ? _currentItem.region : false
-    property int selectedTime: _currentItem !== null ? _currentItem.time: 0
+    property alias selectedCount: selected.count
+    property alias selectedChoices: selected.choices
+    property alias selectedRegion: selected.region
+    property alias selectedTime: selected.time
 
     readonly property int currentIndex: _currentIndex
     readonly property bool presetSelected: _currentIndex >= 0 && _currentItem !== null
@@ -88,8 +90,19 @@ Item {
         return qsTr("None")
     }
 
+    id: presetModel
     onSelectedCountChanged: checkProp("count")
     onSelectedChoicesChanged: checkProp("choices")
     onSelectedRegionChanged: checkProp("region")
     onSelectedTimeChanged: checkProp("time")
+
+    ConfigurationGroup {
+        property int count: presets && presets.count >= 1 ? presets.get(0).count : 0
+        property int choices: presets && presets.count >= 1 ? presets.get(0).choices : 0
+        property bool region: presets && presets.count >= 1 ? presets.get(0).region : false
+        property int time: presets && presets.count >= 1 ? presets.get(0).time: 0
+
+        id: selected
+        path: presetModel.type ? "/site/tomin/apps/CountryQuiz/" + presetModel.type : ""
+    }
 }

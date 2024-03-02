@@ -10,7 +10,7 @@ import "../helpers.js" as Helpers
 
 ExpandingSection {
     property alias presets: presetModel.presets
-    property string quizType
+    property alias quizType: presetModel.type
     readonly property int maximumLength: _maximumLength
     property int _maximumLength: dataModel.getIndices(quizType).length
 
