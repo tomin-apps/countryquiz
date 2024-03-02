@@ -154,7 +154,7 @@ QRectF MapRenderer::fullArea()
     return m_fullArea;
 }
 
-void MapRenderer::renderMap(const QSize &size, const QString &code)
+void MapRenderer::renderMap(const QSize &size, const QString &code, const QColor &overlayColor)
 {
     Map *map = qobject_cast<Map *>(sender());
     assert(map);
@@ -170,8 +170,6 @@ void MapRenderer::renderMap(const QSize &size, const QString &code)
     QThreadPool pool;
     pool.setMaxThreadCount(get_nprocs_conf());
 
-    QColor overlayColor(Qt::red);
-    overlayColor.setAlphaF(0.25);
     auto *overlayRenderer = new OverlayRenderer(overlayColor, translation, scaling, code, true, this);
     connect(overlayRenderer, &OverlayRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
     connect(overlayRenderer, &OverlayRenderer::renderingReady, this, [this, map, overlayColor, translation, scaling, code]{

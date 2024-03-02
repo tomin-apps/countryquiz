@@ -41,6 +41,7 @@ namespace {
 Map::Map(QQuickItem *parent)
     : QQuickItem(parent)
     , m_mapModel(nullptr)
+    , m_overlayColor(Qt::red)
     , m_dirty(true)
     , m_renderer(nullptr)
     , m_window(window())
@@ -104,7 +105,8 @@ void Map::renderAgain()
     }
     releaseResources();
     setTexture(m_miniMap.texture, m_mapModel->miniMap());
-    emit renderMap(m_sourceSize, m_code);
+
+    emit renderMap(m_sourceSize, m_code, m_overlayColor);
 }
 
 void Map::rendererChanged()
@@ -280,6 +282,13 @@ namespace {
 
         return node;
     }
+
+    QColor opaqueColor(const QColor &color)
+    {
+        QColor result(color);
+        result.setAlphaF(1);
+        return result;
+    }
 } // namespace
 
 QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
@@ -336,7 +345,7 @@ QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
         }
 
         prevNode = drawRectangle(node, miniMapNode, m_miniMap.targetRect, QColor(Qt::white), 2);
-        drawRectangle(node, prevNode, m_miniMap.bounds.toRect(), QColor(Qt::red), 2);
+        drawRectangle(node, prevNode, m_miniMap.bounds.toRect(), opaqueColor(m_overlayColor), 2);
 
         m_dirty = false;
     }
@@ -388,6 +397,19 @@ void Map::setModel(MapModel *mapModel)
         emit modelChanged();
         rendererChanged();
         miniMapChanged();
+    }
+}
+
+QColor Map::overlayColor() const
+{
+    return m_overlayColor;
+}
+
+void Map::setOverlayColor(const QColor &color)
+{
+    if (m_overlayColor != color) {
+        m_overlayColor = color;
+        emit overlayColorChanged();
     }
 }
 

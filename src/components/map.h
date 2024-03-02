@@ -8,6 +8,7 @@
 #define MAP_H
 
 #include <vector>
+#include <QColor>
 #include <QElapsedTimer>
 #include <QImage>
 #include <QQuickItem>
@@ -22,6 +23,7 @@ class Map : public QQuickItem
     Q_PROPERTY(QString code READ code WRITE setCode NOTIFY codeChanged)
     Q_PROPERTY(QSize sourceSize READ sourceSize WRITE setSourceSize NOTIFY sourceSizeChanged)
     Q_PROPERTY(MapModel *model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(QColor overlayColor READ overlayColor WRITE setOverlayColor NOTIFY overlayColorChanged)
 
 public:
     enum Ready {
@@ -49,6 +51,9 @@ public:
     MapModel *model() const;
     void setModel(MapModel *model);
 
+    QColor overlayColor() const;
+    void setOverlayColor(const QColor &color);
+
 public slots:
     void renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile);
 
@@ -56,8 +61,10 @@ signals:
     void codeChanged();
     void sourceSizeChanged();
     void modelChanged();
+    void overlayColorChanged();
+    void overlayOpacityChanged();
 
-    void renderMap(const QSize &size, const QString &code);
+    void renderMap(const QSize &size, const QString &code, const QColor &overlayColor);
     void renderingProgressed(MapRenderer::MessageType message, int count);
 
 protected:
@@ -100,6 +107,7 @@ private:
     QString m_code;
     QSize m_sourceSize;
     MapModel *m_mapModel;
+    QColor m_overlayColor;
 
     bool m_dirty;
     std::vector<Tile> m_tiles;

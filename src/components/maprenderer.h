@@ -42,7 +42,7 @@ public:
     Q_ENUM(MessageType)
 
 public slots:
-    void renderMap(const QSize &size, const QString &code);
+    void renderMap(const QSize &size, const QString &code, const QColor &overlayColor);
     void renderFullMap(const QSize &maxSize);
     void windowChanged(QQuickWindow *window);
 
