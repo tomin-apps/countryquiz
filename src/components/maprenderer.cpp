@@ -32,6 +32,13 @@ Q_LOGGING_CATEGORY(lcMapRenderer, "site.tomin.apps.CountryQuiz.MapRenderer", QtW
 #define IMAGE_FORMAT QImage::Format_RGBA8888_Premultiplied
 
 namespace {
+    const qreal CircleLimit = 250;
+    const qreal CircleMinimumWidth = 20;
+    const qreal CirclePenWidth = 2.0;
+    const qreal CircleScalingFactor = 355.0 / 113.0;
+    const qreal FastScalingFactor = 0.25;
+    const QString SubElementTemplate = QStringLiteral("%1-%2");
+
     int mod(int x, int y) {
         return x >= 0 ? x % y : (y + x) % y;
     }
@@ -57,7 +64,43 @@ namespace {
         return bounds;
     }
 
-    QImage draw_overlay(QSvgRenderer &renderer, const QString &code, const QSizeF &size, const QColor &color)
+    QRectF get_union_of_rects(const std::vector<QRectF> rects)
+    {
+        QRectF united;
+        for (const QRectF &rect : rects) {
+            united = united.united(rect);
+        }
+        return united;
+    }
+
+    QRectF get_circle(const QRectF &rect)
+    {
+        QRectF circle;
+        circle.setSize(QSizeF(1, 1).scaled(rect.size(), Qt::KeepAspectRatioByExpanding) * CircleScalingFactor);
+        if (circle.width() < CircleMinimumWidth)
+            circle.setSize(QSizeF(CircleMinimumWidth, CircleMinimumWidth));
+        circle.moveCenter(rect.center());
+        return circle;
+    }
+
+    std::vector<QRectF> get_circles_locked(QSvgRenderer &renderer, const QString &code, const QTransform &scaling, const QTransform &translation, const QRectF &element)
+    {
+        std::vector<QRectF> circles;
+        if (element.width() * element.height() < CircleLimit) {
+            circles.push_back(scaling.mapRect(translation.mapRect(get_circle(element))));
+        } else {
+            for (int i = 1; renderer.elementExists(SubElementTemplate.arg(code).arg(i)); ++i) {
+                QString subCode = SubElementTemplate.arg(code).arg(i);
+                QMatrix matrix = renderer.matrixForElement(subCode);
+                QRectF subElement = matrix.mapRect(renderer.boundsOnElement(subCode));
+                if (subElement.width() * subElement.height() < CircleLimit)
+                    circles.push_back(scaling.mapRect(translation.mapRect(get_circle(subElement))));
+            }
+        }
+        return circles;
+    }
+
+    QImage draw_overlay_locked(QSvgRenderer &renderer, const QString &code, const QSizeF &size, const QColor &color)
     {
         QImage overlay(size.toSize(), IMAGE_FORMAT);
         overlay.fill(color);
@@ -71,6 +114,29 @@ namespace {
         overlayPainter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
         overlayPainter.drawImage(QPoint(0, 0), element);
         return overlay;
+    }
+
+    QImage draw_circles_to_overlay_locked(const QImage &overlay, QRectF &transformed, const QTransform &scaling, const std::vector<QRectF> &circles, const QColor &color)
+    {
+        QRectF united = transformed.united(get_union_of_rects(circles));
+        united.adjust(-1, -1, 1, 1);
+
+        QImage circled(scaling.mapRect(united).size().toSize(), IMAGE_FORMAT);
+        circled.fill(Qt::transparent);
+        QPainter painter(&circled);
+        painter.drawImage(scaling.map(transformed.topLeft() - united.topLeft()), overlay);
+
+        QColor penColor(color);
+        penColor.setAlphaF(1);
+        painter.setPen(QPen(penColor, CirclePenWidth));
+        for (const QRectF &circle : circles) {
+            QRectF target = scaling.mapRect(circle.translated(-united.topLeft()));
+            qCDebug(lcMapRenderer).nospace() << "Drawing circle (d=" << target.width() << ") to " << target.center();
+            painter.drawArc(target, 0, 5760);
+        }
+
+        transformed = united;
+        return circled;
     }
 } // namespace
 
@@ -270,7 +336,7 @@ OverlayRenderer::OverlayRenderer(const QColor &color, const QTransform &translat
     , m_translation(translation)
     , m_scaling(scaling)
     , m_code(code)
-    , m_fast(fast)
+    , m_drawScaling(fast ? QTransform::fromScale(FastScalingFactor, FastScalingFactor) : QTransform())
 {
 }
 
@@ -288,7 +354,11 @@ void OverlayRenderer::run()
         QRectF element = matrix.mapRect(renderer.boundsOnElement(m_code));
 
         transformed = m_scaling.mapRect(m_translation.mapRect(element));
-        overlay = draw_overlay(renderer, m_code, m_fast ? transformed.size() / 4 : transformed.size(), m_color);
+        overlay = draw_overlay_locked(renderer, m_code, m_drawScaling.mapRect(transformed).size(), m_color);
+
+        std::vector<QRectF> circles = get_circles_locked(renderer, m_code, m_scaling, m_translation, element);
+        if (!circles.empty())
+            overlay = draw_circles_to_overlay_locked(overlay, transformed, m_drawScaling, circles, m_color);
     }
 
     emit renderingReady(MapRenderer::OverlayRendered, m_mapRenderer->window()->createTextureFromImage(overlay), transformed);

@@ -102,7 +102,7 @@ private:
     QTransform m_translation;
     QTransform m_scaling;
     QString m_code;
-    bool m_fast;
+    QTransform m_drawScaling;
 };
 
 class FullMapRenderer : public QObject, public QRunnable
