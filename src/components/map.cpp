@@ -471,7 +471,7 @@ void Map::cleanupTextures()
     if (!m_abandoned.empty() && window()) {
         std::vector<QSGTexture *> textures;
         textures.swap(m_abandoned);
-        window()->scheduleRenderJob(new TextureCleaningJob(textures), QQuickWindow::AfterSwapStage);
+        window()->scheduleRenderJob(new TextureCleaningJob(textures), QQuickWindow::AfterRenderingStage);
     }
 }
 
