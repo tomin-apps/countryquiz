@@ -9,11 +9,12 @@ import Sailfish.Silica 1.0
 import "../helpers.js" as Helpers
 
 ExpandingSection {
-    id: expandingSection
+    property alias presets: presetModel.presets
     property string quizType
     readonly property int maximumLength: _maximumLength
     property int _maximumLength: dataModel.getIndices(quizType).length
 
+    id: expandingSection
     content.sourceComponent: Column {
         bottomPadding: Theme.paddingLarge
         width: parent.width
@@ -22,7 +23,7 @@ ExpandingSection {
             label: qsTr("Preset")
             menu: ContextMenu {
                 Repeater {
-                    model: presetModel
+                    model: presetModel.presets
                     MenuItem { text: presetModel.getTitleText(model.name) }
                 }
 
