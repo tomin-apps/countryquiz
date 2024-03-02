@@ -119,7 +119,7 @@ namespace {
     QImage draw_circles_to_overlay_locked(const QImage &overlay, QRectF &transformed, const QTransform &scaling, const std::vector<QRectF> &circles, const QColor &color)
     {
         QRectF united = transformed.united(get_union_of_rects(circles));
-        united.adjust(-1, -1, 1, 1);
+        united.adjust(-CirclePenWidth, -CirclePenWidth, CirclePenWidth, CirclePenWidth);
 
         QImage circled(scaling.mapRect(united).size().toSize(), IMAGE_FORMAT);
         circled.fill(Qt::transparent);
@@ -129,6 +129,7 @@ namespace {
         QColor penColor(color);
         penColor.setAlphaF(1);
         painter.setPen(QPen(penColor, CirclePenWidth));
+        painter.setRenderHint(QPainter::Antialiasing);
         for (const QRectF &circle : circles) {
             QRectF target = scaling.mapRect(circle.translated(-united.topLeft()));
             qCDebug(lcMapRenderer).nospace() << "Drawing circle (d=" << target.width() << ") to " << target.center();
