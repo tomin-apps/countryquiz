@@ -14,16 +14,23 @@ Item {
 
     property var presetModel
 
+    function isInitialSection(section) {
+        return config.lastChosenQuizType === section
+    }
+
+    onPresetModelChanged: if (presetModel !== undefined) config.setLastChosenQuizType(presetModel.type)
+
     SilicaFlickable {
         anchors.fill: parent
 
         ExpandingSectionGroup {
-            currentIndex: 0
+            animateToExpandedSection: false
             width: parent.width
 
             QuizSection {
-                title: qsTr("Flag Quiz")
+                expanded: isInitialSection(quizType)
                 quizType: "flags"
+                title: qsTr("Flag Quiz")
 
                 presets: ListModel {
                     ListElement {
@@ -53,8 +60,9 @@ Item {
             }
 
             QuizSection {
-                title: qsTr("Map Quiz")
+                expanded: isInitialSection(quizType)
                 quizType: "maps"
+                title: qsTr("Map Quiz")
 
                 presets: ListModel {
                     ListElement {
@@ -84,8 +92,9 @@ Item {
             }
 
             QuizSection {
-                title: qsTr("Capital City Quiz")
+                expanded: isInitialSection(quizType)
                 quizType: "capitals"
+                title: qsTr("Capital City Quiz")
 
                 presets: ListModel {
                     ListElement {
@@ -121,6 +130,7 @@ Item {
     Binding {
         target: quizTimer
         property: "timeLimit"
-        value: page.presetModel !== undefined ? page.presetModel.timeToAnswer * 1000 : -1
+        value: presetModel !== undefined ? presetModel.timeToAnswer * 1000 : -1
+        when: presetModel !== undefined
     }
 }

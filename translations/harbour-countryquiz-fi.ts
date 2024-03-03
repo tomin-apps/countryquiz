@@ -221,17 +221,17 @@
 <context>
     <name>QuizSelectionTab</name>
     <message>
-        <location filename="../qml/pages/QuizSelectionTab.qml" line="25"/>
+        <location filename="../qml/pages/QuizSelectionTab.qml" line="33"/>
         <source>Flag Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizSelectionTab.qml" line="56"/>
+        <location filename="../qml/pages/QuizSelectionTab.qml" line="65"/>
         <source>Map Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizSelectionTab.qml" line="87"/>
+        <location filename="../qml/pages/QuizSelectionTab.qml" line="97"/>
         <source>Capital City Quiz</source>
         <translation type="unfinished"></translation>
     </message>
