@@ -8,7 +8,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play quiz at least once to see all the countries</source>
+        <source>Play a quiz at least once to see all the countries</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

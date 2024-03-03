@@ -5,7 +5,7 @@
     <name>CountryListTab</name>
     <message>
         <location filename="../qml/pages/CountryListTab.qml" line="21"/>
-        <source>Play quiz at least once to see all the countries</source>
+        <source>Play a quiz at least once to see all the countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
