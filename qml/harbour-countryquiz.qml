@@ -43,8 +43,6 @@ ApplicationWindow {
                     width: PagedView.contentWidth
                 }
                 model: pageModel
-
-                onCurrentIndexChanged: tabs.currentIndex = currentIndex
             }
         }
     }

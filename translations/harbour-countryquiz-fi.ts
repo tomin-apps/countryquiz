@@ -4,12 +4,12 @@
 <context>
     <name>CountryListTab</name>
     <message>
-        <location filename="../qml/pages/CountryListTab.qml" line="22"/>
+        <location filename="../qml/pages/CountryListTab.qml" line="21"/>
         <source>Play quiz at least once to see all the countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryListTab.qml" line="23"/>
+        <location filename="../qml/pages/CountryListTab.qml" line="22"/>
         <source>Swipe to left and press &apos;Quiz me!&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -297,17 +297,17 @@
 <context>
     <name>harbour-countryquiz</name>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="55"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="53"/>
         <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="96"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="94"/>
         <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="101"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="99"/>
         <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>

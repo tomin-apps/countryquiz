@@ -4,11 +4,11 @@
 <context>
     <name>CountryListTab</name>
     <message>
-        <source>Play quiz at least once to see all the countries</source>
+        <source>Swipe to left and press &apos;Quiz me!&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Swipe to left and press &apos;Quiz me!&apos;</source>
+        <source>Play quiz at least once to see all the countries</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -240,15 +240,15 @@
 <context>
     <name>harbour-countryquiz</name>
     <message>
-        <source>Quiz</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Countries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

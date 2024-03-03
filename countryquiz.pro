@@ -7,6 +7,7 @@ CONFIG += sailfishapp
 DISTFILES += \
     harbour-countryquiz.desktop \
     qml/components/Config.qml \
+    qml/components/CountryListDelegateModel.qml \
     qml/components/PresetModel.qml \
     qml/components/QuizButton.qml \
     qml/components/QuizSection.qml \

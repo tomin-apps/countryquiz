@@ -15,7 +15,6 @@ Item {
     SilicaListView {
         id: view
         anchors.fill: parent
-        model: countryListDelegateModel
 
         ViewPlaceholder {
             enabled: !config.hasPlayed
@@ -26,67 +25,9 @@ Item {
         VerticalScrollDecorator { }
     }
 
-    DelegateModel {
-        id: countryListDelegateModel
-
-        function indexBefore(item) {
-            /* textbook binary search for finding the leftmost suitable position */
-            var left = 0
-            var right = items.count
-            while (left < right) {
-                var middle = Math.floor((left + right) / 2)
-                var middleItem = items.get(middle)
-                if (middleItem.model.name < item.model.name) {
-                    left = middle + 1
-                } else {
-                    right = middle
-                }
-            }
-            return left
-        }
-
-        function insertUnsorted() {
-            while (unsortedCountries.count > 0) {
-                var item = unsortedCountries.get(0)
-                var index = indexBefore(item)
-                item.groups = "items"
-                items.move(item.itemsIndex, index)
-            }
-        }
-
-        delegate: BackgroundItem {
-            id: item
-            height: Theme.itemSizeLarge
-            contentHeight: Theme.itemSizeLarge
-            width: ListView.view.width
-
-            Row {
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: Theme.paddingMedium
-
-                Image {
-                    source: "../../assets/flags/" + iso + ".svg"
-                    sourceSize.height: Theme.itemSizeMedium
-                }
-
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: Theme.fontSizeLarge
-                    text: pre ? pre + " " + name : name
-                    truncationMode: TruncationMode.Fade
-                    width: item.width - x - Theme.horizontalPageMargin
-                }
-            }
-
-            onClicked: pageStack.push(Qt.resolvedUrl("CountryPage.qml"), { item: countryListDelegateModel.model.get(index) })
-        }
-        groups: DelegateModelGroup {
-            id: unsortedCountries
-            name: "unsorted"
-            includeByDefault: true
-            onChanged: countryListDelegateModel.insertUnsorted()
-        }
-        items.includeByDefault: false
-        model: config.hasPlayed ? dataModel : 0
+    Loader {
+        asynchronous: true
+        source: Qt.resolvedUrl("../components/CountryListDelegateModel.qml")
+        onStatusChanged: if (status === Loader.Ready) view.model = item
     }
 }
