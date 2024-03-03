@@ -97,6 +97,8 @@ Page {
             }
 
             ExpandingSectionGroup {
+                animateToExpandedSection: false
+
                 ExpandingSection {
                     content.sourceComponent: Component {
                         ColumnView {

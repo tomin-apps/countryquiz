@@ -299,12 +299,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="129"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="131"/>
         <source>Your answers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="135"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="137"/>
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
