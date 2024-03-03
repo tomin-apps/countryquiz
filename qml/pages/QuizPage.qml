@@ -33,19 +33,43 @@ Page {
 
     onStatusChanged: if (status === PageStatus.Active) choices.opacity = 1.0
 
+    PageHeader {
+        readonly property string name: {
+            if (setup.quizType === "flags") {
+                return qsTr("Flag")
+            } if (setup.quizType === "maps") {
+                return qsTr("Map")
+            } if (setup.quizType === "capitals") {
+                return qsTr("Capital City")
+            }
+            return ""
+        }
+
+        id: header
+        title: qsTr("%1 %2 / %3").arg(name).arg(page.current).arg(page.count)
+        z: 2
+    }
+
     Column {
         readonly property int otherHeight: header.height + label.height + timeLeft.height
         readonly property bool otherReady: header.height !== 0 && label.height !== 0 && timeLeft.height !== 0
+        property bool useHeaderSpace
         id: column
+        anchors.top: useHeaderSpace ? page.top : header.bottom
         width: parent.width
-
-        PageHeader {
-            id: header
-            title: qsTr("Quiz (%1 / %2)").arg(page.current).arg(page.count)
-        }
+        z: 1
 
         Loader {
-            property int maximumHeight: Math.min(parent.width, page.height - column.otherHeight - choices.minimumHeight)
+            property int maximumHeight: {
+                var maximum = Math.min(parent.width, page.height - column.otherHeight - choices.minimumHeight)
+                if (setup.quizType === "maps" && maximum < parent.width) {
+                    column.useHeaderSpace = true
+                    return maximum + header.height
+                } else {
+                    column.useHeaderSpace = false
+                }
+                return maximum
+            }
             property int maximumWidth: parent.width
             property bool ready: parent.width !== 0 && page.height !== 0 && column.otherReady && choices.minimumHeight !== 0
 

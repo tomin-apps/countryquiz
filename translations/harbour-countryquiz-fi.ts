@@ -71,42 +71,57 @@
 <context>
     <name>QuizPage</name>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="44"/>
-        <source>Quiz (%1 / %2)</source>
+        <location filename="../qml/pages/QuizPage.qml" line="39"/>
+        <source>Flag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="63"/>
+        <location filename="../qml/pages/QuizPage.qml" line="41"/>
+        <source>Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/QuizPage.qml" line="43"/>
+        <source>Capital City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/QuizPage.qml" line="49"/>
+        <source>%1 %2 / %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/QuizPage.qml" line="87"/>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="66"/>
+        <location filename="../qml/pages/QuizPage.qml" line="90"/>
         <source>Guess which country is highlighted on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="70"/>
+        <location filename="../qml/pages/QuizPage.qml" line="94"/>
         <source>Guess which country&apos;s capital is this</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="72"/>
+        <location filename="../qml/pages/QuizPage.qml" line="96"/>
         <source>Guess which country&apos;s capitals are these</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="291"/>
+        <location filename="../qml/pages/QuizPage.qml" line="315"/>
         <source>%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="293"/>
+        <location filename="../qml/pages/QuizPage.qml" line="317"/>
         <source>%1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="295"/>
+        <location filename="../qml/pages/QuizPage.qml" line="319"/>
         <source>%1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>

@@ -60,10 +60,6 @@
 <context>
     <name>QuizPage</name>
     <message>
-        <source>Quiz (%1 / %2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -89,6 +85,22 @@
     </message>
     <message>
         <source>Guess which country&apos;s capitals are these</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 / %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capital City</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
