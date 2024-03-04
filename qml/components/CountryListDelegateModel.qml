@@ -10,8 +10,6 @@ import Sailfish.Silica 1.0
 import "../helpers.js" as Helpers
 
 DelegateModel {
-    id: countryListDelegateModel
-
     function indexBefore(item) {
         /* textbook binary search for finding the leftmost suitable position */
         var left = 0
@@ -32,11 +30,12 @@ DelegateModel {
         while (unsortedCountries.count > 0) {
             var item = unsortedCountries.get(0)
             var index = indexBefore(item)
-            item.groups = "items"
-            items.move(item.itemsIndex, index)
+            unsortedCountries.setGroups(0, 1, ["items"])
+            items.move(items.length - 1, index, 1)
         }
     }
 
+    id: countryListDelegateModel
     delegate: BackgroundItem {
         id: item
         height: Theme.itemSizeLarge
@@ -67,8 +66,8 @@ DelegateModel {
         id: unsortedCountries
         name: "unsorted"
         includeByDefault: true
-        onChanged: countryListDelegateModel.insertUnsorted()
     }
     items.includeByDefault: false
     model: config.hasPlayed ? dataModel : 0
+    Component.onCompleted: insertUnsorted()
 }

@@ -15,6 +15,7 @@ Item {
     SilicaListView {
         id: view
         anchors.fill: parent
+        model: loader.item
 
         ViewPlaceholder {
             enabled: !config.hasPlayed
@@ -26,8 +27,8 @@ Item {
     }
 
     Loader {
+        id: loader
         asynchronous: true
         source: Qt.resolvedUrl("../components/CountryListDelegateModel.qml")
-        onStatusChanged: if (status === Loader.Ready) view.model = item
     }
 }
