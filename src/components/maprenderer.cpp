@@ -21,11 +21,7 @@
 #include "mapmodel.h"
 #include "maprenderer.h"
 
-/* TODO
- * - Use theme colour
- * - Light theme support
- * - Circle tiny islands and city states that would be otherwise invisible
- */
+// TODO: Light theme support
 
 Q_LOGGING_CATEGORY(lcMapRenderer, "site.tomin.apps.CountryQuiz.MapRenderer", QtWarningMsg)
 

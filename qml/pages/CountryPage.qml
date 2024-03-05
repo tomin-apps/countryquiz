@@ -137,7 +137,4 @@ Page {
 
         VerticalScrollDecorator { }
     }
-
-    // Break some weird signal issue that crashes the app when leaving the page
-    Component.onCompleted: page.countryName = countryName
 }
