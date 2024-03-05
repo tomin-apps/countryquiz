@@ -30,6 +30,14 @@
         <source>Region: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Time: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IntSelectionPage</name>
@@ -246,6 +254,10 @@
     </message>
     <message>
         <source>Perfect work! You clearly know the capitals!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -12,6 +12,8 @@ import ".."
 Page {
     property var item
     property string countryName: item !== undefined && item !== null ? (item.pre ? item.pre + " " + item.name : item.name) : ""
+    property string time
+    property int score: -1
 
     id: page
 
@@ -89,6 +91,28 @@ Page {
                     font.pixelSize: Theme.fontSizeMedium
                     horizontalAlignment: Text.AlignHCenter
                     text: qsTr("Region: %1").arg(item.region)
+                    width: parent.width - 2 * Theme.horizontalPageMargin
+                    wrapMode: Text.Wrap
+                }
+
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: palette.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    horizontalAlignment: Text.AlignHCenter
+                    text: qsTr("Time: %1").arg(quizTimer.timeAsString(page.time))
+                    visible: page.time != ""
+                    width: parent.width - 2 * Theme.horizontalPageMargin
+                    wrapMode: Text.Wrap
+                }
+
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: palette.secondaryHighlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    horizontalAlignment: Text.AlignHCenter
+                    text: qsTr("Score: %1").arg(page.score)
+                    visible: page.score >= 0
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap
                 }

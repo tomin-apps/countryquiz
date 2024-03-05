@@ -12,6 +12,7 @@ Page {
     id: page
 
     property var correctAnswers
+    property var times
     property var indices
     property var setup
 
@@ -24,6 +25,18 @@ Page {
             }
         }
         return count
+    }
+
+    readonly property int totalScore: {
+        var total = 0
+        for (var i = 0; i < times.length; ++i) {
+            total += calculateScore(correctAnswers[i] ? 1 : 0, times[i], quizTimer.timeLimit)
+        }
+        return total
+    }
+
+    function calculateScore(result, time, timeLimit) {
+        return result * 1000 * (1 - time / timeLimit)
     }
 
     SilicaFlickable {
@@ -96,6 +109,15 @@ Page {
                 x: Theme.horizontalPageMargin
             }
 
+            Label {
+                color: palette.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeLarge
+                horizontalAlignment: Text.AlignHCenter
+                text: qsTr("Score %1").arg(totalScore)
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                x: Theme.horizontalPageMargin
+            }
+
             ExpandingSectionGroup {
                 animateToExpandedSection: false
 
@@ -122,7 +144,11 @@ Page {
                                     x: Theme.horizontalPageMargin
                                 }
 
-                                onClicked: pageStack.push(Qt.resolvedUrl("CountryPage.qml"), { item: dataModel.get(current) })
+                                onClicked: pageStack.push(Qt.resolvedUrl("CountryPage.qml"), {
+                                    item: dataModel.get(current),
+                                    score: calculateScore(correct ? 1 : 0, page.times[index], quizTimer.timeLimit),
+                                    time: page.times[index],
+                                })
                             }
                             itemHeight: Theme.itemSizeSmall
                             model: correctAnswers

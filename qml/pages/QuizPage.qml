@@ -19,6 +19,7 @@ Page {
     property var indices
     property var setup
     property var correctAnswers: new Array
+    property var times: new Array
 
     readonly property int count: indices.length
     readonly property int index: indices[current - 1]
@@ -253,10 +254,13 @@ Page {
         onTriggered: {
             var correctAnswers = page.correctAnswers
             correctAnswers.push(wasCorrect)
+            var times = page.times
+            times.push(quizTimer.timeLimit - quizTimer.timeLeft)
             if (current >= count) {
                 pageStack.replace(Qt.resolvedUrl("ResultsPage.qml"), {
                     indices: page.indices,
                     correctAnswers: correctAnswers,
+                    times: times,
                     setup: page.setup
                 })
                 config.hasPlayed = true
@@ -265,6 +269,7 @@ Page {
                     indices: page.indices,
                     current: page.current + 1,
                     correctAnswers: correctAnswers,
+                    times: times,
                     setup: page.setup
                 })
             }
