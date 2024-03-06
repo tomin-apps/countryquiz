@@ -24,6 +24,7 @@
 // TODO: Light theme support
 
 Q_LOGGING_CATEGORY(lcMapRenderer, "site.tomin.apps.CountryQuiz.MapRenderer", QtWarningMsg)
+Q_LOGGING_CATEGORY(lcCircles, "site.tomin.apps.CountryQuiz.MapRenderer.Circles", QtWarningMsg)
 
 #define IMAGE_FORMAT QImage::Format_RGBA8888_Premultiplied
 
@@ -82,6 +83,7 @@ namespace {
     std::vector<QRectF> get_circles_locked(QSvgRenderer &renderer, const QString &code, const QTransform &scaling, const QTransform &translation, const QRectF &element)
     {
         std::vector<QRectF> circles;
+        qCDebug(lcCircles) << code << "has area" << element.width() * element.height() << "=" << element.width() << "×" << element.height();
         if (element.width() * element.height() < CircleLimit) {
             circles.push_back(scaling.mapRect(translation.mapRect(get_circle(element))));
         } else {
@@ -89,6 +91,7 @@ namespace {
                 QString subCode = SubElementTemplate.arg(code).arg(i);
                 QMatrix matrix = renderer.matrixForElement(subCode);
                 QRectF subElement = matrix.mapRect(renderer.boundsOnElement(subCode));
+                qCDebug(lcCircles) << subCode << "has area" << subElement.width() * subElement.height() << "=" << subElement.width() << "×" << subElement.height();
                 if (subElement.width() * subElement.height() < CircleLimit)
                     circles.push_back(scaling.mapRect(translation.mapRect(get_circle(subElement))));
             }
