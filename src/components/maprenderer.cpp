@@ -29,7 +29,7 @@ Q_LOGGING_CATEGORY(lcCircles, "site.tomin.apps.CountryQuiz.MapRenderer.Circles",
 #define IMAGE_FORMAT QImage::Format_RGBA8888_Premultiplied
 
 namespace {
-    const qreal CircleLimit = 250;
+    const qreal CircleLimit = 350;
     const qreal CircleMinimumWidth = 20;
     const qreal CirclePenWidth = 2.0;
     const qreal CircleScalingFactor = 355.0 / 113.0;
