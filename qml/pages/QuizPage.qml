@@ -191,7 +191,7 @@ Page {
         id: choices
         anchors.bottom: parent.bottom
         boundsBehavior: Flickable.StopAtBounds
-        height: Math.min(maximumHeight, Math.max(minimumHeight, page.height - column.height))
+        height: Math.min(maximumHeight, Math.max(minimumHeight, page.height - column.height - (column.useHeaderSpace ? 0 : header.height)))
         model: DelegateModel {
             signal highlightCorrect
             signal highlightAllWrong
