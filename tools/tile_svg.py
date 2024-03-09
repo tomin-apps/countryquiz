@@ -73,7 +73,8 @@ class Surface:
 
 def draw_tile(surface, tile, target_template):
     tile_surface = tile.draw(surface)
-    tile_surface.write_to_png(target_template.format(x=tile.index.x, y=tile.index.y))
+    if any(tile_surface.get_data()):
+        tile_surface.write_to_png(target_template.format(x=tile.index.x, y=tile.index.y))
 
 def tile(filepath, x, y, target, scale_factor):
     surface = Surface(filepath, scale_factor)
@@ -98,10 +99,10 @@ def tiles_from_txt(txt, output_directory):
     else:
         mtime = -1
     csv.register_dialect('custom', delimiter=';', lineterminator='\n', quoting=csv.QUOTE_NONE)
-    with open(output_txt, 'w', newline='') as output_file, open(txt, newline='') as input_file:
+    with open(output_txt, 'w', newline='') as output_file, open(txt, newline='') as input_file, concurrent.futures.ProcessPoolExecutor() as executor:
         writer = csv.writer(output_file, dialect='custom')
         for svg, template, scale, width, height in csv.reader(input_file, dialect='custom'):
-            tiles_from_line(txt.parent / svg, output_directory / template, scale, width, height, mtime)
+            executor.submit(tiles_from_line, txt.parent / svg, output_directory / template, scale, width, height, mtime)
             writer.writerow([template.format(x='%1', y='%2'), scale, width, height])
 
 if __name__ == "__main__":
