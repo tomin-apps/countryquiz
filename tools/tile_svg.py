@@ -7,10 +7,12 @@
 
 import argparse
 import cairo
+import csv
 import concurrent.futures
 import gi
 import itertools
 import os.path
+import pathlib
 import threading
 
 gi.require_version('Rsvg', '2.0')
@@ -44,19 +46,10 @@ class Tile:
 
 class Surface:
     def __init__(self, svg, scale_factor):
-        self.svg = svg
         self.handle = Rsvg.Handle.new_from_file(svg)
         dimensions = self.handle.get_dimensions()
         self.dimensions = Dimensions(dimensions.width, dimensions.height).scaled(scale_factor)
         self.scale_factor = scale_factor
-
-    def check_tiles(self, x, y, target_template):
-        surface_mtime = os.path.getmtime(self.svg)
-        for tile in self.tiled(x, y):
-            path = target_template.format(x=tile.index.x, y=tile.index.y)
-            if not os.path.isfile(path) or os.path.getmtime(path) < surface_mtime:
-                return True
-        return False
 
     def paint(self):
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, self.dimensions.width, self.dimensions.height)
@@ -84,25 +77,36 @@ def draw_tile(surface, tile, target_template):
 
 def tile(filepath, x, y, target, scale_factor):
     surface = Surface(filepath, scale_factor)
-    if surface.check_tiles(x, y, target):
-        cairo_surface = surface.paint()
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            for tile in surface.tiled(x, y):
-                executor.submit(draw_tile, cairo_surface, tile, target)
+    cairo_surface = surface.paint()
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        for tile in surface.tiled(x, y):
+            executor.submit(draw_tile, cairo_surface, tile, target)
 
-def target(text):
-    if "{x}" not in text:
-        raise ValueError("{} does not contain '{{x}}'".format(text))
-    if "{y}" not in text:
-        raise ValueError("{} does not contain '{{y}}'".format(text))
-    return text
+def tiles_from_line(filepath, template, scale, width, height, mtime):
+    if not filepath.exists():
+        print(f"Input file {filepath} does not exist")
+    if mtime < 0 or os.path.getmtime(filepath) > mtime:
+        tile(str(filepath), int(width), int(height), str(template), float(scale))
+
+def tiles_from_txt(txt, output_directory):
+    output_directory.mkdir(parents=True, exist_ok=True)
+    output_txt = output_directory / txt.name[:-3]
+    if output_txt.exists():
+        mtime = os.path.getmtime(output_txt)
+        if os.path.getmtime(txt) > mtime:
+            mtime = -1
+    else:
+        mtime = -1
+    csv.register_dialect('custom', delimiter=';', lineterminator='\n', quoting=csv.QUOTE_NONE)
+    with open(output_txt, 'w', newline='') as output_file, open(txt, newline='') as input_file:
+        writer = csv.writer(output_file, dialect='custom')
+        for svg, template, scale, width, height in csv.reader(input_file, dialect='custom'):
+            tiles_from_line(txt.parent / svg, output_directory / template, scale, width, height, mtime)
+            writer.writerow([template.format(x='%1', y='%2'), scale, width, height])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('svg')
-    parser.add_argument('x', type=int)
-    parser.add_argument('y', type=int)
-    parser.add_argument('target', type=target)
-    parser.add_argument('--scale-factor', '-s', type=float, default=1.0)
+    parser.add_argument('txt', type=pathlib.Path)
+    parser.add_argument('--output', '-o', type=pathlib.Path)
     args = parser.parse_args()
-    tile(args.svg, args.x, args.y, args.target, args.scale_factor)
+    tiles_from_txt(args.txt, args.output)
