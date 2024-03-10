@@ -298,8 +298,13 @@ const MapRenderer::Tiles &MapRenderer::getTilesForScaling(const QSize &target, c
     }
     if (it == m_tiles.cend()) {
         auto last = m_tiles.crbegin();
-        qCWarning(lcMapRenderer).nospace() << "Falling back to best quality tiles with scaling " << last->first
-                                           << " (requested: " << scale << ")";
+        if (last->first * 2 < scale) {
+            qCWarning(lcMapRenderer).nospace() << "Falling back to best quality tiles with scaling " << last->first
+                                               << " (requested: " << scale << ")";
+        } else {
+            qCDebug(lcMapRenderer).nospace() << "Falling back to best quality tiles with scaling " << last->first
+                                             << " (requested: " << scale << ")";
+        }
         return last->second;
     }
     qCDebug(lcMapRenderer) << "Selecting tiles for scaling" << it->first;
