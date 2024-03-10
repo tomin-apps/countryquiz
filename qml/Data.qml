@@ -37,7 +37,6 @@ ListModel {
         capital: "Andorar la Vella"
         region: "Europe"
         iso: "and"
-        small_island: true
     }
 
     ListElement {
@@ -70,7 +69,6 @@ ListModel {
         capital: "St. John's"
         region: "North America"
         iso: "atg"
-        small_island: true
     }
 
     ListElement {
@@ -150,7 +148,6 @@ ListModel {
         capital: "Manama"
         region: "Asia"
         iso: "bhr"
-        small_island: true
     }
 
     ListElement {
@@ -160,7 +157,6 @@ ListModel {
         capital: "Nassau"
         region: "North America"
         iso: "bhs"
-        small_island: true
     }
 
     ListElement {
@@ -206,7 +202,6 @@ ListModel {
         capital: "Bridgetown"
         region: "North America"
         iso: "brb"
-        small_island: true
     }
 
     ListElement {
@@ -318,7 +313,6 @@ ListModel {
         capital: "Moroni"
         region: "Africa"
         iso: "com"
-        small_island: true
     }
 
     ListElement {
@@ -328,7 +322,6 @@ ListModel {
         region: "Africa"
         iso: "cpv"
         other: "Cabo Verde"
-        small_island: true
     }
 
     ListElement {
@@ -385,7 +378,6 @@ ListModel {
         capital: "Roseau"
         region: "North America"
         iso: "dma"
-        small_island: true
     }
 
     ListElement {
@@ -572,7 +564,6 @@ ListModel {
         capital: "St. George's"
         region: "North America"
         iso: "grd"
-        small_island: true
     }
 
     ListElement {
@@ -691,7 +682,6 @@ ListModel {
         capital: "Kingston"
         region: "North America"
         iso: "jam"
-        small_island: true
     }
 
     ListElement {
@@ -811,7 +801,6 @@ ListModel {
         capital: "Castries"
         region: "North America"
         iso: "lca"
-        small_island: true
     }
 
     ListElement {
