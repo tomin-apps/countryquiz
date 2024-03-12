@@ -385,7 +385,14 @@ QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
         }
 
         prevNode = drawRectangle(node, miniMapNode, unifiedRect(m_miniMap.rect[0].target, m_miniMap.rect[1].target), QColor(Qt::white), 2);
-        drawRectangle(node, prevNode, m_miniMap.bounds.toRect(), opaqueColor(m_overlayColor), 2);
+        prevNode = drawRectangle(node, prevNode, m_miniMap.bounds.toRect(), opaqueColor(m_overlayColor), 2);
+
+        QSGNode *next = prevNode->nextSibling();
+        while (next) {
+            prevNode = next;
+            next = prevNode->nextSibling();
+            delete prevNode;
+        }
 
         m_dirty = false;
     }
