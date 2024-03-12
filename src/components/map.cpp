@@ -178,6 +178,11 @@ namespace {
         return QRectF(QPointF(rect.left() + rect.width() * left, rect.top() + rect.height() * top),
                       QPointF(rect.right() + rect.width() * right, rect.bottom() + rect.height() * bottom));
     }
+
+    QRectF unifiedRect(const QRectF &first, const QRectF &second)
+    {
+        return !second.isValid() ? first : first.united(second);
+    }
 } // namespace
 
 void Map::updatePolish()
@@ -187,11 +192,36 @@ void Map::updatePolish()
         m_miniMap.location = m_mapModel->miniMapBounds(m_code, rect.width() / rect.height());
         if (m_miniMap.location.isValid()) {
             m_ready |= MinimapReady;
-            m_miniMap.sourceRect = miniMapSourceRect(m_miniMap.texture->textureSize(), m_miniMap.location);
-            m_miniMap.targetRect = miniMapRect(boundingRect(), m_miniMap.sourceRect.size());
-            qreal scale = getScale(m_miniMap.targetRect.size(), m_miniMap.sourceRect.size());
-            QRectF bounds((m_miniMap.location.topLeft() - m_miniMap.sourceRect.topLeft()) * scale, m_miniMap.location.size() * scale);
-            m_miniMap.bounds = m_miniMap.targetRect.intersected(bounds);
+            QSizeF textureSize = m_miniMap.texture->textureSize();
+            QRectF miniMapSource = miniMapSourceRect(textureSize, m_miniMap.location);
+            QRectF miniMapTarget = miniMapRect(boundingRect(), miniMapSource.size());
+            m_miniMap.rect[0].source = miniMapSource;
+            m_miniMap.rect[0].target = miniMapTarget;
+            if (m_miniMap.rect[0].source.left() < 0) {
+                m_miniMap.rect[0].source.setLeft(0);
+                m_miniMap.rect[1].source = miniMapSource;
+                m_miniMap.rect[1].source.setRight(0);
+                m_miniMap.rect[1].source.moveRight(textureSize.width());
+                m_miniMap.rect[1].target = miniMapTarget;
+                m_miniMap.rect[1].target.setSize(m_miniMap.rect[1].source.size().scaled(m_miniMap.rect[1].target.size(), Qt::KeepAspectRatio));
+                m_miniMap.rect[0].target.setSize(m_miniMap.rect[0].source.size().scaled(m_miniMap.rect[0].target.size(), Qt::KeepAspectRatio));
+                m_miniMap.rect[0].target.moveLeft(m_miniMap.rect[1].target.right());
+            } else if (m_miniMap.rect[0].source.right() > textureSize.width()) {
+                m_miniMap.rect[0].source.setRight(textureSize.width());
+                m_miniMap.rect[1].source = miniMapSource;
+                m_miniMap.rect[1].source.setLeft(textureSize.width());
+                m_miniMap.rect[1].source.moveLeft(0);
+                m_miniMap.rect[1].target = miniMapTarget;
+                m_miniMap.rect[0].target.setSize(m_miniMap.rect[0].source.size().scaled(m_miniMap.rect[0].target.size(), Qt::KeepAspectRatio));
+                m_miniMap.rect[1].target.setSize(m_miniMap.rect[1].source.size().scaled(m_miniMap.rect[1].target.size(), Qt::KeepAspectRatio));
+                m_miniMap.rect[1].target.moveLeft(m_miniMap.rect[0].target.right());
+            } else {
+                m_miniMap.rect[1].source = QRectF();
+                m_miniMap.rect[1].target = QRectF();
+            }
+            qreal scale = getScale(miniMapTarget.size(), miniMapSource.size());
+            QRectF bounds((m_miniMap.location.topLeft() - miniMapSource.topLeft()) * scale, m_miniMap.location.size() * scale);
+            m_miniMap.bounds = miniMapTarget.intersected(bounds);
 
             m_fastMap[0].target = adjustedBy(boundingRect(), 0.25, 0, 0, 0.25);
             m_fastMap[0].source = adjustedBy(m_miniMap.location, 0.25, 0, 0, 0.25);
@@ -206,21 +236,22 @@ void Map::updatePolish()
         for (Tile &tile : m_tiles) {
             QRectF targetRect = bounds.intersected(tile.location);
             QRectF sourceRect = QRectF(QPointF(targetRect.left() - tile.location.left(), targetRect.top() - tile.location.top()), targetRect.size());
-            if (!tile.location.intersects(m_miniMap.targetRect)) {
+            QRectF miniMapTarget = unifiedRect(m_miniMap.rect[0].target, m_miniMap.rect[1].target);
+            if (!tile.location.intersects(miniMapTarget)) {
                 tile.rects[0].target = targetRect;
                 tile.rects[0].source = sourceRect;
                 tile.parts = SinglePart;
             } else {
                 tile.parts = Hidden;
-                if (targetRect.right() > m_miniMap.targetRect.right()) {
-                    QRectF rect = getSubtractedArea(targetRect, m_miniMap.targetRect, false);
+                if (targetRect.right() > miniMapTarget.right()) {
+                    QRectF rect = getSubtractedArea(targetRect, miniMapTarget, false);
                     tile.rects[0].target = rect;
                     rect.moveTo(sourceRect.topLeft() + rect.topLeft() - targetRect.topLeft());
                     tile.rects[0].source = rect;
                     tile.parts = SinglePart;
                 }
-                if (targetRect.bottom() > m_miniMap.targetRect.bottom()) {
-                    QRectF rect = getSubtractedArea(targetRect, m_miniMap.targetRect, true);
+                if (targetRect.bottom() > miniMapTarget.bottom()) {
+                    QRectF rect = getSubtractedArea(targetRect, miniMapTarget, true);
                     tile.rects[tile.parts].target = rect;
                     rect.moveTo(sourceRect.topLeft() + rect.topLeft() - targetRect.topLeft());
                     tile.rects[tile.parts].source = rect;
@@ -340,11 +371,20 @@ QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
         auto *miniMapNode = getNextChildNode<QSGSimpleTextureNode>(node, overlayNode);
         if (miniMapNode->texture() != m_miniMap.texture.data()) {
             miniMapNode->setTexture(m_miniMap.texture.data());
-            miniMapNode->setRect(m_miniMap.targetRect);
-            miniMapNode->setSourceRect(m_miniMap.sourceRect);
+            miniMapNode->setRect(m_miniMap.rect[0].target);
+            miniMapNode->setSourceRect(m_miniMap.rect[0].source);
         }
 
-        prevNode = drawRectangle(node, miniMapNode, m_miniMap.targetRect, QColor(Qt::white), 2);
+        if (m_miniMap.rect[1].target.isValid()) {
+            miniMapNode = getNextChildNode<QSGSimpleTextureNode>(node, miniMapNode);
+            if (miniMapNode->texture() != m_miniMap.texture.data()) {
+                miniMapNode->setTexture(m_miniMap.texture.data());
+                miniMapNode->setRect(m_miniMap.rect[1].target);
+                miniMapNode->setSourceRect(m_miniMap.rect[1].source);
+            }
+        }
+
+        prevNode = drawRectangle(node, miniMapNode, unifiedRect(m_miniMap.rect[0].target, m_miniMap.rect[1].target), QColor(Qt::white), 2);
         drawRectangle(node, prevNode, m_miniMap.bounds.toRect(), opaqueColor(m_overlayColor), 2);
 
         m_dirty = false;
@@ -445,10 +485,8 @@ void Map::miniMapChanged()
     if (m_mapModel && !m_code.isEmpty()) {
         m_dirty = true;
         setTexture(m_miniMap.texture, m_mapModel->miniMap());
-        if (m_miniMap.texture) {
+        if (m_miniMap.texture)
             qCDebug(lcMap) << "Mini map received";
-            m_miniMap.texture->setHorizontalWrapMode(QSGTexture::Repeat);
-        }
         if (m_ready & OverlayPending)
             polish();
     }

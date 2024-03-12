@@ -118,8 +118,10 @@ private:
     struct {
         QScopedPointer<QSGTexture> texture;
         QRectF location;
-        QRectF sourceRect;
-        QRectF targetRect;
+        struct {
+            QRectF source;
+            QRectF target;
+        } rect[2];
         QRectF bounds;
     } m_miniMap;
     struct {
