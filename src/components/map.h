@@ -123,6 +123,7 @@ private:
             QRectF target;
         } rect[2];
         QRectF bounds;
+        QRectF overlay;
     } m_miniMap;
     struct {
         QRectF source;

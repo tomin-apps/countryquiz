@@ -183,6 +183,14 @@ namespace {
     {
         return !second.isValid() ? first : first.united(second);
     }
+
+    QRectF miniMapOverlayRect(const QRectF &full, const QRectF &minimap, const QRectF &overlay)
+    {
+        qreal scale = getScale(minimap.size(), full.size());
+        QRectF target(QPointF(), overlay.size() * scale);
+        target.moveCenter(minimap.center());
+        return target;
+    }
 } // namespace
 
 void Map::updatePolish()
@@ -222,6 +230,7 @@ void Map::updatePolish()
             qreal scale = getScale(miniMapTarget.size(), miniMapSource.size());
             QRectF bounds((m_miniMap.location.topLeft() - miniMapSource.topLeft()) * scale, m_miniMap.location.size() * scale);
             m_miniMap.bounds = miniMapTarget.intersected(bounds);
+            m_miniMap.overlay = miniMapOverlayRect(boundingRect(), bounds, m_overlay.location);
 
             m_fastMap[0].target = adjustedBy(boundingRect(), 0.25, 0, 0, 0.25);
             m_fastMap[0].source = adjustedBy(m_miniMap.location, 0.25, 0, 0, 0.25);
@@ -384,7 +393,14 @@ QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
             }
         }
 
-        prevNode = drawRectangle(node, miniMapNode, unifiedRect(m_miniMap.rect[0].target, m_miniMap.rect[1].target), QColor(Qt::white), 2);
+        overlayNode = getNextChildNode<QSGSimpleTextureNode>(node, miniMapNode);
+        if (overlayNode->texture() != m_overlay.texture.data()) {
+            overlayNode->setTexture(m_overlay.texture.data());
+            overlayNode->setRect(m_miniMap.overlay);
+            overlayNode->setSourceRect(QRectF());
+        }
+
+        prevNode = drawRectangle(node, overlayNode, unifiedRect(m_miniMap.rect[0].target, m_miniMap.rect[1].target), QColor(Qt::white), 2);
         prevNode = drawRectangle(node, prevNode, m_miniMap.bounds.toRect(), opaqueColor(m_overlayColor), 2);
 
         QSGNode *next = prevNode->nextSibling();
