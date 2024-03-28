@@ -43,7 +43,7 @@
     </message>
     <message>
         <location filename="../qml/pages/CountryPage.qml" line="114"/>
-        <source>Score: %1</source>
+        <source>Score: %L1 points</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -264,77 +264,82 @@
 <context>
     <name>ResultsPage</name>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="49"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="50"/>
         <source>Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="65"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="66"/>
         <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="69"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="70"/>
         <source>Perfect work! You clearly know the flags!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="71"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="72"/>
         <source>Perfect work! You clearly know maps!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="73"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="74"/>
         <source>Perfect work! You clearly know the capitals!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="78"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="79"/>
         <source>Excellent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="80"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="81"/>
         <source>Very good!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="82"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="83"/>
         <source>You did well!!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="84"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="85"/>
         <source>You could use more practice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="86"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="87"/>
         <source>Did you try to avoid the right answers?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="97"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="98"/>
         <source>%1 / %2 correct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="107"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="108"/>
         <source>in %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="116"/>
-        <source>Score %1</source>
+        <location filename="../qml/pages/ResultsPage.qml" line="119"/>
+        <source>Score %L1 points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="157"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="121"/>
+        <source>Score %L1 points (#%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ResultsPage.qml" line="167"/>
         <source>Your answers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResultsPage.qml" line="163"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="173"/>
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>

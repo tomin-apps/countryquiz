@@ -159,7 +159,8 @@ ExpandingSection {
                                        choicesCount: presetModel.choicesCount,
                                        sameRegion: presetModel.sameRegion,
                                        timeToAnswer: presetModel.timeToAnswer,
-                                       quizType: expandingSection.quizType
+                                       quizType: expandingSection.quizType,
+                                       isPreset: presetModel.presetSelected && expandingSection.presetCount
                                    }
                                })
             }

@@ -6,6 +6,7 @@
 
 import QtQuick 2.6
 import Sailfish.Silica 1.0
+import CountryQuiz 1.0
 import "../helpers.js" as Helpers
 
 Page {
@@ -113,9 +114,18 @@ Page {
                 color: palette.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("Score %1").arg(totalScore)
-                width: parent.width - 2 * Theme.horizontalPageMargin
-                x: Theme.horizontalPageMargin
+                text: {
+                    if (resultsSaver.nth === -1) {
+                        return qsTr("Score %L1 points").arg(totalScore)
+                    }
+                    return qsTr("Score %L1 points (#%2)").arg(totalScore).arg(resultsSaver.nth)
+                }
+                width: Math.min(contentWidth, parent.width - 2 * Theme.horizontalPageMargin)
+                x: Theme.horizontalPageMargin + Math.max(0, ((parent.width - 2 * Theme.horizontalPageMargin) - contentWidth)) / 2
+
+                Behavior on x {
+                    NumberAnimation { }
+                }
             }
 
             ExpandingSectionGroup {
@@ -174,4 +184,20 @@ Page {
 
         VerticalScrollDecorator { }
     }
+
+    ResultsSaver {
+        property bool valid: setup && setup.isPreset
+
+        id: resultsSaver
+        options {
+            quizType: valid ? setup.quizType : ""
+            numberOfQuestions: valid ? setup.questionCount : 0
+            numberOfChoices: valid ? setup.choicesCount : 0
+            choicesFrom: valid ? (setup.sameRegion ? "same region" : "everywhere") : ""
+            timeToAnswer: valid ? setup.timeToAnswer : 0
+            language: valid ? "en" : ""
+        }
+    }
+
+    Component.onCompleted: resultsSaver.save(correctAnswers, times)
 }

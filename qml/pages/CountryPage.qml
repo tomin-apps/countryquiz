@@ -111,7 +111,7 @@ Page {
                     color: palette.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeMedium
                     horizontalAlignment: Text.AlignHCenter
-                    text: qsTr("Score: %1").arg(page.score)
+                    text: qsTr("Score: %L1 points").arg(page.score)
                     visible: page.score >= 0
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap
