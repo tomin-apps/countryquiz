@@ -26,6 +26,7 @@ DISTFILES += \
     rpm/harbour-countryquiz.spec \
     translations/*.ts \
     tools/compare_svg.py \
+    tools/create_fake_stats.py \
     tools/tile_svg.py \
     tools/yaml2xml.py
 
