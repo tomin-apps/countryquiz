@@ -197,6 +197,7 @@ Page {
             timeToAnswer: valid ? setup.timeToAnswer : 0
             language: valid ? "en" : ""
         }
+        onNthChanged: signaler.resultSaved()
     }
 
     Component.onCompleted: resultsSaver.save(correctAnswers, times)

@@ -7,6 +7,7 @@
 import Nemo.Configuration 1.0
 import QtQuick 2.6
 import Sailfish.Silica 1.0
+import "../helpers.js" as Helpers
 
 Item {
     property ListModel presets
@@ -18,7 +19,7 @@ Item {
 
     readonly property int currentIndex: _currentIndex
     readonly property bool presetSelected: _currentIndex >= 0 && _currentItem !== null
-    readonly property string presetTitle: getTitleText(presetSelected ? _currentItem.name : "none")
+    readonly property string presetTitle: Helpers.getPresetTitleText(presetSelected ? _currentItem.name : "none")
     readonly property int choicesCount: presetSelected ? _currentItem.choices : selectedChoices
     readonly property bool sameRegion: presetSelected ? _currentItem.region : selectedRegion
     readonly property int timeToAnswer: presetSelected ? _currentItem.time : selectedTime
@@ -69,18 +70,6 @@ Item {
 
     function invalidatePreset() {
         _currentIndex = -1
-    }
-
-
-    function getTitleText(name) {
-        if (name === "easy") {
-            return qsTr("Easy")
-        } if (name === "regular") {
-            return qsTr("Regular")
-        } if (name === "veteran") {
-            return qsTr("Veteran")
-        }
-        return qsTr("None")
     }
 
     id: presetModel

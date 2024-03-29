@@ -56,29 +56,6 @@
     </message>
 </context>
 <context>
-    <name>PresetModel</name>
-    <message>
-        <location filename="../qml/components/PresetModel.qml" line="77"/>
-        <source>Easy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/components/PresetModel.qml" line="79"/>
-        <source>Regular</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/components/PresetModel.qml" line="81"/>
-        <source>Veteran</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/components/PresetModel.qml" line="83"/>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>QuizPage</name>
     <message>
         <location filename="../qml/pages/QuizPage.qml" line="40"/>
@@ -147,21 +124,6 @@
         <location filename="../qml/components/QuizSection.qml" line="39"/>
         <location filename="../qml/components/QuizSection.qml" line="63"/>
         <source>Questions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/components/QuizSection.qml" line="41"/>
-        <source>Short</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/components/QuizSection.qml" line="42"/>
-        <source>Long</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/components/QuizSection.qml" line="43"/>
-        <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -246,17 +208,17 @@
 <context>
     <name>QuizSelectionTab</name>
     <message>
-        <location filename="../qml/pages/QuizSelectionTab.qml" line="33"/>
+        <location filename="../qml/pages/QuizSelectionTab.qml" line="35"/>
         <source>Flag Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizSelectionTab.qml" line="65"/>
+        <location filename="../qml/pages/QuizSelectionTab.qml" line="42"/>
         <source>Map Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizSelectionTab.qml" line="97"/>
+        <location filename="../qml/pages/QuizSelectionTab.qml" line="49"/>
         <source>Capital City Quiz</source>
         <translation type="unfinished"></translation>
     </message>
@@ -345,20 +307,76 @@
     </message>
 </context>
 <context>
+    <name>StatsSection</name>
+    <message>
+        <location filename="../qml/components/StatsSection.qml" line="71"/>
+        <source>Preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/StatsSection.qml" line="88"/>
+        <source>Length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/StatsSection.qml" line="169"/>
+        <source>On %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/StatsSection.qml" line="180"/>
+        <source>%1 / %2 for %3 p</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/StatsSection.qml" line="193"/>
+        <source>In %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/components/StatsSection.qml" line="212"/>
+        <source>This quiz has not been played yet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StatsTab</name>
+    <message>
+        <location filename="../qml/pages/StatsTab.qml" line="33"/>
+        <source>Flag Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StatsTab.qml" line="39"/>
+        <source>Map Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StatsTab.qml" line="45"/>
+        <source>Capital City Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>harbour-countryquiz</name>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="53"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="54"/>
         <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="94"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="95"/>
         <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="99"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="100"/>
         <source>Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-countryquiz.qml" line="105"/>
+        <source>Stats</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -27,7 +27,7 @@ ExpandingSection {
             menu: ContextMenu {
                 Repeater {
                     model: presetModel.presets
-                    MenuItem { text: presetModel.getTitleText(model.name) }
+                    MenuItem { text: Helpers.getPresetTitleText(model.name) }
                 }
 
                 onActivated: presetModel.selectPreset(index)
@@ -38,9 +38,9 @@ ExpandingSection {
         SelectableDetailItem {
             label: qsTr("Questions")
             menu: ContextMenu {
-                MenuItem { text: qsTr("Short") + " - 15" }
-                MenuItem { text: qsTr("Long") + " - 80" }
-                MenuItem { text: qsTr("All") + " - %1".arg(expandingSection.maximumLength) }
+                MenuItem { text: Helpers.getLengthTitleText("short") + " - 15" }
+                MenuItem { text: Helpers.getLengthTitleText("long") + " - 80" }
+                MenuItem { text: Helpers.getLengthTitleText("all") + " - %1".arg(expandingSection.maximumLength) }
                 MenuItem { text: qsTr("Custom value") }
 
                 onActivated: {

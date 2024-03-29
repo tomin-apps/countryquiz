@@ -14,6 +14,7 @@ DISTFILES += \
     qml/components/QuizSection.qml \
     qml/components/QuizTimer.qml \
     qml/components/SelectableDetailItem.qml \
+    qml/components/StatsSection.qml \
     qml/components/Tabs.qml \
     qml/harbour-countryquiz.qml \
     qml/helpers.js \
@@ -23,6 +24,10 @@ DISTFILES += \
     qml/pages/QuizPage.qml \
     qml/pages/QuizSelectionTab.qml \
     qml/pages/ResultsPage.qml \
+    qml/pages/StatsTab.qml \
+    qml/presets/FlagQuizPresets.qml \
+    qml/presets/MapQuizPresets.qml \
+    qml/presets/CapitalQuizPresets.qml \
     rpm/harbour-countryquiz.spec \
     translations/*.ts \
     tools/compare_svg.py \

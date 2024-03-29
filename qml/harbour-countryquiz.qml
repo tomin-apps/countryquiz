@@ -16,6 +16,7 @@ ApplicationWindow {
     property alias dataModel: dataModel
     property alias mapModel: mapModel
     property alias quizTimer: quizTimer
+    property alias signaler: signaler
 
     initialPage: Component {
         Page {
@@ -99,5 +100,16 @@ ApplicationWindow {
             title: qsTr("Quiz")
             url: "pages/QuizSelectionTab.qml"
         }
+
+        ListElement {
+            title: qsTr("Stats")
+            url: "pages/StatsTab.qml"
+        }
+    }
+
+    Item {
+        signal resultSaved()
+
+        id: signaler
     }
 }
