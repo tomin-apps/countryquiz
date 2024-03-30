@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
+import Nemo.Configuration 1.0
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import "../helpers.js" as Helpers
@@ -13,6 +14,9 @@ ExpandingSection {
     property alias quizType: presetModel.type
     readonly property int maximumLength: _maximumLength
     property int _maximumLength: dataModel.getIndices(quizType).length
+    readonly property int questionCount: selectedCount === -1 ? maximumLength : selectedCount
+    property alias selectedCount: selected.count
+    readonly property bool presetCount: selectedCount === 15 || selectedCount ===  80 || selectedCount === -1
 
     id: expandingSection
     content.sourceComponent: Column {
@@ -35,25 +39,25 @@ ExpandingSection {
         SelectableDetailItem {
             label: qsTr("Questions")
             menu: ContextMenu {
-                MenuItem { text: "15" }
-                MenuItem { text: "80" }
-                MenuItem { text: "%1".arg(expandingSection.maximumLength) }
+                MenuItem { text: qsTr("Short") + " - 15" }
+                MenuItem { text: qsTr("Long") + " - 80" }
+                MenuItem { text: qsTr("All") + " - %1".arg(expandingSection.maximumLength) }
                 MenuItem { text: qsTr("Custom value") }
 
                 onActivated: {
                     switch (index) {
                     case 0:
-                        presetModel.selectedCount = 15
+                        expandingSection.selectedCount = 15
                         break
                     case 1:
-                        presetModel.selectedCount = 80
+                        expandingSection.selectedCount = 80
                         break
                     case 2:
-                        presetModel.selectedCount = -1
+                        expandingSection.selectedCount = -1
                         break
                     case 3:
                         var dialog = pageStack.push(Qt.resolvedUrl("../pages/IntSelectionPage.qml"), {
-                            value: presetModel.questionCount,
+                            value: expandingSection.questionCount,
                             minimum: 1,
                             maximum: expandingSection.maximumLength,
                             title: qsTr("Select number of questions"),
@@ -63,16 +67,16 @@ ExpandingSection {
                         })
                         dialog.onAccepted.connect(function() {
                             if (dialog.selectedValue >= expandingSection.maximumLength) {
-                                presetModel.selectedCount = -1
+                                expandingSection.selectedCount = -1
                             } else {
-                                presetModel.selectedCount = dialog.selectedValue
+                                expandingSection.selectedCount = dialog.selectedValue
                             }
                         })
                         break
                     }
                 }
             }
-            value: presetModel.questionCount
+            value: expandingSection.questionCount
         }
 
         SelectableDetailItem {
@@ -150,9 +154,9 @@ ExpandingSection {
             onClicked:  {
                 quizTimer.reset()
                 pageStack.push(Qt.resolvedUrl("../pages/QuizPage.qml"), {
-                                   indices: Helpers.pickRandomIndices(dataModel, dataModel.getIndices(expandingSection.quizType), presetModel.questionCount),
+                                   indices: Helpers.pickRandomIndices(dataModel, dataModel.getIndices(expandingSection.quizType), expandingSection.questionCount),
                                    setup: {
-                                       questionCount: presetModel.questionCount,
+                                       questionCount: expandingSection.questionCount,
                                        choicesCount: presetModel.choicesCount,
                                        sameRegion: presetModel.sameRegion,
                                        timeToAnswer: presetModel.timeToAnswer,
@@ -170,6 +174,13 @@ ExpandingSection {
         property: "presetModel"
         value: presetModel
         when: expandingSection.expanded
+    }
+
+    ConfigurationGroup {
+        property int count: 15
+
+        id: selected
+        path: expandingSection.quizType ? "/site/tomin/apps/CountryQuiz/" + expandingSection.quizType : ""
     }
 
     // Break some weird signal issue that crashes the app when closing it

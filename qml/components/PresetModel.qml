@@ -12,7 +12,6 @@ Item {
     property ListModel presets
     property string type
 
-    property alias selectedCount: selected.count
     property alias selectedChoices: selected.choices
     property alias selectedRegion: selected.region
     property alias selectedTime: selected.time
@@ -20,21 +19,17 @@ Item {
     readonly property int currentIndex: _currentIndex
     readonly property bool presetSelected: _currentIndex >= 0 && _currentItem !== null
     readonly property string presetTitle: getTitleText(presetSelected ? _currentItem.name : "none")
-    readonly property int questionCount: _questionCount < 0 ? maximumLength : _questionCount
     readonly property int choicesCount: presetSelected ? _currentItem.choices : selectedChoices
     readonly property bool sameRegion: presetSelected ? _currentItem.region : selectedRegion
     readonly property int timeToAnswer: presetSelected ? _currentItem.time : selectedTime
 
     property int _currentIndex
     readonly property var _currentItem: presets && currentIndex >= 0 && currentIndex < presets.count ? presets.get(currentIndex) : null
-    readonly property int _questionCount: presetSelected ? _currentItem.count : selectedCount
 
     function checkPropInPreset(index, prop) {
         if (presets) {
             var preset = presets.get(index)
-            if (prop === "count") {
-                return preset.count === selectedCount
-            } if (prop === "choices") {
+            if (prop === "choices") {
                 return preset.choices === selectedChoices
             } if (prop === "region") {
                 return preset.region === selectedRegion
@@ -50,8 +45,7 @@ Item {
             for (var i = 0; i < presets.count; ++i) {
                 if (checkPropInPreset(i, changedProp)) {
                     var preset = presets.get(i)
-                    if (selectedCount === preset.count
-                            && selectedChoices === preset.choices
+                    if (selectedChoices === preset.choices
                             && selectedRegion === preset.region
                             && selectedTime === preset.time) {
                         selectPreset(i)
@@ -66,7 +60,6 @@ Item {
     function selectPreset(index) {
         if (presets) {
             var preset = presets.get(index)
-            selectedCount = preset.count
             selectedChoices = preset.choices
             selectedRegion = preset.region
             selectedTime = preset.time
@@ -91,13 +84,11 @@ Item {
     }
 
     id: presetModel
-    onSelectedCountChanged: checkProp("count")
     onSelectedChoicesChanged: checkProp("choices")
     onSelectedRegionChanged: checkProp("region")
     onSelectedTimeChanged: checkProp("time")
 
     ConfigurationGroup {
-        property int count: presets && presets.count >= 1 ? presets.get(0).count : 0
         property int choices: presets && presets.count >= 1 ? presets.get(0).choices : 0
         property bool region: presets && presets.count >= 1 ? presets.get(0).region : false
         property int time: presets && presets.count >= 1 ? presets.get(0).time: 0
