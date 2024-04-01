@@ -10,6 +10,11 @@ import Sailfish.Silica 1.0
 import "../helpers.js" as Helpers
 
 DelegateModel {
+    property Timer insertTimer: Timer {
+        interval: 0
+        onTriggered: insertUnsorted()
+    }
+
     function indexBefore(item) {
         /* textbook binary search for finding the leftmost suitable position */
         var left = 0
@@ -69,5 +74,5 @@ DelegateModel {
     }
     items.includeByDefault: false
     model: config.hasPlayed ? dataModel : 0
-    Component.onCompleted: insertUnsorted()
+    Component.onCompleted: insertTimer.start()
 }
