@@ -1261,7 +1261,7 @@ ListModel {
 
     ListElement {
         name: "Somalia"
-        alt: "Independent State of Samoa"
+        alt: "Federal Republic of Somalia"
         capital: "Mogadishu"
         region: "Africa"
         iso: "som"
