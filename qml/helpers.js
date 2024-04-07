@@ -37,3 +37,41 @@ function pickRandomIndices(model, indices, count) {
     }
     return indices.splice(0, count)
 }
+
+function getPresetTitleText(name) {
+    if (name === "easy") {
+        return qsTr("Easy")
+    } if (name === "regular") {
+        return qsTr("Regular")
+    } if (name === "veteran") {
+        return qsTr("Veteran")
+    }
+    return qsTr("None")
+}
+
+function getLengthTitleText(name) {
+    if (name === "short") {
+        return qsTr("Short")
+    } if (name === "long") {
+        return qsTr("Long")
+    } if (name === "all") {
+        return qsTr("All")
+    }
+    return ""
+}
+
+function _digits(value) {
+    return (Math.floor(value / 10)).toString() + (value % 10).toString()
+}
+
+function timeAsString(time) {
+    if (time < 0)
+        time = 0
+    var tenths = Math.floor(time / 100) % 10
+    var seconds = Math.floor(time / 1000) % 60
+    var minutes = Math.floor(time / 60000) % 60
+    var hours = Math.floor(time / 3600000)
+    return (hours === 0 ? minutes.toString()
+                        : (hours.toString() + ":" + _digits(minutes.toString())))
+            + ":" + _digits(seconds.toString()) + "." + tenths.toString()
+}

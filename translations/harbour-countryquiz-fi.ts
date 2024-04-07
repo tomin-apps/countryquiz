@@ -17,32 +17,32 @@
 <context>
     <name>CountryPage</name>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="74"/>
+        <location filename="../qml/pages/CountryPage.qml" line="75"/>
         <source>Capital: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="76"/>
+        <location filename="../qml/pages/CountryPage.qml" line="77"/>
         <source>Capitals: %1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="78"/>
+        <location filename="../qml/pages/CountryPage.qml" line="79"/>
         <source>Capitals: %1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="92"/>
+        <location filename="../qml/pages/CountryPage.qml" line="93"/>
         <source>Region: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="102"/>
+        <location filename="../qml/pages/CountryPage.qml" line="103"/>
         <source>Time: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="113"/>
+        <location filename="../qml/pages/CountryPage.qml" line="114"/>
         <source>Score: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -354,6 +354,44 @@
     <message>
         <location filename="../qml/harbour-countryquiz.qml" line="99"/>
         <source>Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>helpers</name>
+    <message>
+        <location filename="../qml/helpers.js" line="43"/>
+        <source>Easy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/helpers.js" line="45"/>
+        <source>Regular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/helpers.js" line="47"/>
+        <source>Veteran</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/helpers.js" line="49"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/helpers.js" line="54"/>
+        <source>Short</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/helpers.js" line="56"/>
+        <source>Long</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/helpers.js" line="58"/>
+        <source>All</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.6
+import "../helpers.js" as Helpers
 
 Item {
     id: timer
@@ -21,24 +22,8 @@ Item {
 
     signal triggered()
 
-    function _digits(value) {
-        return (Math.floor(value / 10)).toString() + (value % 10).toString()
-    }
-
-    function timeAsString(time) {
-        if (time < 0)
-            time = 0
-        var tenths = Math.floor(time / 100) % 10
-        var seconds = Math.floor(time / 1000) % 60
-        var minutes = Math.floor(time / 60000) % 60
-        var hours = Math.floor(time / 3600000)
-        return (hours === 0 ? minutes.toString()
-                            : (hours.toString() + ":" + _digits(minutes.toString())))
-                + ":" + _digits(seconds.toString()) + "." + tenths.toString()
-    }
-
     function getTotalTimeText() {
-        return timeAsString(total)
+        return Helpers.timeAsString(total)
     }
 
     function reset() {

@@ -132,7 +132,7 @@ Page {
                 color: palette.highlightColor
                 font.pixelSize: timerItem.smallFontSize
                 height: timerItem.largeFontSize + Theme.paddingMedium
-                text: quizTimer.timeAsString(quizTimer.timeLimit)
+                text: Helpers.timeAsString(quizTimer.timeLimit)
                 verticalAlignment: Text.AlignVCenter
 
                 states: [
@@ -173,7 +173,7 @@ Page {
                     target: quizTimer.tick
                     onTriggered: {
                         var left = quizTimer.timeLeft
-                        timeLeft.text = quizTimer.timeAsString(left)
+                        timeLeft.text = Helpers.timeAsString(left)
                         if (quizTimer.running) {
                             timeLeft.state = left % 1000 >= 500 ? left < 5000 ? "alerted" : "enlarged" : ""
                         }

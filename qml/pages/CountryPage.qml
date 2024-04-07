@@ -8,6 +8,7 @@ import CountryQuiz 1.0
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import ".."
+import "../helpers.js" as Helpers
 
 Page {
     property var item
@@ -99,7 +100,7 @@ Page {
                     color: palette.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeMedium
                     horizontalAlignment: Text.AlignHCenter
-                    text: qsTr("Time: %1").arg(quizTimer.timeAsString(page.time))
+                    text: qsTr("Time: %1").arg(Helpers.timeAsString(page.time))
                     visible: page.time != ""
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap
