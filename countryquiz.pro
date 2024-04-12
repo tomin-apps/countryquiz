@@ -8,13 +8,13 @@ DISTFILES += \
     harbour-countryquiz.desktop \
     qml/components/Config.qml \
     qml/components/CountryListDelegateModel.qml \
+    qml/components/DataModel.qml \
     qml/components/PresetModel.qml \
     qml/components/QuizButton.qml \
     qml/components/QuizSection.qml \
     qml/components/QuizTimer.qml \
     qml/components/SelectableDetailItem.qml \
     qml/components/Tabs.qml \
-    qml/Data.qml \
     qml/harbour-countryquiz.qml \
     qml/helpers.js \
     qml/pages/CountryListTab.qml \

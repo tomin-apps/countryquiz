@@ -65,7 +65,7 @@ ApplicationWindow {
         miniMapSize: Qt.size(Screen.width, Screen.width)
     }
 
-    Data {
+    DataModel {
         id: dataModel
 
         function getIndices(type) {

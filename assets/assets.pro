@@ -2,9 +2,19 @@ TEMPLATE = aux
 TARGET = harbour-countryquiz
 
 DISTFILES = \
+    data.yaml \
     $$files(flags/*.svg) \
     map.svg \
     README.md
+
+data.CONFIG = no_check_exist
+data.depends = $$PWD/data.yaml
+data.input = data.yaml
+data.output = $$shadowed(data.xml)
+data.commands = python3 $$PWD/../tools/yaml2xml.py $$PWD/data.yaml $$shadowed(data.xml)
+data.files = $$shadowed(data.xml)
+data.path = /usr/share/$${TARGET}/assets
+QMAKE_CLEAN += $$data.files
 
 flags.files = $$files(flags/*.svg)
 flags.path = /usr/share/$${TARGET}/assets/flags
@@ -22,6 +32,6 @@ tiles.path = /usr/share/$${TARGET}/assets
 tiles.extra = -$(INSTALL_FILE) $$shadowed(map_*.png) $(INSTALL_ROOT)$$tiles.path/
 QMAKE_CLEAN += $$tiles.files $$files($$shadowed(map_*.png))
 
-QMAKE_EXTRA_TARGETS += tiles
-PRE_TARGETDEPS += tiles
-INSTALLS += flags map tiles
+QMAKE_EXTRA_TARGETS += data tiles
+PRE_TARGETDEPS += data tiles
+INSTALLS += data flags map tiles

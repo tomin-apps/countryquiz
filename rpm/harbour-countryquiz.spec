@@ -15,6 +15,7 @@ BuildRequires:  librsvg
 BuildRequires:  librsvg-tools
 BuildRequires:  python3-cairo
 BuildRequires:  python3-gobject
+BuildRequires:  python3-yaml
 
 %description
 %{summary}.
