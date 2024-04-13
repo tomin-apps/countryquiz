@@ -12,8 +12,7 @@ import "../helpers.js" as Helpers
 ExpandingSection {
     property alias presets: presetModel.presets
     property alias quizType: presetModel.type
-    readonly property int maximumLength: _maximumLength
-    property int _maximumLength: dataModel.getIndices(quizType).length
+    readonly property int maximumLength: dataModel.count > 0 ? dataModel.getIndices(quizType).length : 0
     readonly property int questionCount: selectedCount === -1 ? maximumLength : selectedCount
     property alias selectedCount: selected.count
     readonly property bool presetCount: selectedCount === 15 || selectedCount ===  80 || selectedCount === -1
@@ -182,7 +181,4 @@ ExpandingSection {
         id: selected
         path: expandingSection.quizType ? "/site/tomin/apps/CountryQuiz/" + expandingSection.quizType : ""
     }
-
-    // Break some weird signal issue that crashes the app when closing it
-    Component.onCompleted: expandingSection._maximumLength = _maximumLength
 }
