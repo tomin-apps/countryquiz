@@ -26,7 +26,6 @@ Page {
     SilicaFlickable {
         contentHeight: content.height
         contentWidth: width
-        height: parent.height - header.height
         width: parent.width
         y: header.height
 
@@ -38,7 +37,7 @@ Page {
                 id: flag
                 anchors.horizontalCenter: parent.horizontalCenter
                 source: "../../assets/flags/" + item.iso + ".svg"
-                sourceSize: Qt.size(parent.width, Math.min(page.height / 4, (page.height - header.height - textContent.height) / 2))
+                sourceSize: Qt.size(parent.width, page.height / 4)
             }
 
             Column {
@@ -121,7 +120,8 @@ Page {
             }
 
             Item {
-                height: page.height - header.height - flag.height - textContent.height - map.height
+                readonly property int fill: page.height - header.height - flag.height - textContent.height - map.height
+                height: Math.max(fill, 0)
                 width: parent.width
             }
 
@@ -129,9 +129,9 @@ Page {
                 id: map
                 anchors.horizontalCenter: parent.horizontalCenter
                 code: item.iso
-                model: parent.width !== 0 && flag.height !== 0 && textContent.height !== 0 ? mapModel : null
+                model: parent.width !== 0 ? mapModel : null
                 overlayColor: Theme.rgba(Theme.highlightColor, Theme.opacityLow)
-                sourceSize: Qt.size(parent.width, Math.min(parent.width, page.height - header.height - flag.height - textContent.height))
+                sourceSize: Qt.size(parent.width, parent.width)
             }
         }
 
