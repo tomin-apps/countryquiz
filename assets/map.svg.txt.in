@@ -1,4 +1,4 @@
-map.svg;map_1_{x}_{y}.png;1;8;4
-map.svg;map_2_{x}_{y}.png;2;16;8
-map.svg;map_4_{x}_{y}.png;4;32;16
-map.svg;map_8_{x}_{y}.png;8;64;32
+map.svg;map_1/{x}_{y}.png;1;8;4
+map.svg;map_2/{x}_{y}.png;2;16;8
+map.svg;map_4/{x}_{y}.png;4;32;16
+map.svg;map_8/{x}_{y}.png;8;64;32

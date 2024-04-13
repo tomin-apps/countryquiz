@@ -29,8 +29,8 @@ tiles.output = $$shadowed(map.svg.txt)
 tiles.commands = python3 $$PWD/../tools/tile_svg.py $$PWD/map.svg.txt.in -o $$shadowed('.')
 tiles.files = $$shadowed(map.svg.txt)
 tiles.path = /usr/share/$${TARGET}/assets
-tiles.extra = -$(INSTALL_FILE) $$shadowed(map_*.png) $(INSTALL_ROOT)$$tiles.path/
-QMAKE_CLEAN += $$tiles.files $$files($$shadowed(map_*.png))
+tiles.extra = -cp -r $$shadowed(map_*) $(INSTALL_ROOT)$$tiles.path/
+QMAKE_CLEAN += $$tiles.files $$files($$shadowed(map_*/*.png))
 
 QMAKE_EXTRA_TARGETS += data tiles
 PRE_TARGETDEPS += data tiles
