@@ -102,7 +102,9 @@ def tiles_from_txt(txt, output_directory):
     with open(output_txt, 'w', newline='') as output_file, open(txt, newline='') as input_file, concurrent.futures.ProcessPoolExecutor() as executor:
         writer = csv.writer(output_file, dialect='custom')
         for svg, template, scale, width, height in csv.reader(input_file, dialect='custom'):
-            executor.submit(tiles_from_line, txt.parent / svg, output_directory / template, scale, width, height, mtime)
+            path = output_directory / template
+            path.parent.mkdir(parents=True, exist_ok=True)
+            executor.submit(tiles_from_line, txt.parent / svg, path, scale, width, height, mtime)
             writer.writerow([template.format(x='%1', y='%2'), scale, width, height])
 
 if __name__ == "__main__":
