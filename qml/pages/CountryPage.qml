@@ -18,21 +18,20 @@ Page {
 
     id: page
 
-    PageHeader {
-        id: header
-        title: countryName
-        leftMargin: Theme.horizontalPageMargin + Theme.paddingLarge
-    }
-
     SilicaFlickable {
+        anchors.fill: parent
         contentHeight: content.height
         contentWidth: width
-        width: parent.width
-        y: header.height
 
         Column {
             id: content
             width: parent.width
+
+            PageHeader {
+                id: header
+                title: countryName
+                leftMargin: Theme.horizontalPageMargin + Theme.paddingLarge
+            }
 
             Image {
                 id: flag

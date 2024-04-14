@@ -17,32 +17,32 @@
 <context>
     <name>CountryPage</name>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="75"/>
+        <location filename="../qml/pages/CountryPage.qml" line="74"/>
         <source>Capital: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="77"/>
+        <location filename="../qml/pages/CountryPage.qml" line="76"/>
         <source>Capitals: %1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="79"/>
+        <location filename="../qml/pages/CountryPage.qml" line="78"/>
         <source>Capitals: %1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="93"/>
+        <location filename="../qml/pages/CountryPage.qml" line="92"/>
         <source>Region: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="103"/>
+        <location filename="../qml/pages/CountryPage.qml" line="102"/>
         <source>Time: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CountryPage.qml" line="114"/>
+        <location filename="../qml/pages/CountryPage.qml" line="113"/>
         <source>Score: %L1 points</source>
         <translation type="unfinished"></translation>
     </message>
