@@ -342,17 +342,17 @@
 <context>
     <name>StatsTab</name>
     <message>
-        <location filename="../qml/pages/StatsTab.qml" line="33"/>
+        <location filename="../qml/pages/StatsTab.qml" line="36"/>
         <source>Flag Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StatsTab.qml" line="39"/>
+        <location filename="../qml/pages/StatsTab.qml" line="42"/>
         <source>Map Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StatsTab.qml" line="45"/>
+        <location filename="../qml/pages/StatsTab.qml" line="48"/>
         <source>Capital City Quiz</source>
         <translation type="unfinished"></translation>
     </message>

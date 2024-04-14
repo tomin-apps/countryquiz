@@ -21,8 +21,11 @@ Item {
 
     SilicaFlickable {
         anchors.fill: parent
+        contentWidth: width
+        contentHeight: group.height
 
         ExpandingSectionGroup {
+            id: group
             animateToExpandedSection: false
             width: parent.width
 
