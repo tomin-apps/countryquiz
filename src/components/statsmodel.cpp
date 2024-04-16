@@ -102,7 +102,6 @@ void StatsModel::setMaxCount(int maxCount)
 QHash<int, QByteArray> StatsModel::roleNames() const
 {
     return QHash<int, QByteArray> {
-        { Qt::DisplayRole,  "display" },
         { Qt::UserRole + 0, "position" },
         { Qt::UserRole + 1, "number_of_correct" },
         { Qt::UserRole + 2, "time" },
@@ -115,11 +114,13 @@ QHash<int, QByteArray> StatsModel::roleNames() const
 
 QVariant StatsModel::data(const QModelIndex &index, int role) const
 {
+    if (role < Qt::UserRole)
+        return QSqlQueryModel::data(index, role);
+
     if (index.row() < 0 || index.row() >= rowCount())
         return QVariant();
 
     switch (role) {
-        case Qt::DisplayRole:
         case Qt::UserRole:
             return QString("#%1").arg(index.row() + 1);
         case Qt::UserRole + 1:
