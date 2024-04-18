@@ -194,6 +194,7 @@ ExpandingSection {
                 }
             }
             model: statsModel ? statsModel : 0
+            visible: { return true }
             width: parent.width
         }
 

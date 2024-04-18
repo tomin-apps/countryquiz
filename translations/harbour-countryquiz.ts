@@ -334,7 +334,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/StatsSection.qml" line="212"/>
+        <location filename="../qml/components/StatsSection.qml" line="213"/>
         <source>This quiz has not been played yet</source>
         <translation type="unfinished"></translation>
     </message>
