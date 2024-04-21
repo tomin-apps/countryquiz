@@ -2,6 +2,67 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AboutPage</name>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="24"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="25"/>
+        <source>Country Quiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="46"/>
+        <source>Country Quiz is a quiz game about states in the world. You can practise recognition of flags, maps and capitals. Results are collected into local database for you to see your own progress.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="55"/>
+        <source>Development</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="61"/>
+        <source>You may obtain source code and report bugs on Github: &lt;a href=%2&gt;%1&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="77"/>
+        <location filename="../qml/pages/AboutPage.qml" line="90"/>
+        <location filename="../qml/pages/AboutPage.qml" line="209"/>
+        <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="82"/>
+        <source>Country Quiz is licensed under MIT license. Touch the button below for more information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="142"/>
+        <source>Original idea and development by %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="72"/>
+        <location filename="../qml/pages/AboutPage.qml" line="137"/>
+        <source>Contributors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="150"/>
+        <source>Translators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="210"/>
+        <source>MIT license</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CountryListTab</name>
     <message>
         <location filename="../qml/pages/CountryListTab.qml" line="22"/>
@@ -360,22 +421,27 @@
 <context>
     <name>harbour-countryquiz</name>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="54"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="30"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-countryquiz.qml" line="67"/>
         <source>Country Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="95"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="108"/>
         <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="100"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="113"/>
         <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="105"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="118"/>
         <source>Stats</source>
         <translation type="unfinished"></translation>
     </message>
