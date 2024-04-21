@@ -20,30 +20,43 @@ ApplicationWindow {
 
     initialPage: Component {
         Page {
-            Tabs {
-                id: tabs
-                currentIndex: paged.currentIndex
-                model: pageModel
-                width: parent.width
-                z: 1
-
-                onChangeTab: paged.currentIndex = index
-            }
-
-            PagedView {
-                id: paged
+            SilicaFlickable {
                 anchors.fill: parent
-                contentItem.height: parent.height - tabs.height
-                contentItem.y: tabs.height
-                contentItem.width: parent.width
-                currentIndex: 1
-                delegate: Loader {
-                    clip: true
-                    height: PagedView.contentHeight
-                    source: Qt.resolvedUrl(model.url)
-                    width: PagedView.contentWidth
+                contentHeight: height
+                contentWidth: width
+
+                PullDownMenu {
+                    MenuItem {
+                        text: qsTr("About")
+                        onClicked: pageStack.push(Qt.resolvedUrl("pages/AboutPage.qml"))
+                    }
                 }
-                model: pageModel
+
+                Tabs {
+                    id: tabs
+                    currentIndex: paged.currentIndex
+                    model: pageModel
+                    width: parent.width
+                    z: 1
+
+                    onChangeTab: paged.currentIndex = index
+                }
+
+                PagedView {
+                    id: paged
+                    anchors.fill: parent
+                    contentItem.height: parent.height - tabs.height
+                    contentItem.y: tabs.height
+                    contentItem.width: parent.width
+                    currentIndex: 1
+                    delegate: Loader {
+                        clip: true
+                        height: PagedView.contentHeight
+                        source: Qt.resolvedUrl(model.url)
+                        width: PagedView.contentWidth
+                    }
+                    model: pageModel
+                }
             }
         }
     }
