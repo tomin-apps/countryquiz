@@ -5,6 +5,7 @@ SUBDIRS = assets src
 CONFIG += sailfishapp
 
 DISTFILES += \
+    COPYING \
     harbour-countryquiz.desktop \
     qml/components/Config.qml \
     qml/components/CountryListDelegateModel.qml \
@@ -28,6 +29,7 @@ DISTFILES += \
     qml/presets/FlagQuizPresets.qml \
     qml/presets/MapQuizPresets.qml \
     qml/presets/CapitalQuizPresets.qml \
+    README.md \
     rpm/harbour-countryquiz.spec \
     translations/*.ts \
     tools/compare_svg.py \
@@ -68,3 +70,7 @@ for (size, ICON_SIZES) {
     QMAKE_CLEAN += $$icon_path
     INSTALLS += icon_$${size}_install
 }
+
+static_files.files = COPYING README.md $$ICON_SOURCE
+static_files.path = /usr/share/$${TARGET}
+INSTALLS += static_files
