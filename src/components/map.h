@@ -13,6 +13,7 @@
 #include <QImage>
 #include <QQuickItem>
 #include <QSGTexture>
+#include <QTimer>
 #include "maprenderer.h"
 
 class MapModel;
@@ -24,6 +25,7 @@ class Map : public QQuickItem
     Q_PROPERTY(QSize sourceSize READ sourceSize WRITE setSourceSize NOTIFY sourceSizeChanged)
     Q_PROPERTY(MapModel *model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(QColor overlayColor READ overlayColor WRITE setOverlayColor NOTIFY overlayColorChanged)
+    Q_PROPERTY(bool invertedColors READ invertedColors WRITE setInvertedColors NOTIFY invertedColorsChanged)
 
 public:
     enum Ready {
@@ -54,6 +56,9 @@ public:
     QColor overlayColor() const;
     void setOverlayColor(const QColor &color);
 
+    bool invertedColors() const;
+    void setInvertedColors(bool inverted);
+
 public slots:
     void renderingReady(MapRenderer::MessageType message, QSGTexture *texture, const QRectF &tile);
 
@@ -63,8 +68,9 @@ signals:
     void modelChanged();
     void overlayColorChanged();
     void overlayOpacityChanged();
+    void invertedColorsChanged();
 
-    void renderMap(const QSize &size, const QString &code, const QColor &overlayColor);
+    void renderMap(const QSize &size, const QString &code, const QColor &overlayColor, bool inverted);
     void renderingProgressed(MapRenderer::MessageType message, int count);
 
 protected:
@@ -108,6 +114,8 @@ private:
     QSize m_sourceSize;
     MapModel *m_mapModel;
     QColor m_overlayColor;
+    bool m_inverted;
+    QTimer *m_renderTimer;
 
     bool m_dirty;
     std::vector<Tile> m_tiles;

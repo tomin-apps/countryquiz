@@ -154,7 +154,7 @@ QRectF MapRenderer::fullArea()
     return m_fullArea;
 }
 
-void MapRenderer::renderMap(const QSize &size, const QString &code, const QColor &overlayColor)
+void MapRenderer::renderMap(const QSize &size, const QString &code, const QColor &overlayColor, bool inverted)
 {
     Map *map = qobject_cast<Map *>(sender());
     assert(map);
@@ -186,7 +186,7 @@ void MapRenderer::renderMap(const QSize &size, const QString &code, const QColor
     while (point.y() <= bounds.bottom()) {
         while (point.x() <= bounds.right()) {
             QString name(tiles.pathTemplate.arg(mod(position.x(), tiles.dimensions.width())).arg(position.y()));
-            auto *tileRenderer = new TileRenderer(name, QRectF(point, tileSize), translation, scaling, this);
+            auto *tileRenderer = new TileRenderer(name, QRectF(point, tileSize), translation, scaling, inverted, this);
             connect(tileRenderer, &TileRenderer::renderingReady, map, &Map::renderingReady, Qt::QueuedConnection);
             tileRenderer->setAutoDelete(true);
             pool.start(tileRenderer, QThread::NormalPriority);
@@ -202,13 +202,13 @@ void MapRenderer::renderMap(const QSize &size, const QString &code, const QColor
     QMetaObject::invokeMethod(map, "renderingReady", Qt::QueuedConnection, Q_ARG(MapRenderer::MessageType, RenderingDone), Q_ARG(QSGTexture *, nullptr), Q_ARG(QRectF, QRectF()));
 }
 
-void MapRenderer::renderFullMap(const QSize &maxSize)
+void MapRenderer::renderFullMap(const QSize &maxSize, bool inverted)
 {
     MapModel *mapModel = qobject_cast<MapModel *>(sender());
     assert(mapModel);
 
     QSize size = m_fullArea.size().scaled(maxSize, Qt::KeepAspectRatio).toSize();
-    auto *renderer = new FullMapRenderer(size, this);
+    auto *renderer = new FullMapRenderer(size, inverted, this);
     connect(renderer, &FullMapRenderer::fullMapReady, mapModel, &MapModel::fullMapReady, Qt::QueuedConnection);
     renderer->setAutoDelete(true);
     QThreadPool::globalInstance()->start(renderer, QThread::HighPriority);
@@ -311,13 +311,14 @@ const MapRenderer::Tiles &MapRenderer::getTilesForScaling(const QSize &target, c
     return it->second;
 }
 
-TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, MapRenderer *mapRenderer)
+TileRenderer::TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, bool inverted, MapRenderer *mapRenderer)
     : QObject(nullptr)
     , m_mapRenderer(mapRenderer)
     , m_path(path)
     , m_rect(rect)
     , m_translation(translation)
     , m_scaling(scaling)
+    , m_inverted(inverted)
 {
 }
 
@@ -328,6 +329,8 @@ void TileRenderer::run()
 
     QRectF transformed = m_scaling.mapRect(m_translation.mapRect(m_rect));
     QImage tile = QImage(m_path).scaled(transformed.size().toSize()).convertToFormat(IMAGE_FORMAT);
+    if (m_inverted)
+        tile.invertPixels();
 
     emit renderingReady(MapRenderer::TileRendered, m_mapRenderer->window()->createTextureFromImage(tile), transformed);
 }
@@ -367,10 +370,11 @@ void OverlayRenderer::run()
     emit renderingReady(MapRenderer::OverlayRendered, m_mapRenderer->window()->createTextureFromImage(overlay), transformed);
 }
 
-FullMapRenderer::FullMapRenderer(const QSize &size, MapRenderer *mapRenderer)
+FullMapRenderer::FullMapRenderer(const QSize &size, bool inverted, MapRenderer *mapRenderer)
     : QObject(nullptr)
     , m_mapRenderer(mapRenderer)
     , m_size(size)
+    , m_inverted(inverted)
 {
 }
 
@@ -388,6 +392,9 @@ void FullMapRenderer::run()
     renderer.setViewBox(m_mapRenderer->fullArea());
     renderer.render(&painter);
     renderer.setViewBox(viewBox);
+
+    if (m_inverted)
+        map.invertPixels();
 
     emit fullMapReady(map);
 }

@@ -42,6 +42,8 @@ Map::Map(QQuickItem *parent)
     : QQuickItem(parent)
     , m_mapModel(nullptr)
     , m_overlayColor(Qt::red)
+    , m_inverted(false)
+    , m_renderTimer(nullptr)
     , m_dirty(true)
     , m_renderer(nullptr)
     , m_window(window())
@@ -104,9 +106,27 @@ void Map::renderAgain()
         renderingTimer->start();
     }
     releaseResources();
-    setTexture(m_miniMap.texture, m_mapModel->miniMap());
 
-    emit renderMap(m_sourceSize, m_code, m_overlayColor);
+    bool existed = m_overlay.texture;
+    setTexture(m_miniMap.texture, m_mapModel->miniMap());
+    if (existed)
+        update();
+
+    if (m_renderTimer) {
+        m_renderTimer->stop();
+        m_renderTimer->deleteLater();
+    }
+    QTimer *renderTimer = new QTimer(this);
+    renderTimer->setSingleShot(true);
+    renderTimer->setInterval(0);
+    connect(renderTimer, &QTimer::timeout, renderTimer, [this, renderTimer] {
+        if (m_renderTimer == renderTimer)
+            m_renderTimer = nullptr;
+        renderTimer->deleteLater();
+        emit renderMap(m_sourceSize, m_code, m_overlayColor, m_inverted);
+    });
+    m_renderTimer = renderTimer;
+    m_renderTimer->start();
 }
 
 void Map::rendererChanged()
@@ -333,7 +353,8 @@ namespace {
 
 QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
 {
-    if (!((m_ready & MinimapReady) && (m_ready & OverlayReady))) {
+    if (!((m_ready & MinimapReady) && m_miniMap.texture && (m_ready & OverlayReady) && m_overlay.texture)) {
+        qCDebug(lcMap) << "Deleting node" << node;
         delete node;
         return nullptr;
     }
@@ -455,8 +476,10 @@ void Map::setModel(MapModel *mapModel)
 {
     if (m_mapModel != mapModel) {
         m_mapModel = mapModel;
-        if (m_mapModel)
+        if (m_mapModel) {
             connect(m_mapModel, &MapModel::rendererChanged, this, &Map::rendererChanged, Qt::QueuedConnection);
+            connect(m_mapModel, &MapModel::miniMapChanged, this, &Map::miniMapChanged, Qt::QueuedConnection);
+        }
         emit modelChanged();
         rendererChanged();
         miniMapChanged();
@@ -473,6 +496,28 @@ void Map::setOverlayColor(const QColor &color)
     if (m_overlayColor != color) {
         m_overlayColor = color;
         emit overlayColorChanged();
+        if (m_overlay.texture || (m_ready & (OverlayPending | OverlayReady))) {
+            setTexture(m_overlay.texture, nullptr);
+            m_ready &= ~(OverlayPending | OverlayReady);
+            update();
+        }
+        if (canRender())
+            renderAgain();
+    }
+}
+
+bool Map::invertedColors() const
+{
+    return m_inverted;
+}
+
+void Map::setInvertedColors(bool inverted)
+{
+    if (m_inverted != inverted) {
+        m_inverted = inverted;
+        emit invertedColorsChanged();
+        if (canRender())
+            renderAgain();
     }
 }
 
@@ -507,11 +552,14 @@ void Map::miniMapChanged()
 {
     if (m_mapModel && !m_code.isEmpty()) {
         m_dirty = true;
+        bool existed = m_miniMap.texture;
         setTexture(m_miniMap.texture, m_mapModel->miniMap());
         if (m_miniMap.texture)
             qCDebug(lcMap) << "Mini map received";
         if (m_ready & OverlayPending)
             polish();
+        if (existed && !m_miniMap.texture)
+            update();
     }
 }
 

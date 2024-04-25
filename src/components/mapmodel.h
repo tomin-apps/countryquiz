@@ -20,6 +20,7 @@ class MapModel : public QQuickItem
     Q_OBJECT
     Q_PROPERTY(QString mapFile READ mapFile WRITE setMapFile NOTIFY mapFileChanged)
     Q_PROPERTY(QSize miniMapSize READ miniMapSize WRITE setMiniMapSize NOTIFY miniMapSizeChanged)
+    Q_PROPERTY(bool invertedColors READ invertedColors WRITE setInvertedColors NOTIFY invertedColorsChanged)
 
 public:
     explicit MapModel(QQuickItem *parent = nullptr);
@@ -29,6 +30,9 @@ public:
 
     const QSize &miniMapSize() const;
     void setMiniMapSize(const QSize &miniMapSize);
+
+    bool invertedColors() const;
+    void setInvertedColors(bool inverted);
 
     QSGTexture *miniMap() const;
     QRectF miniMapBounds(const QString &code, qreal aspectRatio) const;
@@ -41,9 +45,10 @@ public slots:
 signals:
     void mapFileChanged();
     void miniMapSizeChanged();
+    void invertedColorsChanged();
     void miniMapChanged();
     void rendererChanged();
-    void renderFullMap(const QSize &size);
+    void renderFullMap(const QSize &size, bool inverted);
 
 protected:
     void componentComplete() override;
@@ -57,6 +62,7 @@ private:
     QSize m_miniMapSize;
     QScopedPointer<MapRenderer, QScopedPointerDeleteLater> m_renderer;
     QImage m_miniMap;
+    bool m_inverted;
 };
 
 #endif // MAPMODEL_H

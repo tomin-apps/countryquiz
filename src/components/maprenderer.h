@@ -42,8 +42,8 @@ public:
     Q_ENUM(MessageType)
 
 public slots:
-    void renderMap(const QSize &size, const QString &code, const QColor &overlayColor);
-    void renderFullMap(const QSize &maxSize);
+    void renderMap(const QSize &size, const QString &code, const QColor &overlayColor, bool inverted);
+    void renderFullMap(const QSize &maxSize, bool inverted);
     void windowChanged(QQuickWindow *window);
 
 private:
@@ -69,7 +69,7 @@ class TileRenderer : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, MapRenderer *mapRenderer);
+    TileRenderer(const QString &path, const QRectF &rect, const QTransform &translation, const QTransform &scaling, bool inverted, MapRenderer *mapRenderer);
 
     void run() override;
 
@@ -82,6 +82,7 @@ private:
     QRectF m_rect;
     QTransform m_translation;
     QTransform m_scaling;
+    bool m_inverted;
 };
 
 class OverlayRenderer : public QObject, public QRunnable
@@ -110,7 +111,7 @@ class FullMapRenderer : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    FullMapRenderer(const QSize &size, MapRenderer *mapRenderer);
+    FullMapRenderer(const QSize &size, bool inverted, MapRenderer *mapRenderer);
 
     void run() override;
 
@@ -120,6 +121,7 @@ signals:
 private:
     MapRenderer *m_mapRenderer;
     QSize m_size;
+    bool m_inverted;
 };
 
 #endif // MAPRENDERER_H

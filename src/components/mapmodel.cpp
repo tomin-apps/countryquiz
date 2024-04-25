@@ -14,6 +14,7 @@ Q_LOGGING_CATEGORY(lcMapModel, "site.tomin.apps.CountryQuiz.MapModel", QtWarning
 
 MapModel::MapModel(QQuickItem *parent)
     : QQuickItem(parent)
+    , m_inverted(false)
 {
     m_thread.setObjectName("MapRendererThread");
     connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit, [this]() {
@@ -50,6 +51,23 @@ void MapModel::setMiniMapSize(const QSize &miniMapSize)
     if (m_miniMapSize != miniMapSize) {
         m_miniMapSize = miniMapSize;
         emit miniMapSizeChanged();
+        if (m_renderer)
+            drawMiniMap();
+    }
+}
+
+bool MapModel::invertedColors() const
+{
+    return m_inverted;
+}
+
+void MapModel::setInvertedColors(bool inverted)
+{
+    if (m_inverted != inverted) {
+        m_inverted = inverted;
+        emit invertedColorsChanged();
+        m_miniMap = QImage();
+        emit miniMapChanged();
         if (m_renderer)
             drawMiniMap();
     }
@@ -110,5 +128,5 @@ void MapModel::setupRenderer()
 
 void MapModel::drawMiniMap()
 {
-    emit renderFullMap(m_miniMapSize);
+    emit renderFullMap(m_miniMapSize, m_inverted);
 }
