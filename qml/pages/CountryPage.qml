@@ -129,6 +129,7 @@ Page {
                 id: map
                 anchors.horizontalCenter: parent.horizontalCenter
                 code: item.iso
+                invertedColors: palette.colorScheme === Theme.DarkOnLight
                 model: parent.width !== 0 ? mapModel : null
                 overlayColor: Theme.rgba(Theme.highlightColor, Theme.opacityLow)
                 sourceSize: Qt.size(parent.width, parent.width)

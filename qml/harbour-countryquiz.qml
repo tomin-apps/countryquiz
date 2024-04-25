@@ -75,6 +75,7 @@ ApplicationWindow {
 
     MapModel {
         id: mapModel
+        invertedColors: palette.colorScheme === Theme.DarkOnLight
         mapFile: Qt.resolvedUrl("../assets/map.svg")
         miniMapSize: Qt.size(Screen.width, Screen.width)
     }

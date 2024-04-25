@@ -159,17 +159,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="320"/>
+        <location filename="../qml/pages/QuizPage.qml" line="321"/>
         <source>%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="322"/>
+        <location filename="../qml/pages/QuizPage.qml" line="323"/>
         <source>%1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/QuizPage.qml" line="324"/>
+        <location filename="../qml/pages/QuizPage.qml" line="325"/>
         <source>%1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -431,17 +431,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="108"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="109"/>
         <source>Countries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="113"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="114"/>
         <source>Quiz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-countryquiz.qml" line="118"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="119"/>
         <source>Stats</source>
         <translation type="unfinished"></translation>
     </message>

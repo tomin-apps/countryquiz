@@ -291,6 +291,7 @@ Page {
 
         Map {
             code: dataModel.get(index).iso
+            invertedColors: palette.colorScheme === Theme.DarkOnLight
             model: ready ? mapModel : null
             overlayColor: Theme.rgba(Theme.highlightColor, Theme.opacityLow)
             sourceSize: {
