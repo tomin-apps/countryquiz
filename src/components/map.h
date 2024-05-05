@@ -109,6 +109,7 @@ private:
     bool allTexturesReady() const;
     void setTexture(QScopedPointer<QSGTexture> &ptr, QSGTexture *texture);
     void cleanupTextures();
+    void resetTextures();
 
     QString m_code;
     QSize m_sourceSize;

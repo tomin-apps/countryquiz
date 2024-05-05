@@ -75,14 +75,21 @@ Map::~Map()
 
 void Map::releaseResources()
 {
+    resetTextures();
+    cleanupTextures();
+}
+
+void Map::resetTextures()
+{
     m_ready = NothingReady;
     m_abandoned.reserve(m_abandoned.size() + m_tiles.size() + 3);
     for (Tile &tile : m_tiles)
         m_abandoned.push_back(tile.texture.take());
     m_tiles.clear();
-    m_abandoned.push_back(m_overlay.texture.take());
-    m_abandoned.push_back(m_miniMap.texture.take());
-    cleanupTextures();
+    if (m_overlay.texture)
+        m_abandoned.push_back(m_overlay.texture.take());
+    if (m_miniMap.texture)
+        m_abandoned.push_back(m_miniMap.texture.take());
 }
 
 void Map::renderAgain()
@@ -105,12 +112,12 @@ void Map::renderAgain()
         });
         renderingTimer->start();
     }
-    releaseResources();
-
-    bool existed = m_overlay.texture;
+    resetTextures();
     setTexture(m_miniMap.texture, m_mapModel->miniMap());
-    if (existed)
+    if (!m_abandoned.empty()) {
+        polish();
         update();
+    }
 
     if (m_renderTimer) {
         m_renderTimer->stop();
@@ -294,7 +301,6 @@ void Map::updatePolish()
         qCDebug(lcMap) << "Polish done";
         update();
     }
-    cleanupTextures();
 }
 
 namespace {
@@ -356,6 +362,7 @@ QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
     if (!((m_ready & MinimapReady) && m_miniMap.texture && (m_ready & OverlayReady) && m_overlay.texture)) {
         qCDebug(lcMap) << "Deleting node" << node;
         delete node;
+        cleanupTextures();
         return nullptr;
     }
 
@@ -435,6 +442,7 @@ QSGNode *Map::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
     }
 
     qCDebug(lcMap) << "Update done";
+    cleanupTextures();
     return node;
 }
 
@@ -580,6 +588,7 @@ void Map::cleanupTextures()
     if (!m_abandoned.empty() && window()) {
         std::vector<QSGTexture *> textures;
         textures.swap(m_abandoned);
+        qCDebug(lcMap) << "Cleaning up" << textures.size() << "textures";
         window()->scheduleRenderJob(new TextureCleaningJob(textures), QQuickWindow::AfterRenderingStage);
     }
 }
