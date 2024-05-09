@@ -23,7 +23,8 @@ ExpandingSection {
         width: parent.width
 
         SelectableDetailItem {
-            label: qsTr("Preset")
+            //% "Preset"
+            label: qsTrId("countryquiz-la-preset")
             menu: ContextMenu {
                 Repeater {
                     model: presetModel.presets
@@ -36,12 +37,14 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
-            label: qsTr("Questions")
+            //% "Questions"
+            label: qsTrId("countryquiz-la-questions")
             menu: ContextMenu {
                 MenuItem { text: Helpers.getLengthTitleText("short") + " - 15" }
                 MenuItem { text: Helpers.getLengthTitleText("long") + " - 80" }
                 MenuItem { text: Helpers.getLengthTitleText("all") + " - %1".arg(expandingSection.maximumLength) }
-                MenuItem { text: qsTr("Custom value") }
+                //% "Custom value"
+                MenuItem { text: qsTrId("countryquiz-me-custom_value") }
 
                 onActivated: {
                     switch (index) {
@@ -59,10 +62,14 @@ ExpandingSection {
                             value: expandingSection.questionCount,
                             minimum: 1,
                             maximum: expandingSection.maximumLength,
-                            title: qsTr("Select number of questions"),
-                            description: qsTr("Questions"),
-                            tooLowHint: qsTr("You must have at least one question"),
-                            tooHighHint: qsTr("You may not have more than %1 questions").arg(expandingSection.maximumLength)
+                            //% "Select number of questions"
+                            title: qsTrId("countryquiz-he-select-number-of-questions"),
+                            //% "Questions"
+                            description: qsTrId("countryquiz-he-questions"),
+                            //% "You must have at least one question"
+                            tooLowHint: qsTrId("countryquiz-la-at_least_one_question_hint"),
+                            //% "You may not have more than %1 questions"
+                            tooHighHint: qsTrId("countryquiz-la-not_more_than_questions_hint").arg(expandingSection.maximumLength)
                         })
                         dialog.onAccepted.connect(function() {
                             if (dialog.selectedValue >= expandingSection.maximumLength) {
@@ -79,7 +86,8 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
-            label: qsTr("Choices")
+            //% "Choices"
+            label: qsTrId("countryquiz-la-choices")
             menu: ContextMenu {
                 MenuItem { text: "3" }
                 MenuItem { text: "4" }
@@ -92,24 +100,33 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
-            label: qsTr("Choices from")
+            //% "Choices from"
+            label: qsTrId("countryquiz-la-choices_from")
             menu: ContextMenu {
-                MenuItem { text: qsTr("Everywhere") }
-                MenuItem { text: qsTr("Same region") }
+                //% "Everywhere"
+                MenuItem { text: qsTrId("countryquiz-me-everywhere") }
+                //% "Same region"
+                MenuItem { text: qsTrId("countryquiz-me-same_region") }
 
                 onActivated: presetModel.selectedRegion = index === 1
             }
 
-            value: presetModel.sameRegion ? qsTr("Same region") : qsTr("Everywhere")
+            value: presetModel.sameRegion
+                   ? //% "Same region"
+                     qsTrId("countryquiz-me-same_region")
+                   : //% "Everywhere"
+                     qsTrId("countryquiz-me-everywhere")
         }
 
         SelectableDetailItem {
-            label: qsTr("Time to answer")
+            //% "Time to answer"
+            label: qsTrId("countryquiz-la-time_to_answer")
             menu: ContextMenu {
                 MenuItem { text: "15 s" }
                 MenuItem { text: "30 s" }
                 MenuItem { text: "60 s" }
-                MenuItem { text: qsTr("Custom value") }
+                //% "Custom value"
+                MenuItem { text: qsTrId("countryquiz-me-custom_value") }
 
                 onActivated: {
                     switch (index) {
@@ -129,10 +146,14 @@ ExpandingSection {
                             value: presetModel.timeToAnswer,
                             minimum: minimum,
                             maximum: maximum,
-                            title: qsTr("Select time to answer"),
-                            description: qsTr("Seconds"),
-                            tooLowHint: qsTr("You must have at least one second to answer the question"),
-                            tooHighHint: qsTr("You may not have more than %1 seconds (%2 minutes) to answer the question").arg(maximum).arg(maximum / 60)
+                            //% "Select time to answer"
+                            title: qsTrId("countryquiz-la-select_time_to_answer"),
+                            //% "Seconds"
+                            description: qsTrId("countryquiz-la-seconds"),
+                            //% "You must have at least one second to answer the question"
+                            tooLowHint: qsTrId("countryquiz-la-at_least_second_hint"),
+                            //% "You may not have more than %1 seconds (%2 minutes) to answer the question"
+                            tooHighHint: qsTrId("countryquiz-la-not_more_than_seconds_hint").arg(maximum).arg(maximum / 60)
                         })
                         dialog.onAccepted.connect(function() {
                             presetModel.selectedTime = dialog.selectedValue
@@ -141,14 +162,16 @@ ExpandingSection {
                     }
                 }
             }
-            value: qsTr("%1 s per question").arg(presetModel.timeToAnswer)
+            //% "%1 s per question"
+            value: qsTrId("countryquiz-la-seconds_per_question").arg(presetModel.timeToAnswer)
         }
 
         Item { height: Theme.paddingLarge; width: parent.width }
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("Quiz me!")
+            //% "Quiz me!"
+            text: qsTrId("countryquiz-bt-quiz_me")
 
             onClicked:  {
                 quizTimer.reset()

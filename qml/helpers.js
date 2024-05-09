@@ -40,22 +40,29 @@ function pickRandomIndices(model, indices, count) {
 
 function getPresetTitleText(name) {
     if (name === "easy") {
-        return qsTr("Easy")
+        //% "Easy"
+        return qsTrId("countryquiz-la-easy")
     } if (name === "regular") {
-        return qsTr("Regular")
+        //% "Regular"
+        return qsTrId("countryquiz-la-regular")
     } if (name === "veteran") {
-        return qsTr("Veteran")
+        //% "Veteran"
+        return qsTrId("countryquiz-la-veteran")
     }
-    return qsTr("None")
+    //% "None"
+    return qsTrId("countryquiz-la-none")
 }
 
 function getLengthTitleText(name) {
     if (name === "short") {
-        return qsTr("Short")
+        //% "Short"
+        return qsTrId("countryquiz-la-short")
     } if (name === "long") {
-        return qsTr("Long")
+        //% "Long"
+        return qsTrId("countryquiz-la-long")
     } if (name === "all") {
-        return qsTr("All")
+        //% "All"
+        return qsTrId("countryquiz-la-all")
     }
     return ""
 }

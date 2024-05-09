@@ -21,8 +21,10 @@ Page {
             width: aboutPage.width
 
             PageHeader {
-                title: qsTr("About")
-                description: qsTr("Country Quiz")
+                //% "About"
+                title: qsTrId("countryquiz-he-about")
+                //% "Country Quiz"
+                description: qsTrId("countryquiz-la-app_name")
                 height: Math.max(implicitHeight, icon.height + Theme.paddingLarge)
                 leftMargin: Theme.horizontalPageMargin + Theme.paddingLarge
                 rightMargin: Theme.paddingLarge + icon.width + Theme.horizontalPageMargin
@@ -43,22 +45,25 @@ Page {
 
             Label {
                 color: palette.highlightColor
-                text: qsTr("Country Quiz is a quiz game about states in the world. You can practise "
-                          + "recognition of flags, maps and capitals. Results are collected into local "
-                          + "database for you to see your own progress.")
+                //% "Country Quiz is a quiz game about states in the world. You can practise "
+                //% "recognition of flags, maps and capitals. Results are collected into local "
+                //% "database for you to see your own progress."
+                text: qsTrId("countryquiz-la-about_text")
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 wrapMode: Text.Wrap
                 x: Theme.horizontalPageMargin
             }
 
             SectionHeader {
-                text: qsTr("Development")
+                //% "Development"
+                text: qsTrId("countryquiz-se-development")
             }
 
             Label {
                 color: palette.highlightColor
                 linkColor: Theme.primaryColor
-                text: qsTr("You may obtain source code and report bugs on Github: <a href=%2>%1</a>")
+                //% "You may obtain source code and report bugs on Github: <a href=%2>%1</a>"
+                text: qsTrId("countryquiz-la-source_code_and_bugs")
                     .arg("github.com/tomin-apps/countryquiz")
                     .arg("\"https://github.com/tomin-apps/countryquiz/\"")
                 width: parent.width - 2 * Theme.horizontalPageMargin
@@ -69,17 +74,20 @@ Page {
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Contributors")
+                //% "Contributors"
+                text: qsTrId("countryquiz-bt-contributors")
                 onClicked: pageStack.push(contributorsPageComponent)
             }
 
             SectionHeader {
-                text: qsTr("License")
+                //% "License"
+                text: qsTrId("countryquiz-la-header")
             }
 
             Label {
                 color: palette.highlightColor
-                text: qsTr("Country Quiz is licensed under MIT license. Touch the button below for more information.")
+                //% "Country Quiz is licensed under MIT license. Touch the button below for more information."
+                text: qsTrId("countryquiz-la-license_description")
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 wrapMode: Text.Wrap
                 x: Theme.horizontalPageMargin
@@ -87,7 +95,8 @@ Page {
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("License")
+                //% "License"
+                text: qsTrId("countryquiz-bt-license")
                 onClicked: pageStack.push(licensePageComponent)
             }
         }
@@ -134,12 +143,14 @@ Page {
                     width: contributorsPage.width
 
                     PageHeader {
-                        title: qsTr("Contributors")
+                        //% "Contributors"
+                        title: qsTrId("countryquiz-he-contributors")
                     }
 
                     Label {
                         color: palette.highlightColor
-                        text: qsTr("Original idea and development by %1.")
+                        //% "Original idea and development by %1."
+                        text: qsTrId("countryquiz-la-main_developer")
                             .arg("Tomi Leppänen")
                         width: parent.width - 2 * Theme.horizontalPageMargin
                         wrapMode: Text.Wrap
@@ -147,7 +158,8 @@ Page {
                     }
 
                     SectionHeader {
-                        text: qsTr("Translators")
+                        //% "Translators"
+                        text: qsTrId("countryquiz-se-translators")
                     }
 
                     Label {
@@ -206,8 +218,10 @@ Page {
                     width: licensePage.width
 
                     PageHeader {
-                        title: qsTr("License")
-                        description: qsTr("MIT license")
+                        //% "License"
+                        title: qsTrId("countryquiz-he-header")
+                        //% "MIT license"
+                        description: qsTrId("countryquiz-la-mit_license")
                     }
 
                     Label {

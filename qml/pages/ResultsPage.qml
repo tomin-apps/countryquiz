@@ -47,7 +47,8 @@ Page {
 
         PageHeader {
             id: header
-            title: qsTr("Results")
+            //% "Results"
+            title: qsTrId("countryquiz-he-results")
         }
 
         Column {
@@ -63,28 +64,37 @@ Page {
                 horizontalAlignment: Text.AlignHCenter
                 text: {
                     if (count === 1 && correctAnswersCount === 0) {
-                        return qsTr("It's like flipping a coin, sometimes you just have bad luck!")
+                        //% "It's like flipping a coin, sometimes you just have bad luck!"
+                        return qsTrId("countryquiz-la-result_zero")
                     }
                     if (count >= 10 && correctAnswersCount === count) {
                         if (setup.quizType === "flags") {
-                            return qsTr("Perfect work! You clearly know the flags!")
+                            //% "Perfect work! You clearly know the flags!"
+                            return qsTrId("countryquiz-la-result_maximum_flags")
                         } if (setup.quizType === "maps") {
-                            return qsTr("Perfect work! You clearly know maps!")
+                            //% "Perfect work! You clearly know maps!"
+                            return qsTrId("countryquiz-la-result_maximum_maps")
                         } if (setup.quizType === "capitals") {
-                            return qsTr("Perfect work! You clearly know the capitals!")
+                            //% "Perfect work! You clearly know the capitals!"
+                            return qsTrId("countryquiz-la-result_maximum_capitals")
                         }
                     }
                     var portion = correctAnswersCount / count
                     if (portion >= 0.9) {
-                        return qsTr("Excellent!")
+                        //% "Excellent!"
+                        return qsTrId("countryquiz-la-result_awesome")
                     } if (portion > 0.7) {
-                        return qsTr("Very good!")
+                        //% "Very good!"
+                        return qsTrId("countryquiz-la-result_great")
                     } if (portion > 0.5) {
-                        return qsTr("You did well!!")
+                        //% "You did well!!"
+                        return qsTrId("countryquiz-la-result_good")
                     } if (portion >= 0.2) {
-                        return qsTr("You could use more practice.")
+                        //% "You could use more practice."
+                        return qsTrId("countryquiz-la-result_poor")
                     }
-                    return qsTr("Did you try to avoid the right answers?")
+                    //% "Did you try to avoid the right answers?"
+                    return qsTrId("countryquiz-la-result_bad")
                 }
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 wrapMode: Text.Wrap
@@ -95,7 +105,8 @@ Page {
                 color: palette.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("%1 / %2 correct").arg(correctAnswersCount).arg(count)
+                //% "%1 / %2 correct"
+                text: qsTrId("countryquiz-la-correct_answers_count").arg(correctAnswersCount).arg(count)
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 wrapMode: Text.Wrap
                 x: Theme.horizontalPageMargin
@@ -105,7 +116,8 @@ Page {
                 color: palette.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("in %1").arg(quizTimer.getTotalTimeText())
+                //% "in %1"
+                text: qsTrId("countryquiz-la-in_time").arg(quizTimer.getTotalTimeText())
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 x: Theme.horizontalPageMargin
             }
@@ -116,9 +128,11 @@ Page {
                 horizontalAlignment: Text.AlignHCenter
                 text: {
                     if (resultsSaver.nth === -1) {
-                        return qsTr("Score %L1 points").arg(totalScore)
+                        //% "Score %L1 points"
+                        return qsTrId("countryquiz-la-score_n_points").arg(totalScore)
                     }
-                    return qsTr("Score %L1 points (#%2)").arg(totalScore).arg(resultsSaver.nth)
+                    //% "Score %L1 points (#%2)"
+                    return qsTrId("countryquiz-la-score_n_points_with_ranking").arg(totalScore).arg(resultsSaver.nth)
                 }
                 width: Math.min(contentWidth, parent.width - 2 * Theme.horizontalPageMargin)
                 x: Theme.horizontalPageMargin + Math.max(0, ((parent.width - 2 * Theme.horizontalPageMargin) - contentWidth)) / 2
@@ -164,13 +178,15 @@ Page {
                             model: correctAnswers
                         }
                     }
-                    title: qsTr("Your answers")
+                    //% "Your answers"
+                    title: qsTrId("countryquiz-se-your_answers")
                 }
             }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Play again")
+                //% "Play again"
+                text: qsTrId("countryquiz-bt-play_again")
 
                 onClicked: {
                     quizTimer.reset()

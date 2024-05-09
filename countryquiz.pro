@@ -37,9 +37,37 @@ DISTFILES += \
     tools/tile_svg.py \
     tools/yaml2xml.py
 
-SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
+# Translations
+TS_FILE = $$PWD/translations/harbour-countryquiz.ts
+EE_DIR = $$shadowed(translations)
+EE_QM = $$shadowed(translations/harbour-countryquiz.qm)
 
-CONFIG += sailfishapp_i18n
+qtPrepareTool(LUPDATE, lupdate)
+ts_ee.commands = $$LUPDATE $$PWD/src $$PWD/qml -ts $$TS_FILE
+ts_ee.input = $$DISTFILES
+ts_ee.output = $$TS_FILE
+ts_ee.target = $$TS_FILE
+PRE_TARGETDEPS += ts_ee
+QMAKE_EXTRA_TARGETS += ts_ee
+
+qtPrepareTool(LRELEASE, lrelease)
+qm_ee.commands = mkdir -p $$EE_DIR && $$LRELEASE -idbased $$TS_FILE -qm $$EE_QM
+qm_ee.depends = ts_ee
+qm_ee.input = $$TS_FILE
+qm_ee.output = $$EE_QM
+qm_ee.target = $$EE_QM
+
+qm_ee_install.CONFIG = no_check_exist
+qm_ee_install.depends = qm_ee
+qm_ee_install.files = $$EE_QM
+qm_ee_install.path = /usr/share/$$TARGET/translations
+
+QMAKE_CLEAN += $$EE_QM
+QMAKE_EXTRA_TARGETS += qm_ee
+PRE_TARGETDEPS += qm_ee
+INSTALLS += qm_ee_install
+
+CONFIG += sailfishapp_i18n sailfishapp_i18n_idbased
 TRANSLATIONS += translations/harbour-countryquiz-fi.ts
 for (file, TRANSLATIONS) {
     QMAKE_CLEAN += $$shadowed($$file)

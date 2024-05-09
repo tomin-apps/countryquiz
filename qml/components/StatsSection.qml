@@ -68,7 +68,8 @@ ExpandingSection {
 
         SelectableDetailItem {
             id: presetSelection
-            label: qsTr("Preset")
+            //% "Preset"
+            label: qsTrId("countryquiz-la-preset")
             menu: ContextMenu {
                 Repeater {
                     model: presets
@@ -85,7 +86,8 @@ ExpandingSection {
 
         SelectableDetailItem {
             id: lengthSelection
-            label: qsTr("Length")
+            //% "Length"
+            label: qsTrId("countryquiz-la-length")
             menu: ContextMenu {
                 MenuItem { text: Helpers.getLengthTitleText("short") }
                 MenuItem { text: Helpers.getLengthTitleText("long") }
@@ -166,7 +168,8 @@ ExpandingSection {
                         bottom: parent.bottom
                     }
                     color: palette.secondaryHighlightColor
-                    text: qsTr("On %1").arg(model.datetime.toLocaleString(Qt.locale(), Locale.ShortFormat))
+                    //% "On %1"
+                    text: qsTrId("countryquiz-la-on_date").arg(model.datetime.toLocaleString(Qt.locale(), Locale.ShortFormat))
                 }
 
                 Label {
@@ -177,7 +180,8 @@ ExpandingSection {
                         top: parent.top
                     }
                     color: palette.highlightColor
-                    text: qsTr("%1 / %2 for %3 p")
+                    //% "%1 / %2 for %3 p"
+                    text: qsTrId("countryquiz-la-questions_out_of_questions_for_points")
                             .arg(model.number_of_correct)
                             .arg(model.length)
                             .arg(model.score)
@@ -190,7 +194,8 @@ ExpandingSection {
                         bottom: parent.bottom
                     }
                     color: palette.secondaryHighlightColor
-                    text: qsTr("In %1").arg(Helpers.timeAsString(model.time))
+                    //% "In %1"
+                    text: qsTrId("countryquiz-la-in_time_as_sentence").arg(Helpers.timeAsString(model.time))
                 }
             }
             model: statsModel ? statsModel : 0
@@ -210,7 +215,8 @@ ExpandingSection {
             color: palette.secondaryHighlightColor
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeHuge
-            text: qsTr("This quiz has not been played yet")
+            //% "This quiz has not been played yet"
+            text: qsTrId("countryquiz-la-has_not_been_played_yet")
             visible: statsModel && statsModel.count === 0
             wrapMode: Text.Wrap
             width: parent.width - 2 * Theme.horizontalPageMargin

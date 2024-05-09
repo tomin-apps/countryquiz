@@ -19,8 +19,10 @@ Item {
 
         ViewPlaceholder {
             enabled: !config.hasPlayed
-            text: qsTr("Play a quiz at least once to see all the countries")
-            hintText: qsTr("Swipe to left and press 'Quiz me!'")
+            //% "Play a quiz at least once to see all the countries"
+            text: qsTrId("countryquiz-la-play_at_least_once")
+            //% "Swipe to left and press 'Quiz me!'"
+            hintText: qsTrId("countryquiz-la-swipe_to_left")
         }
 
         VerticalScrollDecorator { }

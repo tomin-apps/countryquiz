@@ -32,21 +32,24 @@ Item {
                 expanded: isInitialSection(quizType)
                 presets: FlagQuizPresets { }
                 quizType: "flags"
-                title: qsTr("Flag Quiz")
+                //% "Flag Quiz"
+                title: qsTrId("countryquiz-se-flag_quiz")
             }
 
             QuizSection {
                 expanded: isInitialSection(quizType)
                 presets: MapQuizPresets { }
                 quizType: "maps"
-                title: qsTr("Map Quiz")
+                //% "Map Quiz"
+                title: qsTrId("countryquiz-se-map_quiz")
             }
 
             QuizSection {
                 expanded: isInitialSection(quizType)
                 presets: CapitalQuizPresets { }
                 quizType: "capitals"
-                title: qsTr("Capital City Quiz")
+                //% "Capital City Quiz"
+                title: qsTrId("countryquiz-se-capital_quiz")
             }
         }
 

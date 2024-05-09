@@ -37,17 +37,20 @@ Page {
     PageHeader {
         readonly property string name: {
             if (setup.quizType === "flags") {
-                return qsTr("Flag")
+                //% "Flag"
+                return qsTrId("countryquiz-he-flag")
             } if (setup.quizType === "maps") {
-                return qsTr("Map")
+                //% "Map"
+                return qsTrId("countryquiz-he-map")
             } if (setup.quizType === "capitals") {
-                return qsTr("Capital City")
+                //% "Capital City"
+                return qsTrId("countryquiz-he-capital-city")
             }
             return ""
         }
 
         id: header
-        title: qsTr("%1 %2 / %3").arg(name).arg(page.current).arg(page.count)
+        title: "%1 %2 / %3".arg(name).arg(page.current).arg(page.count)
         z: 2
     }
 
@@ -85,16 +88,20 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             text: {
                 if (setup.quizType === "flags") {
-                    return qsTr("Guess which country this flag belongs to")
+                    //% "Guess which country this flag belongs to"
+                    return qsTrId("countryquiz-la-guess_flag")
                 }
                 if (setup.quizType === "maps") {
-                    return qsTr("Guess which country is highlighted on the map")
+                    //% "Guess which country is highlighted on the map"
+                    return qsTrId("countryquiz-la-guess_maps")
                 }
                 if (setup.quizType === "capitals") {
                     if (dataModel.get(index).capital.indexOf(';') === -1) {
-                        return qsTr("Guess which country's capital is this")
+                        //% "Guess which country's capital is this"
+                        return qsTrId("countryquiz-la-guess_capital")
                     } else {
-                        return qsTr("Guess which country's capitals are these")
+                        //% "Guess which country's capitals are these"
+                        return qsTrId("countryquiz-la-guess_multiple_capitals")
                     }
                 }
                 return ""
@@ -318,11 +325,13 @@ Page {
                     var capitals = dataModel.get(index).capital.split(';')
                     switch (capitals.length) {
                     case 1:
-                        return qsTr("%1").arg(capitals[0])
+                        return "%1".arg(capitals[0])
                     case 2:
-                        return qsTr("%1 and %2").arg(capitals[0]).arg(capitals[1])
+                        //% "%1 and %2"
+                        return qsTrId("countryquiz-la-one_and_other").arg(capitals[0]).arg(capitals[1])
                     case 3:
-                        return qsTr("%1, %2 and %3").arg(capitals[0]).arg(capitals[1]).arg(capitals[2])
+                        //% "%1, %2 and %3"
+                        return qsTrId("countryquiz-la-three_args").arg(capitals[0]).arg(capitals[1]).arg(capitals[2])
                     }
                     console.warn("UNIMPLEMENTD: Bad number of capitals", capitals.length)
                     return ""

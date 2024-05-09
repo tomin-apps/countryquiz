@@ -16,6 +16,7 @@ BuildRequires:  librsvg-tools
 BuildRequires:  python3-cairo
 BuildRequires:  python3-gobject
 BuildRequires:  python3-yaml
+BuildRequires:  qt5-qttools-linguist
 
 %description
 %{summary}.

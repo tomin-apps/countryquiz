@@ -71,11 +71,14 @@ Page {
                         var capitals = item.capital.split(';')
                         switch (capitals.length) {
                         case 1:
-                            return qsTr("Capital: %1").arg(capitals[0])
+                            //% "Capital: %1"
+                            return qsTrId("countryquiz-la-signle_capital").arg(capitals[0])
                         case 2:
-                            return qsTr("Capitals: %1 and %2").arg(capitals[0]).arg(capitals[1])
+                            //% "Capitals: %1 and %2"
+                            return qsTrId("countryquiz-la-two_capitals").arg(capitals[0]).arg(capitals[1])
                         case 3:
-                            return qsTr("Capitals: %1, %2 and %3").arg(capitals[0]).arg(capitals[1]).arg(capitals[2])
+                            //% "Capitals: %1, %2 and %3"
+                            return qsTrId("countryquiz-la-three_capitals").arg(capitals[0]).arg(capitals[1]).arg(capitals[2])
                         }
                         console.warn("UNIMPLEMENTD: Bad number of capitals", capitals.length)
                         return ""
@@ -89,7 +92,8 @@ Page {
                     color: palette.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeMedium
                     horizontalAlignment: Text.AlignHCenter
-                    text: qsTr("Region: %1").arg(item.region)
+                    //% "Region: %1"
+                    text: qsTrId("countryquiz-la-region").arg(item.region)
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap
                 }
@@ -99,7 +103,8 @@ Page {
                     color: palette.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeMedium
                     horizontalAlignment: Text.AlignHCenter
-                    text: qsTr("Time: %1").arg(Helpers.timeAsString(page.time))
+                    //% "Time: %1"
+                    text: qsTrId("countryquiz-la-time").arg(Helpers.timeAsString(page.time))
                     visible: page.time != ""
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap
@@ -110,7 +115,8 @@ Page {
                     color: palette.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeMedium
                     horizontalAlignment: Text.AlignHCenter
-                    text: qsTr("Score: %L1 points").arg(page.score)
+                    //% "Score: %L1 points"
+                    text: qsTrId("countryquiz-la-score").arg(page.score)
                     visible: page.score >= 0
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     wrapMode: Text.Wrap

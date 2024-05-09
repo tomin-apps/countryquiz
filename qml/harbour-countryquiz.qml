@@ -27,7 +27,8 @@ ApplicationWindow {
 
                 PullDownMenu {
                     MenuItem {
-                        text: qsTr("About")
+                        //% "About"
+                        text: qsTrId("countryquiz-me-about")
                         onClicked: pageStack.push(Qt.resolvedUrl("pages/AboutPage.qml"))
                     }
                 }
@@ -64,7 +65,8 @@ ApplicationWindow {
         CoverBackground {
             Label {
                 anchors.centerIn: parent
-                text: qsTr("Country Quiz")
+                //% "Country Quiz"
+                text: qsTrId("countryquiz-la-app_name")
             }
         }
     }
@@ -106,17 +108,20 @@ ApplicationWindow {
         id: pageModel
 
         ListElement {
-            title: qsTr("Countries")
+            //% "Countries"
+            title: qsTrId("countryquiz-la-countries")
             url: "pages/CountryListTab.qml"
         }
 
         ListElement {
-            title: qsTr("Quiz")
+            //% "Quiz"
+            title: qsTrId("countryquiz-la-quiz")
             url: "pages/QuizSelectionTab.qml"
         }
 
         ListElement {
-            title: qsTr("Stats")
+            //% "Stats"
+            title: qsTrId("countryquiz-la-stats")
             url: "pages/StatsTab.qml"
         }
     }

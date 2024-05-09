@@ -15,7 +15,8 @@ Dialog {
     property alias description: textField.label
     property string tooLowHint: invalidHint
     property string tooHighHint: invalidHint
-    property string invalidHint: qsTr("You must specify an integer between %1 and %2").arg(minimum).arg(maximum)
+    //% "You must specify an integer between %1 and %2"
+    property string invalidHint: qsTrId("countryquiz-la-integer-between").arg(minimum).arg(maximum)
 
     readonly property var selectedValue: textField.text.length > 0 ? parseInt(textField.text) : NaN
 
