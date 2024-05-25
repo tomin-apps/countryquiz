@@ -122,7 +122,6 @@ Page {
             }
 
             id: contributorsPage
-            allowedOrientations: Orientation.All
             onStatusChanged: if (status == PageStatus.Active) load()
 
             BusyIndicator {
