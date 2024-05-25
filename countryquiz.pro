@@ -10,6 +10,7 @@ DISTFILES += \
     qml/components/Config.qml \
     qml/components/CountryListDelegateModel.qml \
     qml/components/DataModel.qml \
+    qml/components/LanguageModel.qml \
     qml/components/PresetModel.qml \
     qml/components/QuizButton.qml \
     qml/components/QuizSection.qml \
@@ -22,6 +23,7 @@ DISTFILES += \
     qml/pages/CountryListTab.qml \
     qml/pages/CountryPage.qml \
     qml/pages/IntSelectionPage.qml \
+    qml/pages/OptionsPage.qml \
     qml/pages/QuizPage.qml \
     qml/pages/QuizSelectionTab.qml \
     qml/pages/ResultsPage.qml \

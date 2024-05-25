@@ -58,7 +58,7 @@ Page {
 
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: Qt.openUrlExternally("https://en.wikipedia.org/wiki/" + item.name.replace(/ /g, "_"))
+                        onClicked: Qt.openUrlExternally(languagesModel.getWikipediaLink(dataModel.language) + item.name.replace(/ /g, "_"))
                     }
                 }
 

@@ -9,8 +9,9 @@ import QtQuick.XmlListModel 2.0
 
 XmlListModel {
     property string language
+    readonly property bool ready: status === XmlListModel.Ready
 
-    source: Qt.resolvedUrl(language === "" ? "../../assets/data.xml" : "../../assets/data.%1.xml".arg(language))
+    source: language !== "" ? Qt.resolvedUrl("../../assets/data_%1.xml".arg(language)) : ""
     query: "/countries/country"
 
     XmlRole {

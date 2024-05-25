@@ -71,8 +71,9 @@ DelegateModel {
         id: unsortedCountries
         name: "unsorted"
         includeByDefault: true
+        onCountChanged: if (count > 0) insertTimer.start()
     }
     items.includeByDefault: false
-    model: config.hasPlayed ? dataModel : 0
+    model: config.hasPlayed && dataModel.ready ? dataModel : 0
     Component.onCompleted: insertTimer.start()
 }

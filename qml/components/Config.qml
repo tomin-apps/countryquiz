@@ -11,6 +11,7 @@ Item {
     property alias hasPlayed: group.hasPlayed
     readonly property string lastChosenQuizType: group.lastChosenQuizType || "flags"
     readonly property string lastOpenedStatsSection: group.lastOpenedStatsSection || "flags"
+    readonly property string lastSelectedLanguage: group.lastSelectedLanguage
 
     function setLastChosenQuizType(type) {
         group.lastChosenQuizType = type
@@ -20,6 +21,10 @@ Item {
         group.lastOpenedStatsSection = type
     }
 
+    function setLastSelectedLanguage(name) {
+        group.lastSelectedLanguage = name
+    }
+
     ConfigurationGroup {
         id: group
         path: "/site/tomin/apps/CountryQuiz"
@@ -27,5 +32,6 @@ Item {
         property bool hasPlayed
         property string lastChosenQuizType
         property string lastOpenedStatsSection
+        property string lastSelectedLanguage
     }
 }

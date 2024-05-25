@@ -2,19 +2,36 @@ TEMPLATE = aux
 TARGET = harbour-countryquiz
 
 DISTFILES = \
-    data.yaml \
+    $$files(data_*.yaml) \
     $$files(flags/*.svg) \
+    data.xml \
     map.svg \
     README.md
 
-data.CONFIG = no_check_exist
-data.depends = $$PWD/data.yaml
-data.input = data.yaml
-data.output = $$shadowed(data.xml)
-data.commands = python3 $$PWD/../tools/yaml2xml.py $$PWD/data.yaml $$shadowed(data.xml)
-data.files = $$shadowed(data.xml)
-data.path = /usr/share/$${TARGET}/assets
-QMAKE_CLEAN += $$data.files
+LANGUAGES = en-GB fi-FI
+for (lang, LANGUAGES) {
+    INPUT_YAML = $$PWD/data_$${lang}.yaml
+    OUTPUT_XML = $$shadowed(data_$${lang}.xml)
+    data_$${lang}.CONFIG = no_check_exist
+    data_$${lang}.depends = $$INPUT_YAML
+    data_$${lang}.input = data_$${lang}.yaml
+    data_$${lang}.output = $$OUTPUT_XML
+    data_$${lang}.commands = python3 $$PWD/../tools/yaml2xml.py $$INPUT_YAML $$OUTPUT_XML
+    data_$${lang}.files = $$OUTPUT_XML
+    data_$${lang}.path = /usr/share/$${TARGET}/assets
+    QMAKE_CLEAN += $$OUTPUT_XML
+    QMAKE_EXTRA_TARGETS += data_$${lang}
+    PRE_TARGETDEPS += data_$${lang}
+    INSTALLS += data_$${lang}
+}
+
+data_xml.CONFIG = no_check_exist
+data_xml.input = data.yaml
+data_xml.output = $$shadowed(data.xml)
+data_xml.commands = python3 $$PWD/../tools/yaml2xml.py --languages $$PWD/data.yaml $$shadowed(data.xml)
+data_xml.files = $$shadowed(data.xml)
+data_xml.path = /usr/share/$${TARGET}/assets
+QMAKE_CLEAN += $$data_xml.files
 
 flags.files = $$files(flags/*.svg)
 flags.path = /usr/share/$${TARGET}/assets/flags
@@ -32,6 +49,6 @@ tiles.path = /usr/share/$${TARGET}/assets
 tiles.extra = -cp -r $$shadowed(map_*) $(INSTALL_ROOT)$$tiles.path/
 QMAKE_CLEAN += $$tiles.files $$files($$shadowed(map_*/*.png))
 
-QMAKE_EXTRA_TARGETS += data tiles
-PRE_TARGETDEPS += data tiles
-INSTALLS += data flags map tiles
+QMAKE_EXTRA_TARGETS += data_xml tiles
+PRE_TARGETDEPS += data_xml tiles
+INSTALLS += data_xml flags map tiles

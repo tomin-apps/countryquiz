@@ -31,6 +31,12 @@ ApplicationWindow {
                         text: qsTrId("countryquiz-me-about")
                         onClicked: pageStack.push(Qt.resolvedUrl("pages/AboutPage.qml"))
                     }
+
+                    MenuItem {
+                        //% "Options"
+                        text: qsTrId("countryquiz-me-options")
+                        onClicked: pageStack.push(Qt.resolvedUrl("pages/OptionsPage.qml"))
+                    }
                 }
 
                 Tabs {
@@ -82,8 +88,11 @@ ApplicationWindow {
         miniMapSize: Qt.size(Screen.width, Screen.width)
     }
 
+    LanguagesModel { id: languagesModel }
+
     DataModel {
         id: dataModel
+        language: config.lastSelectedLanguage || (languagesModel.ready ? languagesModel.defaultLanguage : "")
 
         function getIndices(type) {
             var indices = Helpers.getIndexArray(dataModel)
