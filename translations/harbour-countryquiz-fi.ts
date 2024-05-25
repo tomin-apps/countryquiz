@@ -1,444 +1,481 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="fi_FI" sourcelanguage="en_US">
 <context>
     <name></name>
     <message id="countryquiz-la-preset">
         <location filename="../qml/components/QuizSection.qml" line="27"/>
         <location filename="../qml/components/StatsSection.qml" line="72"/>
         <source>Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Esivalinta</translation>
     </message>
     <message id="countryquiz-la-questions">
-        <location filename="../qml/components/QuizSection.qml" line="41"/>
+        <location filename="../qml/components/QuizSection.qml" line="42"/>
         <source>Questions</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Menu for the number of questions to be asked</extracomment>
+        <translation>Kysymyksiä</translation>
     </message>
     <message id="countryquiz-me-custom_value">
-        <location filename="../qml/components/QuizSection.qml" line="47"/>
-        <location filename="../qml/components/QuizSection.qml" line="129"/>
+        <location filename="../qml/components/QuizSection.qml" line="48"/>
+        <location filename="../qml/components/QuizSection.qml" line="137"/>
         <source>Custom value</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Menu item to select some other value for time to answer</extracomment>
+        <translation>Oma valinta</translation>
     </message>
     <message id="countryquiz-he-select-number-of-questions">
-        <location filename="../qml/components/QuizSection.qml" line="66"/>
+        <location filename="../qml/components/QuizSection.qml" line="67"/>
         <source>Select number of questions</source>
-        <translation type="unfinished"></translation>
+        <translation>Valtise kysymysten määrä</translation>
     </message>
     <message id="countryquiz-he-questions">
-        <location filename="../qml/components/QuizSection.qml" line="68"/>
+        <location filename="../qml/components/QuizSection.qml" line="70"/>
         <source>Questions</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Header for page to select the number of questions</extracomment>
+        <translation>Kysymyksiä</translation>
     </message>
     <message id="countryquiz-la-at_least_one_question_hint">
-        <location filename="../qml/components/QuizSection.qml" line="70"/>
+        <location filename="../qml/components/QuizSection.qml" line="72"/>
         <source>You must have at least one question</source>
-        <translation type="unfinished"></translation>
+        <translation>Vähintään yksi kysymys vaaditaan</translation>
     </message>
     <message id="countryquiz-la-not_more_than_questions_hint">
-        <location filename="../qml/components/QuizSection.qml" line="72"/>
+        <location filename="../qml/components/QuizSection.qml" line="74"/>
         <source>You may not have more than %1 questions</source>
-        <translation type="unfinished"></translation>
+        <translation>Kysymyksiä ei voi olla enempää kuin %1 kappaletta</translation>
     </message>
     <message id="countryquiz-la-choices">
-        <location filename="../qml/components/QuizSection.qml" line="90"/>
+        <location filename="../qml/components/QuizSection.qml" line="93"/>
         <source>Choices</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Menu for number of choices to choose from</extracomment>
+        <translation>Vaihtoehtoja</translation>
     </message>
     <message id="countryquiz-la-choices_from">
-        <location filename="../qml/components/QuizSection.qml" line="104"/>
+        <location filename="../qml/components/QuizSection.qml" line="108"/>
         <source>Choices from</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Menu to select area of choices</extracomment>
+        <translation>Vaihtoehdot</translation>
     </message>
     <message id="countryquiz-me-everywhere">
-        <location filename="../qml/components/QuizSection.qml" line="107"/>
-        <location filename="../qml/components/QuizSection.qml" line="118"/>
+        <location filename="../qml/components/QuizSection.qml" line="112"/>
+        <location filename="../qml/components/QuizSection.qml" line="124"/>
         <source>Everywhere</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Choices from anywhere on Earth</extracomment>
+        <translation>Kaikkialta</translation>
     </message>
     <message id="countryquiz-me-same_region">
-        <location filename="../qml/components/QuizSection.qml" line="109"/>
-        <location filename="../qml/components/QuizSection.qml" line="116"/>
+        <location filename="../qml/components/QuizSection.qml" line="115"/>
+        <location filename="../qml/components/QuizSection.qml" line="122"/>
         <source>Same region</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Choices from sama region as the right answer</extracomment>
+        <translation>Samalta alueelta</translation>
     </message>
     <message id="countryquiz-la-time_to_answer">
-        <location filename="../qml/components/QuizSection.qml" line="123"/>
+        <location filename="../qml/components/QuizSection.qml" line="130"/>
         <source>Time to answer</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Menu to select time to answer the question</extracomment>
+        <translation>Vastausaika</translation>
     </message>
     <message id="countryquiz-la-select_time_to_answer">
-        <location filename="../qml/components/QuizSection.qml" line="150"/>
+        <location filename="../qml/components/QuizSection.qml" line="158"/>
         <source>Select time to answer</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse vastausaika</translation>
     </message>
     <message id="countryquiz-la-seconds">
-        <location filename="../qml/components/QuizSection.qml" line="152"/>
+        <location filename="../qml/components/QuizSection.qml" line="160"/>
         <source>Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekuntia</translation>
     </message>
     <message id="countryquiz-la-at_least_second_hint">
-        <location filename="../qml/components/QuizSection.qml" line="154"/>
+        <location filename="../qml/components/QuizSection.qml" line="162"/>
         <source>You must have at least one second to answer the question</source>
-        <translation type="unfinished"></translation>
+        <translation>Vastausaikaa täytyy olla ainakin yksi sekunti</translation>
     </message>
     <message id="countryquiz-la-not_more_than_seconds_hint">
-        <location filename="../qml/components/QuizSection.qml" line="156"/>
+        <location filename="../qml/components/QuizSection.qml" line="164"/>
         <source>You may not have more than %1 seconds (%2 minutes) to answer the question</source>
-        <translation type="unfinished"></translation>
+        <translation>Vastausaikaa ei voi olla enempää kuin %1 sekuntia (%2 minuuttia)</translation>
     </message>
     <message id="countryquiz-la-seconds_per_question">
-        <location filename="../qml/components/QuizSection.qml" line="166"/>
+        <location filename="../qml/components/QuizSection.qml" line="174"/>
         <source>%1 s per question</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 s per kysymys</translation>
     </message>
     <message id="countryquiz-bt-quiz_me">
-        <location filename="../qml/components/QuizSection.qml" line="174"/>
+        <location filename="../qml/components/QuizSection.qml" line="183"/>
         <source>Quiz me!</source>
-        <translation type="unfinished"></translation>
+        <extracomment>Button to start quiz</extracomment>
+        <translation>Visaillaan!</translation>
     </message>
     <message id="countryquiz-la-length">
         <location filename="../qml/components/StatsSection.qml" line="90"/>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Pituus</translation>
+    </message>
+    <message id="countryquiz-la-you">
+        <location filename="../qml/components/StatsSection.qml" line="160"/>
+        <source>You</source>
+        <translation>Sinä</translation>
     </message>
     <message id="countryquiz-la-on_date">
-        <location filename="../qml/components/StatsSection.qml" line="172"/>
+        <location filename="../qml/components/StatsSection.qml" line="174"/>
         <source>On %1</source>
-        <translation type="unfinished"></translation>
+        <extracomment>%1 is the date when the game was played, try to keep this short</extracomment>
+        <translation>%1</translation>
     </message>
     <message id="countryquiz-la-questions_out_of_questions_for_points">
-        <location filename="../qml/components/StatsSection.qml" line="184"/>
+        <location filename="../qml/components/StatsSection.qml" line="187"/>
         <source>%1 / %2 for %3 p</source>
-        <translation type="unfinished"></translation>
+        <extracomment>%1 is number of right answers out of %2 total answer to reward %3 points, try to keep this short</extracomment>
+        <translation>%1 / %2 %3 p</translation>
     </message>
     <message id="countryquiz-la-in_time_as_sentence">
-        <location filename="../qml/components/StatsSection.qml" line="198"/>
+        <location filename="../qml/components/StatsSection.qml" line="202"/>
         <source>In %1</source>
-        <translation type="unfinished"></translation>
+        <extracomment>%1 is time that it took to finish the quiz, try to keep this short</extracomment>
+        <translation>%1</translation>
     </message>
     <message id="countryquiz-la-has_not_been_played_yet">
-        <location filename="../qml/components/StatsSection.qml" line="219"/>
+        <location filename="../qml/components/StatsSection.qml" line="223"/>
         <source>This quiz has not been played yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tätä visaa ei ole vielä pelattu</translation>
     </message>
     <message id="countryquiz-me-about">
         <location filename="../qml/harbour-countryquiz.qml" line="31"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Tietoja</translation>
+    </message>
+    <message id="countryquiz-me-options">
+        <location filename="../qml/harbour-countryquiz.qml" line="37"/>
+        <source>Options</source>
+        <translation>Valinnat</translation>
     </message>
     <message id="countryquiz-la-app_name">
-        <location filename="../qml/harbour-countryquiz.qml" line="69"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="75"/>
         <location filename="../qml/pages/AboutPage.qml" line="27"/>
         <source>Country Quiz</source>
-        <translation type="unfinished"></translation>
+        <translation>Valtiovisa</translation>
     </message>
     <message id="countryquiz-la-countries">
-        <location filename="../qml/harbour-countryquiz.qml" line="112"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="121"/>
         <source>Countries</source>
-        <translation type="unfinished"></translation>
+        <translation>Maat</translation>
     </message>
     <message id="countryquiz-la-quiz">
-        <location filename="../qml/harbour-countryquiz.qml" line="118"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="127"/>
         <source>Quiz</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa</translation>
     </message>
     <message id="countryquiz-la-stats">
-        <location filename="../qml/harbour-countryquiz.qml" line="124"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="133"/>
         <source>Stats</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilastot</translation>
     </message>
     <message id="countryquiz-la-easy">
         <location filename="../qml/helpers.js" line="44"/>
         <source>Easy</source>
-        <translation type="unfinished"></translation>
+        <translation>Helppo</translation>
     </message>
     <message id="countryquiz-la-regular">
         <location filename="../qml/helpers.js" line="47"/>
         <source>Regular</source>
-        <translation type="unfinished"></translation>
+        <translation>Tavallinen</translation>
     </message>
     <message id="countryquiz-la-veteran">
         <location filename="../qml/helpers.js" line="50"/>
         <source>Veteran</source>
-        <translation type="unfinished"></translation>
+        <translation>Veteraani</translation>
     </message>
     <message id="countryquiz-la-none">
         <location filename="../qml/helpers.js" line="53"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei mikään</translation>
     </message>
     <message id="countryquiz-la-short">
         <location filename="../qml/helpers.js" line="59"/>
         <source>Short</source>
-        <translation type="unfinished"></translation>
+        <translation>Lyhyt</translation>
     </message>
     <message id="countryquiz-la-long">
         <location filename="../qml/helpers.js" line="62"/>
         <source>Long</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitkä</translation>
     </message>
     <message id="countryquiz-la-all">
         <location filename="../qml/helpers.js" line="65"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaikki</translation>
     </message>
     <message id="countryquiz-he-about">
         <location filename="../qml/pages/AboutPage.qml" line="25"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Tietoja</translation>
     </message>
     <message id="countryquiz-la-about_text">
         <location filename="../qml/pages/AboutPage.qml" line="51"/>
         <source>Country Quiz is a quiz game about states in the world. You can practise recognition of flags, maps and capitals. Results are collected into local database for you to see your own progress.</source>
-        <translation type="unfinished"></translation>
+        <translation>Valtiovisa on peli maailman maista. Voit harjoitella lippujen, karttojen ja pääkaupunkien tunnistamista. Tulokset kerätään paikalliseen tietokantaan, josta voit nähdä oman edistymisesi.</translation>
     </message>
     <message id="countryquiz-se-development">
         <location filename="../qml/pages/AboutPage.qml" line="59"/>
         <source>Development</source>
-        <translation type="unfinished"></translation>
+        <translation>Kehitys</translation>
     </message>
     <message id="countryquiz-la-source_code_and_bugs">
         <location filename="../qml/pages/AboutPage.qml" line="66"/>
         <source>You may obtain source code and report bugs on Github: &lt;a href=%2&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Voit hakea lähdekoodin ja raportoida bugeja Githubissa: &lt;a href=%2&gt;%1&lt;/a&gt;</translation>
     </message>
     <message id="countryquiz-bt-contributors">
         <location filename="../qml/pages/AboutPage.qml" line="78"/>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekijät</translation>
     </message>
     <message id="countryquiz-la-header">
         <location filename="../qml/pages/AboutPage.qml" line="84"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisenssi</translation>
     </message>
     <message id="countryquiz-la-license_description">
         <location filename="../qml/pages/AboutPage.qml" line="90"/>
         <source>Country Quiz is licensed under MIT license. Touch the button below for more information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Valtiovisa on lisensoitu MIT-lisenssillä. Kosketa nappia alapuolella saadaksesi lisätietoja.</translation>
     </message>
     <message id="countryquiz-bt-license">
         <location filename="../qml/pages/AboutPage.qml" line="99"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisenssi</translation>
     </message>
     <message id="countryquiz-he-contributors">
         <location filename="../qml/pages/AboutPage.qml" line="146"/>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekijät</translation>
     </message>
     <message id="countryquiz-la-main_developer">
         <location filename="../qml/pages/AboutPage.qml" line="152"/>
         <source>Original idea and development by %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alkuperäinen idea ja kehitys: %1.</translation>
     </message>
     <message id="countryquiz-se-translators">
         <location filename="../qml/pages/AboutPage.qml" line="161"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Kääntäjät</translation>
     </message>
     <message id="countryquiz-he-header">
         <location filename="../qml/pages/AboutPage.qml" line="223"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisenssi</translation>
     </message>
     <message id="countryquiz-la-mit_license">
         <location filename="../qml/pages/AboutPage.qml" line="225"/>
         <source>MIT license</source>
-        <translation type="unfinished"></translation>
+        <translation>MIT-lisenssi</translation>
     </message>
     <message id="countryquiz-la-play_at_least_once">
         <location filename="../qml/pages/CountryListTab.qml" line="23"/>
         <source>Play a quiz at least once to see all the countries</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelaa ainakin kerran nähdäksesi kaikki maat</translation>
     </message>
     <message id="countryquiz-la-swipe_to_left">
         <location filename="../qml/pages/CountryListTab.qml" line="25"/>
         <source>Swipe to left and press &apos;Quiz me!&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Pyyhkäise vasemmalle ja valitse &apos;Visaillaan!&apos;</translation>
     </message>
     <message id="countryquiz-la-signle_capital">
         <location filename="../qml/pages/CountryPage.qml" line="75"/>
         <source>Capital: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pääkaupunki: %1</translation>
     </message>
     <message id="countryquiz-la-two_capitals">
         <location filename="../qml/pages/CountryPage.qml" line="78"/>
         <source>Capitals: %1 and %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pääkaupungit: %1 ja %2</translation>
     </message>
     <message id="countryquiz-la-three_capitals">
         <location filename="../qml/pages/CountryPage.qml" line="81"/>
         <source>Capitals: %1, %2 and %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Pääkaupungit: %1, %2 ja %3</translation>
     </message>
     <message id="countryquiz-la-region">
         <location filename="../qml/pages/CountryPage.qml" line="96"/>
         <source>Region: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Alue: %1</translation>
     </message>
     <message id="countryquiz-la-time">
         <location filename="../qml/pages/CountryPage.qml" line="107"/>
         <source>Time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aika: %1</translation>
     </message>
     <message id="countryquiz-la-score">
         <location filename="../qml/pages/CountryPage.qml" line="119"/>
         <source>Score: %L1 points</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulos: %L1 pistettä</translation>
     </message>
     <message id="countryquiz-la-integer-between">
         <location filename="../qml/pages/IntSelectionPage.qml" line="19"/>
         <source>You must specify an integer between %1 and %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Määrittele kokonaisluku väliltä %1 ja %2</translation>
     </message>
     <message id="countryquiz-he-flag">
         <location filename="../qml/pages/QuizPage.qml" line="41"/>
         <source>Flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Lippu</translation>
     </message>
     <message id="countryquiz-he-map">
         <location filename="../qml/pages/QuizPage.qml" line="44"/>
         <source>Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Kartta</translation>
     </message>
     <message id="countryquiz-he-capital-city">
         <location filename="../qml/pages/QuizPage.qml" line="47"/>
         <source>Capital City</source>
-        <translation type="unfinished"></translation>
+        <translation>Pääkaupunki</translation>
     </message>
     <message id="countryquiz-la-guess_flag">
         <location filename="../qml/pages/QuizPage.qml" line="92"/>
         <source>Guess which country this flag belongs to</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvaa, mille maalle tämä lippu kuuluu</translation>
     </message>
     <message id="countryquiz-la-guess_maps">
         <location filename="../qml/pages/QuizPage.qml" line="96"/>
         <source>Guess which country is highlighted on the map</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvaa, mikä maa on korostettu kartassa</translation>
     </message>
     <message id="countryquiz-la-guess_capital">
         <location filename="../qml/pages/QuizPage.qml" line="101"/>
         <source>Guess which country&apos;s capital is this</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvaa, minkä maan pääkaupunki tämä on</translation>
     </message>
     <message id="countryquiz-la-guess_multiple_capitals">
         <location filename="../qml/pages/QuizPage.qml" line="104"/>
         <source>Guess which country&apos;s capitals are these</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvaa, minkä maan pääkaupunkeja nämä ovat</translation>
     </message>
     <message id="countryquiz-la-one_and_other">
         <location filename="../qml/pages/QuizPage.qml" line="331"/>
         <source>%1 and %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ja %2</translation>
     </message>
     <message id="countryquiz-la-three_args">
         <location filename="../qml/pages/QuizPage.qml" line="334"/>
         <source>%1, %2 and %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1, %2 ja %3</translation>
     </message>
     <message id="countryquiz-se-flag_quiz">
         <location filename="../qml/pages/QuizSelectionTab.qml" line="36"/>
         <location filename="../qml/pages/StatsTab.qml" line="37"/>
         <source>Flag Quiz</source>
-        <translation type="unfinished"></translation>
+        <translation>Lippuvisa</translation>
     </message>
     <message id="countryquiz-se-map_quiz">
         <location filename="../qml/pages/QuizSelectionTab.qml" line="44"/>
         <location filename="../qml/pages/StatsTab.qml" line="44"/>
         <source>Map Quiz</source>
-        <translation type="unfinished"></translation>
+        <translation>Karttavisa</translation>
     </message>
     <message id="countryquiz-se-capital_quiz">
         <location filename="../qml/pages/QuizSelectionTab.qml" line="52"/>
         <source>Capital City Quiz</source>
-        <translation type="unfinished"></translation>
+        <translation>Pääkaupunkivisa</translation>
     </message>
     <message id="countryquiz-he-results">
         <location filename="../qml/pages/ResultsPage.qml" line="51"/>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulokset</translation>
     </message>
     <message id="countryquiz-la-result_zero">
         <location filename="../qml/pages/ResultsPage.qml" line="68"/>
         <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>Se on kuin kolikonheittoa, joskus on vain huono tuuri!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_flags">
         <location filename="../qml/pages/ResultsPage.qml" line="73"/>
         <source>Perfect work! You clearly know the flags!</source>
-        <translation type="unfinished"></translation>
+        <translation>Täydellistä! Sinä todella tiedät liput!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_maps">
         <location filename="../qml/pages/ResultsPage.qml" line="76"/>
         <source>Perfect work! You clearly know maps!</source>
-        <translation type="unfinished"></translation>
+        <translation>Täydellistä! Sinä todella tiedät kartat!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_capitals">
         <location filename="../qml/pages/ResultsPage.qml" line="79"/>
         <source>Perfect work! You clearly know the capitals!</source>
-        <translation type="unfinished"></translation>
+        <translation>Täydellistä! Sinä todella tiedät pääkaupungit!</translation>
     </message>
     <message id="countryquiz-la-result_awesome">
         <location filename="../qml/pages/ResultsPage.qml" line="85"/>
         <source>Excellent!</source>
-        <translation type="unfinished"></translation>
+        <translation>Erinomaisesti pelattu!</translation>
     </message>
     <message id="countryquiz-la-result_great">
         <location filename="../qml/pages/ResultsPage.qml" line="88"/>
         <source>Very good!</source>
-        <translation type="unfinished"></translation>
+        <translation>Erittäin hyvin pelattu!</translation>
     </message>
     <message id="countryquiz-la-result_good">
         <location filename="../qml/pages/ResultsPage.qml" line="91"/>
         <source>You did well!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Pärjäsit hyvin!</translation>
     </message>
     <message id="countryquiz-la-result_poor">
         <location filename="../qml/pages/ResultsPage.qml" line="94"/>
         <source>You could use more practice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voisit harjoitella enemmän.</translation>
     </message>
     <message id="countryquiz-la-result_bad">
         <location filename="../qml/pages/ResultsPage.qml" line="97"/>
         <source>Did you try to avoid the right answers?</source>
-        <translation type="unfinished"></translation>
+        <translation>Yrititkö vältellä oikeita vastauksia?</translation>
     </message>
     <message id="countryquiz-la-correct_answers_count">
         <location filename="../qml/pages/ResultsPage.qml" line="109"/>
         <source>%1 / %2 correct</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 / %2 oikein</translation>
     </message>
     <message id="countryquiz-la-in_time">
         <location filename="../qml/pages/ResultsPage.qml" line="120"/>
         <source>in %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
     <message id="countryquiz-la-score_n_points">
         <location filename="../qml/pages/ResultsPage.qml" line="132"/>
         <source>Score %L1 points</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulos %L1 pistettä</translation>
     </message>
     <message id="countryquiz-la-score_n_points_with_ranking">
         <location filename="../qml/pages/ResultsPage.qml" line="135"/>
         <source>Score %L1 points (#%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulos %L1 pistettä (#%2)</translation>
     </message>
     <message id="countryquiz-se-your_answers">
         <location filename="../qml/pages/ResultsPage.qml" line="182"/>
         <source>Your answers</source>
-        <translation type="unfinished"></translation>
+        <translation>Vastauksesi</translation>
     </message>
     <message id="countryquiz-bt-play_again">
         <location filename="../qml/pages/ResultsPage.qml" line="189"/>
         <source>Play again</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelaa uudestaan</translation>
     </message>
     <message id="countryquiz-se-capital_city_quiz">
         <location filename="../qml/pages/StatsTab.qml" line="51"/>
         <source>Capital City Quiz</source>
-        <translation type="unfinished"></translation>
+        <translation>Pääkaupunkivisa</translation>
+    </message>
+    <message id="countryquiz-he-options">
+        <location filename="../qml/pages/OptionsPage.qml" line="23"/>
+        <source>Options</source>
+        <translation>Valinnat</translation>
+    </message>
+    <message id="countryquiz-de-language_combo_box">
+        <location filename="../qml/pages/OptionsPage.qml" line="39"/>
+        <source>Select language for country and capital names and quiz statistics</source>
+        <translation>Valitse maiden nimien, pääkaupunkien nimien ja visojen tilastojen kieli</translation>
+    </message>
+    <message id="countryquiz-la-language">
+        <location filename="../qml/pages/OptionsPage.qml" line="41"/>
+        <source>Language</source>
+        <translation>Kieli</translation>
     </message>
 </context>
 </TS>

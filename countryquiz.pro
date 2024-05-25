@@ -34,6 +34,7 @@ DISTFILES += \
     README.md \
     rpm/harbour-countryquiz.spec \
     translations/*.ts \
+    translations/TRANSLATORS \
     tools/compare_svg.py \
     tools/create_fake_stats.py \
     tools/tile_svg.py \
@@ -101,6 +102,6 @@ for (size, ICON_SIZES) {
     INSTALLS += icon_$${size}_install
 }
 
-static_files.files = COPYING README.md $$ICON_SOURCE
+static_files.files = COPYING README.md $$ICON_SOURCE translations/TRANSLATORS
 static_files.path = /usr/share/$${TARGET}
 INSTALLS += static_files
