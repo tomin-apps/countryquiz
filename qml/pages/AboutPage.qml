@@ -178,6 +178,8 @@ Page {
                         }
                     }
                 }
+
+                VerticalScrollDecorator { }
             }
         }
     }
@@ -240,6 +242,8 @@ Page {
                         }
                     }
                 }
+
+                VerticalScrollDecorator { }
             }
         }
     }
