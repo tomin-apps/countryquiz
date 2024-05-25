@@ -169,6 +169,7 @@ ExpandingSection {
                         bottom: parent.bottom
                     }
                     color: palette.secondaryHighlightColor
+                    //: %1 is the date when the game was played, try to keep this short
                     //% "On %1"
                     text: qsTrId("countryquiz-la-on_date").arg(model.datetime.toLocaleString(Qt.locale(), Locale.ShortFormat))
                 }
@@ -181,6 +182,7 @@ ExpandingSection {
                         top: parent.top
                     }
                     color: palette.highlightColor
+                    //: %1 is number of right answers out of %2 total answer to reward %3 points, try to keep this short
                     //% "%1 / %2 for %3 p"
                     text: qsTrId("countryquiz-la-questions_out_of_questions_for_points")
                             .arg(model.number_of_correct)
@@ -195,6 +197,7 @@ ExpandingSection {
                         bottom: parent.bottom
                     }
                     color: palette.secondaryHighlightColor
+                    //: %1 is time that it took to finish the quiz, try to keep this short
                     //% "In %1"
                     text: qsTrId("countryquiz-la-in_time_as_sentence").arg(Helpers.timeAsString(model.time))
                 }

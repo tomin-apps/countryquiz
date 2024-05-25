@@ -37,6 +37,7 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
+            //: Menu for the number of questions to be asked
             //% "Questions"
             label: qsTrId("countryquiz-la-questions")
             menu: ContextMenu {
@@ -64,6 +65,7 @@ ExpandingSection {
                             maximum: expandingSection.maximumLength,
                             //% "Select number of questions"
                             title: qsTrId("countryquiz-he-select-number-of-questions"),
+                            //: Header for page to select the number of questions
                             //% "Questions"
                             description: qsTrId("countryquiz-he-questions"),
                             //% "You must have at least one question"
@@ -86,6 +88,7 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
+            //: Menu for number of choices to choose from
             //% "Choices"
             label: qsTrId("countryquiz-la-choices")
             menu: ContextMenu {
@@ -100,11 +103,14 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
+            //: Menu to select area of choices
             //% "Choices from"
             label: qsTrId("countryquiz-la-choices_from")
             menu: ContextMenu {
+                //: Choices from anywhere on Earth
                 //% "Everywhere"
                 MenuItem { text: qsTrId("countryquiz-me-everywhere") }
+                //: Choices from sama region as the right answer
                 //% "Same region"
                 MenuItem { text: qsTrId("countryquiz-me-same_region") }
 
@@ -119,12 +125,14 @@ ExpandingSection {
         }
 
         SelectableDetailItem {
+            //: Menu to select time to answer the question
             //% "Time to answer"
             label: qsTrId("countryquiz-la-time_to_answer")
             menu: ContextMenu {
                 MenuItem { text: "15 s" }
                 MenuItem { text: "30 s" }
                 MenuItem { text: "60 s" }
+                //: Menu item to select some other value for time to answer
                 //% "Custom value"
                 MenuItem { text: qsTrId("countryquiz-me-custom_value") }
 
@@ -170,6 +178,7 @@ ExpandingSection {
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
+            //: Button to start quiz
             //% "Quiz me!"
             text: qsTrId("countryquiz-bt-quiz_me")
 
