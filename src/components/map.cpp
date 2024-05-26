@@ -114,10 +114,8 @@ void Map::renderAgain()
     }
     resetTextures();
     setTexture(m_miniMap.texture, m_mapModel->miniMap());
-    if (!m_abandoned.empty()) {
-        polish();
+    if (!m_abandoned.empty())
         update();
-    }
 
     if (m_renderTimer) {
         m_renderTimer->stop();
