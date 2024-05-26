@@ -239,12 +239,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-header">
-        <location filename="../qml/pages/AboutPage.qml" line="222"/>
+        <location filename="../qml/pages/AboutPage.qml" line="224"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-mit_license">
-        <location filename="../qml/pages/AboutPage.qml" line="224"/>
+        <location filename="../qml/pages/AboutPage.qml" line="226"/>
         <source>MIT license</source>
         <translation type="unfinished"></translation>
     </message>
