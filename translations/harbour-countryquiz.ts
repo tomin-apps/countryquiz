@@ -224,27 +224,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-contributors">
-        <location filename="../qml/pages/AboutPage.qml" line="147"/>
+        <location filename="../qml/pages/AboutPage.qml" line="146"/>
         <source>Contributors</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-main_developer">
-        <location filename="../qml/pages/AboutPage.qml" line="153"/>
+        <location filename="../qml/pages/AboutPage.qml" line="152"/>
         <source>Original idea and development by %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-se-translators">
-        <location filename="../qml/pages/AboutPage.qml" line="162"/>
+        <location filename="../qml/pages/AboutPage.qml" line="161"/>
         <source>Translators</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-header">
-        <location filename="../qml/pages/AboutPage.qml" line="224"/>
+        <location filename="../qml/pages/AboutPage.qml" line="223"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-mit_license">
-        <location filename="../qml/pages/AboutPage.qml" line="226"/>
+        <location filename="../qml/pages/AboutPage.qml" line="225"/>
         <source>MIT license</source>
         <translation type="unfinished"></translation>
     </message>
