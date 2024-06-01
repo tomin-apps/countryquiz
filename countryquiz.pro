@@ -33,6 +33,7 @@ DISTFILES += \
     qml/presets/CapitalQuizPresets.qml \
     README.md \
     rpm/harbour-countryquiz.spec \
+    TRANSLATING.md \
     translations/*.ts \
     translations/TRANSLATORS \
     tools/compare_svg.py \
