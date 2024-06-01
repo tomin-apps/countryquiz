@@ -211,7 +211,7 @@ Page {
             numberOfChoices: valid ? setup.choicesCount : 0
             choicesFrom: valid ? (setup.sameRegion ? "same region" : "everywhere") : ""
             timeToAnswer: valid ? setup.timeToAnswer : 0
-            language: valid ? "en" : ""
+            language: valid ? dataModel.language : ""
         }
         onNthChanged: signaler.resultSaved()
     }

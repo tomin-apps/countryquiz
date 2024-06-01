@@ -23,7 +23,7 @@ ExpandingSection {
         statsModel.options.numberOfChoices = preset.choices
         statsModel.options.choicesFrom = preset.region ? "same region" : "everywhere"
         statsModel.options.timeToAnswer = preset.time
-        statsModel.options.language = 'en'
+        statsModel.options.language = dataModel.language
     }
 
     content.sourceComponent: Column {
@@ -156,7 +156,8 @@ ExpandingSection {
                         top: parent.top
                     }
                     color: palette.highlightColor
-                    text: model.name || "You"
+                    //% "You"
+                    text: model.name || qsTrId("countryquiz-la-you")
                     truncationMode: TruncationMode.Fade
                     width: parent.width - positionLabel.width - scoreLabel.width - Theme.paddingMedium * 4
                 }
