@@ -9,23 +9,20 @@ import QtQuick 2.6
 ListModel {
     ListElement {
         name: "easy"
-        count: 15
         choices: 3
+        region: false
+        time: 60
+    }
+
+    ListElement {
+        name: "regular"
+        choices: 4
         region: false
         time: 30
     }
 
     ListElement {
-        name: "regular"
-        count: 15
-        choices: 4
-        region: false
-        time: 15
-    }
-
-    ListElement {
         name: "veteran"
-        count: 15
         choices: 5
         region: true
         time: 15
