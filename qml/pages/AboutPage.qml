@@ -61,7 +61,7 @@ Page {
 
             Label {
                 color: palette.highlightColor
-                linkColor: Theme.primaryColor
+                linkColor: palette.primaryColor
                 //% "You may obtain source code and report bugs on Github: <a href=%2>%1</a>"
                 text: qsTrId("countryquiz-la-source_code_and_bugs")
                     .arg("github.com/tomin-apps/countryquiz")
