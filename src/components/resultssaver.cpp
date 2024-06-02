@@ -14,7 +14,8 @@
 Q_LOGGING_CATEGORY(lcResultsSaver, "site.tomin.apps.CountryQuiz.ResultsSaver", QtWarningMsg)
 
 namespace {
-    const int MaxScore = 1000;
+    const int TimeScore = 800;
+    const int MinScore = 200;
     const int SecondsInMillisecond = 1000;
 } // namespace
 
@@ -108,7 +109,9 @@ int ResultsSaver::calculateScore(const QList<bool> &correct, const QList<int> &t
     auto itCorrect = correct.begin();
     auto itTimes = times.begin();
     while (itCorrect != correct.end() && itTimes != times.end()) {
-        score += static_cast<double>((*(itCorrect++) ? 1 : 0) * MaxScore) * (1.0 - (static_cast<double>(*(itTimes++)) / timeLimit));
+        double correct = *(itCorrect++) ? 1 : 0;
+        double time = *(itTimes++);
+        score += correct * (static_cast<double>(TimeScore) * (1.0 - time / timeLimit) + MinScore);
     }
     return score;
 }

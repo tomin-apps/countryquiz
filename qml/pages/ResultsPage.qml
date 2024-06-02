@@ -37,7 +37,7 @@ Page {
     }
 
     function calculateScore(result, time, timeLimit) {
-        return result * 1000 * (1 - time / timeLimit)
+        return result * (800 * (1 - time / timeLimit) + 200)
     }
 
     SilicaFlickable {
