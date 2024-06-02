@@ -215,7 +215,7 @@ ExpandingSection {
             id: placeholder
             color: palette.secondaryHighlightColor
             horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: Theme.fontSizeHuge
+            font.pixelSize: Theme.fontSizeExtraLarge
             //% "This quiz has not been played yet"
             text: qsTrId("countryquiz-la-has_not_been_played_yet")
             visible: statsModel && statsModel.count === 0
