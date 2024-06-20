@@ -13,6 +13,7 @@ Page {
     id: page
 
     property var correctAnswers
+    property var selectedAnswers
     property var times
     property var indices
     property var setup
@@ -149,23 +150,41 @@ Page {
                     content.sourceComponent: Component {
                         ColumnView {
                             delegate: BackgroundItem {
-                                property bool correct: modelData
-                                property int current: indices[index]
-                                property string name: dataModel.get(current).name
+                                readonly property bool correct: modelData
+                                readonly property int current: indices[index]
+                                readonly property string name: dataModel.get(current).name
+                                readonly property int selected: selectedAnswers[index]
+                                readonly property string selectedName: dataModel.get(selectedAnswers[index]).name
 
                                 id: item
                                 height: Theme.itemSizeSmall
                                 width: parent.width
 
-                                Label {
+                                Column {
                                     anchors.verticalCenter: parent.verticalCenter
-                                    color: highlighted ? palette.highlightColor : (item.correct ? "green" : "red")
-                                    font.pixelSize: Theme.fontSizeMedium
-                                    horizontalAlignment: Text.AlignHCenter
-                                    text: item.name
-                                    truncationMode: TruncationMode.Fade
-                                    width: parent.width - 2 * Theme.horizontalPageMargin
-                                    x: Theme.horizontalPageMargin
+                                    width: parent.width
+
+                                    Label {
+                                        color: highlighted ? palette.highlightColor : (item.correct ? "green" : "red")
+                                        font.pixelSize: Theme.fontSizeMedium
+                                        horizontalAlignment: Text.AlignHCenter
+                                        text: item.name
+                                        truncationMode: TruncationMode.Fade
+                                        width: parent.width - 2 * Theme.horizontalPageMargin
+                                        x: Theme.horizontalPageMargin
+                                    }
+
+                                    Label {
+                                        color: palette.secondaryColor
+                                        font.pixelSize: Theme.fontSizeExtraSmall
+                                        horizontalAlignment: Text.AlignHCenter
+                                        //% "Your answer: %1"
+                                        text: qsTrId("countryquiz-la-your_answer").arg(item.selectedName)
+                                        truncationMode: TruncationMode.Fade
+                                        visible: item.current !== item.selected
+                                        width: parent.width - 2 * Theme.horizontalPageMargin
+                                        x: Theme.horizontalPageMargin
+                                    }
                                 }
 
                                 onClicked: pageStack.push(Qt.resolvedUrl("CountryPage.qml"), {

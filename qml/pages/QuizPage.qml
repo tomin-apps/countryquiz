@@ -19,6 +19,7 @@ Page {
     property var indices
     property var setup
     property var correctAnswers: new Array
+    property var selectedAnswers: new Array
     property var times: new Array
 
     readonly property int count: indices.length
@@ -27,7 +28,7 @@ Page {
 
     function closeInSecond(index) {
         if (!finished) {
-            closeTimer.wasCorrect = index === page.index
+            closeTimer.selectedIndex = index
             closeTimer.running = true
         }
     }
@@ -254,19 +255,22 @@ Page {
     }
 
     Timer {
-        property bool wasCorrect
+        property int selectedIndex
 
         id: closeTimer
         interval: 1500
         onTriggered: {
             var correctAnswers = page.correctAnswers
-            correctAnswers.push(wasCorrect)
+            correctAnswers.push(selectedIndex === page.index)
             var times = page.times
             times.push(quizTimer.timeLimit - quizTimer.timeLeft)
+            var selectedAnswers = page.selectedAnswers
+            selectedAnswers.push(selectedIndex)
             if (current >= count) {
                 pageStack.replace(Qt.resolvedUrl("ResultsPage.qml"), {
                     indices: page.indices,
                     correctAnswers: correctAnswers,
+                    selectedAnswers: selectedAnswers,
                     times: times,
                     setup: page.setup
                 })
@@ -276,6 +280,7 @@ Page {
                     indices: page.indices,
                     current: page.current + 1,
                     correctAnswers: correctAnswers,
+                    selectedAnswers: selectedAnswers,
                     times: times,
                     setup: page.setup
                 })

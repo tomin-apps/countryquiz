@@ -316,47 +316,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-flag">
-        <location filename="../qml/pages/QuizPage.qml" line="41"/>
+        <location filename="../qml/pages/QuizPage.qml" line="42"/>
         <source>Flag</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-map">
-        <location filename="../qml/pages/QuizPage.qml" line="44"/>
+        <location filename="../qml/pages/QuizPage.qml" line="45"/>
         <source>Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-capital-city">
-        <location filename="../qml/pages/QuizPage.qml" line="47"/>
+        <location filename="../qml/pages/QuizPage.qml" line="48"/>
         <source>Capital City</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-guess_flag">
-        <location filename="../qml/pages/QuizPage.qml" line="92"/>
+        <location filename="../qml/pages/QuizPage.qml" line="93"/>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-guess_maps">
-        <location filename="../qml/pages/QuizPage.qml" line="96"/>
+        <location filename="../qml/pages/QuizPage.qml" line="97"/>
         <source>Guess which country is highlighted on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-guess_capital">
-        <location filename="../qml/pages/QuizPage.qml" line="101"/>
+        <location filename="../qml/pages/QuizPage.qml" line="102"/>
         <source>Guess which country&apos;s capital is this</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-guess_multiple_capitals">
-        <location filename="../qml/pages/QuizPage.qml" line="104"/>
+        <location filename="../qml/pages/QuizPage.qml" line="105"/>
         <source>Guess which country&apos;s capitals are these</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-one_and_other">
-        <location filename="../qml/pages/QuizPage.qml" line="331"/>
+        <location filename="../qml/pages/QuizPage.qml" line="336"/>
         <source>%1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-three_args">
-        <location filename="../qml/pages/QuizPage.qml" line="334"/>
+        <location filename="../qml/pages/QuizPage.qml" line="339"/>
         <source>%1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -378,82 +378,87 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-results">
-        <location filename="../qml/pages/ResultsPage.qml" line="51"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="52"/>
         <source>Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_zero">
-        <location filename="../qml/pages/ResultsPage.qml" line="68"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="69"/>
         <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_maximum_flags">
-        <location filename="../qml/pages/ResultsPage.qml" line="73"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="74"/>
         <source>Perfect work! You clearly know the flags!</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_maximum_maps">
-        <location filename="../qml/pages/ResultsPage.qml" line="76"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="77"/>
         <source>Perfect work! You clearly know maps!</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_maximum_capitals">
-        <location filename="../qml/pages/ResultsPage.qml" line="79"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="80"/>
         <source>Perfect work! You clearly know the capitals!</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_awesome">
-        <location filename="../qml/pages/ResultsPage.qml" line="85"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="86"/>
         <source>Excellent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_great">
-        <location filename="../qml/pages/ResultsPage.qml" line="88"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="89"/>
         <source>Very good!</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_good">
-        <location filename="../qml/pages/ResultsPage.qml" line="91"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="92"/>
         <source>You did well!!</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_poor">
-        <location filename="../qml/pages/ResultsPage.qml" line="94"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="95"/>
         <source>You could use more practice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-result_bad">
-        <location filename="../qml/pages/ResultsPage.qml" line="97"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="98"/>
         <source>Did you try to avoid the right answers?</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-correct_answers_count">
-        <location filename="../qml/pages/ResultsPage.qml" line="109"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="110"/>
         <source>%1 / %2 correct</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-in_time">
-        <location filename="../qml/pages/ResultsPage.qml" line="120"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="121"/>
         <source>in %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-score_n_points">
-        <location filename="../qml/pages/ResultsPage.qml" line="132"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="133"/>
         <source>Score %L1 points</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-score_n_points_with_ranking">
-        <location filename="../qml/pages/ResultsPage.qml" line="135"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="136"/>
         <source>Score %L1 points (#%2)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="countryquiz-se-your_answers">
+    <message id="countryquiz-la-your_answer">
         <location filename="../qml/pages/ResultsPage.qml" line="182"/>
+        <source>Your answer: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-se-your_answers">
+        <location filename="../qml/pages/ResultsPage.qml" line="201"/>
         <source>Your answers</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-bt-play_again">
-        <location filename="../qml/pages/ResultsPage.qml" line="189"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="208"/>
         <source>Play again</source>
         <translation type="unfinished"></translation>
     </message>
