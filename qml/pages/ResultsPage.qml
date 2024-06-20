@@ -143,6 +143,12 @@ Page {
                 }
             }
 
+            Loader {
+                active: resultsSaver.valid && (config.mode === "party" || config.mode === "shared")
+                sourceComponent: nameInput
+                width: parent.width
+            }
+
             ExpandingSectionGroup {
                 animateToExpandedSection: false
 
@@ -203,9 +209,11 @@ Page {
             }
 
             Button {
+                id: playAgainButton
                 anchors.horizontalCenter: parent.horizontalCenter
                 //% "Play again"
                 text: qsTrId("countryquiz-bt-play_again")
+                enabled: config.mode === "solo" || config.mode === "anonymous"
 
                 onClicked: {
                     quizTimer.reset()
@@ -220,8 +228,40 @@ Page {
         VerticalScrollDecorator { }
     }
 
+    Component {
+        id: nameInput
+
+        Column {
+            width: parent.width
+
+            TextField {
+                id: nameInputField
+                acceptableInput: text.length > 0
+                enabled: resultsSaver.nth === -1
+                //% "Enter your name to save results"
+                label: qsTrId("countryquiz-la-enter_name")
+                // TODO: Use rightItem IconButton for saving?
+                // TODO: Custom suggestions?
+
+                EnterKey.enabled: acceptableInput
+                EnterKey.iconSource: "image://theme/icon-m-enter-accept"
+                EnterKey.onClicked: resultsSaver.save(correctAnswers, times, nameInputField.text)
+
+                Component.onCompleted: nameInputField.forceActiveFocus()
+            }
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                enabled: nameInputField.acceptableInput && resultsSaver.nth === -1
+                //% "Save result"
+                text: qsTrId("countryquiz-bt-save_result")
+                onClicked: if (enabled) resultsSaver.save(correctAnswers, times, nameInputField.text)
+            }
+        }
+    }
+
     ResultsSaver {
-        property bool valid: setup && setup.isPreset
+        property bool valid: setup && setup.isPreset && config.mode !== "anonymous"
 
         id: resultsSaver
         options {
@@ -232,8 +272,14 @@ Page {
             timeToAnswer: valid ? setup.timeToAnswer : 0
             language: valid ? dataModel.language : ""
         }
+        gameMode: config.mode
         onNthChanged: signaler.resultSaved()
     }
 
-    Component.onCompleted: resultsSaver.save(correctAnswers, times)
+    Connections {
+        target: signaler
+        onResultSaved: playAgainButton.enabled = true
+    }
+
+    Component.onCompleted: if (config.mode === "solo") resultsSaver.save(correctAnswers, times, "")
 }

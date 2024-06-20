@@ -36,7 +36,27 @@ int ResultsSaver::nth() const
     return m_nth;
 }
 
-void ResultsSaver::save(const QList<bool> &correct, const QList<int> &times)
+QString ResultsSaver::gameMode() const
+{
+    return m_gameMode;
+}
+
+void ResultsSaver::setGameMode(const QString &gameMode)
+{
+    if (m_gameMode != gameMode) {
+        m_gameMode = gameMode;
+        emit gameModeChanged();
+    }
+}
+
+StatsDatabase::DatabaseType ResultsSaver::getType() const
+{
+    if (m_gameMode == "party")
+        return StatsDatabase::InMemoryType;
+    return StatsDatabase::OnDiskType;
+}
+
+void ResultsSaver::save(const QList<bool> &correct, const QList<int> &times, const QString &name)
 {
     if (m_nth != -1) {
         m_nth = -1;
@@ -44,7 +64,7 @@ void ResultsSaver::save(const QList<bool> &correct, const QList<int> &times)
     }
     if (checkResults(correct, times)) {
         qCDebug(lcResultsSaver) << "Saving result";
-        auto *worker = new ResultsSaverWorker(*m_options, numberOfCorrect(correct), time(times), calculateScore(correct, times), now());
+        auto *worker = new ResultsSaverWorker(getType(), *m_options, numberOfCorrect(correct), time(times), calculateScore(correct, times), now(), name);
         connect(worker, &ResultsSaverWorker::updateNth, this, [this](int nth) {
             if (m_nth != nth) {
                 m_nth = nth;
@@ -84,6 +104,16 @@ bool ResultsSaver::checkResults(const QList<bool> &correct, const QList<int> &ti
      * - Times don't add up to more than timeToAnswer
      * - Times are positive
      */
+    if (m_gameMode.isEmpty()) {
+        qCWarning(lcResultsSaver) << "Game mode is empty, not saving";
+        return false;
+    }
+
+    if (m_gameMode == "anonymous") {
+        qCDebug(lcResultsSaver) << "Game mode is anonymous, not saving";
+        return false;
+    }
+
     if (!m_options->isValid()) {
         qCDebug(lcResultsSaver) << "Options is not valid, not saving";
         return false;
@@ -116,18 +146,20 @@ int ResultsSaver::calculateScore(const QList<bool> &correct, const QList<int> &t
     return score;
 }
 
-ResultsSaverWorker::ResultsSaverWorker(const Options &options, int numberOfCorrect, int time, int score, time_t datetime)
+ResultsSaverWorker::ResultsSaverWorker(StatsDatabase::DatabaseType type, const Options &options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name)
     : QObject(nullptr)
     , m_options(options)
     , m_numberOfCorrect(numberOfCorrect)
     , m_time(time)
     , m_score(score)
     , m_datetime(datetime)
+    , m_name(name)
+    , m_type(type)
 {
 }
 
 void ResultsSaverWorker::run()
 {
-    int nth = StatsDatabase::store(&m_options, m_numberOfCorrect, m_time, m_score, m_datetime);
+    int nth = StatsDatabase::store(m_type, &m_options, m_numberOfCorrect, m_time, m_score, m_datetime, m_name);
     emit updateNth(nth);
 }

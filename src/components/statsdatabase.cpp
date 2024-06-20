@@ -15,23 +15,35 @@
 
 Q_LOGGING_CATEGORY(lcStatsDB, "site.tomin.apps.CountryQuiz.StatsDatabase", QtWarningMsg)
 
+#define IN_MEMORY "memory"
+#define ON_DISK "disk"
+
 namespace {
+    const auto InMemoryLocation = QStringLiteral(":memory:");
+
     QString databaseLocation()
     {
         QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
         if (path.isEmpty()) {
             qCWarning(lcStatsDB) << "Falling back to in memory database! Cannot save resuts!";
-            return QStringLiteral(":memory:");
+            return InMemoryLocation;
         }
         return QDir::cleanPath(path + "/stats.sqlite");
     }
+
+    QString getNameFromType(StatsDatabase::DatabaseType type)
+    {
+        if (type == StatsDatabase::InMemoryType)
+            return IN_MEMORY;
+        return ON_DISK;
+    }
 };
 
-void StatsDatabase::initialize()
+void StatsDatabase::initialize(DatabaseType type)
 {
     qCDebug(lcStatsDB) << "Available drivers:" << QSqlDatabase::drivers();
-    auto db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(databaseLocation());
+    auto db = QSqlDatabase::addDatabase("QSQLITE", getNameFromType(type));
+    db.setDatabaseName(type == InMemoryType ? InMemoryLocation : databaseLocation());
     if (!db.open()) {
         qCCritical(lcStatsDB) << "Could not open stats database! Results cannot be read or saved!" << db.lastError().text();
         return;
@@ -71,9 +83,9 @@ void StatsDatabase::initialize()
     }
 }
 
-StatsDatabase::StatsDatabase()
+StatsDatabase::StatsDatabase(DatabaseType type)
 {
-    m_db = QSqlDatabase::database("QSQLITE");
+    m_db = QSqlDatabase::database(getNameFromType(type));
 }
 
 void StatsDatabase::prepareOptions(Options *options)
@@ -92,17 +104,18 @@ void StatsDatabase::prepareOptions(Options *options)
         qCCritical(lcStatsDB) << "Failed to store options row";
 }
 
-int64_t StatsDatabase::insertRecord(Options *options, int numberOfCorrect, int time /* milliseconds */, int score, time_t datetime /* Unix epoch */)
+int64_t StatsDatabase::insertRecord(Options *options, int numberOfCorrect, int time /* milliseconds */, int score, time_t datetime /* Unix epoch */, const QString &name)
 {
     QSqlQuery query(m_db);
     query.prepare("INSERT INTO records (options, number_of_correct, time, score, datetime, name) "
-                  "SELECT options.id, :n_correct, :time, :score, :dt, '' FROM options "
+                  "SELECT options.id, :n_correct, :time, :score, :dt, :name FROM options "
                   "WHERE type = :type AND questions = :n_questions AND choices = :n_choices AND choices_from = :choices_from "
                   "AND time_to_answer = :time_to_answer AND language = :lang");
     query.bindValue(":n_correct", numberOfCorrect);
     query.bindValue(":time", time);
     query.bindValue(":score", score);
     query.bindValue(":dt", (quint64)datetime);
+    query.bindValue(":name", name);
     query.bindValue(":type", options->quizType());
     query.bindValue(":n_questions", options->numberOfQuestions());
     query.bindValue(":n_choices", options->numberOfChoices());
@@ -117,17 +130,17 @@ int64_t StatsDatabase::insertRecord(Options *options, int numberOfCorrect, int t
     return query.lastInsertId().toLongLong();
 }
 
-int StatsDatabase::store(Options *options, int numberOfCorrect, int time, int score, time_t datetime)
+int StatsDatabase::store(DatabaseType type, Options *options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name)
 {
-    StatsDatabase db;
+    StatsDatabase db(type);
     db.prepareOptions(options);
-    int64_t id = db.insertRecord(options, numberOfCorrect, time, score, datetime);
+    int64_t id = db.insertRecord(options, numberOfCorrect, time, score, datetime, name);
     return db.getPosition(id);
 }
 
-QSqlQuery StatsDatabase::query(Options *options, int maxCount /* TODO: Add more options for limiting and ordering */)
+QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount /* TODO: Add more options for limiting and ordering */)
 {
-    auto db = QSqlDatabase::database("QSQLITE");
+    auto db = QSqlDatabase::database(getNameFromType(type));
     QSqlQuery query(db);
     query.prepare("SELECT records.number_of_correct, records.time, records.score, records.datetime, records.name, options.questions "
                   "FROM records INNER JOIN options ON records.options = options.id "

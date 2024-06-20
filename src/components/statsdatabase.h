@@ -14,18 +14,23 @@ class Options;
 class StatsDatabase
 {
 public:
-    static void initialize();
+    enum DatabaseType {
+        InMemoryType,
+        OnDiskType,
+    };
 
-    StatsDatabase();
+    static void initialize(DatabaseType type);
 
-    static int store(Options *options, int numberOfCorrect, int time, int score, time_t datetime);
+    StatsDatabase(DatabaseType type);
 
-    static QSqlQuery query(Options *options, int maxCount);
+    static int store(DatabaseType type, Options *options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name);
+
+    static QSqlQuery query(DatabaseType type, Options *options, int maxCount);
 
 private:
     int getPosition(int64_t id);
     void filterRecords(Options *options);
-    int64_t insertRecord(Options *options, int numberOfCorrect, int time, int score, time_t datetime);
+    int64_t insertRecord(Options *options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name);
     void prepareOptions(Options *options);
 
     QSqlDatabase m_db;

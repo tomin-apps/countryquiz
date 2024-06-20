@@ -20,6 +20,7 @@ StatsModel::StatsModel(QObject *parent)
     , m_maxCount(10)
     , m_delayInitialization(false)
     , m_busy(false)
+    , m_inMemoryDB(false)
 {
     qRegisterMetaType<QSqlQuery>();
     connect(options(), &Options::quizTypeChanged, this, &StatsModel::refresh);
@@ -48,7 +49,8 @@ void StatsModel::refresh()
             m_busy = true;
             emit busyChanged();
         }
-        auto *worker = new StatsModelWorker(new Options(*m_options), m_maxCount);
+        auto *worker = new StatsModelWorker(m_inMemoryDB ? StatsDatabase::InMemoryType : StatsDatabase::OnDiskType,
+                                            new Options(*m_options), m_maxCount);
         connect(worker, &StatsModelWorker::queryReady, this, [this](const QSqlQuery &query, Options *options, int maxCount) {
             if (*m_options == *options && m_maxCount == maxCount) {
                 int rows = rowCount();
@@ -99,6 +101,20 @@ void StatsModel::setMaxCount(int maxCount)
     }
 }
 
+bool StatsModel::inMemoryDB() const
+{
+    return m_inMemoryDB;
+}
+
+void StatsModel::setInMemoryDB(bool inMemoryDB)
+{
+    if (m_inMemoryDB != inMemoryDB) {
+        m_inMemoryDB = inMemoryDB;
+        emit inMemoryDBChanged();
+        refresh();
+    }
+}
+
 QHash<int, QByteArray> StatsModel::roleNames() const
 {
     return QHash<int, QByteArray> {
@@ -142,15 +158,16 @@ QVariant StatsModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-StatsModelWorker::StatsModelWorker(Options *options, int maxCount)
+StatsModelWorker::StatsModelWorker(StatsDatabase::DatabaseType type, Options *options, int maxCount)
     : QObject(nullptr)
     , m_options(options)
     , m_maxCount(maxCount)
+    , m_type(type)
 {
 }
 
 void StatsModelWorker::run()
 {
-    QSqlQuery query = StatsDatabase::query(m_options, m_maxCount);
+    QSqlQuery query = StatsDatabase::query(m_type, m_options, m_maxCount);
     emit queryReady(query, m_options, m_maxCount);
 }

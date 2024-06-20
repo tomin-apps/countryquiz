@@ -202,8 +202,8 @@ ExpandingSection {
                     text: qsTrId("countryquiz-la-in_time_as_sentence").arg(Helpers.timeAsString(model.time))
                 }
             }
-            model: statsModel ? statsModel : 0
-            visible: { return true }
+            model: statsModel && config.mode !== "anonymous" ? statsModel : 0
+            visible: config.mode !== "anonymous"
             width: parent.width
         }
 
@@ -219,9 +219,12 @@ ExpandingSection {
             color: palette.secondaryHighlightColor
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeExtraLarge
-            //% "This quiz has not been played yet"
-            text: qsTrId("countryquiz-la-has_not_been_played_yet")
-            visible: statsModel && statsModel.count === 0
+            text: config.mode === "anonymous"
+                //% "Stats are disabled in anonymous mode"
+                ? qsTrId("countryquiz-la-stats_are_disabled_anonymous_mode")
+                //% "This quiz has not been played yet"
+                : qsTrId("countryquiz-la-has_not_been_played_yet")
+            visible: (statsModel && statsModel.count === 0) || config.mode === "anonymous"
             wrapMode: Text.Wrap
             width: parent.width - 2 * Theme.horizontalPageMargin
             x: Theme.horizontalPageMargin
@@ -237,6 +240,7 @@ ExpandingSection {
                 // @disable-check M17
                 options.numberOfQuestions: selected.numberOfQuestions !== -1 ? selected.numberOfQuestions : dataModel.getIndices(quizType).length
                 maxCount: 10
+                inMemoryDB: config.mode === "party"
             }
         }
         onStatusChanged: {

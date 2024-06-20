@@ -23,6 +23,7 @@ class StatsModel : public QSqlQueryModel, public QQmlParserStatus
     Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
     Q_PROPERTY(int count READ rowCount NOTIFY rowCountChanged)
     Q_PROPERTY(int maxCount READ maxCount WRITE setMaxCount NOTIFY maxCountChanged)
+    Q_PROPERTY(bool inMemoryDB READ inMemoryDB WRITE setInMemoryDB NOTIFY inMemoryDBChanged)
 
 public:
     StatsModel(QObject *parent = nullptr);
@@ -34,6 +35,8 @@ public:
     bool busy() const;
     int maxCount() const;
     void setMaxCount(int maxCount);
+    bool inMemoryDB() const;
+    void setInMemoryDB(bool inMemoryDB);
 
     QHash<int, QByteArray> roleNames() const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -45,6 +48,7 @@ signals:
     void rowCountChanged();
     void busyChanged();
     void maxCountChanged();
+    void inMemoryDBChanged();
     void optionsChanged(); // Never emitted
 
 private:
@@ -52,6 +56,7 @@ private:
     int m_maxCount;
     bool m_delayInitialization;
     bool m_busy;
+    bool m_inMemoryDB;
 };
 
 class StatsModelWorker : public QObject, public QRunnable
@@ -59,7 +64,7 @@ class StatsModelWorker : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    StatsModelWorker(Options *options, int maxCount);
+    StatsModelWorker(StatsDatabase::DatabaseType type, Options *options, int maxCount);
 
     void run() override;
 
@@ -69,6 +74,7 @@ signals:
 private:
     Options *m_options;
     int m_maxCount;
+    StatsDatabase::DatabaseType m_type;
 };
 
 Q_DECLARE_METATYPE(QSqlQuery);

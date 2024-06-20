@@ -29,7 +29,8 @@ int main(int argc, char *argv[])
     if (translator.load(QLocale::system(), "harbour-countryquiz", "-", SailfishApp::pathTo("translations").toLocalFile(), ".qm"))
         app->installTranslator(&translator);
 
-    StatsDatabase::initialize();
+    StatsDatabase::initialize(StatsDatabase::OnDiskType);
+    StatsDatabase::initialize(StatsDatabase::InMemoryType);
     qmlRegisterType<Map>("CountryQuiz", 1, 0, "Map");
     qmlRegisterType<MapModel>("CountryQuiz", 1, 0, "MapModel");
     qmlRegisterType<Options>();

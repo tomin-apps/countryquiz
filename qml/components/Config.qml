@@ -12,6 +12,7 @@ Item {
     readonly property string lastChosenQuizType: group.lastChosenQuizType || "flags"
     readonly property string lastOpenedStatsSection: group.lastOpenedStatsSection || "flags"
     readonly property string lastSelectedLanguage: group.lastSelectedLanguage
+    readonly property string mode: group.mode || "solo"
 
     function setLastChosenQuizType(type) {
         group.lastChosenQuizType = type
@@ -25,6 +26,10 @@ Item {
         group.lastSelectedLanguage = name
     }
 
+    function setMode(name) {
+        group.mode = name
+    }
+
     ConfigurationGroup {
         id: group
         path: "/site/tomin/apps/CountryQuiz"
@@ -33,5 +38,6 @@ Item {
         property string lastChosenQuizType
         property string lastOpenedStatsSection
         property string lastSelectedLanguage
+        property string mode
     }
 }

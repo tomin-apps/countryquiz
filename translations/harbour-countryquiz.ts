@@ -134,8 +134,13 @@
         <extracomment>%1 is time that it took to finish the quiz, try to keep this short</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message id="countryquiz-la-stats_are_disabled_anonymous_mode">
+        <location filename="../qml/components/StatsSection.qml" line="224"/>
+        <source>Stats are disabled in anonymous mode</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message id="countryquiz-la-has_not_been_played_yet">
-        <location filename="../qml/components/StatsSection.qml" line="223"/>
+        <location filename="../qml/components/StatsSection.qml" line="226"/>
         <source>This quiz has not been played yet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -448,18 +453,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-your_answer">
-        <location filename="../qml/pages/ResultsPage.qml" line="182"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="188"/>
         <source>Your answer: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-se-your_answers">
-        <location filename="../qml/pages/ResultsPage.qml" line="201"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="207"/>
         <source>Your answers</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-bt-play_again">
-        <location filename="../qml/pages/ResultsPage.qml" line="208"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="215"/>
         <source>Play again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-enter_name">
+        <location filename="../qml/pages/ResultsPage.qml" line="242"/>
+        <source>Enter your name to save results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-bt-save_result">
+        <location filename="../qml/pages/ResultsPage.qml" line="257"/>
+        <source>Save result</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-se-capital_city_quiz">
@@ -472,13 +487,66 @@
         <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="countryquiz-de-solo_mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="41"/>
+        <source>In this mode results are saved on device and are always attributed to you.</source>
+        <extracomment>Description for solo mode</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-de-party_mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="46"/>
+        <source>In this mode results are saved until the application is closed and name is asked after every quiz. Best for playing with friends.</source>
+        <extracomment>Description for party mode</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-de-shared_mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="50"/>
+        <source>In this mode results are saved on device and name is asked after every quiz.</source>
+        <extracomment>Description for shared device mode</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-de-anonymous_mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="54"/>
+        <source>In this mode results are not saved and stats are disabled.</source>
+        <extracomment>Description for anonymous mode</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="59"/>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-me-solo_mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="63"/>
+        <source>Solo</source>
+        <extracomment>Option to save results with name &quot;you&quot;, for playing alone</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-me-party_mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="67"/>
+        <source>Party mode</source>
+        <extracomment>Option to save results to temporary database, to play in group</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-me-shared_device_mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="71"/>
+        <source>Shared device</source>
+        <extracomment>Option to ask for name after every game, to play on shared device</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-me-anonymous_mode">
+        <location filename="../qml/pages/OptionsPage.qml" line="75"/>
+        <source>Anonymous</source>
+        <extracomment>Option to never ask for name, results are not saved</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
     <message id="countryquiz-de-language_combo_box">
-        <location filename="../qml/pages/OptionsPage.qml" line="39"/>
-        <source>Select language for country and capital names and quiz statistics</source>
+        <location filename="../qml/pages/OptionsPage.qml" line="94"/>
+        <source>Select language for country and capital names and quiz statistics.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-language">
-        <location filename="../qml/pages/OptionsPage.qml" line="41"/>
+        <location filename="../qml/pages/OptionsPage.qml" line="96"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
