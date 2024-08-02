@@ -241,39 +241,50 @@
         <translation>Lisenssi</translation>
     </message>
     <message id="countryquiz-la-license_description">
-        <location filename="../qml/pages/AboutPage.qml" line="90"/>
-        <source>Country Quiz is licensed under MIT license. Touch the button below for more information.</source>
-        <translation>Valtiovisa on lisensoitu MIT-lisenssillä. Kosketa nappia alapuolella saadaksesi lisätietoja.</translation>
-    </message>
-    <message id="countryquiz-bt-license">
-        <location filename="../qml/pages/AboutPage.qml" line="99"/>
-        <source>License</source>
-        <translation>Lisenssi</translation>
+        <location filename="../qml/pages/AboutPage.qml" line="92"/>
+        <source>Country Quiz is licensed under &lt;a href=%1&gt;MIT license&lt;/a&gt;. Map assets are licensed under &lt;a href=%2&gt;Creative Commons BY-SA 4.0&lt;/a&gt;.</source>
+        <translation>Valtiovisa on lisensoitu &lt;a href=%1&gt;MIT-lisenssillä&lt;/a&gt;. Karttatiedostot ovat lisensoitu &lt;a href=%2&gt;Creative Commons BY-SA 4.0&lt;/a&gt; -lisenssillä.</translation>
     </message>
     <message id="countryquiz-he-contributors">
-        <location filename="../qml/pages/AboutPage.qml" line="146"/>
+        <location filename="../qml/pages/AboutPage.qml" line="160"/>
         <source>Contributors</source>
         <translation>Tekijät</translation>
     </message>
     <message id="countryquiz-la-main_developer">
-        <location filename="../qml/pages/AboutPage.qml" line="152"/>
-        <source>Original idea and development by %1.</source>
-        <translation>Alkuperäinen idea ja kehitys: %1.</translation>
+        <location filename="../qml/pages/AboutPage.qml" line="166"/>
+        <source>Original idea and development by Tomi Leppänen.</source>
+        <translation>Alkuperäinen idea ja kehitys: Tomi Leppänen.</translation>
+    </message>
+    <message id="countryquiz-se-assets">
+        <location filename="../qml/pages/AboutPage.qml" line="174"/>
+        <source>Assets</source>
+        <translation>Teokset</translation>
+    </message>
+    <message id="countryquiz-la-assets_map_author">
+        <location filename="../qml/pages/AboutPage.qml" line="111"/>
+        <location filename="../qml/pages/AboutPage.qml" line="180"/>
+        <source>Map file is based on work of Allice Hunter.</source>
+        <translation>Karttatiedosto perustuu Allice Hunterin teokseen.</translation>
     </message>
     <message id="countryquiz-se-translators">
-        <location filename="../qml/pages/AboutPage.qml" line="161"/>
+        <location filename="../qml/pages/AboutPage.qml" line="188"/>
         <source>Translators</source>
         <translation>Kääntäjät</translation>
     </message>
     <message id="countryquiz-he-header">
-        <location filename="../qml/pages/AboutPage.qml" line="223"/>
+        <location filename="../qml/pages/AboutPage.qml" line="254"/>
         <source>License</source>
         <translation>Lisenssi</translation>
     </message>
     <message id="countryquiz-la-mit_license">
-        <location filename="../qml/pages/AboutPage.qml" line="225"/>
+        <location filename="../qml/pages/AboutPage.qml" line="103"/>
         <source>MIT license</source>
         <translation>MIT-lisenssi</translation>
+    </message>
+    <message id="countryquiz-la-cc_by_sa_license">
+        <location filename="../qml/pages/AboutPage.qml" line="109"/>
+        <source>Creative Commons BY-SA 4.0</source>
+        <translation>Creative Commons BY-SA 4.0</translation>
     </message>
     <message id="countryquiz-la-play_at_least_once">
         <location filename="../qml/pages/CountryListTab.qml" line="23"/>

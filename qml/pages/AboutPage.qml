@@ -86,18 +86,32 @@ Page {
 
             Label {
                 color: palette.highlightColor
-                //% "Country Quiz is licensed under MIT license. Touch the button below for more information."
+                linkColor: palette.primaryColor
+                //% "Country Quiz is licensed under <a href=%1>MIT license</a>. "
+                //% "Map assets are licensed under <a href=%2>Creative Commons BY-SA 4.0</a>."
                 text: qsTrId("countryquiz-la-license_description")
+                    .arg("\"#mit\"")
+                    .arg("\"#cc-by-sa\"")
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 wrapMode: Text.Wrap
                 x: Theme.horizontalPageMargin
-            }
-
-            Button {
-                anchors.horizontalCenter: parent.horizontalCenter
-                //% "License"
-                text: qsTrId("countryquiz-bt-license")
-                onClicked: pageStack.push(licensePageComponent)
+                onLinkActivated: {
+                    if (link === "#mit") {
+                        pageStack.push(licensePageComponent, {
+                           "file": "COPYING",
+                           //% "MIT license"
+                           "name": qsTrId("countryquiz-la-mit_license")
+                        })
+                    } else if (link === "#cc-by-sa") {
+                        pageStack.push(licensePageComponent, {
+                           "file": "assets/COPYING.CC-BY-SA-4.0.txt",
+                           //% "Creative Commons BY-SA 4.0"
+                           "name": qsTrId("countryquiz-la-cc_by_sa_license"),
+                           //% "Map file is based on work of Allice Hunter."
+                           "preface": qsTrId("countryquiz-la-assets_map_author")
+                        })
+                    }
+                }
             }
         }
 
@@ -148,9 +162,22 @@ Page {
 
                     Label {
                         color: palette.highlightColor
-                        //% "Original idea and development by %1."
+                        //% "Original idea and development by Tomi Leppänen."
                         text: qsTrId("countryquiz-la-main_developer")
-                            .arg("Tomi Leppänen")
+                        width: parent.width - 2 * Theme.horizontalPageMargin
+                        wrapMode: Text.Wrap
+                        x: Theme.horizontalPageMargin
+                    }
+
+                    SectionHeader {
+                        //% "Assets"
+                        text: qsTrId("countryquiz-se-assets")
+                    }
+
+                    Label {
+                        color: palette.highlightColor
+                        //% "Map file is based on work of Allice Hunter."
+                        text: qsTrId("countryquiz-la-assets_map_author")
                         width: parent.width - 2 * Theme.horizontalPageMargin
                         wrapMode: Text.Wrap
                         x: Theme.horizontalPageMargin
@@ -187,9 +214,13 @@ Page {
         id: licensePageComponent
 
         Page {
+            property string file
+            property string name
+            property string preface
+
             function load() {
                 var xhr = new XMLHttpRequest
-                xhr.open("GET", Qt.resolvedUrl("../../COPYING"))
+                xhr.open("GET", Qt.resolvedUrl("../../" + file))
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         content.text = xhr.responseText
@@ -221,8 +252,16 @@ Page {
                     PageHeader {
                         //% "License"
                         title: qsTrId("countryquiz-he-header")
-                        //% "MIT license"
-                        description: qsTrId("countryquiz-la-mit_license")
+                        description: name
+                    }
+
+                    Label {
+                        color: palette.secondaryHighlightColor
+                        text: preface
+                        visible: text !== ""
+                        width: parent.width - 2 * Theme.horizontalPageMargin
+                        wrapMode: Text.Wrap
+                        x: Theme.horizontalPageMargin
                     }
 
                     Label {
