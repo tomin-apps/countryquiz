@@ -6,6 +6,7 @@ DISTFILES = \
     $$files(flags/*.svg) \
     data.xml \
     map.svg \
+    COPYING-CC-BY-SA-4.0.txt \
     README.md
 
 LANGUAGES = en-GB fi-FI
@@ -49,6 +50,12 @@ tiles.path = /usr/share/$${TARGET}/assets
 tiles.extra = -cp -r $$shadowed(map_*) $(INSTALL_ROOT)$$tiles.path/
 QMAKE_CLEAN += $$tiles.files $$files($$shadowed(map_*/*.png))
 
+copying.files = COPYING.CC-BY-SA-4.0.txt
+copying.path = /usr/share/$${TARGET}/assets
+
+readme.files = README.md
+readme.path = /usr/share/$${TARGET}/assets
+
 QMAKE_EXTRA_TARGETS += data_xml tiles
 PRE_TARGETDEPS += data_xml tiles
-INSTALLS += data_xml flags map tiles
+INSTALLS += copying data_xml flags map readme tiles
