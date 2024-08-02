@@ -6,6 +6,7 @@
 
 #include <QLoggingCategory>
 #include <QQuickWindow>
+#include <QSGSimpleRectNode>
 #include <QSGSimpleTextureNode>
 #include <sailfishapp.h>
 
