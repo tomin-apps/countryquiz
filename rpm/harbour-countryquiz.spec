@@ -1,6 +1,6 @@
 Name:       harbour-countryquiz
 Summary:    Country quiz
-Version:    0.2.1
+Version:    0.3.0
 Release:    1
 License:    LICENSE
 URL:        http://example.org/
