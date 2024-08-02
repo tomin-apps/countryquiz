@@ -18,6 +18,15 @@ Adding a language can mean adding data in another language or adding
 translation files for UI translations. Both don't need to be present for a
 language. Please see TRANSLATING.md for more information.
 
+Remaining work
+--------------
+Known issues and missing but planned features:
+
+- Crash when tapping Stats tab on some devices in some conditions.
+- Map view clipping glitch when swithing between ambiences during a map quiz.
+- Graph of previous performance to stats.
+- Better icon.
+
 License
 -------
 This game is licensed under MIT license. See COPYING for more information and
