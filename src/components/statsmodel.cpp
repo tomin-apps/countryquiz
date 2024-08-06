@@ -168,6 +168,6 @@ StatsModelWorker::StatsModelWorker(StatsDatabase::DatabaseType type, Options *op
 
 void StatsModelWorker::run()
 {
-    QSqlQuery query = StatsDatabase::query(m_type, m_options, m_maxCount);
+    QSqlQuery query = StatsDatabase::query(m_type, m_options, m_maxCount, -1, StatsDatabase::MostScore);
     emit queryReady(query, m_options, m_maxCount);
 }

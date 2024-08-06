@@ -19,13 +19,18 @@ public:
         OnDiskType,
     };
 
+    enum OrderBy {
+        MostScore,
+        MostRecent,
+    };
+
     static void initialize(DatabaseType type);
 
     StatsDatabase(DatabaseType type);
 
     static int store(DatabaseType type, Options *options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name);
 
-    static QSqlQuery query(DatabaseType type, Options *options, int maxCount);
+    static QSqlQuery query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order);
 
 private:
     int getPosition(int64_t id);

@@ -138,23 +138,34 @@ int StatsDatabase::store(DatabaseType type, Options *options, int numberOfCorrec
     return db.getPosition(id);
 }
 
-QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount /* TODO: Add more options for limiting and ordering */)
+QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order)
 {
     auto db = QSqlDatabase::database(getNameFromType(type));
     QSqlQuery query(db);
-    query.prepare("SELECT records.number_of_correct, records.time, records.score, records.datetime, records.name, options.questions "
-                  "FROM records INNER JOIN options ON records.options = options.id "
-                  "WHERE options.type = :type AND options.questions = :n_questions "
+    QString queryText("SELECT records.number_of_correct, records.time, records.score, records.datetime, records.name, options.questions "
+                  "FROM records INNER JOIN options ON records.options = options.id WHERE ");
+    if (since >= 0)
+        queryText.append("records.datetime >= :since AND ");
+    queryText.append("options.type = :type AND options.questions = :n_questions "
                   "AND options.choices = :n_choices AND options.choices_from = :choices_from "
-                  "AND options.time_to_answer = :time_to_answer AND options.language = :lang "
-                  "ORDER BY score DESC LIMIT :n_rows");
+                  "AND options.time_to_answer = :time_to_answer AND options.language = :lang ");
+    if (order == MostScore)
+        queryText.append("ORDER BY score DESC ");
+    else if (order == MostRecent)
+        queryText.append("ORDER BY datetime ASC ");
+    if (maxCount >= 0)
+        queryText.append("LIMIT :n_rows");
+    query.prepare(queryText);
     query.bindValue(":type", options->quizType());
     query.bindValue(":n_questions", options->numberOfQuestions());
     query.bindValue(":n_choices", options->numberOfChoices());
     query.bindValue(":choices_from", options->choicesFrom());
     query.bindValue(":time_to_answer", options->timeToAnswer());
     query.bindValue(":lang", options->language());
-    query.bindValue(":n_rows", maxCount);
+    if (since >= 0)
+        query.bindValue(":since", (qlonglong)since);
+    if (maxCount >= 0)
+        query.bindValue(":n_rows", maxCount);
     query.exec();
     return query;
 }
