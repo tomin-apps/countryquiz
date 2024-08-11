@@ -62,6 +62,8 @@ void StatsModel::refresh()
                 if (query.isForwardOnly())
                     qCWarning(lcStatsModel) << "Query is forward only";
                 setQuery(query);
+                while (canFetchMore())
+                    fetchMore();
                 if (lastError().isValid())
                     qCWarning(lcStatsModel) << "Could not fetch rows from database" << lastError().text();
                 else
