@@ -118,13 +118,13 @@ void StatsModel::setInMemoryDB(bool inMemoryDB)
 QHash<int, QByteArray> StatsModel::roleNames() const
 {
     return QHash<int, QByteArray> {
-        { Qt::UserRole + 0, "position" },
-        { Qt::UserRole + 1, "number_of_correct" },
-        { Qt::UserRole + 2, "time" },
-        { Qt::UserRole + 3, "score" },
-        { Qt::UserRole + 4, "datetime" },
-        { Qt::UserRole + 5, "name" },
-        { Qt::UserRole + 6, "length" },
+        { PositionRole, "position" },
+        { NumberOfCorrectRole, "number_of_correct" },
+        { TimeRole, "time" },
+        { ScoreRole, "score" },
+        { DateTimeRole, "datetime" },
+        { NameRole, "name" },
+        { LengthRole, "length" },
     };
 }
 
@@ -137,22 +137,24 @@ QVariant StatsModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     switch (role) {
-        case Qt::UserRole:
+        case PositionRole:
             return QString("#%1").arg(index.row() + 1);
-        case Qt::UserRole + 1:
+        case NumberOfCorrectRole:
             return QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 0, QModelIndex()));
-        case Qt::UserRole + 2:
+        case TimeRole:
             return QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 1, QModelIndex()));
-        case Qt::UserRole + 3:
+        case ScoreRole:
             return QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 2, QModelIndex()));
-        case Qt::UserRole + 4:
+        case DateTimeRole:
             return QDateTime::fromMSecsSinceEpoch(
                     QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 3, QModelIndex())).toLongLong() * 1000,
                     Qt::UTC);
-        case Qt::UserRole + 5:
+        case NameRole:
             return QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 4, QModelIndex()));
-        case Qt::UserRole + 6:
+        case LengthRole:
             return QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 5, QModelIndex()));
+        case TimestampRole:
+            return QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 3, QModelIndex()));
     }
 
     return QVariant();

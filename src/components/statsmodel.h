@@ -26,6 +26,17 @@ class StatsModel : public QSqlQueryModel, public QQmlParserStatus
     Q_PROPERTY(bool inMemoryDB READ inMemoryDB WRITE setInMemoryDB NOTIFY inMemoryDBChanged)
 
 public:
+    enum Roles {
+        PositionRole = Qt::UserRole,
+        NumberOfCorrectRole,
+        TimeRole,
+        ScoreRole,
+        DateTimeRole,
+        NameRole,
+        LengthRole,
+        TimestampRole,
+    };
+
     StatsModel(QObject *parent = nullptr);
     void classBegin();
     void componentComplete();
