@@ -21,8 +21,6 @@
 #include "mapmodel.h"
 #include "maprenderer.h"
 
-// TODO: Light theme support
-
 Q_LOGGING_CATEGORY(lcMapRenderer, "site.tomin.apps.CountryQuiz.MapRenderer", QtWarningMsg)
 Q_LOGGING_CATEGORY(lcCircles, "site.tomin.apps.CountryQuiz.MapRenderer.Circles", QtWarningMsg)
 
