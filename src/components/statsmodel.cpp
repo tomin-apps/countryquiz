@@ -17,10 +17,13 @@ Q_LOGGING_CATEGORY(lcStatsModel, "site.tomin.apps.CountryQuiz.StatsModel", QtWar
 StatsModel::StatsModel(QObject *parent)
     : QSqlQueryModel(parent)
     , m_options(new Options)
-    , m_maxCount(10)
+    , m_maxCount(-1)
+    , m_since(-1)
     , m_delayInitialization(false)
     , m_busy(false)
     , m_inMemoryDB(false)
+    , m_orderByDate(false)
+    , m_onlyOwnResults(false)
 {
     qRegisterMetaType<QSqlQuery>();
     connect(options(), &Options::quizTypeChanged, this, &StatsModel::refresh);
@@ -50,9 +53,9 @@ void StatsModel::refresh()
             emit busyChanged();
         }
         auto *worker = new StatsModelWorker(m_inMemoryDB ? StatsDatabase::InMemoryType : StatsDatabase::OnDiskType,
-                                            new Options(*m_options), m_maxCount);
-        connect(worker, &StatsModelWorker::queryReady, this, [this](const QSqlQuery &query, Options *options, int maxCount) {
-            if (*m_options == *options && m_maxCount == maxCount) {
+                                            new Options(*m_options), m_maxCount, m_since, m_orderByDate, m_onlyOwnResults);
+        connect(worker, &StatsModelWorker::queryReady, this, [this](const QSqlQuery &query, Options *options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults) {
+            if (*m_options == *options && m_maxCount == maxCount && m_since == since && m_orderByDate == orderByDate && m_onlyOwnResults == onlyOwnResults) {
                 int rows = rowCount();
                 if (!query.isActive())
                     qCWarning(lcStatsModel) << "Query is not active";
@@ -101,6 +104,21 @@ void StatsModel::setMaxCount(int maxCount)
     }
 }
 
+QDateTime StatsModel::since() const
+{
+    return m_since != -1 ? QDateTime::fromMSecsSinceEpoch(m_since * 1000) : QDateTime();
+}
+
+void StatsModel::setSince(QDateTime since)
+{
+    qint64 newSince = since.isValid() ? since.toMSecsSinceEpoch() / 1000 : -1;
+    if (m_since != newSince) {
+        m_since = newSince;
+        emit sinceChanged();
+        refresh();
+    }
+}
+
 bool StatsModel::inMemoryDB() const
 {
     return m_inMemoryDB;
@@ -111,6 +129,34 @@ void StatsModel::setInMemoryDB(bool inMemoryDB)
     if (m_inMemoryDB != inMemoryDB) {
         m_inMemoryDB = inMemoryDB;
         emit inMemoryDBChanged();
+        refresh();
+    }
+}
+
+bool StatsModel::orderByDate() const
+{
+    return m_orderByDate;
+}
+
+void StatsModel::setOrderByDate(bool orderByDate)
+{
+    if (m_orderByDate != orderByDate) {
+        m_orderByDate = orderByDate;
+        emit orderByDateChanged();
+        refresh();
+    }
+}
+
+bool StatsModel::onlyOwnResults() const
+{
+    return m_onlyOwnResults;
+}
+
+void StatsModel::setOnlyOwnResults(bool onlyOwnResults)
+{
+    if (m_onlyOwnResults != onlyOwnResults) {
+        m_onlyOwnResults = onlyOwnResults;
+        emit onlyOwnResultsChanged();
         refresh();
     }
 }
@@ -160,16 +206,19 @@ QVariant StatsModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-StatsModelWorker::StatsModelWorker(StatsDatabase::DatabaseType type, Options *options, int maxCount)
+StatsModelWorker::StatsModelWorker(StatsDatabase::DatabaseType type, Options *options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults)
     : QObject(nullptr)
+    , m_type(type)
     , m_options(options)
     , m_maxCount(maxCount)
-    , m_type(type)
+    , m_since(since)
+    , m_orderByDate(orderByDate)
+    , m_onlyOwnResults(onlyOwnResults)
 {
 }
 
 void StatsModelWorker::run()
 {
-    QSqlQuery query = StatsDatabase::query(m_type, m_options, m_maxCount, -1, StatsDatabase::MostScore);
-    emit queryReady(query, m_options, m_maxCount);
+    QSqlQuery query = StatsDatabase::query(m_type, m_options, m_maxCount, m_since, m_orderByDate ? StatsDatabase::MostRecent : StatsDatabase::MostScore, m_onlyOwnResults);
+    emit queryReady(query, m_options, m_maxCount, m_since, m_orderByDate, m_onlyOwnResults);
 }

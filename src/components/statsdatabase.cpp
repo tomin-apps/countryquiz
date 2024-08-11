@@ -37,6 +37,11 @@ namespace {
             return IN_MEMORY;
         return ON_DISK;
     }
+
+    QString ensureEmpty(const QString &text)
+    {
+        return text.isEmpty() ? "" : text;
+    }
 };
 
 void StatsDatabase::initialize(DatabaseType type)
@@ -115,7 +120,7 @@ int64_t StatsDatabase::insertRecord(Options *options, int numberOfCorrect, int t
     query.bindValue(":time", time);
     query.bindValue(":score", score);
     query.bindValue(":dt", (quint64)datetime);
-    query.bindValue(":name", name.isEmpty() ? "" : name);
+    query.bindValue(":name", ensureEmpty(name));
     query.bindValue(":type", options->quizType());
     query.bindValue(":n_questions", options->numberOfQuestions());
     query.bindValue(":n_choices", options->numberOfChoices());
@@ -138,21 +143,23 @@ int StatsDatabase::store(DatabaseType type, Options *options, int numberOfCorrec
     return db.getPosition(id);
 }
 
-QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order)
+QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order, bool filtered, const QString &name)
 {
     auto db = QSqlDatabase::database(getNameFromType(type));
     QSqlQuery query(db);
     QString queryText("SELECT records.number_of_correct, records.time, records.score, records.datetime, records.name, options.questions "
                   "FROM records INNER JOIN options ON records.options = options.id WHERE ");
+    if (filtered)
+        queryText.append("records.name = :name AND ");
     if (since >= 0)
         queryText.append("records.datetime >= :since AND ");
     queryText.append("options.type = :type AND options.questions = :n_questions "
                   "AND options.choices = :n_choices AND options.choices_from = :choices_from "
                   "AND options.time_to_answer = :time_to_answer AND options.language = :lang ");
     if (order == MostScore)
-        queryText.append("ORDER BY score DESC ");
+        queryText.append("ORDER BY records.score DESC ");
     else if (order == MostRecent)
-        queryText.append("ORDER BY datetime ASC ");
+        queryText.append("ORDER BY records.datetime DESC ");
     if (maxCount >= 0)
         queryText.append("LIMIT :n_rows");
     query.prepare(queryText);
@@ -162,6 +169,8 @@ QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount
     query.bindValue(":choices_from", options->choicesFrom());
     query.bindValue(":time_to_answer", options->timeToAnswer());
     query.bindValue(":lang", options->language());
+    if (filtered)
+        query.bindValue(":name", ensureEmpty(name));
     if (since >= 0)
         query.bindValue(":since", (qlonglong)since);
     if (maxCount >= 0)

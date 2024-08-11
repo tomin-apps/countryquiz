@@ -30,7 +30,7 @@ public:
 
     static int store(DatabaseType type, Options *options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name);
 
-    static QSqlQuery query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order);
+    static QSqlQuery query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order, bool filtered = false, const QString &name = QString());
 
 private:
     int getPosition(int64_t id);
