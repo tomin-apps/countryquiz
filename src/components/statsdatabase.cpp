@@ -115,7 +115,7 @@ int64_t StatsDatabase::insertRecord(Options *options, int numberOfCorrect, int t
     query.bindValue(":time", time);
     query.bindValue(":score", score);
     query.bindValue(":dt", (quint64)datetime);
-    query.bindValue(":name", name);
+    query.bindValue(":name", name.isEmpty() ? "" : name);
     query.bindValue(":type", options->quizType());
     query.bindValue(":n_questions", options->numberOfQuestions());
     query.bindValue(":n_choices", options->numberOfChoices());
