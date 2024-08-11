@@ -14,7 +14,6 @@ import re
 import sqlite3
 from dataclasses import dataclass
 
-MAX_SCORE = 1000
 MIN_SCORE = 200
 TIME_SCORE = 800
 
@@ -96,7 +95,7 @@ def generate_record(preset, name):
     for i in range(preset.count):
         time = random.randint(0, preset.time * 1000)
         if i < number_of_correct:
-            score += MIN_SCORE + MAX_SCORE * (1.0 - time / (preset.time * TIME_SCORE))
+            score += MIN_SCORE + TIME_SCORE * (1.0 - time / (preset.time * 1000))
         total_time += time
     end = datetime.datetime.now()
     start = end - datetime.timedelta(days=6*30.44)
