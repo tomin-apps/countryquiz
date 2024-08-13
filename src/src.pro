@@ -12,6 +12,7 @@ HEADERS += \
     components/maprenderer.h \
     components/options.h \
     components/resultssaver.h \
+    components/scoregraph.h \
     components/statsdatabase.h \
     components/statsmodel.h
 
@@ -21,6 +22,7 @@ SOURCES += \
     components/maprenderer.cpp \
     components/options.cpp \
     components/resultssaver.cpp \
+    components/scoregraph.cpp \
     components/statsdatabase.cpp \
     components/statsmodel.cpp \
     countryquiz.cpp

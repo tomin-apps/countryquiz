@@ -14,6 +14,7 @@
 #include "mapmodel.h"
 #include "options.h"
 #include "resultssaver.h"
+#include "scoregraph.h"
 #include "statsdatabase.h"
 #include "statsmodel.h"
 
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MapModel>("CountryQuiz", 1, 0, "MapModel");
     qmlRegisterType<Options>();
     qmlRegisterType<ResultsSaver>("CountryQuiz", 1, 0, "ResultsSaver");
+    qmlRegisterType<ScoreGraph>("CountryQuiz", 1, 0, "ScoreGraph");
     qmlRegisterSingletonType<StatsHelper>("CountryQuiz", 1, 0, "StatsHelper", &StatsHelper::instance);
     qmlRegisterType<StatsModel>("CountryQuiz", 1, 0, "StatsModel");
     view->setSource(SailfishApp::pathToMainQml());
