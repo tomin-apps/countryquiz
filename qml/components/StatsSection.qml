@@ -14,9 +14,10 @@ ExpandingSection {
     property ListModel presets
     property string quizType
     property alias statsModel: statsModelLoader.item
+    property alias scoreModel: scoreModelLoader.item
 
     function updatePreset(index) {
-        if (!presets || statsModelLoader.status !== Loader.Ready) {
+        if (!presets || statsModelLoader.status !== Loader.Ready || scoreModelLoader.status !== Loader.Ready) {
             return
         }
         var preset = presets.get(index)
@@ -24,6 +25,10 @@ ExpandingSection {
         statsModel.options.choicesFrom = preset.region ? "same region" : "everywhere"
         statsModel.options.timeToAnswer = preset.time
         statsModel.options.language = dataModel.language
+        scoreModel.options.numberOfChoices = preset.choices
+        scoreModel.options.choicesFrom = preset.region ? "same region" : "everywhere"
+        scoreModel.options.timeToAnswer = preset.time
+        scoreModel.options.language = dataModel.language
     }
 
     content.sourceComponent: Column {
@@ -34,7 +39,7 @@ ExpandingSection {
             },
             State {
                 name: "busy"
-                when: statsModelLoader.status !== Loader.Ready || statsModel.busy
+                when: statsModelLoader.status !== Loader.Ready || statsModel.busy || scoreModelLoader.status !== Loader.Ready || scoreModel.busy
 
                 PropertyChanges {
                     target: presetSelection
@@ -50,6 +55,11 @@ ExpandingSection {
 
                 PropertyChanges {
                     target: stats
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: scoreGraph
                     visible: false
                 }
 
@@ -207,6 +217,22 @@ ExpandingSection {
             width: parent.width
         }
 
+        ScoreGraph {
+            id: scoreGraph
+            arrowTipSize: Screen.width * 0.025
+            fillColor: Theme.rgba(palette.secondaryHighlightColor, Theme.opacityFaint)
+            fontColor: palette.highlightColor
+            font.pixelSize: Theme.fontSizeTiny
+            height: Theme.itemSizeSmall * 4
+            lineColor: palette.highlightColor
+            lineWidth: 2
+            model: scoreModel && config.mode === "solo" ? scoreModel : null
+            secondaryLineColor: Theme.rgba(palette.secondaryHighlightColor, Theme.opacityHigh)
+            visible: scoreModel && scoreModel.count > 0 && config.mode === "solo"
+            width: parent.width - 2 * Theme.horizontalPageMargin
+            x: Theme.horizontalPageMargin
+        }
+
         BusyIndicator {
             id: indicator
             anchors.horizontalCenter: parent.horizontalCenter
@@ -239,13 +265,37 @@ ExpandingSection {
             StatsModel {
                 // @disable-check M17
                 options.numberOfQuestions: selected.numberOfQuestions !== -1 ? selected.numberOfQuestions : dataModel.getIndices(quizType).length
-                maxCount: 10
+                onlyOwnResults: config.mode === "solo"
+                maxCount: config.mode === "solo" ? 5 : 10
                 inMemoryDB: config.mode === "party"
             }
         }
         onStatusChanged: {
             if (status === Loader.Ready) {
                 statsModel.options.quizType = quizType
+                updatePreset(selected.preset)
+            }
+        }
+    }
+
+    Loader {
+        id: scoreModelLoader
+        active: statsModelLoader.active
+        asynchronous: true
+        sourceComponent: Component {
+            StatsModel {
+                inMemoryDB: config.mode === "party"
+                maxCount: -1
+                // @disable-check M17
+                options.numberOfQuestions: selected.numberOfQuestions !== -1 ? selected.numberOfQuestions : dataModel.getIndices(quizType).length
+                onlyOwnResults: true
+                orderByDate: true
+                since: StatsHelper.getDateSixMonthsAgo()
+            }
+        }
+        onStatusChanged: {
+            if (status === Loader.Ready) {
+                scoreModel.options.quizType = quizType
                 updatePreset(selected.preset)
             }
         }
@@ -258,10 +308,18 @@ ExpandingSection {
                 if (statsModelLoader.status === Loader.Ready) {
                     statsModel.refresh()
                 }
+                if (scoreModelLoader.status === Loader.Ready) {
+                    scoreModel.refresh()
+                }
             } else {
                 statsModelLoader.active = false
             }
         }
+    }
+
+    Connections {
+        target: dataModel
+        onLanguageChanged: updatePreset(selected.preset)
     }
 
     Binding {
@@ -281,6 +339,13 @@ ExpandingSection {
 
     Component.onCompleted: statsModelLoader.active = expanded
     onPresetsChanged: updatePreset(selected.preset)
-    onQuizTypeChanged: if (statsModelLoader.status === Loader.Ready) statsModel.options.quizType = quizType
+    onQuizTypeChanged: {
+        if (statsModelLoader.status === Loader.Ready) {
+            statsModel.options.quizType = quizType
+        }
+        if (scoreModelLoader.status === Loader.Ready) {
+            scoreModel.options.quizType = quizType
+        }
+    }
     onExpandedChanged: statsModelLoader.active = true
 }

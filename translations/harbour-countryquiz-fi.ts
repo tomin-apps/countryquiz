@@ -5,7 +5,7 @@
     <name></name>
     <message id="countryquiz-la-preset">
         <location filename="../qml/components/QuizSection.qml" line="27"/>
-        <location filename="../qml/components/StatsSection.qml" line="72"/>
+        <location filename="../qml/components/StatsSection.qml" line="82"/>
         <source>Preset</source>
         <translation>Esivalinta</translation>
     </message>
@@ -105,44 +105,6 @@
         <source>Quiz me!</source>
         <extracomment>Button to start quiz</extracomment>
         <translation>Visaillaan!</translation>
-    </message>
-    <message id="countryquiz-la-length">
-        <location filename="../qml/components/StatsSection.qml" line="90"/>
-        <source>Length</source>
-        <translation>Pituus</translation>
-    </message>
-    <message id="countryquiz-la-you">
-        <location filename="../qml/components/StatsSection.qml" line="160"/>
-        <source>You</source>
-        <translation>Sinä</translation>
-    </message>
-    <message id="countryquiz-la-on_date">
-        <location filename="../qml/components/StatsSection.qml" line="174"/>
-        <source>On %1</source>
-        <extracomment>%1 is the date when the game was played, try to keep this short</extracomment>
-        <translation>%1</translation>
-    </message>
-    <message id="countryquiz-la-questions_out_of_questions_for_points">
-        <location filename="../qml/components/StatsSection.qml" line="187"/>
-        <source>%1 / %2 for %3 p</source>
-        <extracomment>%1 is number of right answers out of %2 total answer to reward %3 points, try to keep this short</extracomment>
-        <translation>%1 / %2 %3 p</translation>
-    </message>
-    <message id="countryquiz-la-in_time_as_sentence">
-        <location filename="../qml/components/StatsSection.qml" line="202"/>
-        <source>In %1</source>
-        <extracomment>%1 is time that it took to finish the quiz, try to keep this short</extracomment>
-        <translation>%1</translation>
-    </message>
-    <message id="countryquiz-la-stats_are_disabled_anonymous_mode">
-        <location filename="../qml/components/StatsSection.qml" line="224"/>
-        <source>Stats are disabled in anonymous mode</source>
-        <translation>Tilastot eivät ole käytössä anonyymissä tilassa</translation>
-    </message>
-    <message id="countryquiz-la-has_not_been_played_yet">
-        <location filename="../qml/components/StatsSection.qml" line="226"/>
-        <source>This quiz has not been played yet</source>
-        <translation>Tätä visaa ei ole vielä pelattu</translation>
     </message>
     <message id="countryquiz-me-about">
         <location filename="../qml/harbour-countryquiz.qml" line="31"/>
@@ -500,9 +462,9 @@
     </message>
     <message id="countryquiz-de-solo_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="41"/>
-        <source>In this mode results are saved on device and are always attributed to you.</source>
+        <source>In this mode results are saved on device and are always attributed to you. Graphs of recent performance are also available.</source>
         <extracomment>Description for solo mode</extracomment>
-        <translation>Tässä tilassa tulokset tallennetaan laitteelle ja merkitään sinulle.</translation>
+        <translation>Tässä tilassa tulokset tallennetaan laitteelle ja merkitään sinulle. Myös viimeaikaisten suoritusten kuvaajat näytetään.</translation>
     </message>
     <message id="countryquiz-de-party_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="46"/>
@@ -560,6 +522,45 @@
         <location filename="../qml/pages/OptionsPage.qml" line="96"/>
         <source>Language</source>
         <translation>Kieli</translation>
+    </message>
+    <message id="countryquiz-la-length">
+        <location filename="../qml/components/StatsSection.qml" line="100"/>
+        <source>Length</source>
+        <translation>Pituus</translation>
+    </message>
+    <message id="countryquiz-la-you">
+        <location filename="../qml/components/StatsSection.qml" line="170"/>
+        <source>You</source>
+        <translation>Sinä</translation>
+    </message>
+    <message id="countryquiz-la-on_date">
+        <location filename="../qml/components/StatsSection.qml" line="184"/>
+        <source>On %1</source>
+        <extracomment>%1 is the date when the game was played, try to keep this short</extracomment>
+        <translation>%1</translation>
+    </message>
+    <message id="countryquiz-la-questions_out_of_questions_for_points">
+        <location filename="../qml/components/StatsSection.qml" line="197"/>
+        <source>%1 / %2 for %3 p</source>
+        <extracomment>%1 is number of right answers out of %2 total answer to reward %3 points, try to keep this short</extracomment>
+        <translatorcomment>Piste lopussa, koska suomessa lyhenteet loppuvat pisteeseen.</translatorcomment>
+        <translation>%1 / %2 %3 p.</translation>
+    </message>
+    <message id="countryquiz-la-in_time_as_sentence">
+        <location filename="../qml/components/StatsSection.qml" line="212"/>
+        <source>In %1</source>
+        <extracomment>%1 is time that it took to finish the quiz, try to keep this short</extracomment>
+        <translation>%1</translation>
+    </message>
+    <message id="countryquiz-la-stats_are_disabled_anonymous_mode">
+        <location filename="../qml/components/StatsSection.qml" line="250"/>
+        <source>Stats are disabled in anonymous mode</source>
+        <translation>Tilastot ovat pois päältä anonyymissä tilassa</translation>
+    </message>
+    <message id="countryquiz-la-has_not_been_played_yet">
+        <location filename="../qml/components/StatsSection.qml" line="252"/>
+        <source>This quiz has not been played yet</source>
+        <translation>Tätä visaa ei ole vielä pelattu</translation>
     </message>
 </context>
 </TS>

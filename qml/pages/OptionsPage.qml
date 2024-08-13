@@ -37,7 +37,7 @@ Page {
                 description: {
                     if (config.mode === "solo") {
                         //: Description for solo mode
-                        //% "In this mode results are saved on device and are always attributed to you."
+                        //% "In this mode results are saved on device and are always attributed to you. Graphs of recent performance are also available."
                         return qsTrId("countryquiz-de-solo_mode")
                     } else if (config.mode === "party") {
                         //: Description for party mode
