@@ -6,6 +6,7 @@
 
 #include <QDateTime>
 #include <QLoggingCategory>
+#include <QQmlEngine>
 #include <QSqlError>
 #include <QThread>
 #include <QThreadPool>
@@ -224,4 +225,15 @@ void StatsModelWorker::run()
 {
     QSqlQuery query = StatsDatabase::query(m_type, m_options.get(), m_maxCount, m_since, m_orderByDate ? StatsDatabase::MostRecent : StatsDatabase::MostScore, m_onlyOwnResults);
     emit queryReady(query, m_options, m_maxCount, m_since, m_orderByDate, m_onlyOwnResults);
+}
+
+
+QObject *StatsHelper::instance(QQmlEngine *, QJSEngine *)
+{
+    return new StatsHelper;
+}
+
+QDateTime StatsHelper::getDateSixMonthsAgo() const
+{
+    return QDateTime::currentDateTimeUtc().addMonths(-6);
 }

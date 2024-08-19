@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MapModel>("CountryQuiz", 1, 0, "MapModel");
     qmlRegisterType<Options>();
     qmlRegisterType<ResultsSaver>("CountryQuiz", 1, 0, "ResultsSaver");
+    qmlRegisterSingletonType<StatsHelper>("CountryQuiz", 1, 0, "StatsHelper", &StatsHelper::instance);
     qmlRegisterType<StatsModel>("CountryQuiz", 1, 0, "StatsModel");
     view->setSource(SailfishApp::pathToMainQml());
     view->show();

@@ -111,4 +111,16 @@ private:
 
 Q_DECLARE_METATYPE(QSqlQuery);
 
+class QJSEngine;
+class QQmlEngine;
+class StatsHelper : public QObject
+{
+    Q_OBJECT
+
+public:
+    static QObject *instance(QQmlEngine *, QJSEngine *);
+
+    Q_INVOKABLE QDateTime getDateSixMonthsAgo() const;
+};
+
 #endif // STATSMODEL_H
