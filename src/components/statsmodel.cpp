@@ -108,12 +108,12 @@ void StatsModel::setMaxCount(int maxCount)
 
 QDateTime StatsModel::since() const
 {
-    return m_since != -1 ? QDateTime::fromMSecsSinceEpoch(m_since * 1000) : QDateTime();
+    return m_since != -1 ? QDateTime::fromTime_t(m_since) : QDateTime();
 }
 
 void StatsModel::setSince(QDateTime since)
 {
-    qint64 newSince = since.isValid() ? since.toMSecsSinceEpoch() / 1000 : -1;
+    qint64 newSince = since.isValid() ? since.toTime_t() : -1;
     if (m_since != newSince) {
         m_since = newSince;
         emit sinceChanged();
@@ -194,8 +194,8 @@ QVariant StatsModel::data(const QModelIndex &index, int role) const
         case ScoreRole:
             return QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 2, QModelIndex()));
         case DateTimeRole:
-            return QDateTime::fromMSecsSinceEpoch(
-                    QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 3, QModelIndex())).toLongLong() * 1000,
+            return QDateTime::fromTime_t(
+                    QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 3, QModelIndex())).toLongLong(),
                     Qt::UTC);
         case NameRole:
             return QSqlQueryModel::data(QSqlQueryModel::index(index.row(), 4, QModelIndex()));
