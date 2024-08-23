@@ -26,6 +26,7 @@ StatsModel::StatsModel(QObject *parent)
     , m_onlyOwnResults(false)
 {
     qRegisterMetaType<QSqlQuery>();
+    qRegisterMetaType<std::shared_ptr<Options>>();
     connect(options(), &Options::quizTypeChanged, this, &StatsModel::refresh);
     connect(options(), &Options::numberOfQuestionsChanged, this, &StatsModel::refresh);
     connect(options(), &Options::numberOfChoicesChanged, this, &StatsModel::refresh);
@@ -53,8 +54,8 @@ void StatsModel::refresh()
             emit busyChanged();
         }
         auto *worker = new StatsModelWorker(m_inMemoryDB ? StatsDatabase::InMemoryType : StatsDatabase::OnDiskType,
-                                            new Options(*m_options), m_maxCount, m_since, m_orderByDate, m_onlyOwnResults);
-        connect(worker, &StatsModelWorker::queryReady, this, [this](const QSqlQuery &query, Options *options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults) {
+                                            std::make_shared<Options>(*m_options), m_maxCount, m_since, m_orderByDate, m_onlyOwnResults);
+        connect(worker, &StatsModelWorker::queryReady, this, [this](const QSqlQuery &query, std::shared_ptr<Options> options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults) {
             if (*m_options == *options && m_maxCount == maxCount && m_since == since && m_orderByDate == orderByDate && m_onlyOwnResults == onlyOwnResults) {
                 int rows = rowCount();
                 if (!query.isActive())
@@ -208,7 +209,7 @@ QVariant StatsModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-StatsModelWorker::StatsModelWorker(StatsDatabase::DatabaseType type, Options *options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults)
+StatsModelWorker::StatsModelWorker(StatsDatabase::DatabaseType type, std::shared_ptr<Options> options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults)
     : QObject(nullptr)
     , m_type(type)
     , m_options(options)
@@ -221,6 +222,6 @@ StatsModelWorker::StatsModelWorker(StatsDatabase::DatabaseType type, Options *op
 
 void StatsModelWorker::run()
 {
-    QSqlQuery query = StatsDatabase::query(m_type, m_options, m_maxCount, m_since, m_orderByDate ? StatsDatabase::MostRecent : StatsDatabase::MostScore, m_onlyOwnResults);
+    QSqlQuery query = StatsDatabase::query(m_type, m_options.get(), m_maxCount, m_since, m_orderByDate ? StatsDatabase::MostRecent : StatsDatabase::MostScore, m_onlyOwnResults);
     emit queryReady(query, m_options, m_maxCount, m_since, m_orderByDate, m_onlyOwnResults);
 }

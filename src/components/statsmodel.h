@@ -16,6 +16,8 @@
 #include "options.h"
 #include "statsdatabase.h"
 
+Q_DECLARE_METATYPE(std::shared_ptr<Options>)
+
 class StatsModel : public QSqlQueryModel, public QQmlParserStatus
 {
     Q_OBJECT
@@ -91,16 +93,16 @@ class StatsModelWorker : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    StatsModelWorker(StatsDatabase::DatabaseType type, Options *options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults);
+    StatsModelWorker(StatsDatabase::DatabaseType type, std::shared_ptr<Options> options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults);
 
     void run() override;
 
 signals:
-    void queryReady(QSqlQuery query, Options *options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults);
+    void queryReady(QSqlQuery query, std::shared_ptr<Options> options, int maxCount, qint64 since, bool orderByDate, bool onlyOwnResults);
 
 private:
     StatsDatabase::DatabaseType m_type;
-    Options *m_options;
+    std::shared_ptr<Options> m_options;
     int m_maxCount;
     qint64 m_since;
     bool m_orderByDate;
