@@ -180,7 +180,7 @@
     <message id="countryquiz-la-about_text">
         <location filename="../qml/pages/AboutPage.qml" line="51"/>
         <source>Country Quiz is a quiz game about states in the world. You can practise recognition of flags, maps and capitals. Results are collected into local database for you to see your own progress.</source>
-        <translation>Valtiovisa on peli maailman maista. Voit harjoitella lippujen, karttojen ja pääkaupunkien tunnistamista. Tulokset kerätään paikalliseen tietokantaan, josta voit nähdä oman edistymisesi.</translation>
+        <translation>Valtiovisa on peli maailman maista. Voit harjoitella lippujen, karttojen ja pääkaupunkien tunnistamista. Tulokset kerätään paikalliseen tietokantaan, jotta voit nähdä oman edistymisesi.</translation>
     </message>
     <message id="countryquiz-se-development">
         <location filename="../qml/pages/AboutPage.qml" line="59"/>
