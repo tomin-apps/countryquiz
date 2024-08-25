@@ -26,6 +26,7 @@ namespace {
     const int MaxScore = 1000; // Keep in sync with TimeScore and MinScore
     const int Buckets = 6 * 30;
     const int MinimumDifference = MaxScore / 10;
+    const qreal Zero = 0.0;
 
     QVector<QLineF> getArrow(QPointF tip, QPointF end, int tipSize)
     {
@@ -237,7 +238,7 @@ void ScoreGraph::updatePolish()
         month = month.addDays(-month.date().day() + 1); // to first day of the month
         const qint64 span = last - first;
         int lastPos = width();
-        int pos = m_drawArea.x() + std::max(0.0, m_drawArea.width() * ((static_cast<qreal>(month.toTime_t()) - first) / span));
+        int pos = m_drawArea.x() + std::max(Zero, m_drawArea.width() * ((static_cast<qreal>(month.toTime_t()) - first) / span));
         QVector<int> monthLines;
         while (pos >= m_drawArea.x()) {
             monthLines << pos;
