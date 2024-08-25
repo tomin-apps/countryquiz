@@ -89,7 +89,7 @@ def tiles_from_line(filepath, template, scale, width, height, mtime):
     if mtime < 0 or os.path.getmtime(filepath) > mtime:
         tile(str(filepath), int(width), int(height), str(template), float(scale))
 
-def tiles_from_txt(txt, output_directory):
+def tiles_from_txt(txt, output_directory, executor_class):
     output_directory.mkdir(parents=True, exist_ok=True)
     output_txt = output_directory / txt.name[:-3]
     if output_txt.exists():
@@ -99,7 +99,7 @@ def tiles_from_txt(txt, output_directory):
     else:
         mtime = -1
     csv.register_dialect('custom', delimiter=';', lineterminator='\n', quoting=csv.QUOTE_NONE)
-    with open(output_txt, 'w', newline='') as output_file, open(txt, newline='') as input_file, concurrent.futures.ProcessPoolExecutor() as executor:
+    with open(output_txt, 'w', newline='') as output_file, open(txt, newline='') as input_file, executor_class() as executor:
         writer = csv.writer(output_file, dialect='custom')
         for svg, template, scale, width, height in csv.reader(input_file, dialect='custom'):
             path = output_directory / template
@@ -111,5 +111,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('txt', type=pathlib.Path)
     parser.add_argument('--output', '-o', type=pathlib.Path)
+    parser.add_argument('--no-multiprocessing', action='store_const', dest='executor_class',
+                        default=concurrent.futures.ProcessPoolExecutor,
+                        const=concurrent.futures.ThreadPoolExecutor)
     args = parser.parse_args()
-    tiles_from_txt(args.txt, args.output)
+    tiles_from_txt(args.txt, args.output, args.executor_class)

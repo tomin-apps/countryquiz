@@ -50,6 +50,10 @@ tiles.path = /usr/share/$${TARGET}/assets
 tiles.extra = -cp -r $$shadowed(map_*) $(INSTALL_ROOT)$$tiles.path/
 QMAKE_CLEAN += $$tiles.files $$files($$shadowed(map_*/*.png))
 
+no_multiprocessing {
+    tiles.commands += ' --no-multiprocessing'
+}
+
 copying.files = COPYING.CC-BY-SA-4.0.txt
 copying.path = /usr/share/$${TARGET}/assets
 

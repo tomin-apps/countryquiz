@@ -23,7 +23,6 @@ Remaining work
 Known issues and missing but planned features:
 
 - Map view clipping glitch when switching between ambiences during a map quiz.
-- Does not build for i486 target.
 - Better icon.
 
 License

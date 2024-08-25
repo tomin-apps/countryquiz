@@ -27,7 +27,11 @@ BuildRequires:  qt5-qttools-linguist
 
 %build
 
-%qmake5 
+%ifarch i486
+%qmake5 CONFIG+=no_multiprocessing
+%else
+%qmake5
+%endif
 
 %make_build
 
