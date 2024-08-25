@@ -23,7 +23,6 @@ Remaining work
 Known issues and missing but planned features:
 
 - Map view clipping glitch when switching between ambiences during a map quiz.
-- Better icon.
 
 License
 -------
