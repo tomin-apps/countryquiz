@@ -22,9 +22,8 @@ Remaining work
 --------------
 Known issues and missing but planned features:
 
-- Crash when tapping Stats tab on some devices in some conditions.
-- Map view clipping glitch when swithing between ambiences during a map quiz.
-- Graph of previous performance to stats.
+- Map view clipping glitch when switching between ambiences during a map quiz.
+- Does not build for i486 target.
 - Better icon.
 
 License
