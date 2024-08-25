@@ -117,8 +117,8 @@ Page {
                 color: palette.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 horizontalAlignment: Text.AlignHCenter
-                //% "in %1"
-                text: qsTrId("countryquiz-la-in_time").arg(quizTimer.getTotalTimeText())
+                //% "Time: %1"
+                text: qsTrId("countryquiz-la-time").arg(quizTimer.getTotalTimeText())
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 x: Theme.horizontalPageMargin
             }
@@ -129,10 +129,10 @@ Page {
                 horizontalAlignment: Text.AlignHCenter
                 text: {
                     if (resultsSaver.nth === -1) {
-                        //% "Score %L1 points"
+                        //% "Score: %L1 points"
                         return qsTrId("countryquiz-la-score_n_points").arg(totalScore)
                     }
-                    //% "Score %L1 points (#%2)"
+                    //% "Score: %L1 points (#%2)"
                     return qsTrId("countryquiz-la-score_n_points_with_ranking").arg(totalScore).arg(resultsSaver.nth)
                 }
                 width: Math.min(contentWidth, parent.width - 2 * Theme.horizontalPageMargin)

@@ -280,6 +280,7 @@
     </message>
     <message id="countryquiz-la-time">
         <location filename="../qml/pages/CountryPage.qml" line="107"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="121"/>
         <source>Time: %1</source>
         <translation>Aika: %1</translation>
     </message>
@@ -410,20 +411,15 @@
         <source>%1 / %2 correct</source>
         <translation>%1 / %2 oikein</translation>
     </message>
-    <message id="countryquiz-la-in_time">
-        <location filename="../qml/pages/ResultsPage.qml" line="121"/>
-        <source>in %1</source>
-        <translation>%1</translation>
-    </message>
     <message id="countryquiz-la-score_n_points">
         <location filename="../qml/pages/ResultsPage.qml" line="133"/>
-        <source>Score %L1 points</source>
-        <translation>Tulos %L1 pistettä</translation>
+        <source>Score: %L1 points</source>
+        <translation>Tulos: %L1 pistettä</translation>
     </message>
     <message id="countryquiz-la-score_n_points_with_ranking">
         <location filename="../qml/pages/ResultsPage.qml" line="136"/>
-        <source>Score %L1 points (#%2)</source>
-        <translation>Tulos %L1 pistettä (#%2)</translation>
+        <source>Score: %L1 points (#%2)</source>
+        <translation>Tulos: %L1 pistettä (#%2)</translation>
     </message>
     <message id="countryquiz-la-your_answer">
         <location filename="../qml/pages/ResultsPage.qml" line="188"/>
