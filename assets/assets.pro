@@ -4,6 +4,7 @@ TARGET = harbour-countryquiz
 DISTFILES = \
     $$files(data_*.yaml) \
     $$files(flags/*.svg) \
+    $$files(icons/*.svg) \
     data.xml \
     map.svg \
     COPYING-CC-BY-SA-4.0.txt \
@@ -54,6 +55,9 @@ no_multiprocessing {
     tiles.commands += ' --no-multiprocessing'
 }
 
+icons.files = $$files(icons/*.svg)
+icons.path = /usr/share/$${TARGET}/assets/icons
+
 copying.files = COPYING.CC-BY-SA-4.0.txt
 copying.path = /usr/share/$${TARGET}/assets
 
@@ -62,4 +66,4 @@ readme.path = /usr/share/$${TARGET}/assets
 
 QMAKE_EXTRA_TARGETS += data_xml tiles
 PRE_TARGETDEPS += data_xml tiles
-INSTALLS += copying data_xml flags map readme tiles
+INSTALLS += copying data_xml flags icons map readme tiles
