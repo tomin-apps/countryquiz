@@ -359,6 +359,7 @@ Page {
     }
 
     Component.onCompleted: {
+        appWindow.progress = current
         var choices = Helpers.getIndexArray(dataModel)
         choices.swap(0, index)
         if (setup.sameRegion) {

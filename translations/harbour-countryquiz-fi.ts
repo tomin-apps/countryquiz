@@ -107,33 +107,48 @@
         <translation>Visaillaan!</translation>
     </message>
     <message id="countryquiz-me-about">
-        <location filename="../qml/harbour-countryquiz.qml" line="31"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="38"/>
         <source>About</source>
         <translation>Tietoja</translation>
     </message>
     <message id="countryquiz-me-options">
-        <location filename="../qml/harbour-countryquiz.qml" line="37"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="44"/>
         <source>Options</source>
         <translation>Valinnat</translation>
     </message>
+    <message id="countryquiz-la-capital_quiz">
+        <location filename="../qml/harbour-countryquiz.qml" line="119"/>
+        <source>Capital City Quiz</source>
+        <translation>Pääkaupunkivisa</translation>
+    </message>
+    <message id="countryquiz-la-flag_quiz">
+        <location filename="../qml/harbour-countryquiz.qml" line="122"/>
+        <source>Flag Quiz</source>
+        <translation>Lippuvisa</translation>
+    </message>
+    <message id="countryquiz-la-map_quiz">
+        <location filename="../qml/harbour-countryquiz.qml" line="125"/>
+        <source>Map Quiz</source>
+        <translation>Karttavisa</translation>
+    </message>
     <message id="countryquiz-la-app_name">
-        <location filename="../qml/harbour-countryquiz.qml" line="75"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="128"/>
         <location filename="../qml/pages/AboutPage.qml" line="27"/>
         <source>Country Quiz</source>
         <translation>Valtiovisa</translation>
     </message>
     <message id="countryquiz-la-countries">
-        <location filename="../qml/harbour-countryquiz.qml" line="121"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="196"/>
         <source>Countries</source>
         <translation>Maat</translation>
     </message>
     <message id="countryquiz-la-quiz">
-        <location filename="../qml/harbour-countryquiz.qml" line="127"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="202"/>
         <source>Quiz</source>
         <translation>Visa</translation>
     </message>
     <message id="countryquiz-la-stats">
-        <location filename="../qml/harbour-countryquiz.qml" line="133"/>
+        <location filename="../qml/harbour-countryquiz.qml" line="208"/>
         <source>Stats</source>
         <translation>Tilastot</translation>
     </message>
@@ -280,7 +295,7 @@
     </message>
     <message id="countryquiz-la-time">
         <location filename="../qml/pages/CountryPage.qml" line="107"/>
-        <location filename="../qml/pages/ResultsPage.qml" line="121"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="149"/>
         <source>Time: %1</source>
         <translation>Aika: %1</translation>
     </message>
@@ -357,92 +372,92 @@
         <translation>Pääkaupunkivisa</translation>
     </message>
     <message id="countryquiz-he-results">
-        <location filename="../qml/pages/ResultsPage.qml" line="52"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="62"/>
         <source>Results</source>
         <translation>Tulokset</translation>
     </message>
     <message id="countryquiz-la-result_zero">
-        <location filename="../qml/pages/ResultsPage.qml" line="69"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="97"/>
         <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
         <translation>Se on kuin kolikonheittoa, joskus on vain huono tuuri!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_flags">
-        <location filename="../qml/pages/ResultsPage.qml" line="74"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="102"/>
         <source>Perfect work! You clearly know the flags!</source>
         <translation>Täydellistä! Sinä todella tiedät liput!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_maps">
-        <location filename="../qml/pages/ResultsPage.qml" line="77"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="105"/>
         <source>Perfect work! You clearly know maps!</source>
         <translation>Täydellistä! Sinä todella tiedät kartat!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_capitals">
-        <location filename="../qml/pages/ResultsPage.qml" line="80"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="108"/>
         <source>Perfect work! You clearly know the capitals!</source>
         <translation>Täydellistä! Sinä todella tiedät pääkaupungit!</translation>
     </message>
     <message id="countryquiz-la-result_awesome">
-        <location filename="../qml/pages/ResultsPage.qml" line="86"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="114"/>
         <source>Excellent!</source>
         <translation>Erinomaisesti pelattu!</translation>
     </message>
     <message id="countryquiz-la-result_great">
-        <location filename="../qml/pages/ResultsPage.qml" line="89"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="117"/>
         <source>Very good!</source>
         <translation>Erittäin hyvin pelattu!</translation>
     </message>
     <message id="countryquiz-la-result_good">
-        <location filename="../qml/pages/ResultsPage.qml" line="92"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="120"/>
         <source>You did well!!</source>
         <translation>Pärjäsit hyvin!</translation>
     </message>
     <message id="countryquiz-la-result_poor">
-        <location filename="../qml/pages/ResultsPage.qml" line="95"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="123"/>
         <source>You could use more practice.</source>
         <translation>Voisit harjoitella enemmän.</translation>
     </message>
     <message id="countryquiz-la-result_bad">
-        <location filename="../qml/pages/ResultsPage.qml" line="98"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="126"/>
         <source>Did you try to avoid the right answers?</source>
         <translation>Yrititkö vältellä oikeita vastauksia?</translation>
     </message>
     <message id="countryquiz-la-correct_answers_count">
-        <location filename="../qml/pages/ResultsPage.qml" line="110"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="138"/>
         <source>%1 / %2 correct</source>
         <translation>%1 / %2 oikein</translation>
     </message>
     <message id="countryquiz-la-score_n_points">
-        <location filename="../qml/pages/ResultsPage.qml" line="133"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="161"/>
         <source>Score: %L1 points</source>
         <translation>Tulos: %L1 pistettä</translation>
     </message>
     <message id="countryquiz-la-score_n_points_with_ranking">
-        <location filename="../qml/pages/ResultsPage.qml" line="136"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="164"/>
         <source>Score: %L1 points (#%2)</source>
         <translation>Tulos: %L1 pistettä (#%2)</translation>
     </message>
     <message id="countryquiz-la-your_answer">
-        <location filename="../qml/pages/ResultsPage.qml" line="188"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="216"/>
         <source>Your answer: %1</source>
         <translation>Vastauksesi: %1</translation>
     </message>
     <message id="countryquiz-se-your_answers">
-        <location filename="../qml/pages/ResultsPage.qml" line="207"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="235"/>
         <source>Your answers</source>
         <translation>Vastauksesi</translation>
     </message>
     <message id="countryquiz-bt-play_again">
-        <location filename="../qml/pages/ResultsPage.qml" line="215"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="243"/>
         <source>Play again</source>
         <translation>Pelaa uudestaan</translation>
     </message>
     <message id="countryquiz-la-enter_name">
-        <location filename="../qml/pages/ResultsPage.qml" line="242"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="264"/>
         <source>Enter your name to save results</source>
         <translation>Kirjoita nimesi tallentaaksesi tuloksen</translation>
     </message>
     <message id="countryquiz-bt-save_result">
-        <location filename="../qml/pages/ResultsPage.qml" line="257"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="279"/>
         <source>Save result</source>
         <translation>Tallenna tulos</translation>
     </message>

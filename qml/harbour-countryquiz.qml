@@ -18,8 +18,15 @@ ApplicationWindow {
     property alias quizTimer: quizTimer
     property alias signaler: signaler
 
+    property string quizType
+    property int progress
+    property int total
+
+    id: appWindow
     initialPage: Component {
         Page {
+            id: page
+
             SilicaFlickable {
                 anchors.fill: parent
                 contentHeight: height
@@ -64,15 +71,83 @@ ApplicationWindow {
                     }
                     model: pageModel
                 }
+
+                Connections {
+                    target: signaler
+                    onShowQuizTabImmediately: {
+                        pageStack.pop(page, PageStackAction.Immediate)
+                        tabs.animate = false
+                        paged.currentIndex = 1
+                        tabs.animate = true
+                        appWindow.activate()
+                    }
+                }
+            }
+
+            onStatusChanged: {
+                if (status === PageStatus.Activating) {
+                    appWindow.progress = 0
+                    appWindow.total = 0
+                    appWindow.quizType = ""
+                }
             }
         }
     }
+
     cover: Component {
         CoverBackground {
-            Label {
+            Column {
                 anchors.centerIn: parent
-                //% "Country Quiz"
-                text: qsTrId("countryquiz-la-app_name")
+                spacing: Theme.paddingLarge
+                width: parent.width - Theme.paddingLarge * 2
+
+                Icon {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: palette.primaryColor
+                    source: appWindow.quizType === ""
+                            ? "../assets/icons/globe.svg"
+                            : "../assets/icons/%1.svg".arg(appWindow.quizType)
+                    sourceSize: Qt.size(parent.width, parent.width)
+                }
+
+                Label {
+                    color: palette.primaryColor
+                    horizontalAlignment: Text.AlignHCenter
+                    text: {
+                        if (appWindow.quizType === "capitals") {
+                            //% "Capital City Quiz"
+                            return qsTrId("countryquiz-la-capital_quiz")
+                        } else if (appWindow.quizType === "flags") {
+                            //% "Flag Quiz"
+                            return qsTrId("countryquiz-la-flag_quiz")
+                        } else if (appWindow.quizType === "maps") {
+                            //% "Map Quiz"
+                            return qsTrId("countryquiz-la-map_quiz")
+                        } else {
+                            //% "Country Quiz"
+                            return qsTrId("countryquiz-la-app_name")
+                        }
+                    }
+                    truncationMode: TruncationMode.Elide
+                    width: parent.width
+                }
+
+                Label {
+                    color: palette.secondaryColor
+                    horizontalAlignment: Text.AlignHCenter
+                    text: appWindow.quizType !== "" && appWindow.progress >= 0 ? "%1 / %2".arg(appWindow.progress).arg(appWindow.total) : ""
+                    truncationMode: TruncationMode.Elide
+                    width: parent.width
+                }
+
+                CoverActionList {
+                    enabled: appWindow.quizType === "" || appWindow.progress === -1
+
+                    CoverAction {
+                        iconSource: appWindow.progress === -1 ? "image://theme/icon-cover-backup" : "image://theme/icon-cover-play"
+                        onTriggered: appWindow.progress === -1 ? signaler.playAgain() : signaler.showQuizTabImmediately()
+                    }
+                }
             }
         }
     }
@@ -137,6 +212,8 @@ ApplicationWindow {
 
     Item {
         signal resultSaved()
+        signal playAgain()
+        signal showQuizTabImmediately()
 
         id: signaler
     }

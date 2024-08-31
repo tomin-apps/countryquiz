@@ -17,6 +17,7 @@ Page {
     property var times
     property var indices
     property var setup
+    property string nextCoverState
 
     readonly property int count: indices.length
     readonly property int correctAnswersCount: {
@@ -41,6 +42,15 @@ Page {
         return result * (800 * (1 - time / timeLimit) + 200)
     }
 
+    function playAgain() {
+        nextCoverState = setup.quizType
+        quizTimer.reset()
+        pageStack.replace(Qt.resolvedUrl("QuizPage.qml"), {
+            indices: Helpers.pickRandomIndices(dataModel, dataModel.getIndices(setup.quizType), setup.questionCount),
+            setup: setup
+        })
+    }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: header.height + column.height
@@ -58,6 +68,24 @@ Page {
             bottomPadding: Theme.paddingLarge
             spacing: Theme.paddingLarge
             width: parent.width
+
+            Icon {
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: palette.primaryColor
+                source: {
+                    switch (resultsSaver.count < 5 ? -1 : resultsSaver.nth) {
+                    case 1:
+                        return "../../assets/icons/big-trophy.svg"
+                    case 2:
+                        return "../../assets/icons/trophy.svg"
+                    case 3:
+                        return "../../assets/icons/medal.svg"
+                    default:
+                        return "../../assets/icons/%1.svg".arg(setup.quizType)
+                    }
+                }
+                sourceSize: Qt.size(parent.width / 2, parent.width / 2)
+            }
 
             Label {
                 color: palette.highlightColor
@@ -215,13 +243,7 @@ Page {
                 text: qsTrId("countryquiz-bt-play_again")
                 enabled: config.mode === "solo" || config.mode === "anonymous"
 
-                onClicked: {
-                    quizTimer.reset()
-                    pageStack.replace(Qt.resolvedUrl("QuizPage.qml"), {
-                        indices: Helpers.pickRandomIndices(dataModel, dataModel.getIndices(page.setup.quizType), page.setup.questionCount),
-                        setup: page.setup
-                    })
-                }
+                onClicked: playAgain()
             }
         }
 
@@ -278,8 +300,26 @@ Page {
 
     Connections {
         target: signaler
-        onResultSaved: playAgainButton.enabled = true
+        onResultSaved: {
+            appWindow.progress = -1
+            playAgainButton.enabled = true
+        }
+        onPlayAgain: {
+            appWindow.activate()
+            page.playAgain()
+        }
     }
 
-    Component.onCompleted: if (config.mode === "solo") resultsSaver.save(correctAnswers, times, "")
+    onStatusChanged: {
+        if (status === PageStatus.Deactivating) {
+            appWindow.progress = 1
+            appWindow.total = setup.questionCount
+            appWindow.quizType = nextCoverState
+        }
+    }
+
+    Component.onCompleted: {
+        if (playAgainButton.enabled) appWindow.progress = -1
+        if (config.mode === "solo") resultsSaver.save(correctAnswers, times, "")
+    }
 }

@@ -184,6 +184,9 @@ ExpandingSection {
 
             onClicked:  {
                 quizTimer.reset()
+                appWindow.progress = 0
+                appWindow.total = expandingSection.questionCount
+                appWindow.quizType = expandingSection.quizType
                 pageStack.push(Qt.resolvedUrl("../pages/QuizPage.qml"), {
                                    indices: Helpers.pickRandomIndices(dataModel, dataModel.getIndices(expandingSection.quizType), expandingSection.questionCount),
                                    setup: {

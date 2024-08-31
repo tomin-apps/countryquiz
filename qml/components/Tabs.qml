@@ -10,6 +10,7 @@ import Sailfish.Silica 1.0
 Item {
     property int currentIndex: -1
     property alias model: tabs.model
+    property bool animate: true
 
     readonly property Item _currentItem: currentIndex >= 0 && currentIndex < tabs.count ? tabs.itemAt(currentIndex) : null
 
@@ -60,10 +61,12 @@ Item {
         width: _currentItem != null ? _currentItem.contentWidth : 0
 
         Behavior on x {
+            enabled: animate
             NumberAnimation { }
         }
 
         Behavior on width {
+            enabled: animate
             NumberAnimation { }
         }
     }
