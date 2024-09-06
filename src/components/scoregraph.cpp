@@ -58,9 +58,21 @@ namespace {
         return dt.toTime_t();
     }
 
-    inline int round(int value, int factor)
+    inline int roundTruncate(int value, int factor)
     {
         return value / factor * factor;
+    }
+
+    inline int roundUp(int value, int factor)
+    {
+        return static_cast<int>(ceil(value / factor)) * factor;
+    }
+
+    inline int getDivision(int high, int low, int space)
+    {
+        const int span = high - low;
+        const int scaleFactor = pow(10, static_cast<int>(log10(span)) - 1);
+        return std::max(1, span / scaleFactor / space * scaleFactor);
     }
 } // namespace
 
@@ -155,7 +167,7 @@ void ScoreGraph::updatePolish()
 
         // Ensure that maximum and minimum aren't too close
         if (maximum - minimum < MinimumDifference)
-            maximum = round(minimum, MinimumDifference) + MinimumDifference;
+            maximum = roundTruncate(minimum, MinimumDifference) + MinimumDifference;
 
         const qint64 last = m_data[0].first;
         const qint64 first = m_data[m_data.length() - 1].first;
@@ -173,15 +185,17 @@ void ScoreGraph::updatePolish()
     const qint64 last = m_limits.last;
     const qint64 first = m_limits.first;
 
+    QFontMetrics metrics(m_font);
+
     // Limits for labels on y-axis
     const int maximum = m_limits.maximum;
     const int scaleFactor = std::max(static_cast<int>(pow(10, static_cast<int>(log10(maximum - m_limits.minimum)) - 1)), MinimumDifference);
-    const int high = round(maximum, scaleFactor);
-    const int low = round(m_limits.minimum, scaleFactor);
+    const int low = roundTruncate(m_limits.minimum, scaleFactor);
+    const int division = getDivision(roundUp(maximum, scaleFactor), low, static_cast<int>(height() / metrics.height() / 3));
+    const int high = roundUp(maximum, division);
     qCDebug(lcScoreGraph).nospace() << "Limits: max: " << maximum << ", min: " << m_limits.minimum
-                                    << ", scale factor: " << scaleFactor << ", high: " << high << ", low: " << low;
-
-    QFontMetrics metrics(m_font);
+                                    << ", scale factor: " << scaleFactor << ", division: " << division
+                                    << ", high: " << high << ", low: " << low;
     QLocale locale;
 
     if (m_dirty & MeasuresDirty) {
@@ -221,10 +235,6 @@ void ScoreGraph::updatePolish()
     if (m_dirty & TextsDirty) {
         // TODO: Update only if texts change and use QStaticText
         QVector<Text> texts;
-        const int scaleFactor = pow(10, static_cast<int>(log10(high - low)) - 1);
-        int division = (high - low) / scaleFactor / static_cast<int>(height() / metrics.height() / 3) * scaleFactor;
-        if (division <= 0)
-            division = 1;
         qCDebug(lcScoreGraph) << "Using division of" << division << "for values between" << low << "and" << high;
         int score = high;
         while (score >= low) {
