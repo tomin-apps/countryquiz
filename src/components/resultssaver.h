@@ -19,6 +19,7 @@ class ResultsSaver : public QQuickItem
     Q_OBJECT
     Q_PROPERTY(Options *options READ options)
     Q_PROPERTY(int nth READ nth NOTIFY nthChanged)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString gameMode READ gameMode WRITE setGameMode NOTIFY gameModeChanged)
 
 public:
@@ -26,6 +27,7 @@ public:
 
     Options *options() const;
     int nth() const;
+    int count() const;
     QString gameMode() const;
     void setGameMode(const QString &mode);
 
@@ -34,6 +36,7 @@ public slots:
 
 signals:
     void nthChanged();
+    void countChanged();
     void gameModeChanged();
 
 private:
@@ -46,7 +49,8 @@ private:
     StatsDatabase::DatabaseType getType() const;
 
     std::unique_ptr<Options> m_options;
-    int m_nth;
+    int m_nth = -1;
+    int m_count = 0;
     QString m_gameMode;
 };
 
@@ -60,7 +64,7 @@ public:
     void run() override;
 
 signals:
-    void updateNth(int nth);
+    void updateNth(int nth, int count);
 
 private:
     Options m_options;

@@ -22,7 +22,6 @@ namespace {
 ResultsSaver::ResultsSaver(QQuickItem *parent)
     : QQuickItem(parent)
     , m_options(new Options)
-    , m_nth(-1)
 {
 }
 
@@ -34,6 +33,11 @@ Options *ResultsSaver::options() const
 int ResultsSaver::nth() const
 {
     return m_nth;
+}
+
+int ResultsSaver::count() const
+{
+    return m_count;
 }
 
 QString ResultsSaver::gameMode() const
@@ -62,13 +66,21 @@ void ResultsSaver::save(const QList<bool> &correct, const QList<int> &times, con
         m_nth = -1;
         emit nthChanged();
     }
+    if (m_count != 0) {
+        m_count = 0;
+        emit countChanged();
+    }
     if (checkResults(correct, times)) {
         qCDebug(lcResultsSaver) << "Saving result";
         auto *worker = new ResultsSaverWorker(getType(), *m_options, numberOfCorrect(correct), time(times), calculateScore(correct, times), now(), name);
-        connect(worker, &ResultsSaverWorker::updateNth, this, [this](int nth) {
+        connect(worker, &ResultsSaverWorker::updateNth, this, [this](int nth, int count) {
             if (m_nth != nth) {
                 m_nth = nth;
                 emit nthChanged();
+            }
+            if (m_count != count) {
+                m_count = count;
+                emit countChanged();
             }
         }, Qt::QueuedConnection);
         worker->setAutoDelete(true);
@@ -160,6 +172,6 @@ ResultsSaverWorker::ResultsSaverWorker(StatsDatabase::DatabaseType type, const O
 
 void ResultsSaverWorker::run()
 {
-    int nth = StatsDatabase::store(m_type, &m_options, m_numberOfCorrect, m_time, m_score, m_datetime, m_name);
-    emit updateNth(nth);
+    auto pair = StatsDatabase::store(m_type, &m_options, m_numberOfCorrect, m_time, m_score, m_datetime, m_name);
+    emit updateNth(pair.first, pair.second);
 }

@@ -135,12 +135,12 @@ int64_t StatsDatabase::insertRecord(Options *options, int numberOfCorrect, int t
     return query.lastInsertId().toLongLong();
 }
 
-int StatsDatabase::store(DatabaseType type, Options *options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name)
+std::pair<int, int> StatsDatabase::store(DatabaseType type, Options *options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name)
 {
     StatsDatabase db(type);
     db.prepareOptions(options);
     int64_t id = db.insertRecord(options, numberOfCorrect, time, score, datetime, name);
-    return db.getPosition(id);
+    return std::make_pair<int, int>(db.getPosition(id), db.getCount(id));
 }
 
 QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order, bool filtered, const QString &name)
@@ -192,4 +192,19 @@ int StatsDatabase::getPosition(int64_t id)
         return -1;
     }
     return query.value(0).toInt() + 1;
+}
+
+int StatsDatabase::getCount(int64_t id)
+{
+    QSqlQuery query(m_db);
+    query.prepare("SELECT COUNT(records.id) FROM records "
+                  "INNER JOIN records AS this ON records.options = this.options "
+                  "WHERE this.id = :id");
+    query.bindValue(":id", (qlonglong)id);
+    query.exec();
+    if (!query.first()) {
+        qCWarning(lcStatsDB) << "Could not fetch count!";
+        return -1;
+    }
+    return query.value(0).toInt();
 }
