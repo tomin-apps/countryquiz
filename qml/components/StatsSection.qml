@@ -31,6 +31,7 @@ ExpandingSection {
         scoreModel.options.language = dataModel.language
     }
 
+    id: statsSection
     content.sourceComponent: Column {
         bottomPadding: Theme.paddingMedium
         states: [
@@ -135,102 +136,65 @@ ExpandingSection {
         }
 
         Item {
-            height: Theme.paddingSmall
+            height: Theme.paddingMedium
             width: parent.width
         }
 
-        ListView {
+        StatsList {
             id: stats
-            boundsBehavior: Flickable.StopAtBounds
-            height: (statsModel ? statsModel.count : 0) * Theme.itemSizeSmall
-            delegate: Item {
-                height: Theme.itemSizeSmall
-                width: ListView.view.width
-
-                Label {
-                    id: positionLabel
-                    anchors {
-                        left: parent.left
-                        leftMargin: Theme.paddingMedium
-                        verticalCenter: parent.verticalCenter
-                    }
-                    color: palette.secondaryHighlightColor
-                    font.pixelSize: Theme.fontSizeLarge
-                    text: model.position
-                }
-
-                Label {
-                    anchors {
-                        left: positionLabel.right
-                        leftMargin: Theme.paddingMedium
-                        top: parent.top
-                    }
-                    color: palette.highlightColor
-                    //% "You"
-                    text: model.name || qsTrId("countryquiz-la-you")
-                    truncationMode: TruncationMode.Fade
-                    width: parent.width - positionLabel.width - scoreLabel.width - Theme.paddingMedium * 4
-                }
-
-                Label {
-                    anchors {
-                        left: positionLabel.right
-                        leftMargin: Theme.paddingMedium
-                        bottom: parent.bottom
-                    }
-                    color: palette.secondaryHighlightColor
-                    //: %1 is the date when the game was played, try to keep this short
-                    //% "On %1"
-                    text: qsTrId("countryquiz-la-on_date").arg(model.datetime.toLocaleString(Qt.locale(), Locale.ShortFormat))
-                }
-
-                Label {
-                    id: scoreLabel
-                    anchors {
-                        right: parent.right
-                        rightMargin: Theme.paddingMedium
-                        top: parent.top
-                    }
-                    color: palette.highlightColor
-                    //: %1 is number of right answers out of %2 total answer to reward %3 points, try to keep this short
-                    //% "%1 / %2 for %3 p"
-                    text: qsTrId("countryquiz-la-questions_out_of_questions_for_points")
-                            .arg(model.number_of_correct)
-                            .arg(model.length)
-                            .arg(model.score)
-                }
-
-                Label {
-                    anchors {
-                        right: parent.right
-                        rightMargin: Theme.paddingMedium
-                        bottom: parent.bottom
-                    }
-                    color: palette.secondaryHighlightColor
-                    //: %1 is time that it took to finish the quiz, try to keep this short
-                    //% "In %1"
-                    text: qsTrId("countryquiz-la-in_time_as_sentence").arg(Helpers.timeAsString(model.time))
-                }
-            }
             model: statsModel && config.mode !== "anonymous" ? statsModel : 0
             visible: config.mode !== "anonymous"
+            width: parent.width
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: pageStack.push(Qt.resolvedUrl("../pages/StatsListPage.qml"), {
+                    quizType: statsModel.options.quizType,
+                    numberOfQuestions: statsModel.options.numberOfQuestions,
+                    numberOfChoices: statsModel.options.numberOfChoices,
+                    choicesFrom: statsModel.options.choicesFrom,
+                    timeToAnswer: statsModel.options.timeToAnswer,
+                    language: statsModel.options.language,
+                    onlyOwnResults: statsModel.onlyOwnResults,
+                    maxCount: 10,
+                    inMemoryDB: statsModel.inMemoryDB,
+                    title: statsSection.title,
+                    subtitle: "%1 %2".arg(lengthSelection.value).arg(presetSelection.value)
+                })
+            }
+        }
+
+        Item {
+            height: Theme.paddingMedium
             width: parent.width
         }
 
         ScoreGraph {
             id: scoreGraph
             arrowTipSize: Screen.width * 0.025
-            fillColor: Theme.rgba(palette.secondaryHighlightColor, Theme.opacityFaint)
-            fontColor: palette.highlightColor
+            fillColor: Theme.rgba(palette.secondaryColor, Theme.opacityFaint)
+            fontColor: palette.primaryColor
             font.pixelSize: Theme.fontSizeTiny
             height: Theme.itemSizeSmall * 4
-            lineColor: palette.highlightColor
+            lineColor: palette.primaryColor
             lineWidth: 2
             model: scoreModel && config.mode === "solo" ? scoreModel : null
-            secondaryLineColor: Theme.rgba(palette.secondaryHighlightColor, Theme.opacityHigh)
+            secondaryLineColor: Theme.rgba(palette.secondaryColor, Theme.opacityHigh)
             visible: scoreModel && scoreModel.count > 0 && config.mode === "solo"
             width: parent.width - 2 * Theme.horizontalPageMargin
             x: Theme.horizontalPageMargin
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: pageStack.push(Qt.resolvedUrl("../pages/ScoreGraphPage.qml"), {
+                    scoreModel: scoreModel,
+                    title: statsSection.title,
+                    //% "%1 %2"
+                    //: This is subtitle for stats list page, meant to say, e.g. Short Easy
+                    //: %1 is length and %2 is preset name, you may swap them if that's more natural in your language
+                    subtitle: qsTrId("countryquiz-la-length_and_preset").arg(lengthSelection.value).arg(presetSelection.value)
+                })
+            }
         }
 
         BusyIndicator {

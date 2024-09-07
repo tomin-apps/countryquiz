@@ -5,7 +5,7 @@
     <name></name>
     <message id="countryquiz-la-preset">
         <location filename="../qml/components/QuizSection.qml" line="27"/>
-        <location filename="../qml/components/StatsSection.qml" line="82"/>
+        <location filename="../qml/components/StatsSection.qml" line="83"/>
         <source>Preset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -535,40 +535,46 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-length">
-        <location filename="../qml/components/StatsSection.qml" line="100"/>
+        <location filename="../qml/components/StatsSection.qml" line="101"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-you">
-        <location filename="../qml/components/StatsSection.qml" line="170"/>
+        <location filename="../qml/components/StatsList.qml" line="44"/>
         <source>You</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-on_date">
-        <location filename="../qml/components/StatsSection.qml" line="184"/>
+        <location filename="../qml/components/StatsList.qml" line="58"/>
         <source>On %1</source>
         <extracomment>%1 is the date when the game was played, try to keep this short</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-questions_out_of_questions_for_points">
-        <location filename="../qml/components/StatsSection.qml" line="197"/>
+        <location filename="../qml/components/StatsList.qml" line="71"/>
         <source>%1 / %2 for %3 p</source>
         <extracomment>%1 is number of right answers out of %2 total answer to reward %3 points, try to keep this short</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-in_time_as_sentence">
-        <location filename="../qml/components/StatsSection.qml" line="212"/>
+        <location filename="../qml/components/StatsList.qml" line="86"/>
         <source>In %1</source>
         <extracomment>%1 is time that it took to finish the quiz, try to keep this short</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message id="countryquiz-la-length_and_preset">
+        <location filename="../qml/components/StatsSection.qml" line="195"/>
+        <source>%1 %2</source>
+        <extracomment>This is subtitle for stats list page, meant to say, e.g. Short Easy %1 is length and %2 is preset name, you may swap them if that&apos;s more natural in your language</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
     <message id="countryquiz-la-stats_are_disabled_anonymous_mode">
-        <location filename="../qml/components/StatsSection.qml" line="250"/>
+        <location filename="../qml/components/StatsSection.qml" line="214"/>
         <source>Stats are disabled in anonymous mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-has_not_been_played_yet">
-        <location filename="../qml/components/StatsSection.qml" line="252"/>
+        <location filename="../qml/components/StatsSection.qml" line="216"/>
         <source>This quiz has not been played yet</source>
         <translation type="unfinished"></translation>
     </message>
