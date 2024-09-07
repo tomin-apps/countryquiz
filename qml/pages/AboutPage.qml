@@ -47,7 +47,7 @@ Page {
                 color: palette.highlightColor
                 //% "Country Quiz is a quiz game about states in the world. You can practise "
                 //% "recognition of flags, maps and capitals. Results are collected into local "
-                //% "database for you to see your own progress."
+                //% "database for you to see your own progress in tables and graphs."
                 text: qsTrId("countryquiz-la-about_text")
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 wrapMode: Text.Wrap

@@ -194,7 +194,7 @@
     </message>
     <message id="countryquiz-la-about_text">
         <location filename="../qml/pages/AboutPage.qml" line="51"/>
-        <source>Country Quiz is a quiz game about states in the world. You can practise recognition of flags, maps and capitals. Results are collected into local database for you to see your own progress.</source>
+        <source>Country Quiz is a quiz game about states in the world. You can practise recognition of flags, maps and capitals. Results are collected into local database for you to see your own progress in tables and graphs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-se-development">
@@ -429,13 +429,11 @@
     <message id="countryquiz-la-score_n_points">
         <location filename="../qml/pages/ResultsPage.qml" line="161"/>
         <source>Score: %L1 points</source>
-        <oldsource>Score %L1 points</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-score_n_points_with_ranking">
         <location filename="../qml/pages/ResultsPage.qml" line="164"/>
         <source>Score: %L1 points (#%2)</source>
-        <oldsource>Score %L1 points (#%2)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-your_answer">
@@ -476,7 +474,6 @@
     <message id="countryquiz-de-solo_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="41"/>
         <source>In this mode results are saved on device and are always attributed to you. Graphs of recent performance are also available.</source>
-        <oldsource>In this mode results are saved on device and are always attributed to you.</oldsource>
         <extracomment>Description for solo mode</extracomment>
         <translation type="unfinished"></translation>
     </message>
