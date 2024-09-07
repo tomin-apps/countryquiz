@@ -312,8 +312,9 @@ void ScoreGraph::paint(QPainter *painter)
             break;
         painter->drawLine(m_drawArea.x(), text.bottomLeft.y(), m_drawArea.x() + m_drawArea.width(), text.bottomLeft.y());
     }
+    const int monthLineTop = 1.25 * m_arrowTipSize;
     for (const auto &pos : m_monthLines) {
-        painter->drawLine(pos, m_drawArea.y(), pos, m_drawArea.y() + m_drawArea.height());
+        painter->drawLine(pos, monthLineTop, pos, m_drawArea.y() + m_drawArea.height());
     }
 
     painter->setPen(QPen(m_fontColor, m_lineWidth));
