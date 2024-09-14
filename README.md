@@ -20,9 +20,11 @@ language. Please see TRANSLATING.md for more information.
 
 Remaining work
 --------------
-Known issues and missing but planned features:
+Known issues:
 
-- Map view clipping glitch when switching between ambiences during a map quiz.
+- Map is not clipped correctly when switching between ambiences during Map quiz.
+- Hiding window when Quiz is about to start or continue breaks quiz.
+- Score graph subpage is missing busy indicator.
 
 License
 -------
