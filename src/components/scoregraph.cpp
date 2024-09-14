@@ -65,14 +65,14 @@ namespace {
 
     inline int roundUp(int value, int factor)
     {
-        return static_cast<int>(ceil(value / factor)) * factor;
+        return static_cast<int>(ceil(static_cast<qreal>(value) / factor)) * factor;
     }
 
     inline int getDivision(int high, int low, int space)
     {
         const int span = high - low;
         const int scaleFactor = pow(10, static_cast<int>(log10(span)) - 1);
-        return std::max(1, span / scaleFactor / space * scaleFactor);
+        return std::max(1, static_cast<int>(static_cast<qreal>(span) / scaleFactor / space)) * scaleFactor;
     }
 } // namespace
 
