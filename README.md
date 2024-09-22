@@ -22,7 +22,6 @@ Remaining work
 --------------
 Known issues:
 
-- Hiding window when Quiz is about to start or continue breaks quiz.
 - Score graph subpage is missing busy indicator.
 
 License

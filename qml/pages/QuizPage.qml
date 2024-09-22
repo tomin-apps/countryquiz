@@ -35,6 +35,16 @@ Page {
 
     onStatusChanged: if (status === PageStatus.Active) choices.opacity = 1.0
 
+    Connections {
+        target: Qt.application
+        onStateChanged: {
+            if (Qt.application.state === Qt.ApplicationActive && status === PageStatus.Active) {
+                fadeIn.enabled = false
+                choices.opacity = 1.0
+            }
+        }
+    }
+
     PageHeader {
         readonly property string name: {
             if (setup.quizType === "flags") {
@@ -246,8 +256,8 @@ Page {
         width: parent.width
 
         Behavior on opacity {
+            id: fadeIn
             FadeAnimator {
-                id: fadeIn
                 duration: 300
                 onRunningChanged: if (!running && !closeTimer.running) quizTimer.start()
             }

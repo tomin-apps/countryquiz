@@ -310,47 +310,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-flag">
-        <location filename="../qml/pages/QuizPage.qml" line="42"/>
+        <location filename="../qml/pages/QuizPage.qml" line="52"/>
         <source>Flag</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-map">
-        <location filename="../qml/pages/QuizPage.qml" line="45"/>
+        <location filename="../qml/pages/QuizPage.qml" line="55"/>
         <source>Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-he-capital-city">
-        <location filename="../qml/pages/QuizPage.qml" line="48"/>
+        <location filename="../qml/pages/QuizPage.qml" line="58"/>
         <source>Capital City</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-guess_flag">
-        <location filename="../qml/pages/QuizPage.qml" line="93"/>
+        <location filename="../qml/pages/QuizPage.qml" line="103"/>
         <source>Guess which country this flag belongs to</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-guess_maps">
-        <location filename="../qml/pages/QuizPage.qml" line="97"/>
+        <location filename="../qml/pages/QuizPage.qml" line="107"/>
         <source>Guess which country is highlighted on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-guess_capital">
-        <location filename="../qml/pages/QuizPage.qml" line="102"/>
+        <location filename="../qml/pages/QuizPage.qml" line="112"/>
         <source>Guess which country&apos;s capital is this</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-guess_multiple_capitals">
-        <location filename="../qml/pages/QuizPage.qml" line="105"/>
+        <location filename="../qml/pages/QuizPage.qml" line="115"/>
         <source>Guess which country&apos;s capitals are these</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-one_and_other">
-        <location filename="../qml/pages/QuizPage.qml" line="336"/>
+        <location filename="../qml/pages/QuizPage.qml" line="346"/>
         <source>%1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="countryquiz-la-three_args">
-        <location filename="../qml/pages/QuizPage.qml" line="339"/>
+        <location filename="../qml/pages/QuizPage.qml" line="349"/>
         <source>%1, %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
