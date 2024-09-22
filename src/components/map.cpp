@@ -258,8 +258,8 @@ void Map::updatePolish()
             m_miniMap.bounds = miniMapTarget.intersected(bounds);
             m_miniMap.overlay = miniMapOverlayRect(boundingRect(), bounds, m_overlay.location);
 
-            m_fastMap[0].target = adjustedBy(boundingRect(), 0.25, 0, 0, 0.25);
-            m_fastMap[0].source = adjustedBy(m_miniMap.location, 0.25, 0, 0, 0.25);
+            m_fastMap[0].target = adjustedBy(boundingRect(), 0.25, 0, 0, -0.75);
+            m_fastMap[0].source = adjustedBy(m_miniMap.location, 0.25, 0, 0, -0.75);
             m_fastMap[1].target = adjustedBy(boundingRect(), 0, 0.25, 0, 0);
             m_fastMap[1].source = adjustedBy(m_miniMap.location, 0, 0.25, 0, 0);
         }
