@@ -12,6 +12,10 @@
 #include <QLoggingCategory>
 #include <QPainter>
 #include <QVector>
+#include <QSqlDriver>
+#include <QSqlError>
+#include <QThread>
+#include <QThreadPool>
 #include "scoregraph.h"
 
 Q_LOGGING_CATEGORY(lcScoreGraph, "site.tomin.apps.CountryQuiz.ScoreGraph", QtWarningMsg)
@@ -89,85 +93,31 @@ void ScoreGraph::handleMeasuresChanged()
     tryPolish();
 }
 
-void ScoreGraph::tryPolish()
+void ScoreGraph::updateData()
 {
-    if (!m_statsModel || !m_statsModel->busy())
-        polish();
-}
-
-void ScoreGraph::updatePolish()
-{
-    QQuickPaintedItem::updatePolish();
-
-    if (!m_statsModel)
+    if (!m_statsModel || m_statsModel->busy())
         return;
 
-    int count = m_statsModel->rowCount();
-    if (count <= 0)
+    if (m_statsModel->rowCount() <= 0) {
+        qCDebug(lcScoreGraph) << "Stats model is empty";
+        if (!m_data.empty()) {
+            m_data.clear();
+            tryPolish();
+        }
         return;
+    }
 
-    if (m_dirty & DataDirty) {
-        // TODO: Do this in background threads instead?
-        // Assumes that data is sorted descending based on timestamp
-        const qint64 bucketStart = roundToMidnight(
-                    m_statsModel->data(m_statsModel->index(m_statsModel->rowCount() - 1, 0), StatsModel::TimestampRole).toLongLong(), true);
-        const qint64 bucketEnd = roundToMidnight(
-                    m_statsModel->data(m_statsModel->index(0, 0), StatsModel::TimestampRole).toLongLong(), false);
-        const qreal timePerBucket = static_cast<qreal>(bucketEnd - bucketStart) / Buckets;
-        qCDebug(lcScoreGraph).nospace() << "Bucket size: " << timePerBucket << ", start: " << bucketStart << ", end: " << bucketEnd;
-        // Squashed data
-        QVector<std::pair<qint64, int>> data;
-        if (timePerBucket < 600 && count < Buckets) {
-            qCDebug(lcScoreGraph) << "Only few results and little time covered, using all" << count << "data points";
-            data.reserve(count);
-            for (int row = 0; row < count; ++row) {
-                const auto index = m_statsModel->index(row, 0);
-                const qint64 ts = m_statsModel->data(index, StatsModel::TimestampRole).toLongLong();
-                const int score = m_statsModel->data(index, StatsModel::ScoreRole).toReal();
-                qCDebug(lcScoreGraphData) << "Adding datapoint" << ts << "->" << score;
-                data << std::pair<qint64, int>(ts, score);
-            }
-        } else {
-            qCDebug(lcScoreGraph) << "Reading" << count << "rows from stats model," << timePerBucket << "s of time per bucket";
-            int lastBucket = Buckets;
-            int lastScore = 0;
-            data.reserve(Buckets);
-            for (int row = 0; row < count; ++row) {
-                const auto index = m_statsModel->index(row, 0);
-                const qint64 ts = m_statsModel->data(index, StatsModel::TimestampRole).toLongLong();
-                const int score = m_statsModel->data(index, StatsModel::ScoreRole).toReal();
-                const int bucket = (ts - bucketStart) / timePerBucket;
-                if (bucket != lastBucket) {
-                    qCDebug(lcScoreGraphData) << "Adding datapoint" << ts << "->" << score;
-                    data << std::pair<qint64, int>(ts, score);
-                    lastBucket = bucket;
-                    lastScore = score;
-                } else if (score > lastScore /* && bucket == lastBucket */) {
-                    qCDebug(lcScoreGraphData) << "Replacing last datapoint" << ts << "->" << score;
-                    data[data.length() - 1] = std::pair<qint64, int>(ts, score);
-                    lastScore = score;
-                } // else bucket == lastBucket && score <= lastScore
-            }
-            data.squeeze();
-            qCDebug(lcScoreGraph) << "Squashed data into" << data.length() << "buckets";
-        }
+    auto query = m_statsModel->query();
+    if (!query.isActive() || !query.isSelect() || query.isForwardOnly()) {
+        qCDebug(lcScoreGraph) << "Query is not active, is not select or is forward only";
+        return;
+    }
 
-        // Limits for values
-        int maximum = std::numeric_limits<int>::min();
-        int minimum = std::numeric_limits<int>::max();
-        for (const std::pair<qint64, int> &pair : data) {
-            const int score = pair.second;
-            if (maximum < score)
-                maximum = score;
-            if (minimum > score)
-                minimum = score;
-        }
+    qCDebug(lcScoreGraph) << "Sending data to background process";
+    auto *worker = new ScoreGraphDataWorker(query);
+    connect(worker, &ScoreGraphDataWorker::updatedData, this, [this](QVector<std::pair<qint64, int>> data, int minimum, int maximum) {
+        qCDebug(lcScoreGraph) << "Got updated data back";
         m_data.swap(data);
-        m_dirty &= ~DataDirty;
-
-        // Ensure that maximum and minimum aren't too close
-        if (maximum - minimum < MinimumDifference)
-            maximum = roundTruncate(minimum, MinimumDifference) + MinimumDifference;
 
         const qint64 last = m_data[0].first;
         const qint64 first = m_data[m_data.length() - 1].first;
@@ -179,7 +129,25 @@ void ScoreGraph::updatePolish()
             m_limits.first = first;
             m_dirty |= MeasuresDirty | TextsDirty | PointsDirty;
         }
-    }
+
+        tryPolish();
+    }, Qt::QueuedConnection);
+    worker->setAutoDelete(true);
+    QThreadPool::globalInstance()->start(worker, QThread::LowPriority);
+}
+
+void ScoreGraph::tryPolish()
+{
+    if (!m_statsModel || !m_statsModel->busy())
+        polish();
+}
+
+void ScoreGraph::updatePolish()
+{
+    QQuickPaintedItem::updatePolish();
+
+    if (!m_statsModel || m_data.empty())
+        return;
 
     // Limits for labels on x-axis
     const qint64 last = m_limits.last;
@@ -344,16 +312,15 @@ void ScoreGraph::setModel(StatsModel *model)
         if (m_statsModel) {
             qCDebug(lcScoreGraph) << "Connecting new model to score graph";
             connect(m_statsModel, &StatsModel::busyChanged, this, [this] {
+                updateData();
                 if (m_dirty)
                     tryPolish();
             });
             connect(m_statsModel, &StatsModel::modelReset, this, [this] {
                 qCDebug(lcScoreGraph) << "Model data changed, refreshing graph";
-                m_dirty |= DataDirty;
-                tryPolish();
+                updateData();
             });
-            m_dirty |= DataDirty;
-            tryPolish();
+            updateData();
         }
     }
 }
@@ -456,4 +423,83 @@ void ScoreGraph::setArrowTipSize(int arrowTipSize)
         m_dirty |= ArrowsDirty;
         tryPolish();
     }
+}
+
+ScoreGraphDataWorker::ScoreGraphDataWorker(const QSqlQuery &query)
+    : QObject(nullptr)
+    , m_query(query)
+{
+}
+
+void ScoreGraphDataWorker::run()
+{
+    // Assumes that data is sorted descending based on timestamp
+    Q_ASSERT(m_query.last());
+    const qint64 bucketStart = roundToMidnight(m_query.value(3).toLongLong(), true);
+    Q_ASSERT(m_query.first());
+    const qint64 bucketEnd = roundToMidnight(m_query.value(3).toLongLong(), false);
+    const qreal timePerBucket = static_cast<qreal>(bucketEnd - bucketStart) / Buckets;
+    qCDebug(lcScoreGraph).nospace() << "Bucket size: " << timePerBucket << ", start: " << bucketStart << ", end: " << bucketEnd;
+
+    // Squashed data
+    QVector<std::pair<qint64, int>> data;
+    int count = 0;
+    if (timePerBucket < 600) {
+        qCDebug(lcScoreGraph) << "Little time covered, trying to use all data points";
+        do {
+            ++count;
+            const auto index = m_query.value(0);
+            const qint64 ts = m_query.value(3).toLongLong();
+            const int score = m_query.value(2).toReal();
+            qCDebug(lcScoreGraphData) << "Adding datapoint" << ts << "->" << score;
+            data << std::pair<qint64, int>(ts, score);
+            if (count >= Buckets) {
+                qCDebug(lcScoreGraph) << "Too many results, falling back to buckets";
+                data.clear();
+                break;
+            }
+        } while (m_query.next());
+    }
+    Q_ASSERT(m_query.first());
+    if (timePerBucket >= 600 || count >= Buckets) {
+        qCDebug(lcScoreGraph) << "Reading stats model," << timePerBucket << "s of time per bucket";
+        int lastBucket = Buckets;
+        int lastScore = 0;
+        data.reserve(Buckets);
+        do {
+            const auto index = m_query.value(0);
+            const qint64 ts = m_query.value(3).toLongLong();
+            const int score = m_query.value(2).toReal();
+            const int bucket = (ts - bucketStart) / timePerBucket;
+            if (bucket != lastBucket) {
+                qCDebug(lcScoreGraphData) << "Adding datapoint" << ts << "->" << score;
+                data << std::pair<qint64, int>(ts, score);
+                lastBucket = bucket;
+                lastScore = score;
+            } else if (score > lastScore /* && bucket == lastBucket */) {
+                qCDebug(lcScoreGraphData) << "Replacing last datapoint" << ts << "->" << score;
+                data[data.length() - 1] = std::pair<qint64, int>(ts, score);
+                lastScore = score;
+            } // else bucket == lastBucket && score <= lastScore
+        } while (m_query.next());
+        data.squeeze();
+        qCDebug(lcScoreGraph) << "Squashed data into" << data.length() << "buckets";
+    }
+
+    // Limits for values
+    int maximum = std::numeric_limits<int>::min();
+    int minimum = std::numeric_limits<int>::max();
+    for (const std::pair<qint64, int> &pair : data) {
+        const int score = pair.second;
+        if (maximum < score)
+            maximum = score;
+        if (minimum > score)
+            minimum = score;
+    }
+
+    // Ensure that maximum and minimum aren't too close
+    if (maximum - minimum < MinimumDifference)
+        maximum = roundTruncate(minimum, MinimumDifference) + MinimumDifference;
+
+    emit updatedData(data, minimum, maximum);
 }

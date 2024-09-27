@@ -30,11 +30,10 @@ class ScoreGraph : public QQuickPaintedItem
 public:
     enum DirtyFlag {
         CleanFlags,
-        DataDirty = (1 << 0),
-        MeasuresDirty = (1 << 1),
-        ArrowsDirty = (1 << 2),
-        TextsDirty = (1 << 3),
-        PointsDirty = (1 << 4),
+        MeasuresDirty = (1 << 0),
+        ArrowsDirty = (1 << 1),
+        TextsDirty = (1 << 2),
+        PointsDirty = (1 << 3),
     };
     Q_DECLARE_FLAGS(DirtyFlags, DirtyFlag)
     Q_FLAG(DirtyFlags)
@@ -76,6 +75,7 @@ signals:
 private:
     void handleMeasuresChanged();
     void tryPolish();
+    void updateData();
 
     struct Text {
         Text() {}
@@ -108,6 +108,22 @@ private:
     } m_limits;
     QVector<int> m_monthLines;
     QVector<Text> m_texts;
+};
+
+class ScoreGraphDataWorker : public QObject, public QRunnable
+{
+    Q_OBJECT
+
+public:
+    ScoreGraphDataWorker(const QSqlQuery &query);
+
+    void run() override;
+
+signals:
+    void updatedData(QVector<std::pair<qint64, int>> data, int minimum, int maximum);
+
+private:
+    QSqlQuery m_query;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(ScoreGraph::DirtyFlags)
