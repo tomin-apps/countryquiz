@@ -23,7 +23,7 @@ Q_LOGGING_CATEGORY(lcScoreGraphData, "site.tomin.apps.CountryQuiz.ScoreGraph.Dat
 
 /*
  * This draws highest scores for each datapoint.
- * The number of datapoints displayed depends on the width of the graph.
+ * The number of datapoints displayed depends on the data.
  */
 
 namespace {
