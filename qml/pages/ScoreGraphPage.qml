@@ -23,15 +23,21 @@ Page {
         anchors.top: parent.top
     }
 
+    BusyIndicator {
+        anchors.centerIn: parent
+        running: !activateEarly && (scoreGraphLoader.status !== Loader.Ready || scoreModel.busy || page.status === PageStatus.Activating)
+        size: BusyIndicatorSize.Large
+    }
+
     Loader {
         id: scoreGraphLoader
+
         anchors {
             top: header.bottom
             bottom: parent.bottom
             bottomMargin: Theme.paddingLarge
         }
         asynchronous: true
-        active: activateEarly
         sourceComponent: scoreGraphComponent
         width: parent.width - 2 * Theme.horizontalPageMargin
         x: Theme.horizontalPageMargin
@@ -42,6 +48,7 @@ Page {
 
         ScoreGraph {
             arrowTipSize: Screen.width * 0.025
+            canDraw: activateEarly || page.status === PageStatus.Active
             fillColor: Theme.rgba(palette.highlightColor, Theme.opacityFaint)
             fontColor: palette.highlightColor
             font.pixelSize: Theme.fontSizeTiny
@@ -53,8 +60,4 @@ Page {
             visible: scoreModel
         }
     }
-
-    // TODO: Add busy indicator once score graph doesn't block UI thread
-    onStatusChanged: if (page.status === PageStatus.Active) scoreGraphLoader.active = true
-    Component.onCompleted: if (page.status === PageStatus.Active) scoreGraphLoader.active = true
 }

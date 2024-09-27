@@ -18,12 +18,6 @@ Adding a language can mean adding data in another language or adding
 translation files for UI translations. Both don't need to be present for a
 language. Please see TRANSLATING.md for more information.
 
-Remaining work
---------------
-Known issues:
-
-- Score graph subpage is missing busy indicator.
-
 License
 -------
 This game is licensed under MIT license. See COPYING for more information and
