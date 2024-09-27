@@ -26,6 +26,7 @@ class ScoreGraph : public QQuickPaintedItem
     Q_PROPERTY(QColor fillColor READ fillColor WRITE setFillColor NOTIFY fillColorChanged)
     Q_PROPERTY(QColor fontColor READ fontColor WRITE setFontColor NOTIFY fontColorChanged)
     Q_PROPERTY(QFont font READ font WRITE setFont NOTIFY fontChanged)
+    Q_PROPERTY(bool canDraw READ canDraw WRITE setCanDraw NOTIFY canDrawChanged)
 
 public:
     enum DirtyFlag {
@@ -57,6 +58,8 @@ public:
     void setFont(QFont font);
     QColor fontColor() const;
     void setFontColor(QColor fontColor);
+    bool canDraw() const;
+    void setCanDraw(bool canDraw);
 
 protected:
     void updatePolish() override;
@@ -71,6 +74,7 @@ signals:
     void fillColorChanged();
     void fontChanged();
     void fontColorChanged();
+    void canDrawChanged();
 
 private:
     void handleMeasuresChanged();
@@ -108,6 +112,7 @@ private:
     } m_limits;
     QVector<int> m_monthLines;
     QVector<Text> m_texts;
+    bool m_canDraw = true;
 };
 
 class ScoreGraphDataWorker : public QObject, public QRunnable

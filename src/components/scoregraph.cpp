@@ -235,7 +235,7 @@ void ScoreGraph::updatePolish()
         m_dirty &= ~TextsDirty;
     }
 
-    if (m_dirty & PointsDirty) {
+    if (m_canDraw && (m_dirty & PointsDirty)) {
         qCDebug(lcScoreGraph) << "Fitting" << m_data.length() << "data points to the graph";
         QVector<QPointF> dataPoints;
         for (const std::pair<qint64, int> &pair : m_data) {
@@ -250,11 +250,15 @@ void ScoreGraph::updatePolish()
         m_dirty &= ~PointsDirty;
     }
 
-    update();
+    if (m_canDraw)
+        update();
 }
 
 void ScoreGraph::paint(QPainter *painter)
 {
+    if (!m_canDraw)
+        return;
+
     qCDebug(lcScoreGraph) << "Painting score table";
 
     painter->setCompositionMode(QPainter::CompositionMode_Source);
@@ -407,6 +411,21 @@ void ScoreGraph::setFontColor(QColor fontColor)
         m_fontColor = fontColor;
         emit fontColorChanged();
         update();
+    }
+}
+
+bool ScoreGraph::canDraw() const
+{
+    return m_canDraw;
+}
+
+void ScoreGraph::setCanDraw(bool canDraw)
+{
+    if (m_canDraw != canDraw) {
+        m_canDraw = canDraw;
+        emit canDrawChanged();
+        if (m_canDraw)
+            tryPolish();
     }
 }
 
