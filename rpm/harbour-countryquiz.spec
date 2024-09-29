@@ -2,8 +2,8 @@ Name:       harbour-countryquiz
 Summary:    Country quiz
 Version:    0.4.0
 Release:    1
-License:    LICENSE
-URL:        http://example.org/
+License:    MIT
+URL:        https://github.com/tomin-apps/countryquiz
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   qt5-qtdeclarative-import-xmllistmodel
