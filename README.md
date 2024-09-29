@@ -1,7 +1,7 @@
 Country Quiz
 ============
 Country Quiz is a quiz game about states in the world. You can practise
-recognition of flags, maps and capitals. Results are collected into local
+identification of flags, maps and capitals. Results are collected into local
 database for you to see your own progress.
 
 Idea and development by Tomi Leppänen.
