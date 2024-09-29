@@ -262,7 +262,16 @@ Page {
                 enabled: resultsSaver.nth === -1
                 //% "Enter your name to save results"
                 label: qsTrId("countryquiz-la-enter_name")
-                // TODO: Use rightItem IconButton for saving?
+                rightItem: IconButton {
+                    height: icon.height
+                    icon.source: "image://theme/icon-m-input-clear"
+                    opacity: nameInputField.text.length > 0 ? 1.0 : 0.0
+                    width: icon.width
+
+                    onClicked: nameInputField.text = ""
+
+                    Behavior on opacity { FadeAnimation {} }
+                }
                 // TODO: Custom suggestions?
 
                 EnterKey.enabled: acceptableInput

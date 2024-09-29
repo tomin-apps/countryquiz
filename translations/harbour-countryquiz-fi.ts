@@ -457,7 +457,7 @@
         <translation>Kirjoita nimesi tallentaaksesi tuloksen</translation>
     </message>
     <message id="countryquiz-bt-save_result">
-        <location filename="../qml/pages/ResultsPage.qml" line="279"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="288"/>
         <source>Save result</source>
         <translation>Tallenna tulos</translation>
     </message>
