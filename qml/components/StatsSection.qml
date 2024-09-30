@@ -17,18 +17,21 @@ ExpandingSection {
     property alias scoreModel: scoreModelLoader.item
 
     function updatePreset(index) {
-        if (!presets || statsModelLoader.status !== Loader.Ready || scoreModelLoader.status !== Loader.Ready) {
-            return
+        if (presets) {
+            var preset = presets.get(index)
+            if (statsModelLoader.status === Loader.Ready) {
+                statsModel.options.numberOfChoices = preset.choices
+                statsModel.options.choicesFrom = preset.region ? "same region" : "everywhere"
+                statsModel.options.timeToAnswer = preset.time
+                statsModel.options.language = dataModel.language
+            }
+            if (scoreModelLoader.status === Loader.Ready) {
+                scoreModel.options.numberOfChoices = preset.choices
+                scoreModel.options.choicesFrom = preset.region ? "same region" : "everywhere"
+                scoreModel.options.timeToAnswer = preset.time
+                scoreModel.options.language = dataModel.language
+            }
         }
-        var preset = presets.get(index)
-        statsModel.options.numberOfChoices = preset.choices
-        statsModel.options.choicesFrom = preset.region ? "same region" : "everywhere"
-        statsModel.options.timeToAnswer = preset.time
-        statsModel.options.language = dataModel.language
-        scoreModel.options.numberOfChoices = preset.choices
-        scoreModel.options.choicesFrom = preset.region ? "same region" : "everywhere"
-        scoreModel.options.timeToAnswer = preset.time
-        scoreModel.options.language = dataModel.language
     }
 
     id: statsSection

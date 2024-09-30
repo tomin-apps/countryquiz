@@ -5,7 +5,7 @@
     <name></name>
     <message id="countryquiz-la-preset">
         <location filename="../qml/components/QuizSection.qml" line="27"/>
-        <location filename="../qml/components/StatsSection.qml" line="83"/>
+        <location filename="../qml/components/StatsSection.qml" line="86"/>
         <source>Preset</source>
         <translation>Esivalinta</translation>
     </message>
@@ -535,7 +535,7 @@
         <translation>Kieli</translation>
     </message>
     <message id="countryquiz-la-length">
-        <location filename="../qml/components/StatsSection.qml" line="101"/>
+        <location filename="../qml/components/StatsSection.qml" line="104"/>
         <source>Length</source>
         <translation>Pituus</translation>
     </message>
@@ -564,18 +564,18 @@
         <translation>%1</translation>
     </message>
     <message id="countryquiz-la-length_and_preset">
-        <location filename="../qml/components/StatsSection.qml" line="195"/>
+        <location filename="../qml/components/StatsSection.qml" line="198"/>
         <source>%1 %2</source>
         <extracomment>This is subtitle for stats list page, meant to say, e.g. Short Easy %1 is length and %2 is preset name, you may swap them if that&apos;s more natural in your language</extracomment>
         <translation>%1 %2</translation>
     </message>
     <message id="countryquiz-la-stats_are_disabled_anonymous_mode">
-        <location filename="../qml/components/StatsSection.qml" line="214"/>
+        <location filename="../qml/components/StatsSection.qml" line="217"/>
         <source>Stats are disabled in anonymous mode</source>
         <translation>Tilastot ovat pois päältä anonyymissä tilassa</translation>
     </message>
     <message id="countryquiz-la-has_not_been_played_yet">
-        <location filename="../qml/components/StatsSection.qml" line="216"/>
+        <location filename="../qml/components/StatsSection.qml" line="219"/>
         <source>This quiz has not been played yet</source>
         <translation>Tätä visaa ei ole vielä pelattu</translation>
     </message>
