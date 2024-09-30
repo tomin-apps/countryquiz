@@ -453,12 +453,22 @@ ScoreGraphDataWorker::ScoreGraphDataWorker(const QSqlQuery &query)
 void ScoreGraphDataWorker::run()
 {
     // Assumes that data is sorted descending based on timestamp
-    Q_ASSERT(m_query.last());
+    if (!m_query.last()) {
+        qCCritical(lcScoreGraph) << "Could not seek to last result";
+        return;
+    }
     const qint64 bucketStart = roundToMidnight(m_query.value(3).toLongLong(), true);
-    Q_ASSERT(m_query.first());
+    if (!m_query.first()) {
+        qCCritical(lcScoreGraph) << "Could not seek to first result";
+        return;
+    }
     const qint64 bucketEnd = roundToMidnight(m_query.value(3).toLongLong(), false);
     const qreal timePerBucket = static_cast<qreal>(bucketEnd - bucketStart) / Buckets;
     qCDebug(lcScoreGraph).nospace() << "Bucket size: " << timePerBucket << ", start: " << bucketStart << ", end: " << bucketEnd;
+    if (timePerBucket <= 0) {
+        qCCritical(lcScoreGraph) << "Time per bucket is too small";
+        return;
+    }
 
     // Squashed data
     QVector<std::pair<qint64, int>> data;
@@ -479,7 +489,10 @@ void ScoreGraphDataWorker::run()
             }
         } while (m_query.next());
     }
-    Q_ASSERT(m_query.first());
+    if (!m_query.first()) {
+        qCCritical(lcScoreGraph) << "Could not seek back to first result";
+        return;
+    }
     if (timePerBucket >= 600 || count >= Buckets) {
         qCDebug(lcScoreGraph) << "Reading stats model," << timePerBucket << "s of time per bucket";
         int lastBucket = Buckets;
