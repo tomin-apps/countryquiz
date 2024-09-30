@@ -65,7 +65,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
 public slots:
-    void refresh();
+    void refresh(bool force = false);
 
 signals:
     void rowCountChanged();
@@ -79,13 +79,14 @@ signals:
 
 private:
     std::unique_ptr<Options> m_options;
-    int m_maxCount;
-    qint64 m_since;
+    int m_maxCount = -1;
+    qint64 m_since = -1;
     bool m_delayInitialization : 1;
     bool m_busy : 1;
     bool m_inMemoryDB : 1;
     bool m_orderByDate : 1;
     bool m_onlyOwnResults : 1;
+    bool m_fetchAgain : 1;
 };
 
 class StatsModelWorker : public QObject, public QRunnable

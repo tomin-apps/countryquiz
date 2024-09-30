@@ -18,22 +18,21 @@ Q_LOGGING_CATEGORY(lcStatsModel, "site.tomin.apps.CountryQuiz.StatsModel", QtWar
 StatsModel::StatsModel(QObject *parent)
     : QSqlQueryModel(parent)
     , m_options(new Options)
-    , m_maxCount(-1)
-    , m_since(-1)
     , m_delayInitialization(false)
     , m_busy(false)
     , m_inMemoryDB(false)
     , m_orderByDate(false)
     , m_onlyOwnResults(false)
+    , m_fetchAgain(false)
 {
     qRegisterMetaType<QSqlQuery>();
     qRegisterMetaType<std::shared_ptr<Options>>();
-    connect(options(), &Options::quizTypeChanged, this, &StatsModel::refresh);
-    connect(options(), &Options::numberOfQuestionsChanged, this, &StatsModel::refresh);
-    connect(options(), &Options::numberOfChoicesChanged, this, &StatsModel::refresh);
-    connect(options(), &Options::choicesFromChanged, this, &StatsModel::refresh);
-    connect(options(), &Options::timeToAnswerChanged, this, &StatsModel::refresh);
-    connect(options(), &Options::languageChanged, this, &StatsModel::refresh);
+    connect(options(), &Options::quizTypeChanged, this, [this] { refresh(); });
+    connect(options(), &Options::numberOfQuestionsChanged, this, [this] { refresh(); });
+    connect(options(), &Options::numberOfChoicesChanged, this, [this] { refresh(); });
+    connect(options(), &Options::choicesFromChanged, this, [this] { refresh(); });
+    connect(options(), &Options::timeToAnswerChanged, this, [this] { refresh(); });
+    connect(options(), &Options::languageChanged, this, [this] { refresh(); });
 }
 
 void StatsModel::classBegin()
@@ -47,12 +46,16 @@ void StatsModel::componentComplete()
     refresh();
 }
 
-void StatsModel::refresh()
+void StatsModel::refresh(bool force)
 {
     if (!m_delayInitialization && m_options->isValid()) {
         if (!m_busy) {
             m_busy = true;
             emit busyChanged();
+        } else if (!force) {
+            qCDebug(lcStatsModel) << "Marking StatsModel to be fetched again later";
+            m_fetchAgain = true;
+            return;
         }
         auto *worker = new StatsModelWorker(m_inMemoryDB ? StatsDatabase::InMemoryType : StatsDatabase::OnDiskType,
                                             std::make_shared<Options>(*m_options), m_maxCount, m_since, m_orderByDate, m_onlyOwnResults);
@@ -76,6 +79,10 @@ void StatsModel::refresh()
                     m_busy = false;
                     emit busyChanged();
                 }
+            }
+            if (m_fetchAgain) {
+                m_fetchAgain = false;
+                refresh(true);
             }
             options->deleteLater();
         }, Qt::QueuedConnection);
