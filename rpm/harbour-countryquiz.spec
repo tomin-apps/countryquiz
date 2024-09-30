@@ -1,6 +1,6 @@
 Name:       harbour-countryquiz
 Summary:    Country quiz
-Version:    0.4.0
+Version:    0.4.1
 Release:    1
 License:    MIT
 URL:        https://github.com/tomin-apps/countryquiz
