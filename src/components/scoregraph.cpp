@@ -215,7 +215,7 @@ void ScoreGraph::updatePolish()
         month.setTime(QTime()); // to midnight
         month = month.addDays(-month.date().day() + 1); // to first day of the month
         const qint64 span = last - first;
-        int lastPos = width();
+        int lastPos = m_drawArea.x() + m_drawArea.width();
         int pos = m_drawArea.x() + std::max(Zero, m_drawArea.width() * ((static_cast<qreal>(month.toTime_t()) - first) / span));
         QVector<int> monthLines;
         while (pos >= m_drawArea.x()) {
@@ -229,9 +229,18 @@ void ScoreGraph::updatePolish()
             month = month.addMonths(-1);
             pos = m_drawArea.x() + (m_drawArea.width() * ((static_cast<qreal>(month.toTime_t()) - first) / span));
         }
-        qCDebug(lcScoreGraph) << "Added" << monthLines.length() << "month lines to x-axis";
+
+        // Check if we should add that last month text anyway
+        QString name = QDate::shortMonthName(month.date().month(), QDate::StandaloneFormat);
+        if (m_drawArea.x() + metrics.width(name) < lastPos) {
+            qCDebug(lcScoreGraph) << "Adding one more month text";
+            texts << Text(m_drawArea.x(), height() - metrics.descent(), name);
+        }
+
+        qCDebug(lcScoreGraph) << "Added" << monthLines.length() << "month lines and" << texts.length() << "texts to x-axis";
         m_monthLines.swap(monthLines);
         m_texts.swap(texts);
+
         m_dirty &= ~TextsDirty;
     }
 
