@@ -36,7 +36,7 @@ ExpandingSection {
 
     id: statsSection
     content.sourceComponent: Column {
-        bottomPadding: Theme.paddingMedium
+        bottomPadding: placeholder.visible ? Theme.paddingLarge : Theme.paddingMedium
         states: [
             State {
                 name: "default"
@@ -170,6 +170,7 @@ ExpandingSection {
         Item {
             height: Theme.paddingMedium
             width: parent.width
+            visible: stats.height !== 0
         }
 
         ScoreGraph {
