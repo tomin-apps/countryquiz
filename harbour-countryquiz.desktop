@@ -4,6 +4,7 @@ X-Nemo-Application-Type=silica-qt5
 Icon=harbour-countryquiz
 Exec=harbour-countryquiz
 Name=Country Quiz
+Name[fi]=Valtiovisa
 
 X-Desktop-File-Install-Version=0.26
 

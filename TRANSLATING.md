@@ -4,6 +4,9 @@ Adding a language can mean adding data in another language or adding
 translation files for UI translations. Both don't need to be present for a
 language.
 
+Also add translated name to harbour-countryquiz.desktop. It should be the same
+as key countryquiz-la-app_name.
+
 Translators may add their name to _translations/TRANSLATORS_ file to get credit
 for their work on the application's About page.
 
