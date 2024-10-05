@@ -112,7 +112,7 @@ ApplicationWindow {
 
                 Label {
                     color: palette.primaryColor
-                    horizontalAlignment: Text.AlignHCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
                     text: {
                         if (appWindow.quizType === "capitals") {
                             //% "Capital City Quiz"
@@ -128,8 +128,8 @@ ApplicationWindow {
                             return qsTrId("countryquiz-la-app_name")
                         }
                     }
-                    truncationMode: TruncationMode.Elide
-                    width: parent.width
+                    truncationMode: TruncationMode.Fade
+                    width: Math.min(parent.width, contentWidth)
                 }
 
                 Label {
