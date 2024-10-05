@@ -25,7 +25,7 @@
     <message id="countryquiz-he-select-number-of-questions">
         <location filename="../qml/components/QuizSection.qml" line="67"/>
         <source>Select number of questions</source>
-        <translation>Valtise kysymysten määrä</translation>
+        <translation>Valitse kysymysten määrä</translation>
     </message>
     <message id="countryquiz-he-questions">
         <location filename="../qml/components/QuizSection.qml" line="70"/>
