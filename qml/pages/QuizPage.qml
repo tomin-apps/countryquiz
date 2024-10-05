@@ -348,7 +348,7 @@ Page {
                         //% "%1, %2 and %3"
                         return qsTrId("countryquiz-la-three_args").arg(capitals[0]).arg(capitals[1]).arg(capitals[2])
                     }
-                    console.warn("UNIMPLEMENTD: Bad number of capitals", capitals.length)
+                    console.warn("UNIMPLEMENTED: Bad number of capitals", capitals.length)
                     return ""
                 }
                 width: parent.width
