@@ -241,7 +241,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 //% "Play again"
                 text: qsTrId("countryquiz-bt-play_again")
-                enabled: config.mode === "solo" || config.mode === "anonymous"
+                enabled: !resultsSaver.valid || config.mode === "solo" || config.mode === "anonymous"
 
                 onClicked: playAgain()
             }
