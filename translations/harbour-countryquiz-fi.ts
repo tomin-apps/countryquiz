@@ -437,27 +437,27 @@
         <translation>Tulos: %L1 pistettä (#%2)</translation>
     </message>
     <message id="countryquiz-la-your_answer">
-        <location filename="../qml/pages/ResultsPage.qml" line="216"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="218"/>
         <source>Your answer: %1</source>
         <translation>Vastauksesi: %1</translation>
     </message>
     <message id="countryquiz-se-your_answers">
-        <location filename="../qml/pages/ResultsPage.qml" line="235"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="237"/>
         <source>Your answers</source>
         <translation>Vastauksesi</translation>
     </message>
     <message id="countryquiz-bt-play_again">
-        <location filename="../qml/pages/ResultsPage.qml" line="243"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="245"/>
         <source>Play again</source>
         <translation>Pelaa uudestaan</translation>
     </message>
     <message id="countryquiz-la-enter_name">
-        <location filename="../qml/pages/ResultsPage.qml" line="264"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="266"/>
         <source>Enter your name to save results</source>
         <translation>Kirjoita nimesi tallentaaksesi tuloksen</translation>
     </message>
     <message id="countryquiz-bt-save_result">
-        <location filename="../qml/pages/ResultsPage.qml" line="288"/>
+        <location filename="../qml/pages/ResultsPage.qml" line="290"/>
         <source>Save result</source>
         <translation>Tallenna tulos</translation>
     </message>

@@ -181,6 +181,7 @@ Page {
                 animateToExpandedSection: false
 
                 ExpandingSection {
+                    id: expandingSection
                     content.sourceComponent: Component {
                         ColumnView {
                             delegate: BackgroundItem {
@@ -191,6 +192,7 @@ Page {
                                 readonly property string selectedName: dataModel.get(selectedAnswers[index]).name
 
                                 id: item
+                                enabled: expandingSection.expanded
                                 height: Theme.itemSizeSmall
                                 width: parent.width
 
