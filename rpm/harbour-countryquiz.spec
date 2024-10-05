@@ -1,5 +1,5 @@
 Name:       harbour-countryquiz
-Summary:    Country quiz
+Summary:    Country Quiz is a fun way to learn to identify flags, maps and capitals all around the world
 Version:    0.4.1
 Release:    1
 License:    MIT
@@ -21,6 +21,13 @@ BuildRequires:  qt5-qttools-linguist
 
 %description
 %{summary}.
+
+Country Quiz is a quiz game about states in the world. You can practise
+identification of flags, maps and capitals. Results are collected into local
+database for you to see your own progress.
+
+You can also play Country Quiz with a friend competitively. Just enable Party
+or Shared device mode and you can find out who knows the countries the best.
 
 %prep
 %autosetup -n %{name}-%{version}
