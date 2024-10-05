@@ -64,6 +64,12 @@ copying.path = /usr/share/$${TARGET}/assets
 readme.files = README.md
 readme.path = /usr/share/$${TARGET}/assets
 
-QMAKE_EXTRA_TARGETS += data_xml tiles
-PRE_TARGETDEPS += data_xml tiles
+banner.files = $$PWD/banner.svg
+banner.output = $$shadowed(banner.png)
+banner.commands = mkdir -p $$shadowed('.') $$escape_expand(\n\t)
+banner.commands += rsvg-convert --width=1080 --height=540 \
+            --output $${banner.output} $${banner.files} $$escape_expand(\n\t)
+
+QMAKE_EXTRA_TARGETS += banner data_xml tiles
+PRE_TARGETDEPS += banner data_xml tiles
 INSTALLS += copying data_xml flags icons map readme tiles
