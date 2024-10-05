@@ -33,8 +33,8 @@ public:
     static QSqlQuery query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order, bool filtered = false, const QString &name = QString());
 
 private:
-    int getPosition(int64_t id);
-    int getCount(int64_t id);
+    int getPosition(int64_t id, bool filtered);
+    int getCount(int64_t id, bool filtered);
     void filterRecords(Options *options);
     int64_t insertRecord(Options *options, int numberOfCorrect, int time, int score, time_t datetime, const QString &name);
     void prepareOptions(Options *options);

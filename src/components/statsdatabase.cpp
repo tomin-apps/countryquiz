@@ -140,7 +140,7 @@ std::pair<int, int> StatsDatabase::store(DatabaseType type, Options *options, in
     StatsDatabase db(type);
     db.prepareOptions(options);
     int64_t id = db.insertRecord(options, numberOfCorrect, time, score, datetime, name);
-    return std::make_pair<int, int>(db.getPosition(id), db.getCount(id));
+    return std::make_pair<int, int>(db.getPosition(id, name.isEmpty()), db.getCount(id, name.isEmpty()));
 }
 
 QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount, int64_t since, OrderBy order, bool filtered, const QString &name)
@@ -179,12 +179,15 @@ QSqlQuery StatsDatabase::query(DatabaseType type, Options *options, int maxCount
     return query;
 }
 
-int StatsDatabase::getPosition(int64_t id)
+int StatsDatabase::getPosition(int64_t id, bool filtered)
 {
     QSqlQuery query(m_db);
-    query.prepare("SELECT COUNT(records.id) FROM records "
-                  "INNER JOIN records AS this ON records.options = this.options AND records.score > this.score "
-                  "WHERE this.id = :id");
+    QString queryText("SELECT COUNT(records.id) FROM records "
+                      "INNER JOIN records AS this ON records.options = this.options AND records.score > this.score "
+                      "WHERE this.id = :id");
+    if (filtered)
+        queryText.append(" AND records.name = ''");
+    query.prepare(queryText);
     query.bindValue(":id", (qlonglong)id);
     query.exec();
     if (!query.first()) {
@@ -194,12 +197,15 @@ int StatsDatabase::getPosition(int64_t id)
     return query.value(0).toInt() + 1;
 }
 
-int StatsDatabase::getCount(int64_t id)
+int StatsDatabase::getCount(int64_t id, bool filtered)
 {
     QSqlQuery query(m_db);
-    query.prepare("SELECT COUNT(records.id) FROM records "
-                  "INNER JOIN records AS this ON records.options = this.options "
-                  "WHERE this.id = :id");
+    QString queryText("SELECT COUNT(records.id) FROM records "
+                      "INNER JOIN records AS this ON records.options = this.options "
+                      "WHERE this.id = :id");
+    if (filtered)
+        queryText.append(" AND records.name = ''");
+    query.prepare(queryText);
     query.bindValue(":id", (qlonglong)id);
     query.exec();
     if (!query.first()) {
