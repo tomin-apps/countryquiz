@@ -1,6 +1,6 @@
 Name:       harbour-countryquiz
 Summary:    Country Quiz is a fun way to learn to identify flags, maps and capitals all around the world
-Version:    0.4.1
+Version:    1.0.0
 Release:    1
 License:    MIT
 URL:        https://github.com/tomin-apps/countryquiz
