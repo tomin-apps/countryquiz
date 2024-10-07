@@ -235,7 +235,7 @@
 -
         name: "Cape Verde"
         alt: "Republic of Cabo Verde"
-        capital: "Prala"
+        capital: "Praia"
         region: "Africa"
         other: ["Cabo Verde"]
         iso: "cpv"
@@ -638,7 +638,7 @@
         name: "Morocco"
         alt: "Kingdom of Morocco"
         capital: "Rabat"
-        region: "Asia"
+        region: "Africa"
         iso: "mar"
 -
         name: "Monaco"

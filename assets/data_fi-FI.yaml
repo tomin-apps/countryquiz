@@ -236,7 +236,7 @@
 -
         name: "Kap Verde"
         alt: "Kap Verden tasavalta"
-        capital: "Prala"
+        capital: "Praia"
         region: "Afrikka"
         iso: "cpv"
 -
@@ -640,7 +640,7 @@
         name: "Marokko"
         alt: "Marokon kuningaskunta"
         capital: "Rabat"
-        region: "Aasia"
+        region: "Afrikka"
         iso: "mar"
 -
         name: "Monaco"
