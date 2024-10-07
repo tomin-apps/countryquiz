@@ -327,54 +327,54 @@
     <message id="countryquiz-la-guess_flag">
         <location filename="../qml/pages/QuizPage.qml" line="103"/>
         <source>Guess which country this flag belongs to</source>
-        <translation>Arvaa, mille maalle tämä lippu kuuluu</translation>
+        <translation>Gissa vilket land denna flagga tillhör</translation>
     </message>
     <message id="countryquiz-la-guess_maps">
         <location filename="../qml/pages/QuizPage.qml" line="107"/>
         <source>Guess which country is highlighted on the map</source>
-        <translation>Arvaa, mikä maa on korostettu kartassa</translation>
+        <translation>Gissa vilket land som är markerat på kartan</translation>
     </message>
     <message id="countryquiz-la-guess_capital">
         <location filename="../qml/pages/QuizPage.qml" line="112"/>
         <source>Guess which country&apos;s capital is this</source>
-        <translation>Arvaa, minkä maan pääkaupunki tämä on</translation>
+        <translation>Gissa, vilket lands huvudstad är detta</translation>
     </message>
     <message id="countryquiz-la-guess_multiple_capitals">
         <location filename="../qml/pages/QuizPage.qml" line="115"/>
         <source>Guess which country&apos;s capitals are these</source>
-        <translation>Arvaa, minkä maan pääkaupunkeja nämä ovat</translation>
+        <translation>Gissa, vilket lands huvudstad är dessa</translation>
     </message>
     <message id="countryquiz-la-one_and_other">
         <location filename="../qml/pages/QuizPage.qml" line="346"/>
         <source>%1 and %2</source>
-        <translation>%1 ja %2</translation>
+        <translation>%1 och %2</translation>
     </message>
     <message id="countryquiz-la-three_args">
         <location filename="../qml/pages/QuizPage.qml" line="349"/>
         <source>%1, %2 and %3</source>
-        <translation>%1, %2 ja %3</translation>
+        <translation>%1, %2 och %3</translation>
     </message>
     <message id="countryquiz-se-flag_quiz">
         <location filename="../qml/pages/QuizSelectionTab.qml" line="36"/>
         <location filename="../qml/pages/StatsTab.qml" line="37"/>
         <source>Flag Quiz</source>
-        <translation>Lippuvisa</translation>
+        <translation>Flaggquiz</translation>
     </message>
     <message id="countryquiz-se-map_quiz">
         <location filename="../qml/pages/QuizSelectionTab.qml" line="44"/>
         <location filename="../qml/pages/StatsTab.qml" line="44"/>
         <source>Map Quiz</source>
-        <translation>Karttavisa</translation>
+        <translation>Kartquiz</translation>
     </message>
     <message id="countryquiz-se-capital_quiz">
         <location filename="../qml/pages/QuizSelectionTab.qml" line="52"/>
         <source>Capital City Quiz</source>
-        <translation>Pääkaupunkivisa</translation>
+        <translation>Huvudstadsquiz</translation>
     </message>
     <message id="countryquiz-he-results">
         <location filename="../qml/pages/ResultsPage.qml" line="62"/>
         <source>Results</source>
-        <translation>Tulokset</translation>
+        <translation>Resultat</translation>
     </message>
     <message id="countryquiz-la-result_zero">
         <location filename="../qml/pages/ResultsPage.qml" line="97"/>
