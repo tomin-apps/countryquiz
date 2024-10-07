@@ -379,170 +379,170 @@
     <message id="countryquiz-la-result_zero">
         <location filename="../qml/pages/ResultsPage.qml" line="97"/>
         <source>It&apos;s like flipping a coin, sometimes you just have bad luck!</source>
-        <translation>Se on kuin kolikonheittoa, joskus on vain huono tuuri!</translation>
+        <translation>Det är som att singla slant, ibland har man helt enkelt otur!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_flags">
         <location filename="../qml/pages/ResultsPage.qml" line="102"/>
         <source>Perfect work! You clearly know the flags!</source>
-        <translation>Täydellistä! Sinä todella tiedät liput!</translation>
+        <translation>Perfekt! Du kan dina flaggor!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_maps">
         <location filename="../qml/pages/ResultsPage.qml" line="105"/>
         <source>Perfect work! You clearly know maps!</source>
-        <translation>Täydellistä! Sinä todella tiedät kartat!</translation>
+        <translation>Perfekt! Du kan dina kartor!</translation>
     </message>
     <message id="countryquiz-la-result_maximum_capitals">
         <location filename="../qml/pages/ResultsPage.qml" line="108"/>
         <source>Perfect work! You clearly know the capitals!</source>
-        <translation>Täydellistä! Sinä todella tiedät pääkaupungit!</translation>
+        <translation>Perfekt! Du kan dina huvudstäder!</translation>
     </message>
     <message id="countryquiz-la-result_awesome">
         <location filename="../qml/pages/ResultsPage.qml" line="114"/>
         <source>Excellent!</source>
-        <translation>Erinomaisesti pelattu!</translation>
+        <translation>Snyggt!</translation>
     </message>
     <message id="countryquiz-la-result_great">
         <location filename="../qml/pages/ResultsPage.qml" line="117"/>
         <source>Very good!</source>
-        <translation>Erittäin hyvin pelattu!</translation>
+        <translation>Mycket bra!</translation>
     </message>
     <message id="countryquiz-la-result_good">
         <location filename="../qml/pages/ResultsPage.qml" line="120"/>
         <source>You did well!!</source>
-        <translation>Pärjäsit hyvin!</translation>
+        <translation>Bra jobbat!</translation>
     </message>
     <message id="countryquiz-la-result_poor">
         <location filename="../qml/pages/ResultsPage.qml" line="123"/>
         <source>You could use more practice.</source>
-        <translation>Voisit harjoitella enemmän.</translation>
+        <translation>Du har lite att öva på.</translation>
     </message>
     <message id="countryquiz-la-result_bad">
         <location filename="../qml/pages/ResultsPage.qml" line="126"/>
         <source>Did you try to avoid the right answers?</source>
-        <translation>Yrititkö vältellä oikeita vastauksia?</translation>
+        <translation>Försökte du undvika de rätta svaren?</translation>
     </message>
     <message id="countryquiz-la-correct_answers_count">
         <location filename="../qml/pages/ResultsPage.qml" line="138"/>
         <source>%1 / %2 correct</source>
-        <translation>%1 / %2 oikein</translation>
+        <translation>%1 / %2 rätt</translation>
     </message>
     <message id="countryquiz-la-score_n_points">
         <location filename="../qml/pages/ResultsPage.qml" line="161"/>
         <source>Score: %L1 points</source>
-        <translation>Tulos: %L1 pistettä</translation>
+        <translation>Resultat: %L1 poäng</translation>
     </message>
     <message id="countryquiz-la-score_n_points_with_ranking">
         <location filename="../qml/pages/ResultsPage.qml" line="164"/>
         <source>Score: %L1 points (#%2)</source>
-        <translation>Tulos: %L1 pistettä (#%2)</translation>
+        <translation>Resultat: %L1 poäng (#%2)</translation>
     </message>
     <message id="countryquiz-la-your_answer">
         <location filename="../qml/pages/ResultsPage.qml" line="218"/>
         <source>Your answer: %1</source>
-        <translation>Vastauksesi: %1</translation>
+        <translation>Ditt svar: %1</translation>
     </message>
     <message id="countryquiz-se-your_answers">
         <location filename="../qml/pages/ResultsPage.qml" line="237"/>
         <source>Your answers</source>
-        <translation>Vastauksesi</translation>
+        <translation>Dina svar</translation>
     </message>
     <message id="countryquiz-bt-play_again">
         <location filename="../qml/pages/ResultsPage.qml" line="245"/>
         <source>Play again</source>
-        <translation>Pelaa uudestaan</translation>
+        <translation>Spela igen</translation>
     </message>
     <message id="countryquiz-la-enter_name">
         <location filename="../qml/pages/ResultsPage.qml" line="266"/>
         <source>Enter your name to save results</source>
-        <translation>Kirjoita nimesi tallentaaksesi tuloksen</translation>
+        <translation>Ange ditt namn för att spara resultatet</translation>
     </message>
     <message id="countryquiz-bt-save_result">
         <location filename="../qml/pages/ResultsPage.qml" line="290"/>
         <source>Save result</source>
-        <translation>Tallenna tulos</translation>
+        <translation>Spara resultat</translation>
     </message>
     <message id="countryquiz-se-capital_city_quiz">
         <location filename="../qml/pages/StatsTab.qml" line="51"/>
         <source>Capital City Quiz</source>
-        <translation>Pääkaupunkivisa</translation>
+        <translation>Huvudstadsquiz</translation>
     </message>
     <message id="countryquiz-he-options">
         <location filename="../qml/pages/OptionsPage.qml" line="23"/>
         <source>Options</source>
-        <translation>Valinnat</translation>
+        <translation>Inställningar</translation>
     </message>
     <message id="countryquiz-de-solo_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="41"/>
         <source>In this mode results are saved on device and are always attributed to you. Graphs of recent performance are also available.</source>
         <extracomment>Description for solo mode</extracomment>
-        <translation>Tässä tilassa tulokset tallennetaan laitteelle ja merkitään sinulle. Myös viimeaikaisten suoritusten kuvaajat näytetään.</translation>
+        <translation>I detta läge sparas resultaten på enheten och tilldelas alltid dig. Grafer är också tillgängliga.</translation>
     </message>
     <message id="countryquiz-de-party_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="46"/>
         <source>In this mode results are saved until the application is closed and name is asked after every quiz. Best for playing with friends.</source>
         <extracomment>Description for party mode</extracomment>
-        <translation>Tässä tilassa tulokset tallennetaan sovelluksen sulkemiseen asti ja nimeä kysytään jokaisen visan jälkeen. Paras kavereiden kanssa pelaamiseen.</translation>
+        <translation>I detta läge sparas resultaten tills applikationen avslutas och namn efterfrågas efter varje quiz. Perfekt för att spela med vänner.</translation>
     </message>
     <message id="countryquiz-de-shared_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="50"/>
         <source>In this mode results are saved on device and name is asked after every quiz.</source>
         <extracomment>Description for shared device mode</extracomment>
-        <translation>Tässä tilassa tulokset tallennetaan laitteelle ja nimeä kysytään jokaisen visan jälkeen.</translation>
+        <translation>I detta läge sparas resultaten på enheten och namn efterfrågas efter varje quiz.</translation>
     </message>
     <message id="countryquiz-de-anonymous_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="54"/>
         <source>In this mode results are not saved and stats are disabled.</source>
         <extracomment>Description for anonymous mode</extracomment>
-        <translation>Tässä tilassa tuloksia ei tallenneta ja tilastot eivät ole käytössä.</translation>
+        <translation>I detta läge sparas inte resultaten och statistik är deaktiverat.</translation>
     </message>
     <message id="countryquiz-la-mode">
         <location filename="../qml/pages/OptionsPage.qml" line="59"/>
         <source>Mode</source>
-        <translation>Tila</translation>
+        <translation>Läge</translation>
     </message>
     <message id="countryquiz-me-solo_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="63"/>
         <source>Solo</source>
         <extracomment>Option to save results with name &quot;you&quot;, for playing alone</extracomment>
-        <translation>Soolo</translation>
+        <translation>Solo</translation>
     </message>
     <message id="countryquiz-me-party_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="67"/>
         <source>Party mode</source>
         <extracomment>Option to save results to temporary database, to play in group</extracomment>
-        <translation>Biletila</translation>
+        <translation>Partyläge</translation>
     </message>
     <message id="countryquiz-me-shared_device_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="71"/>
         <source>Shared device</source>
         <extracomment>Option to ask for name after every game, to play on shared device</extracomment>
-        <translation>Jaettu laite</translation>
+        <translation>Delad enhet</translation>
     </message>
     <message id="countryquiz-me-anonymous_mode">
         <location filename="../qml/pages/OptionsPage.qml" line="75"/>
         <source>Anonymous</source>
         <extracomment>Option to never ask for name, results are not saved</extracomment>
-        <translation>Anonyymi</translation>
+        <translation>Anonym</translation>
     </message>
     <message id="countryquiz-de-language_combo_box">
         <location filename="../qml/pages/OptionsPage.qml" line="94"/>
         <source>Select language for country and capital names and quiz statistics.</source>
-        <translation>Valitse maiden nimien, pääkaupunkien nimien ja visojen tilastojen kieli.</translation>
+        <translation>Välj språk för land- och huvudstadsnamn samt quizstatistik.</translation>
     </message>
     <message id="countryquiz-la-language">
         <location filename="../qml/pages/OptionsPage.qml" line="96"/>
         <source>Language</source>
-        <translation>Kieli</translation>
+        <translation>Språk</translation>
     </message>
     <message id="countryquiz-la-length">
         <location filename="../qml/components/StatsSection.qml" line="104"/>
         <source>Length</source>
-        <translation>Pituus</translation>
+        <translation>Längd</translation>
     </message>
     <message id="countryquiz-la-you">
         <location filename="../qml/components/StatsList.qml" line="44"/>
         <source>You</source>
-        <translation>Sinä</translation>
+        <translation>Du</translation>
     </message>
     <message id="countryquiz-la-on_date">
         <location filename="../qml/components/StatsList.qml" line="58"/>
@@ -572,12 +572,12 @@
     <message id="countryquiz-la-stats_are_disabled_anonymous_mode">
         <location filename="../qml/components/StatsSection.qml" line="218"/>
         <source>Stats are disabled in anonymous mode</source>
-        <translation>Tilastot ovat pois päältä anonyymissä tilassa</translation>
+        <translation>Statistik är deaktiverat i anonymt läge</translation>
     </message>
     <message id="countryquiz-la-has_not_been_played_yet">
         <location filename="../qml/components/StatsSection.qml" line="220"/>
         <source>This quiz has not been played yet</source>
-        <translation>Tätä visaa ei ole vielä pelattu</translation>
+        <translation>Den här quizen har ännu inte spelats</translation>
     </message>
 </context>
 </TS>
