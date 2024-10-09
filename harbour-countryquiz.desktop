@@ -5,6 +5,7 @@ Icon=harbour-countryquiz
 Exec=harbour-countryquiz
 Name=Country Quiz
 Name[fi]=Valtiovisa
+Name[sv]=Landsquiz
 
 X-Desktop-File-Install-Version=0.26
 

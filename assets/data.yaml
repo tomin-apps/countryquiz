@@ -6,3 +6,7 @@
     name: "suomi"
     code: "fi-FI"
     url: "https://fi.wikipedia.org/wiki/"
+-
+    name: "svenska"
+    code: "sv-SE"
+    url: "https://sv.wikipedia.org/wiki/"

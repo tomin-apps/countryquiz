@@ -73,6 +73,7 @@ INSTALLS += qm_ee_install
 
 CONFIG += sailfishapp_i18n sailfishapp_i18n_idbased
 TRANSLATIONS += translations/harbour-countryquiz-fi.ts
+TRANSLATIONS += translations/harbour-countryquiz-sv.ts
 for (file, TRANSLATIONS) {
     QMAKE_CLEAN += $$shadowed($$file)
     file ~= s/\.ts/.qm
