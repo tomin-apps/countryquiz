@@ -48,10 +48,16 @@ _alt_ should be only specified if it differs from name. _other_ list can be
 specified as needed and its length may vary. Feel free to add or remove them
 both for any country.
 
-Finally add the language to _assets/data.yaml_. Put the name of the language
-(in the language) to _name_ field, its ISO code to _code_ and link to Wikipedia
-in that language to _url_. Hopefully there is Wikipedia written in the language
-and covering all of the countries in the world.
+Add the language to _assets/data.yaml_. Put the name of the language (in the
+language) to _name_ field, its ISO code to _code_ and link to Wikipedia in that
+language to _url_. Hopefully there is Wikipedia written in the language and
+covering all of the countries in the world.
+
+Finally add the language also to _assets/assets.pro_ _LANGUAGES_ variable.
+
+If you want to test the changes by building the app,  you need to clear build
+files when building with a completely new language. Otherwise some build files
+(_Makefile_) will not be updated.
 
 Once everything is ready please create a pull request or an issue report
 containing the new file and changes to _data.yaml_ to add data in the new
@@ -61,5 +67,12 @@ Adding UI translations
 ----------------------
 Add the language to countryquiz.pro TRANSLATIONS variable and build the app
 once in Sailfish SDK. This should generate ts file for the language. Edit this
-file with Qt Linguist to add translations. Create a pull request or an issue
-report containing the new file to add the new language.
+file with Qt Linguist to add translations.
+
+To test changes to translation files you must build the application twice
+because there an issue with the build system and it does not pick the changes
+otherwise. Also you likely need to clear build files when building with a
+completely new language.
+
+Create a pull request or an issue report containing the new file to add the new
+language.
