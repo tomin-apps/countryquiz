@@ -10,7 +10,7 @@ DISTFILES = \
     COPYING-CC-BY-SA-4.0.txt \
     README.md
 
-LANGUAGES = en-GB fi-FI
+LANGUAGES = en-GB fi-FI sv-SE
 for (lang, LANGUAGES) {
     INPUT_YAML = $$PWD/data_$${lang}.yaml
     OUTPUT_XML = $$shadowed(data_$${lang}.xml)
