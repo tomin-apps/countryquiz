@@ -309,51 +309,6 @@
         <source>You must specify an integer between %1 and %2</source>
         <translation>Du måste specificera ett heltal mellan %1 och %2</translation>
     </message>
-    <message id="countryquiz-he-flag">
-        <location filename="../qml/pages/QuizPage.qml" line="52"/>
-        <source>Flag</source>
-        <translation>Flagga</translation>
-    </message>
-    <message id="countryquiz-he-map">
-        <location filename="../qml/pages/QuizPage.qml" line="55"/>
-        <source>Map</source>
-        <translation>Karta</translation>
-    </message>
-    <message id="countryquiz-he-capital-city">
-        <location filename="../qml/pages/QuizPage.qml" line="58"/>
-        <source>Capital City</source>
-        <translation>Huvudstad</translation>
-    </message>
-    <message id="countryquiz-la-guess_flag">
-        <location filename="../qml/pages/QuizPage.qml" line="103"/>
-        <source>Guess which country this flag belongs to</source>
-        <translation>Gissa vilket land denna flagga tillhör</translation>
-    </message>
-    <message id="countryquiz-la-guess_maps">
-        <location filename="../qml/pages/QuizPage.qml" line="107"/>
-        <source>Guess which country is highlighted on the map</source>
-        <translation>Gissa vilket land som är markerat på kartan</translation>
-    </message>
-    <message id="countryquiz-la-guess_capital">
-        <location filename="../qml/pages/QuizPage.qml" line="112"/>
-        <source>Guess which country&apos;s capital is this</source>
-        <translation>Gissa, vilket lands huvudstad är detta</translation>
-    </message>
-    <message id="countryquiz-la-guess_multiple_capitals">
-        <location filename="../qml/pages/QuizPage.qml" line="115"/>
-        <source>Guess which country&apos;s capitals are these</source>
-        <translation>Gissa, vilket lands huvudstad är dessa</translation>
-    </message>
-    <message id="countryquiz-la-one_and_other">
-        <location filename="../qml/pages/QuizPage.qml" line="346"/>
-        <source>%1 and %2</source>
-        <translation>%1 och %2</translation>
-    </message>
-    <message id="countryquiz-la-three_args">
-        <location filename="../qml/pages/QuizPage.qml" line="349"/>
-        <source>%1, %2 and %3</source>
-        <translation>%1, %2 och %3</translation>
-    </message>
     <message id="countryquiz-se-flag_quiz">
         <location filename="../qml/pages/QuizSelectionTab.qml" line="36"/>
         <location filename="../qml/pages/StatsTab.qml" line="37"/>
@@ -578,6 +533,66 @@
         <location filename="../qml/components/StatsSection.qml" line="220"/>
         <source>This quiz has not been played yet</source>
         <translation>Den här quizen har ännu inte spelats</translation>
+    </message>
+    <message id="countryquiz-he-flag">
+        <location filename="../qml/pages/QuizPage.qml" line="73"/>
+        <source>Flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-he-map">
+        <location filename="../qml/pages/QuizPage.qml" line="76"/>
+        <source>Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-he-capital-city">
+        <location filename="../qml/pages/QuizPage.qml" line="79"/>
+        <source>Capital City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-guess_flag">
+        <location filename="../qml/pages/QuizPage.qml" line="124"/>
+        <source>Guess which country this flag belongs to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-guess_maps">
+        <location filename="../qml/pages/QuizPage.qml" line="128"/>
+        <source>Guess which country is highlighted on the map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-guess_capital">
+        <location filename="../qml/pages/QuizPage.qml" line="133"/>
+        <source>Guess which country&apos;s capital is this</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-guess_multiple_capitals">
+        <location filename="../qml/pages/QuizPage.qml" line="136"/>
+        <source>Guess which country&apos;s capitals are these</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-your_choice">
+        <location filename="../qml/pages/QuizPage.qml" line="459"/>
+        <source>Your choice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-no_answer">
+        <location filename="../qml/pages/QuizPage.qml" line="489"/>
+        <source>No answer given</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-press_to_skip">
+        <location filename="../qml/pages/QuizPage.qml" line="550"/>
+        <source>Press to skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-one_and_other">
+        <location filename="../qml/pages/QuizPage.qml" line="602"/>
+        <source>%1 and %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-three_args">
+        <location filename="../qml/pages/QuizPage.qml" line="605"/>
+        <source>%1, %2 and %3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
