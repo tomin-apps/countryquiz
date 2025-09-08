@@ -9,7 +9,7 @@
 Options::Options(QObject *parent)
     : QObject(parent)
     , m_numberOfQuestions(0)
-    , m_numberOfChoices(0)
+    , m_numberOfChoices(-1)
     , m_timeToAnswer(0)
 {
 }
@@ -29,7 +29,7 @@ bool Options::isValid() const
 {
     return !m_quizType.isEmpty()
         &&  m_numberOfQuestions > 0
-        &&  m_numberOfChoices > 0
+        &&  m_numberOfChoices >= 0
         && !m_choicesFrom.isEmpty()
         &&  m_timeToAnswer > 0
         && !m_language.isEmpty();
