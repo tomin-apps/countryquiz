@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2025 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -10,6 +10,20 @@ Array.prototype.swap = function(a, b) {
     var tmp = this[b]
     this[b] = this[a]
     this[a] = tmp
+}
+
+Array.prototype.extend = function(other) {
+    for (var i = 0; i < other.length; ++i) {
+        this.push(other[i])
+    }
+}
+
+String.prototype.startsWith = function(text) {
+    for (var i = 0; i < text.length; ++i) {
+        if (this[i] !== text[i])
+            return false;
+    }
+    return true;
 }
 
 function getIndexArray(model) {

@@ -153,37 +153,37 @@
         <translation>Tilastot</translation>
     </message>
     <message id="countryquiz-la-easy">
-        <location filename="../qml/helpers.js" line="44"/>
+        <location filename="../qml/helpers.js" line="58"/>
         <source>Easy</source>
         <translation>Helppo</translation>
     </message>
     <message id="countryquiz-la-regular">
-        <location filename="../qml/helpers.js" line="47"/>
+        <location filename="../qml/helpers.js" line="61"/>
         <source>Regular</source>
         <translation>Tavallinen</translation>
     </message>
     <message id="countryquiz-la-veteran">
-        <location filename="../qml/helpers.js" line="50"/>
+        <location filename="../qml/helpers.js" line="64"/>
         <source>Veteran</source>
         <translation>Veteraani</translation>
     </message>
     <message id="countryquiz-la-none">
-        <location filename="../qml/helpers.js" line="53"/>
+        <location filename="../qml/helpers.js" line="67"/>
         <source>None</source>
         <translation>Ei mikään</translation>
     </message>
     <message id="countryquiz-la-short">
-        <location filename="../qml/helpers.js" line="59"/>
+        <location filename="../qml/helpers.js" line="73"/>
         <source>Short</source>
         <translation>Lyhyt</translation>
     </message>
     <message id="countryquiz-la-long">
-        <location filename="../qml/helpers.js" line="62"/>
+        <location filename="../qml/helpers.js" line="76"/>
         <source>Long</source>
         <translation>Pitkä</translation>
     </message>
     <message id="countryquiz-la-all">
-        <location filename="../qml/helpers.js" line="65"/>
+        <location filename="../qml/helpers.js" line="79"/>
         <source>All</source>
         <translation>Kaikki</translation>
     </message>
