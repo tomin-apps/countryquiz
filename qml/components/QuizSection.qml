@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Tomi Leppänen
+ * Copyright (c) 2024 - 2025 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -12,7 +12,7 @@ import "../helpers.js" as Helpers
 ExpandingSection {
     property alias presets: presetModel.presets
     property alias quizType: presetModel.type
-    readonly property int maximumLength: dataModel.count > 0 ? dataModel.getIndices(quizType).length : 0
+    readonly property int maximumLength: {dataModel.ready; return dataModel.count > 0 ? dataModel.getIndices(quizType).length : 0}
     readonly property int questionCount: selectedCount === -1 ? maximumLength : selectedCount
     property alias selectedCount: selected.count
     readonly property bool presetCount: selectedCount === 15 || selectedCount ===  80 || selectedCount === -1
