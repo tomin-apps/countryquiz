@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 - 2025 Tomi Leppänen
+ * Copyright (c) 2024-2025 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -95,11 +95,18 @@ ExpandingSection {
                 MenuItem { text: "3" }
                 MenuItem { text: "4" }
                 MenuItem { text: "5" }
+                MenuItem { text: "All" }
 
-                onActivated: presetModel.selectedChoices = 3 + index
+                onActivated: {
+                    if (index < 3) {
+                        presetModel.selectedChoices = 3 + index
+                    } else {
+                        presetModel.selectedChoices = 0
+                    }
+                }
             }
 
-            value: presetModel.choicesCount
+            value: presetModel.choicesCount === 0 ? "All" : presetModel.choicesCount
         }
 
         SelectableDetailItem {

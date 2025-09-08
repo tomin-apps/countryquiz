@@ -17,7 +17,7 @@
     </message>
     <message id="countryquiz-me-custom_value">
         <location filename="../qml/components/QuizSection.qml" line="48"/>
-        <location filename="../qml/components/QuizSection.qml" line="137"/>
+        <location filename="../qml/components/QuizSection.qml" line="144"/>
         <source>Custom value</source>
         <extracomment>Menu item to select some other value for time to answer</extracomment>
         <translation>Anpassat värde</translation>
@@ -50,58 +50,58 @@
         <translation>Val</translation>
     </message>
     <message id="countryquiz-la-choices_from">
-        <location filename="../qml/components/QuizSection.qml" line="108"/>
+        <location filename="../qml/components/QuizSection.qml" line="115"/>
         <source>Choices from</source>
         <extracomment>Menu to select area of choices</extracomment>
         <translation>Val från</translation>
     </message>
     <message id="countryquiz-me-everywhere">
-        <location filename="../qml/components/QuizSection.qml" line="112"/>
-        <location filename="../qml/components/QuizSection.qml" line="124"/>
+        <location filename="../qml/components/QuizSection.qml" line="119"/>
+        <location filename="../qml/components/QuizSection.qml" line="131"/>
         <source>Everywhere</source>
         <extracomment>Choices from anywhere on Earth</extracomment>
         <translation>Överallt</translation>
     </message>
     <message id="countryquiz-me-same_region">
-        <location filename="../qml/components/QuizSection.qml" line="115"/>
         <location filename="../qml/components/QuizSection.qml" line="122"/>
+        <location filename="../qml/components/QuizSection.qml" line="129"/>
         <source>Same region</source>
         <extracomment>Choices from sama region as the right answer</extracomment>
         <translation>Samma region</translation>
     </message>
     <message id="countryquiz-la-time_to_answer">
-        <location filename="../qml/components/QuizSection.qml" line="130"/>
+        <location filename="../qml/components/QuizSection.qml" line="137"/>
         <source>Time to answer</source>
         <extracomment>Menu to select time to answer the question</extracomment>
         <translation>Tid för att svara</translation>
     </message>
     <message id="countryquiz-la-select_time_to_answer">
-        <location filename="../qml/components/QuizSection.qml" line="158"/>
+        <location filename="../qml/components/QuizSection.qml" line="165"/>
         <source>Select time to answer</source>
         <translation>Välj tid att svara</translation>
     </message>
     <message id="countryquiz-la-seconds">
-        <location filename="../qml/components/QuizSection.qml" line="160"/>
+        <location filename="../qml/components/QuizSection.qml" line="167"/>
         <source>Seconds</source>
         <translation>Sekunder</translation>
     </message>
     <message id="countryquiz-la-at_least_second_hint">
-        <location filename="../qml/components/QuizSection.qml" line="162"/>
+        <location filename="../qml/components/QuizSection.qml" line="169"/>
         <source>You must have at least one second to answer the question</source>
         <translation>Du måste ha minst en sekund för att besvara frågan</translation>
     </message>
     <message id="countryquiz-la-not_more_than_seconds_hint">
-        <location filename="../qml/components/QuizSection.qml" line="164"/>
+        <location filename="../qml/components/QuizSection.qml" line="171"/>
         <source>You may not have more than %1 seconds (%2 minutes) to answer the question</source>
         <translation>Du kan inte ha mer än %1 sekunder (%2 minuter) för att svara på frågan</translation>
     </message>
     <message id="countryquiz-la-seconds_per_question">
-        <location filename="../qml/components/QuizSection.qml" line="174"/>
+        <location filename="../qml/components/QuizSection.qml" line="181"/>
         <source>%1 s per question</source>
         <translation>%1 s per fråga</translation>
     </message>
     <message id="countryquiz-bt-quiz_me">
-        <location filename="../qml/components/QuizSection.qml" line="183"/>
+        <location filename="../qml/components/QuizSection.qml" line="190"/>
         <source>Quiz me!</source>
         <extracomment>Button to start quiz</extracomment>
         <translation>Fråga mig!</translation>
