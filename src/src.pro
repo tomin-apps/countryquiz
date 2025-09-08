@@ -14,7 +14,8 @@ HEADERS += \
     components/resultssaver.h \
     components/scoregraph.h \
     components/statsdatabase.h \
-    components/statsmodel.h
+    components/statsmodel.h \
+    components/stringhelper.h
 
 SOURCES += \
     components/map.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
     components/scoregraph.cpp \
     components/statsdatabase.cpp \
     components/statsmodel.cpp \
+    components/stringhelper.cpp \
     countryquiz.cpp
 
 QMAKE_CLEAN += $$shadowed($$TARGET)

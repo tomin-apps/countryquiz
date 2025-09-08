@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Tomi Leppänen
+ * Copyright (c) 2023-2025 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -17,6 +17,7 @@
 #include "scoregraph.h"
 #include "statsdatabase.h"
 #include "statsmodel.h"
+#include "stringhelper.h"
 
 int main(int argc, char *argv[])
 {
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ScoreGraph>("CountryQuiz", 1, 0, "ScoreGraph");
     qmlRegisterSingletonType<StatsHelper>("CountryQuiz", 1, 0, "StatsHelper", &StatsHelper::instance);
     qmlRegisterType<StatsModel>("CountryQuiz", 1, 0, "StatsModel");
+    qmlRegisterSingletonType<StringHelper>("CountryQuiz", 1, 0, "StringHelper", &StringHelper::instance);
     view->setSource(SailfishApp::pathToMainQml());
     view->show();
     return app->exec();
