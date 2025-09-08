@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Tomi Leppänen
+ * Copyright (c) 2023-2025 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -11,6 +11,7 @@ SilicaControl {
     property alias text: label.text
     property alias altText: altLabel.text
     property color color: highlighted ? palette.highlightColor : palette.primaryColor
+    property var radius
 
     signal clicked
 
@@ -23,7 +24,7 @@ SilicaControl {
 
         Rectangle {
             anchors.fill: parent
-            radius: height / 2
+            radius: button.radius === undefined ? height / 2 : button.radius
             color: Theme.highlightBackgroundFromColor(button.color, Theme.colorScheme)
             opacity: Theme.highlightBackgroundOpacity
         }
