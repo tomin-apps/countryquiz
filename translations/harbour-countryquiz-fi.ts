@@ -170,7 +170,7 @@
     <message id="countryquiz-la-expert">
         <location filename="../qml/helpers.js" line="67"/>
         <source>Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>Asiantuntija</translation>
     </message>
     <message id="countryquiz-la-none">
         <location filename="../qml/helpers.js" line="70"/>
@@ -542,62 +542,62 @@
     <message id="countryquiz-he-flag">
         <location filename="../qml/pages/QuizPage.qml" line="73"/>
         <source>Flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Lippu</translation>
     </message>
     <message id="countryquiz-he-map">
         <location filename="../qml/pages/QuizPage.qml" line="76"/>
         <source>Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Kartta</translation>
     </message>
     <message id="countryquiz-he-capital-city">
         <location filename="../qml/pages/QuizPage.qml" line="79"/>
         <source>Capital City</source>
-        <translation type="unfinished"></translation>
+        <translation>Pääkaupunki</translation>
     </message>
     <message id="countryquiz-la-guess_flag">
         <location filename="../qml/pages/QuizPage.qml" line="124"/>
         <source>Guess which country this flag belongs to</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvaa, mille maalle tämä lippu kuuluu</translation>
     </message>
     <message id="countryquiz-la-guess_maps">
         <location filename="../qml/pages/QuizPage.qml" line="128"/>
         <source>Guess which country is highlighted on the map</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvaa, mikä maa on korostettu kartassa</translation>
     </message>
     <message id="countryquiz-la-guess_capital">
         <location filename="../qml/pages/QuizPage.qml" line="133"/>
         <source>Guess which country&apos;s capital is this</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvaa, minkä maan pääkaupunki tämä on</translation>
     </message>
     <message id="countryquiz-la-guess_multiple_capitals">
         <location filename="../qml/pages/QuizPage.qml" line="136"/>
         <source>Guess which country&apos;s capitals are these</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvaa, minkä maan pääkaupunkeja nämä ovat</translation>
     </message>
     <message id="countryquiz-la-your_choice">
         <location filename="../qml/pages/QuizPage.qml" line="459"/>
         <source>Your choice</source>
-        <translation type="unfinished"></translation>
+        <translation>Valintasi</translation>
     </message>
     <message id="countryquiz-la-no_answer">
         <location filename="../qml/pages/QuizPage.qml" line="489"/>
         <source>No answer given</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei annettu vastausta</translation>
     </message>
     <message id="countryquiz-la-press_to_skip">
         <location filename="../qml/pages/QuizPage.qml" line="550"/>
         <source>Press to skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Paina ohittaaksesi</translation>
     </message>
     <message id="countryquiz-la-one_and_other">
         <location filename="../qml/pages/QuizPage.qml" line="602"/>
         <source>%1 and %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ja %2</translation>
     </message>
     <message id="countryquiz-la-three_args">
         <location filename="../qml/pages/QuizPage.qml" line="605"/>
         <source>%1, %2 and %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1, %2 ja %3</translation>
     </message>
 </context>
 </TS>
