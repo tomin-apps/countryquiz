@@ -62,6 +62,9 @@ function getPresetTitleText(name) {
     } if (name === "veteran") {
         //% "Veteran"
         return qsTrId("countryquiz-la-veteran")
+    } if (name === "expert") {
+        //% "Expert"
+        return qsTrId("countryquiz-la-expert")
     }
     //% "None"
     return qsTrId("countryquiz-la-none")

@@ -27,4 +27,11 @@ ListModel {
         region: true
         time: 15
     }
+
+    ListElement {
+        name: "expert"
+        choices: 0
+        region: false
+        time: 30
+    }
 }

@@ -167,23 +167,28 @@
         <source>Veteran</source>
         <translation>Veteraani</translation>
     </message>
-    <message id="countryquiz-la-none">
+    <message id="countryquiz-la-expert">
         <location filename="../qml/helpers.js" line="67"/>
+        <source>Expert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="countryquiz-la-none">
+        <location filename="../qml/helpers.js" line="70"/>
         <source>None</source>
         <translation>Ei mikään</translation>
     </message>
     <message id="countryquiz-la-short">
-        <location filename="../qml/helpers.js" line="73"/>
+        <location filename="../qml/helpers.js" line="76"/>
         <source>Short</source>
         <translation>Lyhyt</translation>
     </message>
     <message id="countryquiz-la-long">
-        <location filename="../qml/helpers.js" line="76"/>
+        <location filename="../qml/helpers.js" line="79"/>
         <source>Long</source>
         <translation>Pitkä</translation>
     </message>
     <message id="countryquiz-la-all">
-        <location filename="../qml/helpers.js" line="79"/>
+        <location filename="../qml/helpers.js" line="82"/>
         <source>All</source>
         <translation>Kaikki</translation>
     </message>
