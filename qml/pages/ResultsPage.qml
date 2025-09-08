@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Tomi Leppänen
+ * Copyright (c) 2023-2025 Tomi Leppänen
  *
  * SPDX-License-Identifier: MIT
  */
@@ -189,7 +189,7 @@ Page {
                                 readonly property int current: indices[index]
                                 readonly property string name: dataModel.get(current).name
                                 readonly property int selected: selectedAnswers[index]
-                                readonly property string selectedName: dataModel.get(selectedAnswers[index]).name
+                                readonly property string selectedName: selected !== -1 ? dataModel.get(selected).name : ""
 
                                 id: item
                                 enabled: expandingSection.expanded
@@ -217,7 +217,7 @@ Page {
                                         //% "Your answer: %1"
                                         text: qsTrId("countryquiz-la-your_answer").arg(item.selectedName)
                                         truncationMode: TruncationMode.Fade
-                                        visible: item.current !== item.selected
+                                        visible: item.selected !== -1 && item.current !== item.selected
                                         width: parent.width - 2 * Theme.horizontalPageMargin
                                         x: Theme.horizontalPageMargin
                                     }
