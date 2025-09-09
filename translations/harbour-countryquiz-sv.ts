@@ -170,7 +170,7 @@
     <message id="countryquiz-la-expert">
         <location filename="../qml/helpers.js" line="67"/>
         <source>Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>Expert</translation>
     </message>
     <message id="countryquiz-la-none">
         <location filename="../qml/helpers.js" line="70"/>
@@ -577,17 +577,17 @@
     <message id="countryquiz-la-your_choice">
         <location filename="../qml/pages/QuizPage.qml" line="459"/>
         <source>Your choice</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditt val</translation>
     </message>
     <message id="countryquiz-la-no_answer">
         <location filename="../qml/pages/QuizPage.qml" line="489"/>
         <source>No answer given</source>
-        <translation type="unfinished"></translation>
+        <translation>Svar saknas</translation>
     </message>
     <message id="countryquiz-la-press_to_skip">
         <location filename="../qml/pages/QuizPage.qml" line="550"/>
         <source>Press to skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryck för att hoppa över</translation>
     </message>
     <message id="countryquiz-la-one_and_other">
         <location filename="../qml/pages/QuizPage.qml" line="602"/>
