@@ -575,27 +575,27 @@
         <translation>Arvaa, minkä maan pääkaupunkeja nämä ovat</translation>
     </message>
     <message id="countryquiz-la-your_choice">
-        <location filename="../qml/pages/QuizPage.qml" line="460"/>
+        <location filename="../qml/pages/QuizPage.qml" line="461"/>
         <source>Your choice</source>
         <translation>Valintasi</translation>
     </message>
     <message id="countryquiz-la-no_answer">
-        <location filename="../qml/pages/QuizPage.qml" line="490"/>
+        <location filename="../qml/pages/QuizPage.qml" line="491"/>
         <source>No answer given</source>
         <translation>Ei annettu vastausta</translation>
     </message>
     <message id="countryquiz-la-press_to_skip">
-        <location filename="../qml/pages/QuizPage.qml" line="551"/>
+        <location filename="../qml/pages/QuizPage.qml" line="552"/>
         <source>Press to skip</source>
         <translation>Paina ohittaaksesi</translation>
     </message>
     <message id="countryquiz-la-one_and_other">
-        <location filename="../qml/pages/QuizPage.qml" line="603"/>
+        <location filename="../qml/pages/QuizPage.qml" line="604"/>
         <source>%1 and %2</source>
         <translation>%1 ja %2</translation>
     </message>
     <message id="countryquiz-la-three_args">
-        <location filename="../qml/pages/QuizPage.qml" line="606"/>
+        <location filename="../qml/pages/QuizPage.qml" line="607"/>
         <source>%1, %2 and %3</source>
         <translation>%1, %2 ja %3</translation>
     </message>

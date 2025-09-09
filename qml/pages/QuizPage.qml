@@ -316,10 +316,11 @@ Page {
     TextInput {
         property var list: null
         // TODO: Can we avoid the height reserved for suggestions?
-        property var __inputMethodExtensions: {
-            "keyboardClosingDisabled": true,
-            "pasteDisabled": true
-        }
+        // TODO: Would like to do these but they break EnterKey behaviour
+        //property var __inputMethodExtensions: {
+        //    "keyboardClosingDisabled": true,
+        //    "pasteDisabled": true
+        //}
 
         function splitted(text, part) {
             var names = [{"weight": 0, "part": part, "text": text}]
@@ -417,10 +418,10 @@ Page {
         x: Theme.horizontalPageMargin
         y: page.availableHeight - height - Theme.paddingSmall
 
-        EnterKey.enabled: includedGroup.count >= 1 && choices.atYBeginning
+        EnterKey.enabled: expertMode && !page.finished && text !== "" && includedGroup.count >= 1 && choices.atYBeginning
         EnterKey.iconSource: "image://theme/icon-m-enter-accept"
         EnterKey.onClicked: {
-            if (expertMode && !page.finished) {
+            if (expertMode && !page.finished && text !== "") {
                 quizTimer.stop()
                 var indices = filter(text)
                 if (indices.length >= 1) {
@@ -433,7 +434,7 @@ Page {
         onTextChanged: {
             if (expertMode && !page.finished) {
                 delegateModel.reset()
-                if (text.length !== 0) {
+                if (text !== "") {
                     var indices = filter(text)
                     // Collecting items to an array as move will rearrange them in items
                     var items = []
