@@ -447,6 +447,7 @@ Page {
                         // Moving them in delegateModel group moves them in includedGroup too
                         delegateModel.items.move(items[i].itemsIndex, i, 1)
                     }
+                    choices.positionViewAtBeginning()
                 }
             }
         }

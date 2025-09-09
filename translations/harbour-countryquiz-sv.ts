@@ -575,27 +575,27 @@
         <translation>Gissa, vilket lands huvudstad är dessa</translation>
     </message>
     <message id="countryquiz-la-your_choice">
-        <location filename="../qml/pages/QuizPage.qml" line="459"/>
+        <location filename="../qml/pages/QuizPage.qml" line="460"/>
         <source>Your choice</source>
         <translation>Ditt val</translation>
     </message>
     <message id="countryquiz-la-no_answer">
-        <location filename="../qml/pages/QuizPage.qml" line="489"/>
+        <location filename="../qml/pages/QuizPage.qml" line="490"/>
         <source>No answer given</source>
         <translation>Svar saknas</translation>
     </message>
     <message id="countryquiz-la-press_to_skip">
-        <location filename="../qml/pages/QuizPage.qml" line="550"/>
+        <location filename="../qml/pages/QuizPage.qml" line="551"/>
         <source>Press to skip</source>
         <translation>Tryck för att hoppa över</translation>
     </message>
     <message id="countryquiz-la-one_and_other">
-        <location filename="../qml/pages/QuizPage.qml" line="602"/>
+        <location filename="../qml/pages/QuizPage.qml" line="603"/>
         <source>%1 and %2</source>
         <translation>%1 och %2</translation>
     </message>
     <message id="countryquiz-la-three_args">
-        <location filename="../qml/pages/QuizPage.qml" line="605"/>
+        <location filename="../qml/pages/QuizPage.qml" line="606"/>
         <source>%1, %2 and %3</source>
         <translation>%1, %2 och %3</translation>
     </message>
