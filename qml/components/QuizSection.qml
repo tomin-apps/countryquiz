@@ -95,7 +95,8 @@ ExpandingSection {
                 MenuItem { text: "3" }
                 MenuItem { text: "4" }
                 MenuItem { text: "5" }
-                MenuItem { text: "All" }
+                // % "All"
+                MenuItem { text: qsTrId("countryquiz-la-all") }
 
                 onActivated: {
                     if (index < 3) {
@@ -106,7 +107,8 @@ ExpandingSection {
                 }
             }
 
-            value: presetModel.choicesCount === 0 ? "All" : presetModel.choicesCount
+            // % "All"
+            value: presetModel.choicesCount === 0 ? qsTrId("countryquiz-la-all") : presetModel.choicesCount
         }
 
         SelectableDetailItem {
