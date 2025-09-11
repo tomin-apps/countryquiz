@@ -516,8 +516,8 @@
         <location filename="../qml/components/StatsList.qml" line="71"/>
         <source>%1 / %2 for %3 p</source>
         <extracomment>%1 is number of right answers out of %2 total answer to reward %3 points, try to keep this short</extracomment>
-        <translatorcomment>Piste lopussa, koska suomessa lyhenteet loppuvat pisteeseen.</translatorcomment>
-        <translation>%1 / %2 %3 p.</translation>
+        <translatorcomment>Piste lopussa, koska suomessa lyhenteet loppuvat pisteeseen. Pilkku errottamaan noita.</translatorcomment>
+        <translation>%1 / %2, %3 p.</translation>
     </message>
     <message id="countryquiz-la-in_time_as_sentence">
         <location filename="../qml/components/StatsList.qml" line="86"/>
